@@ -1,1 +1,135 @@
-/* pages/selectAdress/selectAdress.wxss */
+/* pages/plan2/plan2.wxss */
+.preimg{
+  width:694rpx;
+  height:462rpx;
+  margin-top: 200rpx;
+}
+/* 旋转图容器 */
+.pre{
+  position: relative;
+  width:750rpx;
+  height:462rpx;
+  margin-top: 200rpx;
+  box-sizing: border-box;
+}
+.preimgrotat{
+  width:462rpx;
+  height:694rpx;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform-origin: center center;
+  transform: translate(-50%,-50%) rotate(-90deg);
+}
+.addressInfo{
+  width: 690rpx;
+  height:60rpx;
+  border-radius: 4px;
+  margin-top:30rpx;
+  border: 1px solid #4294EA;
+}
+.addressInfo image{
+  width: 27rpx;
+  height:30rpx;
+  margin-right:5rpx;
+}
+.addressInfo .addressText{
+  color:#4294EA;
+}
+.tiptext{
+  padding-top:10rpx;
+}
+.querybtn{
+  width: 690rpx;
+  height:80rpx;
+  color:#fff;
+  border-radius: 4px;
+  background-color: #4294EA;
+  margin-top:264rpx;
+}
+/* 拍摄地址 */
+.photo_address{
+  height:928rpx;
+  width:750rpx;
+  position: fixed;
+  left:0;
+  bottom:0;
+  overflow-y: hidden;
+  background-color: #fff;
+}
+.photo_address .title{
+  height:80rpx;
+  width:750rpx;
+  padding:0 30rpx;
+  text-align: center;
+  line-height: 100rpx;
+  position: absolute;
+  top:0;
+  left:0;
+  box-sizing: border-box;
+}
+.photo_address .title .cancel{
+  color:#4294EA;
+}
+.photo_address .title .text{
+  color:#323232;
+}
+.photo_address .title .query{
+  color:#4294EA;
+}
+.photo_address .content{
+  position: absolute;
+  left:0;
+  top:100rpx;
+  height:900rpx;
+  width:750rpx;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  padding:20rpx 40rpx 60rpx;
+}
+.photo_address .content .address{
+  padding-bottom:40rpx;
+}
+.photo_address .content .address .aline{
+  height:64rpx;
+  width:164rpx;
+  line-height: 64rpx;
+  text-align: center;
+  color:#92929C;
+  font-size: 32rpx;
+  border-radius: 200rpx;
+  border: 1px solid #92929C;
+}
+.photo_address .content .address .active{
+
+  color:#4294EA;
+  border: 1px solid #4294EA;
+}
+.photo_address .content .addrTwo{
+  padding-bottom:40rpx;
+}
+.photo_address .content .addrTwo .aline{
+  height:64rpx;
+  width:290rpx;
+  line-height: 64rpx;
+  text-align: center;
+  color:#92929C;
+  font-size: 32rpx;
+  border-radius: 200rpx;
+  border: 1px solid #92929C;
+}
+.photo_address .content .addrTwo .active{
+
+  color:#4294EA;
+  border: 1px solid #4294EA;
+}
+.loyer{
+  width:100%;
+  height:100%;
+  position: fixed;
+  bottom:0;
+  top:0；
+  left: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.3);
+}

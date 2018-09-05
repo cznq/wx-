@@ -1,2 +1,26 @@
-<!--pages/postCard/postCard.wxml-->
-<text>pages/postCard/postCard.wxml</text>
+<!-- <view class='s_content'>
+  <view class='title padding10-0 gray-9 row cen-center'>请选择明信片反面样式</view>
+  <swiper indicator-dots="{{indicatorDots}}"
+   autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" display-multiple-items="2.5" previous-margin='10px'>
+   <block wx:for="{{imgUrls}}" wx:for-item='item' wx:for-index='indx' wx:key='unique'>
+     <swiper-item>
+       <image src="{{item.url}}" bindtap='cltap' data-index='{{indx}}' class="slide-image marg10-left" width="355" height="150"/>
+       <text class='name'>{{item.name}}</text>
+     </swiper-item>
+   </block>
+  </swiper>
+</view> -->
+<view class="mian row cen-center">
+  <view class="card">
+    <image class='card_bg' src=''></image>  <!-- 背景图 -->
+    <view class=' row cen-start content-sjr'>
+      <view class='font28'>收件人:</view><input class='content-input' type="text"/>
+    </view>
+    <view class='content-middle-area'>
+      <textarea class='content-area' />
+      <view class='boder-one title_border05'></view>
+      <view class='boder-two title_border05'></view>
+      <view class='boder-three title_border05'></view>
+    </view>
+  </view>
+</view>

@@ -1,1 +1,40 @@
 /* pages/home/home.wxss */
+.buttom{
+  position: fixed;
+  left:0;
+  bottom:0;
+  width: 750rpx;
+  height:96rpx;
+  background: #fff;
+  padding:0 90rpx;
+  box-sizing: border-box;
+}
+.activeColor{
+  color:#4294EA!important;
+}
+.postCard{
+  width: 100rpx;
+  height:86rpx;
+}
+.postCard .cardimg{
+  width: 48rpx;
+  height: 40rpx;
+}
+.postCard .cardtext{
+  color:#B0B0B0;
+}
+.makeCard image{
+  width:86rpx;
+  height:86rpx;
+}
+.order{
+  width: 100rpx;
+  height:86rpx;
+}
+.order .orderimg{
+  width: 42rpx;
+  height: 42rpx;
+}
+.order .ordertext{
+  color:#B0B0B0;
+}

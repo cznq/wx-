@@ -1,2 +1,100 @@
-<!--pages/selectAdress/selectAdress.wxml-->
-<text>pages/selectAdress/selectAdress.wxml</text>
+<view class='column cen-start'>
+  <view wx:if="{{imgdir ==='1'}}" class='pre'>
+    <image  class='preimgrotat' src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'></image>
+  </view>
+  <image wx:if="{{imgdir ==='2'}}" class='preimg' src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'></image>
+  <view bindtap='querySel' class="addressInfo row cen-center">
+    <image src='../../images/selectAddress.png'></image>
+    <text class='addressText ft13'>点击这里补充照片拍摄地址信息</text>
+  </view>
+    <text class='tiptext gray-9 ft10'>温馨提示：没有拍摄地址无法制作明信片哦</text>
+    <view class="querybtn row cen-center ft13">确认拍摄地址</view>
+<!-- 地址选择 -->
+<view wx:if='{{address_photo}}' class='loyer'>
+<view class='photo_address'>
+  <view class='title row cen-space gray-3'>
+    <text bindtap='titCancel' class='cancel ft16'>取消</text>
+    <text class='text'>请选择照片拍摄地址</text>
+    <text bindtap='titQuery' class='query ft16'>确定</text>
+  </view>
+  <view bindtap='selectCity' class='content'>
+    <view  class='address row cen-space'>
+      <view data-cityname='北京市' class="aline {{cityName =='北京市'? 'active':''}}">北京市</view>
+      <view id='2' data-cityname='天津市' class="aline {{cityName =='天津市'? 'active':''}}">天津市</view>
+      <view id='3' data-cityname='上海市' class="aline {{cityName =='上海市'? 'active':''}}">上海市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='address row cen-space'>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+      <view class='aline'>北京市</view>
+    </view>
+    <view class='addrTwo row cen-space'>
+      <view class='aline'>大家开发领导了</view>
+      <view class='aline'>大家开发领导</view>
+    </view>
+    <view class='addrTwo row cen-space'>
+      <view class='aline'>大家开发领导了</view>
+      <view class='aline'>大家开发领导</view>
+    </view>
+    <view class='addrTwo row cen-space'>
+      <view class='aline'>大家开发领导了</view>
+    </view>
+  </view>
+</view>
+</view>
+</view>

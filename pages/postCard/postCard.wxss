@@ -1,1 +1,96 @@
-/* pages/postCard/postCard.wxss */
+.main{
+  width:750rpx;
+  height:460rpx;
+  box-sizing: border-box;
+}
+.card{
+  position: relative;
+}
+.card_bg{
+  width:690rpx;
+  height:460rpx;
+}
+/* 收件人 */
+.content-sjr{
+  position: absolute;
+  top:52rpx;
+  left:36rpx;
+  width:280rpx;
+  height: 35rpx;
+  border: 1px solid red;
+}
+.content-input{
+  width:150rpx;
+  height:30rpx;
+  border:1px solid black;
+}
+/* 明信片内容 */
+.content-middle-area{
+  position: absolute;
+  top:140rpx;
+  left:46rpx;
+}
+.content-area{
+  width:350rpx;
+  height: 180rpx;
+  border: 1px solid red;
+}
+.boder-one{
+  position: absolute;
+  top:50rpx;
+  left:10rpx;
+  width:300rpx;
+  height:1px;
+}
+.boder-two{
+  position: absolute;
+  top:100rpx;
+  left:10rpx;
+  width:300rpx;
+  height:1px;
+}
+.boder-three{
+  position: absolute;
+  top:150rpx;
+  left:10rpx;
+  width:300rpx;
+  height:1px;
+}
+.title_border05 {
+    position: absolute;
+}
+.title_border05:before {
+    display: block;
+    content: "";
+    width: 199%;
+    width: calc(200%);
+    height: 1px;
+    position: absolute;
+    left: -50%;
+    bottom: 0;
+    background-color: #fd5293;
+    transform: scale(0.5);
+    z-index: 1;
+}
+/* pages/card_reverse /card_reverse.wxss */
+.s_content{
+  width:750rpx;
+  height: 360rpx;
+  background: #fff;
+}
+.s_content .title{
+  width:750rpx;
+}
+.s_content .slide-image{
+  width:254rpx;
+  height:170rpx;
+}
+.s_content .name{
+  display: block;
+  text-align: center;
+  color:#323232;
+  font-size: 28rpx;
+  width: 100%;
+  height:20px;
+  line-height: 20px;
+}

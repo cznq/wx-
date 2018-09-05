@@ -1,2 +1,44 @@
-<!--pages/make/make.wxml-->
-<text>pages/make/make.wxml</text>
+<!--pages/plan/plan.wxml-->
+<!-- <swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" display-multiple-items="2.5" previous-margin='10px'>
+  <block wx:for="{{imgUrls}}" wx:for-item='item' wx:for-index='indx' wx:key='unique'>
+    <swiper-item >
+      <image src="{{item}}" bindtap='cltap' data-index='{{indx}}' class="slide-image marg10-left" width="355" height="150"/>
+    </swiper-item>
+  </block>
+</swiper>
+<view class='content'>
+  <image class='imbg' src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' />
+  <view class=' row cen-start content-sjr'>
+    <view class='font28'>收件人:</view><input class='content-input' type="text"/>
+  </view>
+  <view class='content-middle-area'>
+    <textarea class='content-area' />
+    <view class='boder-one title_border05'></view>
+    <view class='boder-two title_border05'></view>
+    <view class='boder-three title_border05'></view>
+  </view>
+
+</view> -->
+
+<import src="../we-cropper/we-cropper.wxml"/>
+
+<view class="cropper-wrapper">
+    <template wx:if='{{is_chooseimg}}' is="we-cropper" data="{{...cropperOpt}}"/>
+    <image wx:if='{{!is_chooseimg}}' src='{{fixtext}}' class='fix' bindtap='chooseImage'></image>
+    <view class="cropper-buttons">
+        <view
+                class="upload"
+                bindtap="uploadTap">
+            <!-- 上传图片 -->
+            {{text}}
+        </view>
+        <view
+                class="getCropperImage"
+                bindtap="getCropperImage">
+            生成图片
+        </view>
+    </view>
+</view>
+
+  <!-- <image src='{{bg_src}}' class='clip_img' style="clip:rect({{top}}rpx, {{right}}rpx, {{bottom}}rpx, {{left}}rpx)" ></image> -->

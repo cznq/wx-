@@ -1,2 +1,16 @@
-<!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+
+<view class="buttom row cen-space">
+  <view bindtap='cardActive' class="postCard column cen-center">
+    <image wx:if='{{cardActive}}' class='cardimg' src='../../images/postCard.png'></image>
+    <image wx:if='{{!cardActive}}' class='cardimg' src='../../images/npostCard.png'></image>
+    <text class='cardtext ft10 {{cardActive ? "activeColor":""}}'>明信片</text>
+  </view>
+  <view class="makeCard">
+    <image bindtap='uploadTap' src='../../images/makecard.png'></image>
+  </view>
+  <view bindtap='orderActive' class="order column cen-center">
+    <image wx:if='{{orderActive}}' class='orderimg' src='../../images/order.png'></image>
+    <image wx:if='{{!orderActive}}' class='orderimg' src='../../images/norder.png'></image>
+    <text class='ordertext ft10 {{orderActive ? "activeColor":""}}'>订单</text>
+  </view>
+</view>
