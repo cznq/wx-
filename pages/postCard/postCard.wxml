@@ -10,17 +10,19 @@
    </block>
   </swiper>
 </view> -->
-<view class="mian row cen-center">
+<view class="main row cen-center">
   <view class="card">
-    <image class='card_bg' src=''></image>  <!-- 背景图 -->
-    <view class=' row cen-start content-sjr'>
-      <view class='font28'>收件人:</view><input class='content-input' type="text"/>
+    <image class='card_bg' src='../../images/postbj.jpg'></image>  <!-- 背景图 -->
+    <input class='content-input' maxlength='8' type="text"/>
+    <textarea class='{{platform =="ios"?"textaios":"textarea"}}' value="" maxlength='39' />
+    <!-- <view class=' row cen-start content-sjr'>
+      <view class='font28'>收件人:</view>
     </view>
     <view class='content-middle-area'>
       <textarea class='content-area' />
       <view class='boder-one title_border05'></view>
       <view class='boder-two title_border05'></view>
       <view class='boder-three title_border05'></view>
-    </view>
+    </view> -->
   </view>
 </view>

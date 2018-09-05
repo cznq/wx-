@@ -33,12 +33,18 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "selectAddress",
-					"pathName": "pages/selectAdress/selectAdress"
+					"pathName": "pages/selectAdress/selectAdress",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "postCard",
+					"pathName": "pages/postCard/postCard"
 				}
 			]
 		}
