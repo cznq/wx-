@@ -9,6 +9,7 @@ Page({
     autoplay: false,
     interval: 5000,
     duration: 1000,
+    areaVal:'就是打开',
     imgUrls: [{
         url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
         name: '父情节'
@@ -53,7 +54,21 @@ Page({
       });        
     }
   },
-
+  noExpre(e){
+    var val = e.detail.value;
+    var regStr =  /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F\uDE80-\uDEFF]/g
+    var regStr2 = /^ +| +$/g
+    if (regStr.test(val)) {
+      val = val.replace(regStr,'')
+    }
+    if (regStr2.test(val)) {
+      val = val.replace(regStr2,'')
+    }
+    this.setData({
+      areaVal:val
+    })
+    console.log(val);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

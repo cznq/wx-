@@ -24,13 +24,13 @@
 } */
 .content-input{
   position: absolute;
-  top:54rpx;
-  left:138rpx;
-  width:176rpx;
+  top:48rpx;
+  left:165rpx;
+  width:248rpx;
   height:20rpx;
   color:#fff;
-  /* border:1px solid black; */
-  font-size: 19rpx;
+  border:1px solid black;
+  font-size: 28rpx;
 }
 input,button,select,textarea{outline:none}
 textarea{resize:none}
@@ -38,26 +38,87 @@ textarea{resize:none}
   position: absolute;
   top:142rpx;
   left:67rpx;
-  width:328rpx;
+  width:358rpx;
   height:180rpx;
   line-height: 55rpx;
   color:#fff;
   border:1px solid blue;
-  font-size: 26rpx;
+  font-size: 28rpx;
 }
 .textaios{
   position: absolute;
   top:142rpx;
   left:56rpx;
-  width:350rpx;
+  width:395rpx;
   height:180rpx;
   line-height: 55rpx;
   color:#fff;
   border:1px solid yellow;
-  font-size: 25rpx;
+  font-size: 28rpx;
 }
-/* 明信片内容 */
-.content-middle-area{
+/* 寄件人位置 */
+.position-j{
+
+  top:374rpx;
+  left:388rpx;
+  border:1px solid black;
+}
+/* 地址 */
+.addressIos{
+  position: absolute;
+  top:125rpx;
+  right:80rpx;
+  width: 70rpx;
+  height:20rpx;
+  font-size: 10rpx;
+  line-height: 20rpx;
+  text-align: center;
+  color: #fff;
+  border:1px solid red;
+}
+.address{
+  position: absolute;
+  top:115rpx;
+  right:40rpx;
+  width: 140rpx;
+  height:40rpx;
+  font-size: 20rpx;
+  line-height: 40rpx;
+  transform: scale(0.5);
+  text-align: center;
+  color: #fff;
+  border:1px solid red;
+}
+/* 日期 */
+.riqiIos{
+  display: block;
+  position: absolute;
+  top:142rpx;
+  right:68rpx;
+  width: 90rpx;
+  height:20rpx;
+  font-size: 10rpx;
+  line-height: 20rpx;
+  text-align: center;
+  color: #fff;
+  border:1px solid red;
+}
+.riqi{
+  display: block;
+  position: absolute;
+  top:132rpx;
+  right:28rpx;
+  width: 180rpx;
+  height:40rpx;
+  font-size: 20rpx;
+  line-height: 40rpx;
+  transform: scale(0.5);
+  text-align: center;
+  color: #fff;
+  border:1px solid red;
+}
+/* 明信片内容
+/* .content-middle-area{
   position: absolute;
   top:140rpx;
   left:46rpx;
@@ -103,7 +164,7 @@ textarea{resize:none}
     background-color: #fd5293;
     transform: scale(0.5);
     z-index: 1;
-}
+} */
 /* pages/card_reverse /card_reverse.wxss */
 .s_content{
   width:750rpx;

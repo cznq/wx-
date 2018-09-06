@@ -12,9 +12,18 @@
 </view> -->
 <view class="main row cen-center">
   <view class="card">
-    <image class='card_bg' src='../../images/postbj.jpg'></image>  <!-- 背景图 -->
+    <!-- 背景图 -->
+    <image class='card_bg' src='../../images/Group.png'></image>
+    <!-- 收件人 -->
     <input class='content-input' maxlength='8' type="text"/>
-    <textarea class='{{platform =="ios"?"textaios":"textarea"}}' value="" maxlength='39' />
+    <!-- 信件内容 -->
+    <textarea bindinput='noExpre' class='{{platform =="ios"?"textaios":"textarea"}}' value="{{areaVal}}" maxlength='39' />
+    <!-- 寄件人 -->
+    <input class='content-input position-j' maxlength='8' type="text"/>
+    <!-- 地址 -->
+    <text class='{{platform =="ios"?"addressIos":"address"}}'>北京市</text>
+    <!-- 日期 -->
+    <text class='{{platform =="ios"?"riqiIos":"riqi"}}'>2018-08-11</text>
     <!-- <view class=' row cen-start content-sjr'>
       <view class='font28'>收件人:</view>
     </view>
