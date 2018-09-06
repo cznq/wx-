@@ -1,15 +1,4 @@
-<!-- <view class='s_content'>
-  <view class='title padding10-0 gray-9 row cen-center'>请选择明信片反面样式</view>
-  <swiper indicator-dots="{{indicatorDots}}"
-   autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" display-multiple-items="2.5" previous-margin='10px'>
-   <block wx:for="{{imgUrls}}" wx:for-item='item' wx:for-index='indx' wx:key='unique'>
-     <swiper-item>
-       <image src="{{item.url}}" bindtap='cltap' data-index='{{indx}}' class="slide-image marg10-left" width="355" height="150"/>
-       <text class='name'>{{item.name}}</text>
-     </swiper-item>
-   </block>
-  </swiper>
-</view> -->
+
 <view class="main row cen-center">
   <view class="card">
     <!-- 背景图 -->
@@ -23,15 +12,25 @@
     <!-- 地址 -->
     <text class='{{platform =="ios"?"addressIos":"address"}}'>北京市</text>
     <!-- 日期 -->
-    <text class='{{platform =="ios"?"riqiIos":"riqi"}}'>2018-08-11</text>
-    <!-- <view class=' row cen-start content-sjr'>
-      <view class='font28'>收件人:</view>
-    </view>
-    <view class='content-middle-area'>
-      <textarea class='content-area' />
-      <view class='boder-one title_border05'></view>
-      <view class='boder-two title_border05'></view>
-      <view class='boder-three title_border05'></view>
-    </view> -->
+    <text class='{{platform =="ios"?"riqiIos":"riqi"}}'>{{setTime}}</text>
   </view>
+</view>
+<view class='s_content'>
+  <view class='title padding10-0 gray-9 row cen-center'>请选择明信片反面样式</view>
+  <swiper indicator-dots="{{indicatorDots}}"
+   autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" display-multiple-items="2.5" previous-margin='10px'>
+   <block wx:for="{{imgUrls}}" wx:for-item='item' wx:for-index='indx' wx:key='unique'>
+     <swiper-item>
+       <view class='item-v'>
+         <image wx:if='{{currentIndex == indx}}' src='../../images/selected.png' class='selected' />
+         <image src="{{item.url}}" bindtap='clickSwiper' data-index='{{indx}}' class="slide-image marg10-left {{currentIndex == indx ? 'slide-active':''}}" width="355" height="150"/>
+       </view>
+
+       <text class='name'>{{item.name}}</text>
+     </swiper-item>
+   </block>
+  </swiper>
+</view>
+<view class='button_view row cen-center'>
+<view class='button'>下一步</view>
 </view>

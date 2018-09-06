@@ -1,4 +1,5 @@
 // pages/card_reverse /card_reverse.js
+const util = require('../../utils/util.js')
 Page({
 
   /**
@@ -10,6 +11,8 @@ Page({
     interval: 5000,
     duration: 1000,
     areaVal:'就是打开',
+    setTime:'',
+    currentIndex:'0',
     imgUrls: [{
         url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
         name: '父情节'
@@ -53,6 +56,11 @@ Page({
         platform: 'android'           
       });        
     }
+    let setTime = util.mformatTime(new Date());
+    that.setData({
+      setTime: setTime
+    })
+
   },
   noExpre(e){
     var val = e.detail.value;
@@ -68,6 +76,13 @@ Page({
       areaVal:val
     })
     console.log(val);
+  },
+  clickSwiper(e){
+    console.log(e.currentTarget.dataset.index);
+    var currentIndex = e.currentTarget.dataset.index;
+    this.setData({
+      currentIndex:currentIndex
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

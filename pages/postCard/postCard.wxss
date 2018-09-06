@@ -169,14 +169,29 @@ textarea{resize:none}
 .s_content{
   width:750rpx;
   height: 360rpx;
+  margin-top:112rpx;
   background: #fff;
 }
 .s_content .title{
   width:750rpx;
 }
+.s_content .item-v{
+  position: relative;
+}
 .s_content .slide-image{
   width:254rpx;
   height:170rpx;
+  box-sizing: border-box;
+}
+.s_content .slide-active{
+  border: 1px solid #4294EA;
+}
+.s_content .item-v .selected{
+  position: absolute;
+  top:0;
+  right:23rpx;
+  width:40rpx;
+  height: 34rpx;
 }
 .s_content .name{
   display: block;
@@ -186,4 +201,17 @@ textarea{resize:none}
   width: 100%;
   height:20px;
   line-height: 20px;
+}
+.button_view{
+  width:750rpx;
+  height: 80rpx;
+}
+.button{
+  width:690rpx;
+  height: 80rpx;
+  background-color: #4294EA;
+  line-height: 80rpx;
+  color: #fff;
+  text-align: center;
+  border-radius: 8rpx;
 }
