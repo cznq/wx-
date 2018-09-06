@@ -5,7 +5,8 @@
     "pages/selectAdress/selectAdress",
     "pages/postCard/postCard",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/order/order"
   ],
   "window": {
     "backgroundTextStyle": "light",

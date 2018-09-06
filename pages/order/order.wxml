@@ -1,0 +1,7 @@
+<view class="order_address">
+  <view>
+  <image src='../' />
+  <text class='address_tip'>请填写收货地址</text>
+  </view>
+  <view></view>
+</view>
