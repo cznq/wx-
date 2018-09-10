@@ -1,4 +1,12 @@
-
+<view class="home-bg">
+  <image src='../../images/mainbj.jpg' />
+</view>
+<view class="home-bg2">
+  <image src='../../images/home-instr.png' />
+</view>
+<view class="home-bg3">
+  <image src='../../images/home-instro.png' />
+</view>
 <view class="buttom row cen-space">
   <view bindtap='cardActive' class="postCard column cen-center">
     <image wx:if='{{cardActive}}' class='cardimg' src='../../images/postCard.png'></image>

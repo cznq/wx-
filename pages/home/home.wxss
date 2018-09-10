@@ -1,4 +1,17 @@
 /* pages/home/home.wxss */
+.home-bg image{
+  width:750rpx;
+  height:2306rpx;
+}
+.home-bg2 image{
+  width:750rpx;
+  height:1755rpx;
+}
+.home-bg3 image{
+  width:750rpx;
+  height:2016rpx;
+  margin-bottom:96rpx;
+}
 .buttom{
   position: fixed;
   left:0;
