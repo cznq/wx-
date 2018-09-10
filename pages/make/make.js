@@ -20,9 +20,6 @@ Page({
       'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
       'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
       'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
     ],
     indicatorDots: false,
     autoplay: false,
@@ -32,6 +29,8 @@ Page({
     bgimg_w: '',
     bgimg_h: '',
     fixtext: '../../images/dizhi.png',
+    original_image:'',
+    cut_image:'',
     cropperOpt: {
       id: 'cropper',
       width,
@@ -71,9 +70,12 @@ Page({
               title: '提示',
               content: '为了防止图片被过度剪裁，请确认您已预览图片且人像完整',
               success: function(res) {
+                self.setData({
+                  cut_image:src
+                })
                 if (res.confirm) {
                   wx.navigateTo({
-                    url: '../selectAdress/selectAdress?src=' + src + '&imgdir=' + self.data.imgdir
+                    url: '../selectAdress/selectAdress?src=' + src + '&imgdir=' + self.data.imgdir + '&original_image=' + self.data.original_image + '&cut_image=' + self.data.cut_image
                   })
                 } else if (res.cancel) {
                   console.log('用户点击取消')
@@ -95,7 +97,7 @@ Page({
       sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
-        const src = res.tempFilePaths[0]
+        const src = res.tempFilePaths[0];
         //  获取裁剪图片资源后，给data添加src属性及其值
         wx.getImageInfo({
           src: res.tempFilePaths[0],
@@ -113,7 +115,8 @@ Page({
                 [cuty]: (height - 187) / 2,
                 [cutW]: 343,
                 [cutH]: 187,
-                imgdir: 2 //横图 2
+                imgdir: 2, //横图 2
+                original_image:src
               })
               console.log(self.data.cropperOpt.cut.width);
               self.showCavs();
@@ -130,7 +133,8 @@ Page({
                 [cuty]: (height - 443) / 2,
                 [cutW]: 287,
                 [cutH]: 443,
-                imgdir: 1
+                imgdir: 1,
+                original_image:src
               })
               self.showCavs();
               self.wecropper.pushOrign(src);
@@ -170,7 +174,8 @@ Page({
               [cuty]: (height - 187) / 2,
               [cutW]: 353,
               [cutH]: 197,
-              imgdir: 2 //横图 2
+              imgdir: 2, //横图 2
+              original_image:options.src
             })
             self.showCavs();
             self.wecropper.pushOrign(options.src);
@@ -196,40 +201,30 @@ Page({
     }
 
   },
-  getImageInfo(){
-
-  },
-  // preImg(src) {
-  //   if (src == void 0) {
-  //     console.log('src 不能为空');
-  //     return false
-  //   }
-  //
+  // chooseImage() {
+  //   var self = this;
+  //   wx.chooseImage({
+  //     count: 1, // 默认9
+  //     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+  //     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+  //     success(res) {
+  //       const src = res.tempFilePaths[0]
+  //       // 获取图片信息
+  //       wx.getImageInfo({
+  //         src: res.tempFilePaths[0],
+  //         success: function(res) {
+  //           console.log('res.width', res.width);
+  //           console.log('res.height', res.height);
+  //         }
+  //       });
+  //       self.setData({
+  //         is_chooseimg: true
+  //       });
+  //       //  获取裁剪图片资源后，给data添加src属性及其值
+  //       self.wecropper.pushOrign(src)
+  //     }
+  //   });
   // },
-  chooseImage() {
-    var self = this;
-    wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success(res) {
-        const src = res.tempFilePaths[0]
-        // 获取图片信息
-        wx.getImageInfo({
-          src: res.tempFilePaths[0],
-          success: function(res) {
-            console.log('res.width', res.width);
-            console.log('res.height', res.height);
-          }
-        });
-        self.setData({
-          is_chooseimg: true
-        });
-        //  获取裁剪图片资源后，给data添加src属性及其值
-        self.wecropper.pushOrign(src)
-      }
-    });
-  },
   showCavs() {
     const {
       cropperOpt
