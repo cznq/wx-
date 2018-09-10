@@ -1,1 +1,42 @@
 /* pages/order/order.wxss */
+.order_address{
+  width: 750rpx;
+  height:140rpx;
+  padding:0 30rpx;
+  box-sizing: border-box;
+}
+.order_address.active{
+  height:172rpx;
+}
+.order_address .left_image{
+  width: 32rpx;
+  height:36rpx;
+  margin-right: 10rpx;
+}
+.order_address .address_tip{
+  color:#323232;
+  font-size: 32rpx;
+}
+.order_address .right_image{
+  width: 12.8rpx;
+  height:22.6rpx;
+}
+.ChooseAddr{
+  color:#323232;
+}
+.order_address .order_details{
+  width:594rpx;
+  height: 49rpx;
+  color:#323232;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  overflow: scroll;
+}
+.cutting{
+  position: relative;
+  margin-top: -20px;
+}
+.cutting image{
+  width:750rpx;
+  height:8rpx;
+}

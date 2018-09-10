@@ -1,7 +1,23 @@
-<view class="order_address">
-  <view>
-  <image src='../' />
-  <text class='address_tip'>请填写收货地址</text>
+<view class="order_address row cen-space {{chooseAddr?'active':''}}">
+  <view class='address_left row cen-start'>
+    <image class='left_image' src='../../images/address.png' />
+    <view bindtap='bindChooseAddr' class='ChooseAddr ' >
+      <text wx:if='{{!chooseAddr}}' class='address_tip'>请填写收货地址</text>
+      <view wx:if='{{chooseAddr}}' class='column start-cen'>
+      <view>
+        <text class='addressee' >{{addressName}}</text>
+        <text>{{addressPhone}}</text>
+      </view>
+      <view class='order_details'>
+        <text>收货地址：{{provinceName}}{{cityName}}{{countyName}}{{addressDetails}}</text>
+      </view>
+    </view>
+    </view>
   </view>
-  <view></view>
+  <view>
+    <image class='right_image' src='../../images/jt.png' />
+  </view>
+</view>
+<view class="cutting">
+  <image src='../../images/order-border.png' />
 </view>
