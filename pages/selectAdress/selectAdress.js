@@ -5,10 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    preImg: '',
-    imgdir:'2',
-    cityName:'',
-    address_photo:'true'
+    cut_image: '',
+    original_image: '',
+    imgdir: '2',
+    cityName: '',
+    address_photo: false,
   },
 
   /**
@@ -16,7 +17,7 @@ Page({
    */
   onLoad: function(options) {
     console.log(options);
-    // console.log(options.imgdir);
+    console.log(options.imgdir);
     // wx.getImageInfo({
     //   src: options.src,
     //   success: function(res) {
@@ -24,44 +25,82 @@ Page({
     //     console.log(res.height);
     //   }
     // })
-    // if (options.imgdir === "1") {
-    //   this.setData({
-    //     imgdir:"1"
-    //   })
-    //   console.log('this.imgdir',this.data.imgdir);
-    // }else{
-    //   this.setData({
-    //     imgdir:"2"
-    //   })
-    // }
-    // this.setData({
-    //   preImg:options.src
-    // })
-
+    if (options.imgdir === "1") {
+      this.setData({
+        imgdir: "1",
+        cut_image: options.cut_image,
+        original_image: options.original_image
+      })
+      console.log('this.imgdir', this.data.imgdir);
+    } else {
+      this.setData({
+        imgdir: "2",
+        cut_image: options.cut_image,
+        original_image: options.original_image
+      })
+    }
   },
-  querySel(){//页面选择地址
+  querySel() { //页面选择地址
     this.setData({
-      address_photo:true
+      address_photo: true
     })
   },
-  titCancel(){//表头取消
+  titCancel() { //表头取消
     this.setData({
-      address_photo:false
+      address_photo: false,
+      cityName: ''
     })
   },
-  titQuery(){//表头确认
+  titQuery() { //表头确认
     this.setData({
-      address_photo:false
+      address_photo: false
     })
   },
-  selectCity(e){//选择地址
+  selectCity(e) { //选择地址
     console.log(e);
     console.log(e.target.dataset.cityname);
     var cityName = e.target.dataset.cityname;
     this.setData({
-      cityName:cityName
+      cityName: cityName
     })
 
+  },
+  querySubmit() {
+    if (!this.data.cityName) {
+      wx.showToast({
+        title: '确认地址',
+        icon: 'none'
+      })
+      return false;
+    }
+    var imageInfo = {
+      cut_image: this.data.cut_image,
+      original_image: this.data.original_image
+    }
+    wx.uploadFile({
+      url: constant.SERVER_URL + "/FileUploadServlet",
+      filePath: imageInfo,
+      name: 'imageInfo',
+      formData: {
+        //和服务器约定的token, 一般也可以放在header中
+        'user': 'test'
+      },
+      success: function(res) {
+        console.log(res);
+      },
+      fail: function(e) {
+        console.log(e);
+      },
+      complete: function() {
+        wx.hideToast(); //隐藏Toast
+      }
+    })
+
+    wx.uploadFile.onProgressUpdate((res) => {
+      console.log('上传进度', res.progress)
+      console.log('已经上传的数据长度', res.totalBytesSent)
+      console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

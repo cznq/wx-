@@ -156,6 +156,8 @@ page{
 .cropper-buttons .upload, .cropper-buttons .getCropperImage{
     width: 50%;
     text-align: center;
+    color:#4294EA;
+    font-size: 28rpx;
 }
 .cropper{
     position: absolute;

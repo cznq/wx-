@@ -1,100 +1,85 @@
 <view class='column cen-start'>
   <view wx:if="{{imgdir ==='1'}}" class='pre'>
-    <image  class='preimgrotat' src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'></image>
+    <image  class='preimgrotat' src='{{cut_image}}'></image>
   </view>
-  <image wx:if="{{imgdir ==='2'}}" class='preimg' src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'></image>
+  <image wx:if="{{imgdir ==='2'}}" class='preimg' src='{{cut_image}}'></image>
   <view bindtap='querySel' class="addressInfo row cen-center">
     <image src='../../images/selectAddress.png'></image>
-    <text class='addressText ft13'>点击这里补充照片拍摄地址信息</text>
+    <text wx:if="{{cityName == ''}}" class='addressText ft13'>点击这里补充照片拍摄地址信息</text>
+    <text wx:if="{{cityName != ''}}" class='addressText ft13'>{{cityName}}</text>
   </view>
     <text class='tiptext gray-9 ft10'>温馨提示：没有拍摄地址无法制作明信片哦</text>
-    <view class="querybtn row cen-center ft13">确认拍摄地址</view>
+    <view bindtap='querySubmit' class="querybtn row cen-center ft13">确认拍摄地址</view>
 <!-- 地址选择 -->
 <view wx:if='{{address_photo}}' class='loyer'>
-<view class='photo_address'>
-  <view class='title row cen-space gray-3'>
-    <text bindtap='titCancel' class='cancel ft16'>取消</text>
-    <text class='text'>请选择照片拍摄地址</text>
-    <text bindtap='titQuery' class='query ft16'>确定</text>
-  </view>
-  <view bindtap='selectCity' class='content'>
-    <view  class='address row cen-space'>
-      <view data-cityname='北京市' class="aline {{cityName =='北京市'? 'active':''}}">北京市</view>
-      <view id='2' data-cityname='天津市' class="aline {{cityName =='天津市'? 'active':''}}">天津市</view>
-      <view id='3' data-cityname='上海市' class="aline {{cityName =='上海市'? 'active':''}}">上海市</view>
+  <view class='photo_address'>
+    <view class='title row cen-space gray-3'>
+      <text bindtap='titCancel' class='cancel ft16'>取消</text>
+      <text class='text'>请选择照片拍摄地址</text>
+      <text bindtap='titQuery' class='query ft16'>确定</text>
     </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='address row cen-space'>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-      <view class='aline'>北京市</view>
-    </view>
-    <view class='addrTwo row cen-space'>
-      <view class='aline'>大家开发领导了</view>
-      <view class='aline'>大家开发领导</view>
-    </view>
-    <view class='addrTwo row cen-space'>
-      <view class='aline'>大家开发领导了</view>
-      <view class='aline'>大家开发领导</view>
-    </view>
-    <view class='addrTwo row cen-space'>
-      <view class='aline'>大家开发领导了</view>
+    <view bindtap='selectCity' class='content'>
+      <view  class='address row cen-space'>
+        <view data-cityname='北京市' class="aline {{cityName =='北京市'? 'active':''}}">北京市</view>
+        <view data-cityname='天津市' class="aline {{cityName =='天津市'? 'active':''}}">天津市</view>
+        <view data-cityname='上海市' class="aline {{cityName =='上海市'? 'active':''}}">上海市</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='重庆市' class="aline {{cityName =='重庆市'? 'active':''}}">重庆市</view>
+        <view data-cityname='辽宁省' class="aline {{cityName =='辽宁省'? 'active':''}}">辽宁省</view>
+        <view data-cityname='吉林省' class="aline {{cityName =='吉林省'? 'active':''}}">吉林省</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='黑龙江省' class="aline {{cityName =='黑龙江省'? 'active':''}}">黑龙江省</view>
+        <view data-cityname='河南省' class="aline {{cityName =='河南省'? 'active':''}}">河南省</view>
+        <view data-cityname='河北省' class="aline {{cityName =='河北省'? 'active':''}}">河北省</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='山西省' class="aline {{cityName =='山西省'? 'active':''}}">山西省</view>
+        <view data-cityname='陕西省' class="aline {{cityName =='陕西省'? 'active':''}}">陕西省</view>
+        <view data-cityname='山东省' class="aline {{cityName =='山东省'? 'active':''}}">山东省</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='安徽省' class="aline {{cityName =='安徽省'? 'active':''}}">安徽省</view>
+        <view data-cityname='江苏省' class="aline {{cityName =='江苏省'? 'active':''}}">江苏省</view>
+        <view data-cityname='浙江省' class="aline {{cityName =='浙江省'? 'active':''}}">浙江省</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='湖北省' class="aline {{cityName =='湖北省'? 'active':''}}">湖北省</view>
+        <view data-cityname='湖南省' class="aline {{cityName =='湖南省'? 'active':''}}">湖南省</view>
+        <view data-cityname='江西省' class="aline {{cityName =='江西省'? 'active':''}}">江西省</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='四川省' class="aline {{cityName =='四川省'? 'active':''}}">四川省</view>
+        <view data-cityname='广东省' class="aline {{cityName =='广东省'? 'active':''}}">广东省</view>
+        <view data-cityname='贵州省' class="aline {{cityName =='贵州省'? 'active':''}}">贵州省</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='福建省' class="aline {{cityName =='福建省'? 'active':''}}">福建省</view>
+        <view data-cityname='云南省' class="aline {{cityName =='云南省'? 'active':''}}">云南省</view>
+        <view data-cityname='海南省' class="aline {{cityName =='海南省'? 'active':''}}">海南省</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='甘肃省' class="aline {{cityName =='甘肃省'? 'active':''}}">甘肃省</view>
+        <view data-cityname='青海省' class="aline {{cityName =='青海省'? 'active':''}}">青海省</view>
+        <view data-cityname='台湾省' class="aline {{cityName =='台湾省'? 'active':''}}">台湾省</view>
+      </view>
+      <view class='addrTwo row cen-space'>
+        <view data-cityname='内蒙古自治区' class="aline {{cityName =='内蒙古自治区'? 'active':''}}">内蒙古自治区</view>
+        <view data-cityname='广西壮族自治区' class="aline {{cityName =='广西壮族自治区'? 'active':''}}">广西壮族自治区</view>
+      </view>
+      <view class='addrTwo row cen-space'>
+        <view data-cityname='宁夏回族自治区' class="aline {{cityName =='宁夏回族自治区'? 'active':''}}">宁夏回族自治区</view>
+        <view data-cityname='新疆维吾尔自治区' class="aline {{cityName =='新疆维吾尔自治区'? 'active':''}}">新疆维吾尔自治区</view>
+      </view>
+      <view class='addrTwo row cen-space'>
+        <view data-cityname='西藏自治区' class="aline {{cityName =='西藏自治区'? 'active':''}}">西藏自治区</view>
+        <view data-cityname='香港特别行政区' class="aline {{cityName =='香港特别行政区'? 'active':''}}">香港特别行政区</view>
+      </view>
+      <view class='addrTwo row cen-space'>
+        <view data-cityname='澳门特别行政区' class="aline {{cityName =='澳门特别行政区'? 'active':''}}">澳门特别行政区</view>
+      </view>
     </view>
   </view>
-</view>
-</view>
+  </view>
 </view>

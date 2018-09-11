@@ -74,9 +74,9 @@ Page({
                   cut_image:src
                 })
                 if (res.confirm) {
-                  // wx.navigateTo({
-                  //   url: '../selectAdress/selectAdress?src=' + src + '&imgdir=' + self.data.imgdir + '&original_image=' + self.data.original_image + '&cut_image=' + self.data.cut_image
-                  // })
+                  wx.navigateTo({
+                    url: '../selectAdress/selectAdress?src=' + src + '&imgdir=' + self.data.imgdir + '&original_image=' + self.data.original_image + '&cut_image=' + self.data.cut_image
+                  })
                 } else if (res.cancel) {
                   console.log('用户点击取消')
                 }
@@ -172,8 +172,8 @@ Page({
             self.setData({
               [cutx]: (width - 343) / 2,
               [cuty]: (height - 187) / 2,
-              [cutW]: 353,
-              [cutH]: 197,
+              [cutW]: 343,
+              [cutH]: 187,
               imgdir: 2, //横图 2
               original_image:options.src
             })
@@ -201,30 +201,6 @@ Page({
     }
 
   },
-  // chooseImage() {
-  //   var self = this;
-  //   wx.chooseImage({
-  //     count: 1, // 默认9
-  //     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-  //     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-  //     success(res) {
-  //       const src = res.tempFilePaths[0]
-  //       // 获取图片信息
-  //       wx.getImageInfo({
-  //         src: res.tempFilePaths[0],
-  //         success: function(res) {
-  //           console.log('res.width', res.width);
-  //           console.log('res.height', res.height);
-  //         }
-  //       });
-  //       self.setData({
-  //         is_chooseimg: true
-  //       });
-  //       //  获取裁剪图片资源后，给data添加src属性及其值
-  //       self.wecropper.pushOrign(src)
-  //     }
-  //   });
-  // },
   showCavs() {
     const {
       cropperOpt
