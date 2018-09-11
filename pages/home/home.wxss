@@ -22,8 +22,8 @@
   padding:0 90rpx;
   box-sizing: border-box;
 }
-.activeColor{
-  color:#4294EA!important;
+.postCard .cardtext.activeColor{
+  color:#4294EA;
 }
 .postCard{
   width: 100rpx;
@@ -35,6 +35,20 @@
 }
 .postCard .cardtext{
   color:#B0B0B0;
+}
+.makeCard{
+  position: relative;
+}
+.makeCard .getUserInfo{
+  position: absolute;
+  left:0;
+  top:0;
+  width:86rpx;
+  height:86rpx;
+  z-index:1;
+}
+button[plain]{
+  border: none;
 }
 .makeCard image{
   width:86rpx;

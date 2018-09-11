@@ -9,16 +9,17 @@
 </view>
 <view class="buttom row cen-space">
   <view bindtap='cardActive' class="postCard column cen-center">
-    <image wx:if='{{cardActive}}' class='cardimg' src='../../images/postCard.png'></image>
-    <image wx:if='{{!cardActive}}' class='cardimg' src='../../images/npostCard.png'></image>
+    <image wx:if='{{cardActive}}' class='cardimg' src='../../images/post_card.png' />
+    <image wx:if='{{!cardActive}}' class='cardimg' src='../../images/npost_card.png' />
     <text class='cardtext ft10 {{cardActive ? "activeColor":""}}'>明信片</text>
   </view>
   <view class="makeCard">
-    <image bindtap='uploadTap' src='../../images/makecard.png'></image>
+    <image bindtap='uploadTap' src='../../images/makecard.png' />
+    <button wx:if="{{!getUserInfo}}" plain='true' open-type="getUserInfo" class="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button>
   </view>
   <view bindtap='orderActive' class="order column cen-center">
-    <image wx:if='{{orderActive}}' class='orderimg' src='../../images/order.png'></image>
-    <image wx:if='{{!orderActive}}' class='orderimg' src='../../images/norder.png'></image>
+    <image wx:if='{{orderActive}}' class='orderimg' src='../../images/order.png' />
+    <image wx:if='{{!orderActive}}' class='orderimg' src='../../images/norder.png' />
     <text class='ordertext ft10 {{orderActive ? "activeColor":""}}'>订单</text>
   </view>
 </view>

@@ -1,4 +1,5 @@
 // pages/photo/photo.js
+const app = getApp();
 Page({
 
   /**
@@ -6,14 +7,55 @@ Page({
    */
   data: {
     cardActive:true,
-    orderActive:false
+    orderActive:false,
+    getUserInfo:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var _that = this
+    wx.getSetting({ // 查看是否授权
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success: function (res) {
 
+              _that.setData({
+                getUserInfo: true
+              })
+
+            }
+          })
+        }else {
+          _that.setData({
+            getUserInfo: false
+          })
+        }
+
+
+      },
+    });
+
+    app.getOpenid().then(function (userId) {
+      console.log('2userId', userId);
+    })
+  },
+  //主动获取用户信息权限
+  onGotUserInfo: function (e) {
+    console.log('onGotUserInfo', e.detail.userInfo);
+    let userInfo = e.detail.userInfo;
+    if (!userInfo) {
+      this.setData({
+        getUserInfo: true
+      })
+    } else {
+      this.setData({
+        getUserInfo: true
+      })
+    }
   },
   cardActive(){//点击明信片
     if (this.data.cardActive) {

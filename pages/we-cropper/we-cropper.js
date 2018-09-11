@@ -899,7 +899,7 @@ function cut () {
   self.setBoundStyle = function (ref) {
     if ( ref === void 0 ) ref = {};
     var color = ref.color; if ( color === void 0 ) color = '#04b00f';
-    var mask = ref.mask; if ( mask === void 0 ) mask = 'rgba(0, 0, 0, 0.3)';
+    var mask = ref.mask; if ( mask === void 0 ) mask = 'rgba(0, 0, 0, 0.7)';
     var lineWidth = ref.lineWidth; if ( lineWidth === void 0 ) lineWidth = 1;
 
     var boundOption = [

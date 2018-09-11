@@ -46,7 +46,7 @@ function http(url, callBack, reqbody) {
     data: reqbody,
     method: 'POST',
     header: {
-      'content-type': 'application/x-www-form-urlencoded'
+      'content-type': 'application/json'
     },
     success: function(res) {
       wx.hideLoading();

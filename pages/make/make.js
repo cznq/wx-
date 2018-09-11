@@ -74,9 +74,9 @@ Page({
                   cut_image:src
                 })
                 if (res.confirm) {
-                  wx.navigateTo({
-                    url: '../selectAdress/selectAdress?src=' + src + '&imgdir=' + self.data.imgdir + '&original_image=' + self.data.original_image + '&cut_image=' + self.data.cut_image
-                  })
+                  // wx.navigateTo({
+                  //   url: '../selectAdress/selectAdress?src=' + src + '&imgdir=' + self.data.imgdir + '&original_image=' + self.data.original_image + '&cut_image=' + self.data.cut_image
+                  // })
                 } else if (res.cancel) {
                   console.log('用户点击取消')
                 }
