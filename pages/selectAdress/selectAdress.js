@@ -10,6 +10,7 @@ Page({
     imgdir: '2',
     cityName: '',
     address_photo: false,
+    progress: ''
   },
 
   /**
@@ -66,6 +67,7 @@ Page({
 
   },
   querySubmit() {
+    var _that = this;
     if (!this.data.cityName) {
       wx.showToast({
         title: '确认地址',
@@ -73,34 +75,50 @@ Page({
       })
       return false;
     }
-    var imageInfo = {
-      cut_image: this.data.cut_image,
-      original_image: this.data.original_image
-    }
-    wx.uploadFile({
-      url: constant.SERVER_URL + "/FileUploadServlet",
-      filePath: imageInfo,
-      name: 'imageInfo',
-      formData: {
-        //和服务器约定的token, 一般也可以放在header中
-        'user': 'test'
+    console.log('cut_imgage', _that.data.cut_image);
+    var filename = _that.data.cut_image.split('.');
+    console.log('filename.length', filename[filename.length - 1]);
+    wx.showLoading({
+      title: '上传中',
+    })
+    const uploadTask = wx.uploadFile({ //上传cut_imgage
+      url: 'http://snsforum.mojitest.com/snsupload/upload/json/upload', //http://snsup.moji.com/snsupload/upload/json/upload
+      filePath: _that.data.cut_image,
+      name: 'image',
+      header: {
+        'snsid': '921',
+        'sid': 'AES6D4A3231353766677666376D6569784B3539316D72413D3D',
+        'filename': 'image.' + filename[filename.length - 1],
+        'platform': 'Androed'
       },
+      formData: {},
       success: function(res) {
         console.log(res);
+        console.log('上传cut_image完成');
+        wx.hideLoading();
+        var data = JSON.parse(res.data);
+        if (data.code == 0) {
+          wx.navigateTo({
+            url: '../postCard/postCard?cityName=' + _that.data.cityName
+          })
+        }
       },
       fail: function(e) {
+        console.log('上传cut_image失败');
+        wx.hideLoading();
         console.log(e);
-      },
-      complete: function() {
-        wx.hideToast(); //隐藏Toast
       }
     })
+    //上传进度
+    uploadTask.onProgressUpdate((res) => {
+      console.log('上传进度', res.progress);
+      var progress = res.progress + '%'
+      _that.setData({
+        progress: progress
+      })
 
-    wx.uploadFile.onProgressUpdate((res) => {
-      console.log('上传进度', res.progress)
-      console.log('已经上传的数据长度', res.totalBytesSent)
-      console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
     })
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
