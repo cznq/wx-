@@ -18,23 +18,23 @@ App({
     // 获取用户信息
     // wx.getSetting({
     //   success: res => {
-    //       if (userInfo != '') {
-    //         console.log('调用登陆接口');
-    //         // var url = this.globalData.baseUrl + 'maternal/user/login';
-    //         console.log('userInfo.openId',userInfo.openId);
-    //         var reqbody = {
-    //           openId: userInfo.openId
-    //         }
-    //         utils.http(url, (dataStr) => {
-    //           if (dataStr.success) {
-    //             console.log('dataStr',dataStr);
-    //           this.globalData.openId = dataStr.data.openId;
-    //           this.globalData.sessionKey = dataStr.data.sessionKey;
-    //           this.globalData.id = dataStr.data.id;
-    //           console.log('this.globalData.id',this.globalData.id);
-    //           }
-    //         }, reqbody);
-    //       }
+          // if (userInfo != '') {
+          //   console.log('调用登陆接口');
+          //   var url = this.globalData.baseUrl + 'maternal/user/login';
+          //   console.log('userInfo.openId',userInfo.openId);
+          //   var reqbody = {
+          //     openId: userInfo.openId
+          //   }
+          //   utils.http(url, (dataStr) => {
+          //     if (dataStr.success) {
+          //       console.log('dataStr',dataStr);
+          //     this.globalData.openId = dataStr.data.openId;
+          //     this.globalData.sessionKey = dataStr.data.sessionKey;
+          //     this.globalData.id = dataStr.data.id;
+          //     console.log('this.globalData.id',this.globalData.id);
+          //     }
+          //   }, reqbody);
+          // }
     //   }
     // })
   },
@@ -91,8 +91,10 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrlT: 'http://192.168.1.232:8883/', //http://192.168.1.199:8099/
-    baseUrl: 'https://nbmp.moji.com/', //http://192.168.1.199:8099/
+    baseUrlT: 'http://192.168.1.232:8883/',
+    baseUrlTpost: 'http://192.168.1.232:8886/postcard/',
+    baseUrlPost: 'https://pcd.api.moji.com',
+    baseUrl: 'https://nbmp.moji.com/',
     language: '',
     platform: '',
     userId:'',

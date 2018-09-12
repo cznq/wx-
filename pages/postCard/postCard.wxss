@@ -68,10 +68,10 @@ textarea{resize:none}
   position: absolute;
   top:125rpx;
   right:80rpx;
-  width: 70rpx;
-  height:20rpx;
+  width: 60rpx;
+  height:15rpx;
   font-size: 10rpx;
-  line-height: 20rpx;
+  line-height: 15rpx;
   text-align: center;
   color: #fff;
   border:1px solid red;

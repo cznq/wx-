@@ -2,17 +2,18 @@
 <view class="main row cen-center">
   <view class="card">
     <!-- 背景图 -->
-    <image class='card_bg' src='../../images/Group.png'></image>
+    <!-- ../../images/Group.png -->
+    <image class='card_bg' src='{{mainbg}}'></image>
     <!-- 收件人 -->
-    <input class='content-input' maxlength='8' type="text"/>
+    <input class='content-input' style='color:{{color}}' maxlength='8' type="text"/>
     <!-- 信件内容 -->
-    <textarea bindinput='noExpre' class='{{platform =="ios"?"textaios":"textarea"}}' value="{{areaVal}}" maxlength='39' />
+    <textarea bindinput='noExpre' style='color:{{color}}' class='{{platform =="ios"?"textaios":"textarea"}}' value="{{areaVal}}" maxlength='39' />
     <!-- 寄件人 -->
-    <input class='content-input position-j' maxlength='8' type="text"/>
+    <input class='content-input position-j' style='color:{{color}}' maxlength='8' type="text"/>
     <!-- 地址 -->
-    <text class='{{platform =="ios"?"addressIos":"address"}}'>北京市</text>
+    <text style='color:{{color}}' class='{{platform =="ios"?"addressIos":"address"}}'>积分都是拉</text>
     <!-- 日期 -->
-    <text class='{{platform =="ios"?"riqiIos":"riqi"}}'>{{setTime}}</text>
+    <text style='color:{{color}}' class='{{platform =="ios"?"riqiIos":"riqi"}}'>{{setTime}}</text>
   </view>
 </view>
 <view class='s_content'>

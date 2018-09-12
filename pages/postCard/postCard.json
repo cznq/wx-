@@ -1,1 +1,7 @@
-{}
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "编辑明信片反面",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light"
+}
