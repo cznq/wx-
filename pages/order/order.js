@@ -11,11 +11,11 @@ Page({
     provinceName:'',
     cityName:'',
     countyName:'',
-    addressDetails:'多少卡机的撒开了就是打开了房饭都是靠捡垃圾范德萨开发发动机阿里'
+    addressDetails:'北京市朝阳区酒仙桥街路14号兆维华灯大厦A2区3门2层墨迹风云科技有限公司',
+    post_bg:''
   },
   // 选择地址
   bindChooseAddr() {
-    console.log(3333);
     let that = this
     wx.chooseAddress({
       success(res) {
@@ -39,6 +39,20 @@ Page({
         console.log(res.telNumber)
       },
       fail(res) {
+        console.log('res',res);
+        wx.getSetting({
+          success(res) {
+            if (!res.authSetting['scope.address']) {
+              wx.openSetting({
+                success(res) {
+                  res.authSetting = {
+                    "scope.address": true,
+                  }
+                }
+              })
+            }
+          }
+        })
         that.setData({
           chooseAddr:false
         })
@@ -49,7 +63,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
 
+    console.log(options.post_bg);
+    that.setData({
+      post_bg:options.post_bg
+    })
   },
 
   /**

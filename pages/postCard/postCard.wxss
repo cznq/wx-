@@ -24,7 +24,7 @@
 } */
 .content-input{
   position: absolute;
-  top:48rpx;
+  top:47rpx;
   left:165rpx;
   width:248rpx;
   height:20rpx;
@@ -47,7 +47,7 @@ textarea{resize:none}
 }
 .textaios{
   position: absolute;
-  top:142rpx;
+  top:138rpx;
   left:56rpx;
   width:395rpx;
   height:180rpx;
@@ -59,7 +59,7 @@ textarea{resize:none}
 /* 寄件人位置 */
 .position-j{
 
-  top:374rpx;
+  top:378rpx;
   left:388rpx;
   border:1px solid black;
 }

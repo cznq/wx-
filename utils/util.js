@@ -78,8 +78,9 @@ function Md5http(url, callBack, reqbody, platform) {
   var value;
   var reqbody = reqbody ? reqbody : {};
     reqbody = JSON.stringify(reqbody)
-  if (platform == 'ios') {
+  if (platform == 'iphone') {
     value = reqbody + 'MojiWeather_iOS';
+    console.log(value);
   }else{
     value = reqbody + 'KAndroid';
   }

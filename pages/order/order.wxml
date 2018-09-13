@@ -1,12 +1,12 @@
-<view class="order_address row cen-space {{chooseAddr?'active':''}}">
+<view class="order_address row cen-space {{chooseAddr?'active':''}}" bindtap='bindChooseAddr' >
   <view class='address_left row cen-start'>
     <image class='left_image' src='../../images/address.png' />
-    <view bindtap='bindChooseAddr' class='ChooseAddr ' >
+    <view class='ChooseAddr ' >
       <text wx:if='{{!chooseAddr}}' class='address_tip'>请填写收货地址</text>
       <view wx:if='{{chooseAddr}}' class='column start-cen'>
       <view>
-        <text class='addressee' >{{addressName}}</text>
-        <text>{{addressPhone}}</text>
+        <text class='addressee gray-32 ft16' >{{addressName}}</text>
+        <text class=' gray-32 ft16'>{{addressPhone}}</text>
       </view>
       <view class='order_details'>
         <text>收货地址：{{provinceName}}{{cityName}}{{countyName}}{{addressDetails}}</text>
@@ -20,4 +20,34 @@
 </view>
 <view class="cutting">
   <image src='../../images/order-border.png' />
+</view>
+<view class='intro padding10-left column'>
+  <text class='title gray-32 ft14'>墨迹时光邮局明信片</text>
+  <text class='name gray-9 ft12'>颜色：樱花模板</text>
+  <image class='post_bg' src='{{post_bg}}'></image>
+</view>
+<view class='song padding0-10 row cen-space'>
+  <view class='row cen-start'>
+    <image class='peisong' src='../../images/peisong.png'></image>
+    <text class='gray-32 ft14'>配送方式</text>
+  </view>
+  <view class='column'>
+    <text class='kd gray-32 ft14'>快递免费</text>
+    <text class='bay gray-9 ft12'>满9.9包邮</text>
+  </view>
+</view>
+<view class='song padding0-10 row cen-space'>
+  <view class='row cen-start'>
+    <image class='peisong' src='../../images/wx.png'></image>
+    <text class='gray-32 ft14'>支付方式</text>
+  </view>
+    <text class='kd gray-32 ft14'>微信支付</text>
+</view>
+<view class="button row cen-space padding0-10">
+  <view class="tipAddress row cen-start">
+    北京市朝阳区酒仙桥街路14号兆维华灯大厦A2区3门2层墨迹风云
+科技有限公司
+  </view>
+  <text class='ft14 gray-32'>总计：<text class='pay'>￥9.9</text></text>
+  <view class='btn'>立即下单</view>
 </view>

@@ -1,2 +1,67 @@
-<!--pages/orderDetail/orderDetail.wxml-->
-<text>pages/orderDetail/orderDetail.wxml</text>
+<!--pages/order/order.wxml-->
+<view class="orderTitle ft12 gray-9  row cen-space padding0-15 " bindtap="touchTit">
+  <li class="text-center "  >
+    <view data-tag='all' class="  gray-9  {{orderTitle === 'all' ? 'title_border05 active':''}}">全部</view>
+  </li>
+  <li class="text-center " >
+    <view  data-tag='repay' class=" gray-9 {{orderTitle === 'repay' ? 'title_border05 active':''}}">待付款</view>
+  </li>
+  <li class="text-center " >
+    <view data-tag='resend' class=" gray-9 {{orderTitle === 'resend' ? 'title_border05 active':''}}">待发货</view>
+  </li>
+  <li class="text-center " >
+    <view data-tag='sended' class=" gray-9 {{orderTitle === 'sended' ? 'title_border05 active':''}}">已发货</view>
+  </li>
+  <li class="text-center " >
+    <view data-tag='Invalid' class=" gray-9 {{orderTitle === 'Invalid' ? 'title_border05 active':''}}">已失效</view>
+  </li>
+</view>
+<!-- wx:for='{{orderDetails}}' wx:for-item='item' wx:key="unique" -->
+<view class='order-content-box' >
+  <block wx:if="{{orderTitle ==='all'}}" >
+    <view class="marg10-top">
+      <view class="orderInfo padding0-10">
+      <view class="title row cen-space">
+          <view>
+            <text class='ft12 gray-32'>2018-04-20 18:20:28</text>
+          </view>
+          <text class='ft12 qrcolo'>待支付</text>
+      </view>
+      <view class="middle row padding10-top">
+        <image class='order_image' src='../../images/zw.png'></image>
+          <view class='right_text column'>
+            <text>墨迹时光邮局明信片</text>
+            <view class='middle_address gray-9 ft12 column'>
+              <view class=''>收件人：<text>李乐</text><text>183030333116</text></view>
+              <view class='address'>北京市朝阳区酒仙桥路14号兆维华灯大厦A1区3门A216室墨迹天气</view>
+            </view>
+          </view>
+      </view>
+      <view class="bottom row cen-space">
+          <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥9.9</text></text>
+          <view class='row cen-start'>
+            <view class='btn_ordetail'>订单详情</view>
+            <view class='btn_pay'>立即支付</view>
+          </view>
+      </view>
+    </view>
+    </view>
+  </block>
+
+
+  <!-- <view wx:if="{{noDetails}}" class='noResult column cen-center'>
+      <view class='row cen-center'>
+        <image class='resultImage' src='../../images/noresult.png'></image>
+      </view>
+      <view bindtap='yjz' class='row cen-center'>
+        <image class='resultbtn' src='../../images/yjz.png'></image>
+      </view>
+  </view>
+  <view class="loyerbg {{cancelbtn ? 'action':''}}" catchtouchmove='loyerbg'>
+    <view class="loyer {{cancelbtn ? 'action':''}}">
+        <li catchtap='queryCancel' class='cancelInfo white font36'>信息填写有误</li>
+        <li catchtap='queryCancel' class='cancelInfo marg5-top white font36'>不想捐了</li>
+        <li bindtap='cancelTxt' class='cancelbtn marg10-top font36'>取消</li>
+    </view>
+  </view> -->
+  </view>

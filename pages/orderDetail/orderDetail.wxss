@@ -1,1 +1,169 @@
-/* pages/orderDetail/orderDetail.wxss */
+/* pages/order/order.wxss */
+page{
+  background-color: #F8F9FB;
+}
+.orderTitle{
+  position: fixed;
+  width: 100%;
+  /* height: 80rpx; */
+  left: 0;
+  top: 0;
+  display: flex;
+  align-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background-color: #F8F9FB;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid rgba(0,0,0,.1);
+}
+.order-content-box{
+  margin-top: 100rpx;
+  margin-bottom: 20rpx;
+}
+.orderTitle li{
+  height:80rpx;
+  line-height: 80rpx;
+}
+.orderTitle li .active{
+  color:#323232
+}
+.orderInfo{
+  height:370rpx;
+  box-sizing: border-box;
+}
+.orderInfo .title{
+  height:70rpx;
+}
+.qrcolo{
+  color:#FF973E;
+}
+.middle{
+  height:190rpx;
+}
+.middle .order_image{
+  width:196rpx;
+  height:128rpx;
+}
+.middle .right_text{
+  padding-left: 41rpx;
+}
+.middle .middle_address{
+  padding-top:16rpx;
+  line-height: 28rpx;
+}
+.middle .address{
+  padding-top:10rpx;
+}
+.orderInfo .bottom{
+  height:64rpx;
+}
+.bottom .price{
+  color:#FF973E;
+  font-size: 32rpx;
+}
+.bottom .btn_ordetail{
+  width:160rpx;
+  height:52rpx;
+  text-align: center;
+  line-height: 52rpx;
+  border-radius: 8rpx;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  border: 1rpx solid rgba(50,50,50,.3);
+  color:#323232;
+
+}
+.bottom .btn_pay{
+  width:160rpx;
+  height:52rpx;
+  text-align: center;
+  line-height: 52rpx;
+  border-radius: 8rpx;
+  background-color: #EE973E;
+  color:#FFFFFF;
+    box-sizing: border-box;
+  font-size: 24rpx;
+  border: 1rpx solid #EE973E;
+  margin-left:30rpx;
+}
+.padding8r-bottom{
+  padding-bottom: 16rpx;
+}
+/* 0.5px border */
+.title_border05 {
+    position: relative;
+}
+.title_border05:before {
+    display: block;
+    content: "";
+    width: 199%;
+    width: calc(200%);
+    height: 2px;
+    position: absolute;
+    left: -50%;
+    bottom: 0;
+    background-color: #323232;
+    transform: scale(0.5);
+    z-index: 1;
+}
+.noResult{
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding-top:70rpx;
+}
+.noResult .resultImage{
+  width:269rpx;
+  height:269rpx;
+}
+.noResult .resultbtn{
+  width:182rpx;
+  height:60rpx;
+  margin-top:25rpx;
+}
+.loyerbg{
+  position: fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index: 999;
+  display: none;
+}
+.loyerbg.action{
+  display: block;
+}
+.loyer{
+  width:90%;
+  position: fixed;
+  bottom:0px;
+  left:5%;
+  height:0px;
+  overflow: hidden;
+  z-index: 9999;
+  transition: height .3s;
+  overflow: hidden;
+}
+.loyer .cancelInfo{
+  display: block;
+  width:100%;
+  line-height: 50px;
+  background-color: #fd5394;
+  border-radius: 5px;
+  text-align: center;
+}
+.loyer .cancelbtn{
+  display: block;
+  width:100%;
+  line-height: 50px;
+  border:1px solid #f685a3;
+  background-color: #fff;
+  border-radius: 5px;
+  color:#ff8db9;
+  text-align: center;
+  box-sizing: border-box;
+}
+.loyer.action{
+  height: 168px;
+  transition: height .3s;
+}

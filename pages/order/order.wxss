@@ -5,7 +5,7 @@
   padding:0 30rpx;
   box-sizing: border-box;
 }
-.order_address.active{
+.active{
   height:172rpx;
 }
 .order_address .left_image{
@@ -24,19 +24,84 @@
 .ChooseAddr{
   color:#323232;
 }
+.addressee{
+  padding-right:20rpx;
+}
 .order_address .order_details{
   width:594rpx;
-  height: 49rpx;
+  height: 56rpx;
   color:#323232;
   font-size: 24rpx;
-  line-height: 24rpx;
+  padding-top:10rpx;
+  line-height: 28rpx;
   overflow: scroll;
 }
 .cutting{
   position: relative;
-  margin-top: -20px;
+  margin-top: -32rpx;
 }
 .cutting image{
   width:750rpx;
   height:8rpx;
+}
+.intro .title{
+  padding-top:10rpx;
+}
+.intro .name{
+  padding-top:10rpx;
+  padding-bottom: 20rpx;
+}
+.post_bg{
+  width:252rpx;
+  height:166rpx;
+}
+.song{
+  margin-top:70rpx;
+}
+.peisong{
+  width:36rpx;
+  height:36rpx;
+  margin-right: 20rpx;
+}
+.kd{
+  line-height: 28rpx;
+}
+.baoy{
+  line-height: 24rpx;
+}
+.pay{
+  color:#FF973E;
+  font-size: 32rpx;
+}
+.button{
+  position: absolute;
+  bottom:66rpx;
+  left: 0;
+  width:750rpx;
+  height:92rpx;
+  box-sizing: border-box;
+}
+.tipAddress{
+  position: absolute;
+  top:-110rpx;
+  left: 0;
+  padding:0 20rpx;
+  width:750rpx;
+  height: 110rpx;
+  color: #C5743E;
+  font-size: 24rpx;
+  line-height: 30rpx;
+  box-sizing: border-box;
+  background-color: #FEF8D8;
+  z-index: 99;
+}
+.btn{
+  width: 200rpx;
+  height:80rpx;
+  background-color: #FF973E;
+  border-radius: 8rpx;
+  text-align: center;
+  line-height: 80rpx;
+  color: #FFFFFF;
+  font-size: 32rpx;
 }

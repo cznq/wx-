@@ -1,4 +1,5 @@
 // pages/plan2/plan2.js
+const app = getApp();
 Page({
 
   /**
@@ -89,7 +90,7 @@ Page({
         'snsid': '921',
         'sid': 'AES6D4A3231353766677666376D6569784B3539316D72413D3D',
         'filename': 'image.' + filename[filename.length - 1],
-        'platform': 'Androed'
+        'platform': app.globalData.platform
       },
       formData: {},
       success: function(res) {

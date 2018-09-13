@@ -8,42 +8,26 @@ Page({
    * 页面的初始数据
    */
   data: {
+    backFlag:false,
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
     duration: 1000,
-    areaVal: '就是打开',
+    Addressee:'',
+    areaVal: '所有快乐，无需假装；此生尽兴，赤城善良。',
+    sender:'',
     setTime: '',
     selAddress: '',
     mainbg:'',
+    postCard_url:'',
     color:'',
     currentIndex: '0',
     imgUrls: [{
         url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
         name: '父情节'
-      },
-      {
-        url: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        name: '小墨兰'
-      },
-      {
-        url: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
-        name: '附近的'
-      },
-      {
-        url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '戴假发'
-      },
-      {
-        url: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        name: '角度看'
-      },
-      {
-        url: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
-        name: '觉得的'
       }
     ],
-    platform: 'ios'
+    platform: 'iphone'
   },
 
   /**
@@ -54,40 +38,44 @@ Page({
     var phone = wx.getSystemInfoSync();  //调用方法获取机型    
     var that = this;
     if (phone.platform == 'ios') {   
+
       that.setData({    
-        platform: 'ios'   
+        platform: 'iphone'   
       });
-    } else if (phone.platform == 'android') {
+    } else {
       that.setData({    
         platform: 'android'   
       });  
     }
     // ---获取接口数据---
+      var platform = that.data.platform;
     var url = app.globalData.baseUrlTpost + 'config/bg_list_v1?';
-    console.log('app.globalData.baseUrlTpost', app.globalData.baseUrlTpost + 'config/bg_list_v1?');
+    // console.log('app.globalData.baseUrlTpost', app.globalData.baseUrlTpost + 'config/bg_list_v1?');
     var reqbody = {
       common: {
         'snsid': '921',
         'sid': 'AES6D4A3231353766677666376D6569784B3539316D72413D3D',
-        'platform': 'Android',
+        'platform': platform,
         'uid':1,
         "language": "CN"
       },
       params: {}
     }
     utils.Md5http(url, (dataStr) => {
+      console.log('dataStr', dataStr);
       if (dataStr.rc.c == 0) {
         that.setData({
           imgUrls: dataStr.bg_list
         })
-        console.log('dataStr', dataStr);
+
         console.log('imgUrls', that.data.imgUrls);
         that.setData({
           mainbg:that.data.imgUrls[0].print_bg_url,
+          postCard_url:that.data.imgUrls[0].url,
           color:that.data.imgUrls[0].color,
         })
       }
-    }, reqbody,'Androed');
+    }, reqbody,platform);
     // 获取接口数据
     let setTime = utils.mformatTime(new Date());
     that.setData({
@@ -111,16 +99,67 @@ Page({
     })
     console.log(val);
   },
+
+  addressee(e){
+    console.log(e.detail.value);
+    this.setData({
+      Addressee:e.detail.value
+    })
+  },
+  areaVal(e){
+    console.log(e.detail.value);
+    this.setData({
+      areaVal:e.detail.value
+    })
+  },
+  sender(e){
+    console.log(e.detail.value);
+    this.setData({
+      sender:e.detail.value
+    })
+  },
   clickSwiper(e) {
     console.log(e.currentTarget.dataset.index);
     var currentIndex = e.currentTarget.dataset.index;
     var mainbg = this.data.imgUrls[currentIndex].print_bg_url;
+    var postCard_url = this.data.imgUrls[currentIndex].url
     var color = this.data.imgUrls[currentIndex].color;
     this.setData({
       currentIndex: currentIndex,
       mainbg:mainbg,
-      color:color
+      color:color,
+      postCard_url:postCard_url
     })
+  },
+  step_btn(){
+    var that = this;
+    if (that.data.Addressee == '') {
+      wx.showToast({
+        title: '请填写收件人',
+        icon: 'none'
+      })
+      return false
+    }
+    if (that.data.areaVal == '') {
+      wx.showToast({
+        title: '请填写内容',
+        icon: 'none'
+      })
+      return false
+    }
+    if (that.data.sender == '') {
+      wx.showToast({
+        title: '请填写寄件人',
+        icon: 'none'
+      })
+      return false
+    }
+    wx.navigateTo({
+      url: '../order/order?post_bg=' + that.data.postCard_url
+    })
+    // console.log(that.data.Addressee);
+    // console.log(that.data.areaVal);
+    // console.log(that.data.sender);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -147,7 +186,11 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    if (!this.data.backFlag) {
+      wx.navigateBack({
+        url: '../make/make',
+      })
+    }
   },
 
   /**
