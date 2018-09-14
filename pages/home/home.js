@@ -1,5 +1,6 @@
 // pages/photo/photo.js
 const app = getApp();
+const utils = require('../../utils/util.js');
 Page({
 
   /**
@@ -8,7 +9,8 @@ Page({
   data: {
     cardActive:true,
     orderActive:false,
-    getUserInfo:false
+    getUserInfo:false,
+    picture_list:[]
   },
 
   /**
@@ -16,6 +18,26 @@ Page({
    */
   onLoad: function (options) {
     var _that = this
+    var url = app.globalData.baseUrlTpost + 'config/get_config_information';
+    var reqbody = {
+      "common": {
+        "uid": 198490817408925696,
+        "platform": app.globalData.platform,
+        "language": app.globalData.language
+      },
+      "params": {}
+    }
+    utils.http(url, (dataStr) => {
+      console.log('dataStr22',dataStr);
+      if (dataStr.rc.c == 0) {
+        var picture_list = dataStr.promotion_picture_list;
+        _that.setData({
+          picture_list:picture_list
+        })
+      }
+
+    }, reqbody);
+
     wx.getSetting({ // 查看是否授权
       success: function (res) {
         if (res.authSetting['scope.userInfo']) {
@@ -58,30 +80,22 @@ Page({
     }
   },
   cardActive(){//点击明信片
-    if (this.data.cardActive) {
-      this.setData({
-        cardActive:false,
-        orderActive:false
-      })
-    }else{
-      this.setData({
-        cardActive:true,
-        orderActive:false
-      })
-    }
+    // if (this.data.cardActive) {
+    //   this.setData({
+    //     cardActive:false,
+    //     orderActive:false
+    //   })
+    // }else{
+    //   this.setData({
+    //     cardActive:true,
+    //     orderActive:false
+    //   })
+    // }
   },
   orderActive(){//点击订单
-    if (this.data.orderActive) {
-      this.setData({
-        orderActive:false,
-        cardActive:false
-      })
-    }else{
-      this.setData({
-        orderActive:true,
-        cardActive:false
-      })
-    }
+    wx.navigateTo({
+      url: '../orderDetail/orderDetail'
+    })
   },
   uploadTap() { //选择图片
     const self = this

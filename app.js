@@ -53,10 +53,10 @@ App({
           // 首次登陆调注册接口获取openid&&userid
           if (!userInfo.userId || userInfo.userId == undefined) {
             console.log('主动注册接口');
-            var url = _that.globalData.baseUrlT + 'api/applet/loginByCode';
+            var url = _that.globalData.baseUrlT + 'applet/loginByCode';
             var reqbody = {
               "common": {
-                "uid": 198490817408925696,
+                "uid": 198490817408925696,//先写死--
                 "platform": _that.globalData.platform,
                 "language": _that.globalData.language
               },
@@ -91,14 +91,19 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrlT: 'http://192.168.1.232:8883/',
+    baseUrlT: 'http://192.168.1.232:8883/api/',
+    baseUrl:'https://uc.api.moji.com/mapi/',
     baseUrlTpost: 'http://192.168.1.232:8886/postcard/',
-    baseUrlPost: 'https://pcd.api.moji.com',
-    baseUrl: 'https://nbmp.moji.com/',
+    baseUrlPost: 'https://pcd.api.moji.com/',
     language: '',
     platform: '',
     userId:'',
     openId:'',
-    session_id:''
+    session_id:'',
+    original_price:'',//订单总价
+    postage_fee:'',//邮费0不展示
+    postage_copywriting:'',//邮费文案
+    express_delivery_copywriting:'',//快递文案
+    original_copywriting:''	//原价文案
   }
 })

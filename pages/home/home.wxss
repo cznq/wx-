@@ -1,16 +1,7 @@
 /* pages/home/home.wxss */
-.home-bg image{
-  width:750rpx;
-  height:2306rpx;
-}
-.home-bg2 image{
-  width:750rpx;
-  height:1755rpx;
-}
-.home-bg3 image{
-  width:750rpx;
-  height:2016rpx;
-  margin-bottom:96rpx;
+.padding50{
+  width: 750rpx;
+  height: 100rpx;
 }
 .buttom{
   position: fixed;
@@ -45,7 +36,6 @@
   top:0;
   width:86rpx;
   height:86rpx;
-  z-index:1;
 }
 button[plain]{
   border: none;

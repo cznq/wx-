@@ -16,8 +16,9 @@ Page({
     Addressee:'',
     areaVal: '所有快乐，无需假装；此生尽兴，赤城善良。',
     sender:'',
-    setTime: '',
+    setTime: '2019-10-03',
     selAddress: '',
+    selAddressLen:5,
     mainbg:'',
     postCard_url:'',
     color:'',
@@ -34,7 +35,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('options', options.cityName);
+
     var phone = wx.getSystemInfoSync();  //调用方法获取机型    
     var that = this;
     if (phone.platform == 'ios') {   
@@ -70,7 +71,7 @@ Page({
 
         console.log('imgUrls', that.data.imgUrls);
         that.setData({
-          mainbg:that.data.imgUrls[0].print_bg_url,
+          mainbg:that.data.imgUrls[0].url_h5,
           postCard_url:that.data.imgUrls[0].url,
           color:that.data.imgUrls[0].color,
         })
@@ -82,7 +83,24 @@ Page({
       setTime: setTime,
       selAddress: options.cityName
     })
-
+    console.log('options', options.cityName);
+    var cityName = options.cityName;
+      var cityName = that.data.selAddress;
+    if (cityName.length == 6) {
+      that.setData({
+        selAddressLen:6
+      })
+    }
+    if (cityName.length == 7) {
+      that.setData({
+        selAddressLen:7
+      })
+    }
+    if (cityName.length == 8) {
+      that.setData({
+        selAddressLen:8
+      })
+    }
   },
   noExpre(e) {
     var val = e.detail.value;
@@ -121,7 +139,7 @@ Page({
   clickSwiper(e) {
     console.log(e.currentTarget.dataset.index);
     var currentIndex = e.currentTarget.dataset.index;
-    var mainbg = this.data.imgUrls[currentIndex].print_bg_url;
+    var mainbg = this.data.imgUrls[currentIndex].url_h5;
     var postCard_url = this.data.imgUrls[currentIndex].url
     var color = this.data.imgUrls[currentIndex].color;
     this.setData({

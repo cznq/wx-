@@ -65,3 +65,16 @@
     </view>
   </view> -->
   </view>
+  <view class="buttom row cen-space">
+    <view bindtap='cardActive' class="postCard column cen-center">
+      <image class='cardimg' src='../../images/npost_card.png' />
+      <text class='cardtext ft10'>明信片</text>
+    </view>
+    <view class="makeCard">
+      <image bindtap='uploadTap' src='../../images/makecard.png' />
+    </view>
+    <view class="order column cen-center">
+      <image class='orderimg' src='../../images/order.png' />
+      <text class='ordertext ft10 activeColor'>订单</text>
+    </view>
+  </view>

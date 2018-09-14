@@ -2,8 +2,8 @@
 <view class="main row cen-center">
   <view class="card">
     <!-- 背景图 -->
-    <!--  {{mainbg}}-->
-    <image class='card_bg' src='../../images/hj.png'></image>
+    <!--  -->
+    <image class='card_bg' src='{{mainbg}}'></image>
     <!-- 收件人 -->
     <input class='content-input' style='color:{{color}}' value='{{Addressee}}' bindblur='addressee' maxlength='8' type="text"/>
     <!-- 信件内容 -->
@@ -11,9 +11,9 @@
     <!-- 寄件人 -->
     <input class='content-input position-j' bindblur='sender' value='{{sender}}' style='color:{{color}}' maxlength='8' type="text"/>
     <!-- 地址 -->
-    <text style='color:{{color}}' class='{{platform =="ios"?"addressIos":"address"}}'>积分都是拉</text>
+    <text style='color:{{color}}' class='{{platform =="iphone"? selAddressLen == 6? "addressIos6":selAddressLen >= 7? "addressIos7":"addressIos5" :selAddressLen == 6? "addressAndro6":selAddressLen >= 7? "addressAndro7":"addressAndro5"}}'>{{selAddress}}</text>
     <!-- 日期 -->
-    <text style='color:{{color}}' class='{{platform =="ios"?"riqiIos":"riqi"}}'>{{setTime}}</text>
+    <text style='color:{{color}}' class='{{platform =="iphone"?"riqiIos":"riqi"}}'>{{setTime}}</text>
   </view>
 </view>
 <view class='s_content'>
