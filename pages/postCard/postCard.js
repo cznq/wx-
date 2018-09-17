@@ -1,7 +1,7 @@
 // pages/card_reverse /card_reverse.js
+const app = getApp();
 const utils = require('../../utils/util.js');
 
-const app = getApp();
 Page({
 
   /**
@@ -13,11 +13,11 @@ Page({
     autoplay: false,
     interval: 5000,
     duration: 1000,
-    Addressee:'',
-    areaVal: '所有快乐，无需假装；此生尽兴，赤城善良。',
-    sender:'',
+    Addressee:'',//收件人
+    areaVal: '所有快乐，无需假装；此生尽兴，赤城善良。',//信件内容
+    sender:'',//寄件人
     setTime: '2019-10-03',
-    selAddress: '',
+    selAddress: '',//地址
     selAddressLen:5,
     mainbg:'',
     postCard_url:'',
@@ -51,13 +51,13 @@ Page({
     // ---获取接口数据---
       var platform = that.data.platform;
     var url = app.globalData.baseUrlTpost + 'config/bg_list_v1?';
-    // console.log('app.globalData.baseUrlTpost', app.globalData.baseUrlTpost + 'config/bg_list_v1?');
+
     var reqbody = {
       common: {
         'snsid': '921',
         'sid': 'AES6D4A3231353766677666376D6569784B3539316D72413D3D',
         'platform': platform,
-        'uid':1,
+        'uid':0,
         "language": "CN"
       },
       params: {}
@@ -76,7 +76,7 @@ Page({
           color:that.data.imgUrls[0].color,
         })
       }
-    }, reqbody,platform);
+    }, reqbody);
     // 获取接口数据
     let setTime = utils.mformatTime(new Date());
     that.setData({
@@ -173,7 +173,11 @@ Page({
       return false
     }
     wx.navigateTo({
-      url: '../order/order?post_bg=' + that.data.postCard_url
+      url: '../order/order?post_bg=' + that.data.postCard_url +
+      "&Addressee=" + that.data.Addressee +
+      "&areaVal=" + that.data.areaVal + "&sender=" + that.data.sender +
+      "&selAddress=" + that.data.selAddress +
+      "&currentIndex=" + that.data.currentIndex
     })
     // console.log(that.data.Addressee);
     // console.log(that.data.areaVal);

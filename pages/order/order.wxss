@@ -64,6 +64,7 @@
   margin-right: 20rpx;
 }
 .kd{
+  text-align: right;
   line-height: 28rpx;
 }
 .baoy{
@@ -75,7 +76,7 @@
 }
 .button{
   position: absolute;
-  bottom:66rpx;
+  bottom:0;
   left: 0;
   width:750rpx;
   height:92rpx;

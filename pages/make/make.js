@@ -60,16 +60,16 @@ Page({
     const self = this
     this.wecropper.getCropperImage((src) => { //获取裁剪图片
       if (src) {
-        console.log(src)
-        self.wecropper.pushOrign(src)
         wx.showModal({//预览后提示
           title: '提示',
           content: '为了防止图片被过度剪裁，请确认您已预览图片且人像完整',
           success: function(res) {
-            self.setData({
-              cut_image:src
-            })
-            if (res.confirm) {
+            if (res.confirm) {//用户点击确认
+              console.log(src)
+              self.wecropper.pushOrign(src)
+              self.setData({
+                cut_image:src
+              })
               wx.navigateTo({
                 url: '../selectAdress/selectAdress?src=' + src + '&imgdir=' + self.data.imgdir + '&original_image=' + self.data.original_image + '&cut_image=' + self.data.cut_image
               })
@@ -78,20 +78,13 @@ Page({
             }
           }
         })
-        // wx.previewImage({ //预览
-        //   current: '', // 当前显示图片的http链接
-        //   urls: [src], // 需要预览的图片http链接列表
-        //   success: function() {
-        //
-        //   }
-        // })
+      
       } else {
         console.log('获取图片地址失败，请稍后重试')
       }
     })
   },
   uploadTap() { //选择图片
-
     const self = this
     wx.chooseImage({
       count: 1, // 默认9

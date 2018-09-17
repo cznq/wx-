@@ -29,7 +29,7 @@
   width:248rpx;
   height:20rpx;
   color:#fff;
-  border:1px solid black;
+  /* border:1px solid black; */
   font-size: 28rpx;
 }
 input,button,select,textarea{outline:none}
@@ -42,7 +42,7 @@ textarea{resize:none}
   height:180rpx;
   line-height: 55rpx;
   color:#fff;
-  border:1px solid blue;
+  /* border:1px solid blue; */
   font-size: 28rpx;
 }
 .textaios{
@@ -53,7 +53,7 @@ textarea{resize:none}
   height:180rpx;
   line-height: 55rpx;
   color:#fff;
-  border:1px solid yellow;
+  /* border:1px solid yellow; */
   font-size: 28rpx;
 }
 /* 寄件人位置 */
@@ -61,7 +61,7 @@ textarea{resize:none}
 
   top:378rpx;
   left:388rpx;
-  border:1px solid black;
+  /* border:1px solid black; */
 }
 /* 地址 */
 .addressIos5{
@@ -74,7 +74,7 @@ textarea{resize:none}
   line-height: 15rpx;
   text-align: center;
   color: #fff;
-  border:1px solid red;
+  /* border:1px solid red; */
 }
 .addressIos6{
   position: absolute;
@@ -86,7 +86,7 @@ textarea{resize:none}
   line-height: 12rpx;
   text-align: center;
   color: #fff;
-  border:1px solid red;
+  /* border:1px solid red; */
 }
 .addressIos7{
   position: absolute;
@@ -98,7 +98,7 @@ textarea{resize:none}
   line-height: 12rpx;
   text-align: center;
   color: #fff;
-  border:1px solid red;
+  /* border:1px solid red; */
 }
 
 .addressAndro5{
@@ -112,7 +112,7 @@ textarea{resize:none}
   transform: scale(0.5);
   text-align: center;
   color: #fff;
-  border:1px solid red;
+  /* border:1px solid red; */
 }
 .addressAndro6{
   position: absolute;
@@ -125,7 +125,7 @@ textarea{resize:none}
   transform: scale(0.5);
   text-align: center;
   color: #fff;
-  border:1px solid red;
+  /* border:1px solid red; */
 }
 .addressAndro7{
   position: absolute;
@@ -138,7 +138,7 @@ textarea{resize:none}
   transform: scale(0.5);
   text-align: center;
   color: #fff;
-  border:1px solid red;
+  /* border:1px solid red; */
 }
 /* 日期 */
 .riqiIos{
@@ -152,7 +152,7 @@ textarea{resize:none}
   line-height: 20rpx;
   text-align: center;
   color: #fff;
-  border:1px solid red;
+  /* border:1px solid red; */
 }
 .riqi{
   display: block;
@@ -166,7 +166,7 @@ textarea{resize:none}
   transform: scale(0.5);
   text-align: center;
   color: #fff;
-  border:1px solid red;
+  /* border:1px solid red; */
 }
 /* 明信片内容
 /* .content-middle-area{

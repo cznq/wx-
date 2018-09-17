@@ -7,7 +7,7 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 const formatNumber = n => {
@@ -71,23 +71,23 @@ function http(url, callBack, reqbody) {
  * @date     2018-08-10
  * @author   wzj
  */
-function Md5http(url, callBack, reqbody, platform) {
+function Md5http(url, callBack, reqbody) {
   wx.showLoading({
     title: '加载中',
   })
   var value;
   var reqbody = reqbody ? reqbody : {};
     reqbody = JSON.stringify(reqbody)
-  if (platform == 'iphone') {
-    value = reqbody + 'MojiWeather_iOS';
-    console.log(value);
-  }else{
-    value = reqbody + 'KAndroid';
-  }
-  value = md5.hex_md5(value).toUpperCase()
+  // if (platform == 'iphone') {
+  //   value = reqbody + 'MojiWeather_iOS';
+  //   console.log(value);
+  // }else{
+  //   value = reqbody + 'KAndroid';
+  // }
+  // value = md5.hex_md5(value).toUpperCase()
   // console.log('url::',url + 'sign='+value);
   wx.request({
-    url: url + 'sign='+value,
+    url: url + 'fromType=1',
     data: reqbody,
     method: 'POST',
     header: {

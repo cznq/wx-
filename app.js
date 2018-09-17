@@ -7,56 +7,31 @@ App({
       var res = wx.getSystemInfoSync();
       this.globalData.platform = res.platform;
       this.globalData.language = res.language;
-      console.log(this.globalData.language);
-      console.log(res);
+      console.log('获取设备信息',res);
     } catch (e) {
       console.log('获取系统信息失败');
     }
 
-    // var userInfo = {};
-    // userInfo = wx.getStorageSync('userInfo'); //读取本地userInfo
-    // 获取用户信息
-    // wx.getSetting({
-    //   success: res => {
-          // if (userInfo != '') {
-          //   console.log('调用登陆接口');
-          //   var url = this.globalData.baseUrl + 'maternal/user/login';
-          //   console.log('userInfo.openId',userInfo.openId);
-          //   var reqbody = {
-          //     openId: userInfo.openId
-          //   }
-          //   utils.http(url, (dataStr) => {
-          //     if (dataStr.success) {
-          //       console.log('dataStr',dataStr);
-          //     this.globalData.openId = dataStr.data.openId;
-          //     this.globalData.sessionKey = dataStr.data.sessionKey;
-          //     this.globalData.id = dataStr.data.id;
-          //     console.log('this.globalData.id',this.globalData.id);
-          //     }
-          //   }, reqbody);
-          // }
-    //   }
-    // })
   },
   getOpenid: function() {
     var userInfo = {};
     userInfo = wx.getStorageSync('userInfo');
-    console.log('userInfo',userInfo);
+    console.log('获取登陆成功userInfo',userInfo);
     var _that = this;
     return new Promise(function(resolve, reject) {
       // 登录
       wx.login({
         success: res => {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          console.log('res.coded', res.code);
+          console.log('当前coded为', res.code);
           _that.globalData.code = res.code;
           // 首次登陆调注册接口获取openid&&userid
           if (!userInfo.userId || userInfo.userId == undefined) {
-            console.log('主动注册接口');
+            console.log('登陆接口');
             var url = _that.globalData.baseUrlT + 'applet/loginByCode';
             var reqbody = {
               "common": {
-                "uid": 198490817408925696,//先写死--
+                "uid": 0,//先写死--
                 "platform": _that.globalData.platform,
                 "language": _that.globalData.language
               },
@@ -65,7 +40,7 @@ App({
               }
             }
             utils.http(url, (dataStr) => {
-              console.log('dataStr',dataStr);
+              console.log('据code获取登陆信息',dataStr);
               if (dataStr.code == 0) {
                 _that.globalData.userId = dataStr.sns_id;
                 _that.globalData.openId = dataStr.open_id;
@@ -76,10 +51,9 @@ App({
                   session_id:_that.globalData.session_id
                 }
                 wx.setStorageSync('userInfo', userInfo);
-                console.log('userInfo111',userInfo);
                 resolve(userInfo);
               }else {
-                console.log('失败',dataStr);
+                console.log('登陆接口失败',dataStr);
               }
             }, reqbody);
           } else {

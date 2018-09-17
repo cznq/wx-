@@ -32,8 +32,8 @@
     <text class='gray-32 ft14'>配送方式</text>
   </view>
   <view class='column'>
-    <text class='kd gray-32 ft14'>快递免费</text>
-    <text class='bay gray-9 ft12'>满9.9包邮</text>
+    <text class='kd gray-32 ft14'>{{express_delivery_copywriting}}</text>
+    <text class='bay gray-9 ft12'>{{postage_copywriting}}</text>
   </view>
 </view>
 <view class='song padding0-10 row cen-space'>
@@ -44,10 +44,10 @@
     <text class='kd gray-32 ft14'>微信支付</text>
 </view>
 <view class="button row cen-space padding0-10">
-  <view class="tipAddress row cen-start">
+  <!-- <view class="tipAddress row cen-start">
     北京市朝阳区酒仙桥街路14号兆维华灯大厦A2区3门2层墨迹风云
 科技有限公司
-  </view>
-  <text class='ft14 gray-32'>总计：<text class='pay'>￥9.9</text></text>
+  </view> -->
+  <text class='ft14 gray-32'>总计：<text class='pay'>￥{{original_price}}</text></text>
   <view class='btn'>立即下单</view>
 </view>

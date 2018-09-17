@@ -1,4 +1,6 @@
 // pages/orderDetail/orderDetail.js
+const app = getApp();
+const utils = require('../../utils/util.js');
 Page({
 
   /**
@@ -6,14 +8,57 @@ Page({
    */
   data: {
     orderTitle:'all',
-    noDetails:false
+    noDetails:false,
+    order_list:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // ---获取接口数据---
+    var platform = app.globalData.platform;
+    var url = app.globalData.baseUrlTpost + 'order/order_list?';
+    var reqbody = {
+      common: {
+        'snsid': '100001236',
+        'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+        'platform': platform,
+        'uid':0,
+        "language": "CN"
+      },
+      params: {
+        order_status:-1,
+        page_no:1,
+        page_size:20
+      }
+    }
+    utils.Md5http(url, (dataStr) => {
+      console.log('获取订单详情信息', dataStr);
+      if (dataStr.rc.c == 0) {
+      var  order_list = dataStr.order_list;
+      if (order_list.length == 0) {
+        this.setData({
+          noDetails:true
+        })
+      }
+      var time_list = [], time;
+      for (var item in order_list) {
+        if (order_list.hasOwnProperty(item)) {
+          time = utils.formatTime(new Date(order_list[item].create_time))
+            order_list[item].time = time
+        }
+      }
+      this.setData({
+        order_list:order_list
+      })
+    }else {
+      this.setData({
+        noDetails:true
+      })
+    }
+    }, reqbody);
+    // 获取接口数据
   },
   touchTit: function(e) {
     let tag = e.target.dataset.tag;
@@ -23,27 +68,47 @@ Page({
           orderTitle: "all",
           noDetails: false
         });
-        // url = app.globalData.baseUrl + 'maternal/order/list';
-        // var reqbody = {
-        //   userId: app.globalData.id
-        // }
-        // util.http(url, (dataStr) => {
-        //   if (dataStr.success) {
-        //     console.log(dataStr);
-        //     if (!dataStr.data[0] || dataStr.data[0].type != 0) {
-        //       console.log('不存在');
-        //       this.setData({
-        //         noDetails: true
-        //       })
-        //       return false;
-        //     }
-        //     console.log(dataStr.data[0].order);
-        //     orderDetails = dataStr.data[0].order;
-        //     this.setData({
-        //       'orderDetails': orderDetails
-        //     })
-        //   }
-        // }, reqbody);
+        var platform = app.globalData.platform;
+        var url = app.globalData.baseUrlTpost + 'order/order_list?';
+        var reqbody = {
+          common: {
+            'snsid': '100001236',
+            'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+            'platform': platform,
+            'uid':0,
+            "language": "CN"
+          },
+          params: {
+            order_status:-1,
+            page_no:1,
+            page_size:20
+          }
+        }
+        utils.Md5http(url, (dataStr) => {
+          console.log('获取订单详情信息', dataStr);
+          if (dataStr.rc.c == 0) {
+          var  order_list = dataStr.order_list;
+          if (order_list.length == 0) {
+            this.setData({
+              noDetails:true
+            })
+          }
+          var time_list = [], time;
+          for (var item in order_list) {
+            if (order_list.hasOwnProperty(item)) {
+              time = utils.formatTime(new Date(order_list[item].create_time))
+                order_list[item].time = time
+            }
+          }
+          this.setData({
+            order_list:order_list
+          })
+        }else {
+          this.setData({
+            noDetails:true
+          })
+        }
+        }, reqbody);
 
         break;
       case "repay":
@@ -51,112 +116,188 @@ Page({
           'orderTitle': "repay",
           noDetails: false
         });
-        // url = app.globalData.baseUrl + 'maternal/order/list';
-        // var reqbody = {
-        //   userId: app.globalData.id
-        // }
-        // util.http(url, (dataStr) => {
-        //   if (dataStr.success) {
-        //     console.log(dataStr);
-        //     console.log(dataStr.data[4]);
-        //     if (!dataStr.data[4]) {
-        //       console.log(3333);
-        //       this.setData({
-        //         noDetails: true,
-        //         'orderDetails': []
-        //       })
-        //       return false;
-        //     }
-        //     console.log(dataStr.data[4].order);
-        //     orderDetails = dataStr.data[4].order;
-        //     this.setData({
-        //       'orderDetails': orderDetails
-        //     })
-        //   }
-        // }, reqbody);
+        var platform = app.globalData.platform;
+        var url = app.globalData.baseUrlTpost + 'order/order_list?';
+        var reqbody = {
+          common: {
+            'snsid': '100001236',
+            'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+            'platform': platform,
+            'uid':0,
+            "language": "CN"
+          },
+          params: {
+            order_status: 0,
+            page_no:1,
+            page_size:20
+          }
+        }
+        utils.Md5http(url, (dataStr) => {
+          console.log('获取订单详情待付款', dataStr);
+          if (dataStr.rc.c == 0) {
+          var  order_list = dataStr.order_list;
+          if (order_list.length == 0) {
+            this.setData({
+              noDetails:true
+            })
+          }
+          var time_list = [], time;
+          for (var item in order_list) {
+            if (order_list.hasOwnProperty(item)) {
+              time = utils.formatTime(new Date(order_list[item].create_time))
+                order_list[item].time = time
+            }
+          }
+          this.setData({
+            order_list:order_list
+          })
+        }else {
+          this.setData({
+            noDetails:true
+          })
+        }
+        }, reqbody);
         break;
       case "resend":
         this.setData({
           orderTitle: "resend",
           noDetails: false
         });
-        // url = app.globalData.baseUrl + 'maternal/order/list';
-        // var reqbody = {
-        //   userId: app.globalData.id
-        // }
-        // util.http(url, (dataStr) => {
-        //   if (dataStr.success) {
-        //     console.log('待回收', dataStr);
-        //     if (!dataStr.data[3] || dataStr.data[3].type != 3) {
-        //       this.setData({
-        //         noDetails: true,
-        //         orderDetails: []
-        //       });
-        //       return false;
-        //     }
-        //     console.log(dataStr.data[3].order);
-        //     orderDetails = dataStr.data[3].order;
-        //     this.setData({
-        //       'orderDetails': orderDetails
-        //     })
-        //   }
-        // }, reqbody);
+        var platform = app.globalData.platform;
+        var url = app.globalData.baseUrlTpost + 'order/order_list?';
+        var reqbody = {
+          common: {
+            'snsid': '100001236',
+            'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+            'platform': platform,
+            'uid':0,
+            "language": "CN"
+          },
+          params: {
+            order_status:1,
+            page_no:1,
+            page_size:20
+          }
+        }
+        utils.Md5http(url, (dataStr) => {
+          console.log('获取订单详情已付款', dataStr);
+          if (dataStr.rc.c == 0) {
+          var  order_list = dataStr.order_list;
+          if (order_list.length == 0) {
+            this.setData({
+              noDetails:true
+            })
+          }
+          var time_list = [], time;
+          for (var item in order_list) {
+            if (order_list.hasOwnProperty(item)) {
+              time = utils.formatTime(new Date(order_list[item].create_time))
+                order_list[item].time = time
+            }
+          }
+          this.setData({
+            order_list:order_list
+          })
+        }else {
+          this.setData({
+            noDetails:true
+          })
+        }
+        }, reqbody);
         break;
       case "sended":
         this.setData({
           orderTitle: "sended",
           noDetails: false
         });
-        // url = app.globalData.baseUrl + 'maternal/order/list';
-        // var reqbody = {
-        //   userId: app.globalData.id
-        // }
-        // util.http(url, (dataStr) => {
-        //   if (dataStr.success) {
-        //     console.log('待确认', dataStr);
-        //     if (!dataStr.data[1] || dataStr.data[1].type != 1) {
-        //       console.log('不存在');
-        //       this.setData({
-        //         noDetails: true,
-        //         orderDetails: []
-        //       })
-        //       return false;
-        //     }
-        //     console.log(dataStr.data[1].order);
-        //     orderDetails = dataStr.data[1].order;
-        //     this.setData({
-        //       'orderDetails': orderDetails
-        //     })
-        //   }
-        // }, reqbody);
+        var platform = app.globalData.platform;
+        var url = app.globalData.baseUrlTpost + 'order/order_list?';
+        var reqbody = {
+          common: {
+            'snsid': '100001236',
+            'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+            'platform': platform,
+            'uid':0,
+            "language": "CN"
+          },
+          params: {
+            order_status:3,
+            page_no:1,
+            page_size:20
+          }
+        }
+        utils.Md5http(url, (dataStr) => {
+          console.log('获取订单详情已发货', dataStr);
+          if (dataStr.rc.c == 0) {
+          var  order_list = dataStr.order_list;
+          if (order_list.length == 0) {
+            this.setData({
+              noDetails:true
+            })
+          }
+          var time_list = [], time;
+          for (var item in order_list) {
+            if (order_list.hasOwnProperty(item)) {
+              time = utils.formatTime(new Date(order_list[item].create_time))
+                order_list[item].time = time
+            }
+          }
+          this.setData({
+            order_list:order_list
+          })
+        }else {
+          this.setData({
+            noDetails:true
+          })
+        }
+        }, reqbody);
         break;
         case "Invalid":
           this.setData({
             orderTitle: "Invalid",
             noDetails: false
           });
-          // url = app.globalData.baseUrl + 'maternal/order/list';
-          // var reqbody = {
-          //   userId: app.globalData.id
-          // }
-          // util.http(url, (dataStr) => {
-          //   if (dataStr.success) {
-          //     console.log('待确认', dataStr);
-          //     if (!dataStr.data[1] || dataStr.data[1].type != 1) {
-          //       console.log('不存在');
-          //       this.setData({
-          //         noDetails: true,
-          //         orderDetails: []
-          //       })
-          //       return false;
-          //     }
-          //     console.log(dataStr.data[1].order);
-          //     orderDetails = dataStr.data[1].order;
-          //     this.setData({
-          //       'orderDetails': orderDetails
-          //     })
-          //   }
-          // }, reqbody);
+          var platform = app.globalData.platform;
+          var url = app.globalData.baseUrlTpost + 'order/order_list?';
+          var reqbody = {
+            common: {
+              'snsid': '100001236',
+              'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+              'platform': platform,
+              'uid':0,
+              "language": "CN"
+            },
+            params: {
+              order_status:2,
+              page_no:1,
+              page_size:20
+            }
+          }
+          utils.Md5http(url, (dataStr) => {
+            console.log('获取订单详情已失效', dataStr);
+            if (dataStr.rc.c == 0) {
+            var  order_list = dataStr.order_list;
+            if (order_list.length == 0) {
+              this.setData({
+                noDetails:true
+              })
+            }
+            var time_list = [], time;
+            for (var item in order_list) {
+              if (order_list.hasOwnProperty(item)) {
+                time = utils.formatTime(new Date(order_list[item].create_time))
+                  order_list[item].time = time
+              }
+            }
+            this.setData({
+              order_list:order_list
+            })
+          }else{
+            this.setData({
+              noDetails:true
+            })
+          }
+          }, reqbody);
           break;
       default:
         console.log('^………');
@@ -165,6 +306,79 @@ Page({
   cardActive(){
     wx.navigateBack({
       url: '../home/home',
+    })
+  },
+  delete_Ord(e){
+    var that = this;
+    wx.showModal({//预览后提示
+      title: '提示',
+      content: '订单信息删除之后不再显示相关内容，确认删除订单信息',
+      success: function(res) {//确认删除订单提示
+        if (res.confirm) {
+          var order_no = e.currentTarget.dataset.ord_no;
+          console.log('order_no',order_no);
+          var platform = app.globalData.platform;
+          var url = app.globalData.baseUrlTpost + 'order/del_order?';
+          var reqbody = {//删除订单请求体
+            common: {
+              'snsid': '100001236',
+              'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+              'platform': platform,
+              'uid':0,
+              "language": "CN"
+            },
+            params: {
+              order_no:order_no
+            }
+          }
+          utils.Md5http(url, (dataStr) => {
+            if (dataStr.rc.c == 0) {//删除订单成功--从新请求
+              var platform = app.globalData.platform;
+              var url = app.globalData.baseUrlTpost + 'order/order_list?';
+              var reqbody = {
+                common: {
+                  'snsid': '100001236',
+                  'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+                  'platform': platform,
+                  'uid':0,
+                  "language": "CN"
+                },
+                params: {
+                  order_status:2,
+                  page_no:1,
+                  page_size:20
+                }
+              }
+              utils.Md5http(url, (dataStr) => {//刷新请求
+                if (dataStr.rc.c == 0) {
+                var  order_list = dataStr.order_list;
+                if (order_list.length == 0) {
+                  that.setData({
+                    noDetails:true
+                  })
+                }
+                var time_list = [], time;
+                for (var item in order_list) {
+                  if (order_list.hasOwnProperty(item)) {
+                    time = utils.formatTime(new Date(order_list[item].create_time))
+                      order_list[item].time = time
+                  }
+                }
+                that.setData({//更新数据
+                  order_list:order_list
+                })
+              }else{
+                this.setData({
+                  noDetails:true
+                })
+              }
+              }, reqbody);
+            }
+          }, reqbody);
+
+        }
+
+      }
     })
   },
   uploadTap() { //选择图片

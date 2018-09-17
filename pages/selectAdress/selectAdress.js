@@ -18,8 +18,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options);
-    console.log(options.imgdir);
+    console.log('获取上页传入信息',options);
+    console.log('图片方向2为横向',options.imgdir);
     // wx.getImageInfo({
     //   src: options.src,
     //   success: function(res) {
