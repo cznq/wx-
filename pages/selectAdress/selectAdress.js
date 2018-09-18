@@ -8,7 +8,7 @@ Page({
   data: {
     cut_image: '',
     original_image: '',
-    imgdir: '2',
+    imgdir: '2',//图片方向2为横向
     cityName: '',
     address_photo: false,
     progress: ''
@@ -33,7 +33,6 @@ Page({
         cut_image: options.cut_image,
         original_image: options.original_image
       })
-      console.log('this.imgdir', this.data.imgdir);
     } else {
       this.setData({
         imgdir: "2",
@@ -59,7 +58,6 @@ Page({
     })
   },
   selectCity(e) { //选择地址
-    console.log(e);
     console.log(e.target.dataset.cityname);
     var cityName = e.target.dataset.cityname;
     this.setData({
@@ -82,13 +80,15 @@ Page({
     wx.showLoading({
       title: '上传中',
     })
+    console.log('_that.globalData.userId',app.globalData.userId);
+    console.log('_that.globalData.session_id',app.globalData.session_id);
     const uploadTask = wx.uploadFile({ //上传cut_imgage
       url: 'http://snsforum.mojitest.com/snsupload/upload/json/upload', //http://snsup.moji.com/snsupload/upload/json/upload
       filePath: _that.data.cut_image,
       name: 'image',
       header: {
-        'snsid': '921',
-        'sid': 'AES6D4A3231353766677666376D6569784B3539316D72413D3D',
+        'snsid': app.globalData.userId,
+        'sid': app.globalData.session_id,
         'filename': 'image.' + filename[filename.length - 1],
         'platform': app.globalData.platform
       },

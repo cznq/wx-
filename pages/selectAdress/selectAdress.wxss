@@ -1,20 +1,20 @@
 /* pages/plan2/plan2.wxss */
 .preimg{
-  width:694rpx;
-  height:462rpx;
+  width:726rpx;
+  height:414rpx;
   margin-top: 200rpx;
 }
 /* 旋转图容器 */
 .pre{
   position: relative;
   width:750rpx;
-  height:462rpx;
+  height:414rpx;
   margin-top: 200rpx;
   box-sizing: border-box;
 }
 .preimgrotat{
-  width:462rpx;
-  height:694rpx;
+  width:414rpx;
+  height:726rpx;
   position: absolute;
   top:50%;
   left:50%;
@@ -49,13 +49,17 @@
 }
 /* 拍摄地址 */
 .photo_address{
-  height:928rpx;
+  height:0px;
   width:750rpx;
   position: fixed;
   left:0;
   bottom:0;
   overflow-y: hidden;
   background-color: #fff;
+  transition: height .3s;
+}
+.photo_address.active{
+  height:928rpx;
 }
 .photo_address .title{
   height:80rpx;

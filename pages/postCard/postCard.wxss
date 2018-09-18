@@ -24,8 +24,8 @@
 } */
 .content-input{
   position: absolute;
-  top:47rpx;
-  left:165rpx;
+  top:57rpx;
+  left:173rpx;
   width:248rpx;
   height:20rpx;
   color:#fff;
@@ -59,8 +59,8 @@ textarea{resize:none}
 /* 寄件人位置 */
 .position-j{
 
-  top:378rpx;
-  left:388rpx;
+  top:387rpx;
+  left:398rpx;
   /* border:1px solid black; */
 }
 /* 地址 */

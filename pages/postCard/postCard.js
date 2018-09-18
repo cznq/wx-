@@ -23,6 +23,7 @@ Page({
     postCard_url:'',
     color:'',
     currentIndex: '0',
+    imgName:'',
     imgUrls: [{
         url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
         name: '父情节'
@@ -74,6 +75,7 @@ Page({
           mainbg:that.data.imgUrls[0].url_h5,
           postCard_url:that.data.imgUrls[0].url,
           color:that.data.imgUrls[0].color,
+          imgName:that.data.imgUrls[0].name,
         })
       }
     }, reqbody);
@@ -142,11 +144,13 @@ Page({
     var mainbg = this.data.imgUrls[currentIndex].url_h5;
     var postCard_url = this.data.imgUrls[currentIndex].url
     var color = this.data.imgUrls[currentIndex].color;
+    var imgName = this.data.imgUrls[currentIndex].name;
     this.setData({
       currentIndex: currentIndex,
       mainbg:mainbg,
       color:color,
-      postCard_url:postCard_url
+      postCard_url:postCard_url,
+      imgName:imgName
     })
   },
   step_btn(){
@@ -177,7 +181,7 @@ Page({
       "&Addressee=" + that.data.Addressee +
       "&areaVal=" + that.data.areaVal + "&sender=" + that.data.sender +
       "&selAddress=" + that.data.selAddress +
-      "&currentIndex=" + that.data.currentIndex
+      "&currentIndex=" + that.data.currentIndex + "&imgName=" + that.data.imgName
     })
     // console.log(that.data.Addressee);
     // console.log(that.data.areaVal);

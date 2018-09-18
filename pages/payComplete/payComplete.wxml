@@ -1,0 +1,4 @@
+<image class='paySuccess' src='../../images/payed.gif'></image>
+<text class='successText gray-32 row cen-center'>支付成功</text>
+<view class="sharbtn">分享给朋友</view>
+<view class="backMain">返回首页</view>

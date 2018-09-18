@@ -23,7 +23,7 @@
 </view>
 <view class='intro padding10-left column'>
   <text class='title gray-32 ft14'>墨迹时光邮局明信片</text>
-  <text class='name gray-9 ft12'>颜色：樱花模板</text>
+  <text class='name gray-9 ft12'>颜色：{{imgName}}</text>
   <image class='post_bg' src='{{post_bg}}'></image>
 </view>
 <view class='song padding0-10 row cen-space'>

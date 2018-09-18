@@ -19,7 +19,8 @@ Page({
     postage_fee:0, //邮费0不展示
     postage_copywriting:'',//邮费文案
     express_delivery_copywriting:'',//快递文案
-    original_copywriting:''//原价文案
+    original_copywriting:'',//原价文案
+    imgName:''
   },
   // 选择地址
   bindChooseAddr() {
@@ -79,12 +80,14 @@ Page({
     var currentIndex = options.currentIndex //当前序列
     var post_bg = options.post_bg //背景
     var selAddress = options.selAddress //选择的地址
+    var imgName  = options.imgName
     that.setData({
       post_bg:post_bg,
       original_price:app.globalData.original_price, //订单总价
       postage_copywriting:app.globalData.postage_copywriting,//邮费文案
       express_delivery_copywriting:app.globalData.express_delivery_copywriting,//快递文案
-      original_copywriting:app.globalData.original_copywriting//原价文案
+      original_copywriting:app.globalData.original_copywriting,//原价文案
+      imgName:imgName
     })
   },
 

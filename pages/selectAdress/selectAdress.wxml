@@ -13,7 +13,7 @@
     <view wx:if="{{cityName != ''}}" bindtap='querySubmit' class="querybtn row cen-center ft13">确认上传{{progress}}</view>
 <!-- 地址选择 -->
 <view wx:if='{{address_photo}}' class='loyer'>
-  <view class='photo_address'>
+  <view class='photo_address {{address_photo ? "active":""}}'>
     <view class='title row cen-space gray-3'>
       <text bindtap='titCancel' class='cancel ft16'>取消</text>
       <text class='text'>请选择照片拍摄地址</text>

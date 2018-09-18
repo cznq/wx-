@@ -7,7 +7,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/order/order",
-    "pages/orderDetail/orderDetail"
+    "pages/orderDetail/orderDetail",
+    "pages/payComplete/payComplete"
   ],
   "window": {
     "backgroundTextStyle": "light",

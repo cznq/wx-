@@ -42,7 +42,7 @@ function http(url, callBack, reqbody) {
     title: '加载中',
   })
   var reqbody = reqbody ? reqbody : {};
-  console.log('reqbody',reqbody);
+  // console.log('reqbody',reqbody);
   wx.request({
     url: url,
     data: reqbody,
