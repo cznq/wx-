@@ -8,7 +8,7 @@ Page({
   data: {
     cut_image: '',
     original_image: '',
-    imgdir: '2',//图片方向2为横向
+    imgdir: '0',//图片方向0为横向
     cityName: '',
     address_photo: false,
     progress: ''
@@ -19,7 +19,8 @@ Page({
    */
   onLoad: function(options) {
     console.log('获取上页传入信息',options);
-    console.log('图片方向2为横向',options.imgdir);
+    console.log('图片方向0为横向',options.imgdir);
+    app.globalData.postcard_picture_type = options.imgdir;
     // wx.getImageInfo({
     //   src: options.src,
     //   success: function(res) {
@@ -35,7 +36,7 @@ Page({
       })
     } else {
       this.setData({
-        imgdir: "2",
+        imgdir: "0",
         cut_image: options.cut_image,
         original_image: options.original_image
       })
@@ -80,8 +81,6 @@ Page({
     wx.showLoading({
       title: '上传中',
     })
-    console.log('_that.globalData.userId',app.globalData.userId);
-    console.log('_that.globalData.session_id',app.globalData.session_id);
     const uploadTask = wx.uploadFile({ //上传cut_imgage
       url: 'http://snsforum.mojitest.com/snsupload/upload/json/upload', //http://snsup.moji.com/snsupload/upload/json/upload
       filePath: _that.data.cut_image,
@@ -94,11 +93,12 @@ Page({
       },
       formData: {},
       success: function(res) {
-        console.log(res);
-        console.log('上传cut_image完成');
+        console.log('上传cut_image完成',res);
         wx.hideLoading();
         var data = JSON.parse(res.data);
+
         if (data.code == 0) {
+          app.globalData.postcard_front_url = data.path;
           wx.navigateTo({
             url: '../postCard/postCard?cityName=' + _that.data.cityName
           })
@@ -125,7 +125,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    wx.hideShareMenu()
   },
 
   /**

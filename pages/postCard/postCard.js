@@ -8,27 +8,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    backFlag:false,
+    backFlag: false,
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
     duration: 1000,
-    Addressee:'',//收件人
-    areaVal: '所有快乐，无需假装；此生尽兴，赤城善良。',//信件内容
-    sender:'',//寄件人
+    Addressee: '', //收件人
+    areaVal: '所有快乐，无需假装；此生尽兴，赤城善良。', //信件内容
+    sender: '', //寄件人
     setTime: '2019-10-03',
-    selAddress: '',//地址
-    selAddressLen:5,
-    mainbg:'',
-    postCard_url:'',
-    color:'',
+    selAddress: '', //地址
+    selAddressLen: 5,
+    mainbg: '',
+    postCard_url: '',
+    color: '',
     currentIndex: '0',
-    imgName:'',
+    imgName: '',
     imgUrls: [{
-        url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '父情节'
-      }
-    ],
+      url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      name: '父情节'
+    }],
     platform: 'iphone'
   },
 
@@ -50,32 +49,33 @@ Page({
       });  
     }
     // ---获取接口数据---
-      var platform = that.data.platform;
+    var platform = that.data.platform;
     var url = app.globalData.baseUrlTpost + 'config/bg_list_v1?';
-
+// console.log('app.globalData.userId', app.globalData.userId);
+// console.log('app.globalData.session_id', app.globalData.session_id);
     var reqbody = {
       common: {
-        'snsid': '921',
-        'sid': 'AES6D4A3231353766677666376D6569784B3539316D72413D3D',
+        'snsid': app.globalData.userId,
+        'sid': app.globalData.session_id,
         'platform': platform,
-        'uid':0,
+        'uid': 0,
         "language": "CN"
       },
       params: {}
     }
     utils.Md5http(url, (dataStr) => {
-      console.log('dataStr', dataStr);
+      // console.log('dataStr', dataStr);
       if (dataStr.rc.c == 0) {
         that.setData({
           imgUrls: dataStr.bg_list
         })
-
         console.log('imgUrls', that.data.imgUrls);
+
         that.setData({
-          mainbg:that.data.imgUrls[0].url_h5,
-          postCard_url:that.data.imgUrls[0].url,
-          color:that.data.imgUrls[0].color,
-          imgName:that.data.imgUrls[0].name,
+          mainbg: that.data.imgUrls[0].url_h5,
+          postCard_url: that.data.imgUrls[0].url,
+          color: that.data.imgUrls[0].color,
+          imgName: that.data.imgUrls[0].name,
         })
       }
     }, reqbody);
@@ -85,22 +85,21 @@ Page({
       setTime: setTime,
       selAddress: options.cityName
     })
-    console.log('options', options.cityName);
-    var cityName = options.cityName;
-      var cityName = that.data.selAddress;
+    // console.log('选择的地址', options.cityName);
+    var cityName = that.data.selAddress;
     if (cityName.length == 6) {
       that.setData({
-        selAddressLen:6
+        selAddressLen: 6
       })
     }
     if (cityName.length == 7) {
       that.setData({
-        selAddressLen:7
+        selAddressLen: 7
       })
     }
     if (cityName.length == 8) {
       that.setData({
-        selAddressLen:8
+        selAddressLen: 8
       })
     }
   },
@@ -110,9 +109,17 @@ Page({
     var regStr2 = /^ +| +$/g
     if (regStr.test(val)) {
       val = val.replace(regStr, '')
+      wx.showToast({
+        title: '不支持表情填写',
+        icon: 'none'
+      })
     }
     if (regStr2.test(val)) {
       val = val.replace(regStr2, '')
+      wx.showToast({
+        title: '不支持表情填写',
+        icon: 'none'
+      })
     }
     this.setData({
       areaVal: val
@@ -120,26 +127,26 @@ Page({
     console.log(val);
   },
 
-  addressee(e){
+  addressee(e) {
     console.log(e.detail.value);
     this.setData({
-      Addressee:e.detail.value
+      Addressee: e.detail.value
     })
   },
-  areaVal(e){
+  areaVal(e) {
     console.log(e.detail.value);
     this.setData({
-      areaVal:e.detail.value
+      areaVal: e.detail.value
     })
   },
-  sender(e){
+  sender(e) {
     console.log(e.detail.value);
     this.setData({
-      sender:e.detail.value
+      sender: e.detail.value
     })
   },
   clickSwiper(e) {
-    console.log(e.currentTarget.dataset.index);
+    // console.log(e.currentTarget.dataset.index);
     var currentIndex = e.currentTarget.dataset.index;
     var mainbg = this.data.imgUrls[currentIndex].url_h5;
     var postCard_url = this.data.imgUrls[currentIndex].url
@@ -147,13 +154,13 @@ Page({
     var imgName = this.data.imgUrls[currentIndex].name;
     this.setData({
       currentIndex: currentIndex,
-      mainbg:mainbg,
-      color:color,
-      postCard_url:postCard_url,
-      imgName:imgName
+      mainbg: mainbg,
+      color: color,
+      postCard_url: postCard_url,
+      imgName: imgName
     })
   },
-  step_btn(){
+  step_btn() {
     var that = this;
     if (that.data.Addressee == '') {
       wx.showToast({
@@ -178,14 +185,11 @@ Page({
     }
     wx.navigateTo({
       url: '../order/order?post_bg=' + that.data.postCard_url +
-      "&Addressee=" + that.data.Addressee +
-      "&areaVal=" + that.data.areaVal + "&sender=" + that.data.sender +
-      "&selAddress=" + that.data.selAddress +
-      "&currentIndex=" + that.data.currentIndex + "&imgName=" + that.data.imgName
+        "&Addressee=" + that.data.Addressee +
+        "&areaVal=" + that.data.areaVal + "&sender=" + that.data.sender +
+        "&selAddress=" + that.data.selAddress +
+        "&currentIndex=" + that.data.currentIndex + "&imgName=" + that.data.imgName
     })
-    // console.log(that.data.Addressee);
-    // console.log(that.data.areaVal);
-    // console.log(that.data.sender);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -198,7 +202,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    wx.hideShareMenu()
   },
 
   /**

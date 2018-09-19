@@ -2,7 +2,7 @@
   <view wx:if="{{imgdir ==='1'}}" class='pre'>
     <image  class='preimgrotat' src='{{cut_image}}'></image>
   </view>
-  <image wx:if="{{imgdir ==='2'}}" class='preimg' src='{{cut_image}}'></image>
+  <image wx:if="{{imgdir ==='0'}}" class='preimg' src='{{cut_image}}'></image>
   <view bindtap='querySel' class="addressInfo row cen-center">
     <image src='../../images/selectAddress.png'></image>
     <text wx:if="{{cityName == ''}}" class='addressText ft13'>点击这里补充照片拍摄地址信息</text>

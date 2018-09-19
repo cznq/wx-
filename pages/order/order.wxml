@@ -49,5 +49,9 @@
 科技有限公司
   </view> -->
   <text class='ft14 gray-32'>总计：<text class='pay'>￥{{original_price}}</text></text>
-  <view class='btn'>立即下单</view>
+  <view catchtap='paybtn' class='btn'>
+    立即下单
+    <button wx:if="{{!getUserInfo}}" plain='true' open-type="getUserInfo" class="getUserInfo" lang="zh_CN" catchgetuserinfo="onGotUser"></button>
+  </view>
+
 </view>

@@ -1,12 +1,3 @@
-<!-- <view class="home-bg">
-  <image src='../../images/mainbj.jpg' />
-</view>
-<view class="home-bg2">
-  <image src='../../images/home-instr.png' />
-</view>
-<view class="home-bg3">
-  <image src='../../images/home-instro.png' />
-</view> -->
 <block wx:for="{{picture_list}}" wx:for-item='item' wx:for-index='indx' wx:key='unique'>
 <view class="home-bg" style='width:750rpx;height:{{item.height}}rpx'>
   <image style='width:750rpx;height:{{item.height}}rpx' src='{{item.url}}' />
@@ -22,7 +13,7 @@
   </view>
   <view class="makeCard">
     <image bindtap='uploadTap' src='../../images/makecard.png' />
-    <button wx:if="{{!getUserInfo}}" plain='true' open-type="getUserInfo" class="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button>
+    <button wx:if="{{!getUserInfo}}" plain='true' open-type="getUserInfo" class="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUser"></button>
   </view>
   <view bindtap='orderActive' class="order column cen-center">
     <!-- <image wx:if='{{orderActive}}' class='orderimg' src='../../images/order.png' /> -->

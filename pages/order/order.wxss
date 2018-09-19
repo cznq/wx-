@@ -97,6 +97,7 @@
   z-index: 99;
 }
 .btn{
+  position: relative;
   width: 200rpx;
   height:80rpx;
   background-color: #FF973E;
@@ -105,4 +106,16 @@
   line-height: 80rpx;
   color: #FFFFFF;
   font-size: 32rpx;
+}
+.getUserInfo{
+  position: absolute;
+  left: 0;
+  bottom:0;
+  width: 200rpx;
+  height:80rpx;
+  /* border: 1px solid red; */
+  z-index: 99;
+}
+button[plain]{
+  border: none;
 }

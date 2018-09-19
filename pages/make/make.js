@@ -29,8 +29,8 @@ Page({
     bgimg_w: '',
     bgimg_h: '',
     fixtext: '../../images/dizhi.png',
-    original_image:'',
-    cut_image:'',
+    original_image: '',
+    cut_image: '',
     cropperOpt: {
       id: 'cropper',
       width,
@@ -44,7 +44,7 @@ Page({
         height: 443
       }
     },
-    imgdir:1,
+    imgdir: 0,
     is_chooseimg: true //选择图片
   },
   touchStart(e) {
@@ -56,19 +56,26 @@ Page({
   touchEnd(e) {
     this.wecropper.touchEnd(e)
   },
-  getCropperImage() {//生成图片
+  getCropperImage() { //生成图片
     const self = this
     this.wecropper.getCropperImage((src) => { //获取裁剪图片
       if (src) {
-        wx.showModal({//预览后提示
+        wx.showModal({ //预览后提示
           title: '提示',
           content: '为了防止图片被过度剪裁，请确认您已预览图片且人像完整',
           success: function(res) {
-            if (res.confirm) {//用户点击确认
+            if (res.confirm) { //用户点击确认
               console.log(src)
               self.wecropper.pushOrign(src)
+              wx.getImageInfo({//获取图信息
+                src: src,
+                success(res) {
+                  app.globalData.postcard_picture_width = res.width
+                  app.globalData.postcard_picture_height = res.height
+                }
+              })
               self.setData({
-                cut_image:src
+                cut_image: src
               })
               wx.navigateTo({
                 url: '../selectAdress/selectAdress?src=' + src + '&imgdir=' + self.data.imgdir + '&original_image=' + self.data.original_image + '&cut_image=' + self.data.cut_image
@@ -78,7 +85,7 @@ Page({
             }
           }
         })
-      
+
       } else {
         console.log('获取图片地址失败，请稍后重试')
       }
@@ -109,8 +116,8 @@ Page({
                 [cuty]: (height - 187) / 2,
                 [cutW]: 343,
                 [cutH]: 187,
-                imgdir: 2, //横图 2
-                original_image:src
+                imgdir: 0, //横图 0
+                original_image: src
               })
               console.log(self.data.cropperOpt.cut.width);
               self.showCavs();
@@ -128,7 +135,7 @@ Page({
                 [cutW]: 287,
                 [cutH]: 443,
                 imgdir: 1,
-                original_image:src
+                original_image: src
               })
               self.showCavs();
               self.wecropper.pushOrign(src);
@@ -150,8 +157,8 @@ Page({
       backgroundColor: '000000'
     })
     self.showCavs();
-    console.log('options.src',options.src);
-    if (options.src) {//首次加载图片
+    console.log('options.src', options.src);
+    if (options.src) { //首次加载图片
       wx.getImageInfo({
         src: options.src,
         success: function(res) {
@@ -168,8 +175,8 @@ Page({
               [cuty]: (height - 187) / 2,
               [cutW]: 343,
               [cutH]: 187,
-              imgdir: 2, //横图 2
-              original_image:options.src
+              imgdir: 0, //横图 0
+              original_image: options.src
             })
             self.showCavs();
             self.wecropper.pushOrign(options.src);
@@ -229,7 +236,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    wx.hideShareMenu()
   },
 
   /**

@@ -1,12 +1,15 @@
 // pages/order/order.js
 const app = getApp();
 const utils = require('../../utils/util.js');
+const base64 = require('../../utils/base64.js');
+var Base64 = base64.Base64;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    getUserInfo: false,
     chooseAddr:false,
     addressName:'王大陆',
     addressPhone:33456677654,
@@ -20,7 +23,13 @@ Page({
     postage_copywriting:'',//邮费文案
     express_delivery_copywriting:'',//快递文案
     original_copywriting:'',//原价文案
-    imgName:''
+    imgName:'',
+    AddreName:'',//收件人
+    sender:'',//发送人姓名
+    areaVala:'', //内容
+    currentIndex:'',//当前序列
+    post_bg:'',//背景
+    selAddress:''//选择的地址
   },
   // 选择地址
   bindChooseAddr() {
@@ -74,8 +83,8 @@ Page({
     var that = this;
 
     console.log('传参',options);
-    var Addressee = options.Addressee //发送人姓名
-    var sender = options.sender //收件人
+    var AddreName = options.Addressee //收件人
+    var sender = options.sender //发送人姓名
     var areaVal = options.areaVal //内容
     var currentIndex = options.currentIndex //当前序列
     var post_bg = options.post_bg //背景
@@ -87,10 +96,132 @@ Page({
       postage_copywriting:app.globalData.postage_copywriting,//邮费文案
       express_delivery_copywriting:app.globalData.express_delivery_copywriting,//快递文案
       original_copywriting:app.globalData.original_copywriting,//原价文案
-      imgName:imgName
+      imgName:imgName,
+      AddreName:AddreName,
+      sender:sender,
+      areaVal:areaVal,
+      currentIndex:currentIndex,
+      post_bg:post_bg,
+      selAddress:selAddress
     })
+    wx.getSetting({ // 查看是否授权
+      success: function (res) {
+        if (!res.authSetting['scope.userInfo']) {
+          that.setData({
+            getUserInfo: false
+          })
+        }else{
+          that.setData({
+            getUserInfo: true
+          })
+        }
+      },
+    });
   },
+  //主动获取用户信息权限
+  onGotUser(){
+    utils.throttle(this.onGotUserInfo(arguments),500);
+  },
+  onGotUserInfo: function (e) {
+    let userInfo = e[0].detail.userInfo;
+      console.log('onGotUserInfo', e[0].detail.userInfo);
+    if (!userInfo) {
+      wx.getSetting({
+        success(res) {
+          if (!res.authSetting['scope.userInfo']) {
+            wx.openSetting({//打开设置
+              success(res) {
+                res.authSetting = {
+                  "scope.userInfo": true,
+                }
+              }
+            })
+          }
+        }
+      })
+    } else {
+      this.setData({
+        getUserInfo: true
+      })
+      console.log('e[0].detail.userInfo', e[0].detail.userInfo);
+      app.globalData.nickName = userInfo.nickName
+      app.globalData.avatarUrl = userInfo.avatarUrl
+      app.globalData.gender = userInfo.gender //性别 0：未知、1：男、2：女
+      app.globalData.province = userInfo.province
+      app.globalData.city = userInfo.city
+      app.globalData.country = userInfo.country
+    }
+  },
+  paybtn(){
+    var _that = this;
+    if (!_that.data.chooseAddr) {
+      wx.showToast({
+        title: '请填写收货地址',
+        icon: 'none'
+      })
+      return false;
+    }
+    // ---获取接口数据---
+    var platform = app.globalData.platform;
+    var url = app.globalData.baseUrlTpost + 'order/init_order?';
+    var reqbody = {
+      common: {
+        'snsid': app.globalData.userId,
+        'sid': app.globalData.session_id,
+        'platform': platform,
+        'uid': 0,
+        "language": "CN"
+      },
+      params: {
+        postcard_receive_name:_that.data.AddreName,//明信片上的接收人
+        postcard_send_name:_that.data.sender,//明信片上的发送人
+        post_mark:_that.data.selAddress,//邮戳
+        postcard_content:_that.data.areaVal,//明信片上的寄语
+        receive_name:_that.data.addressName,//收件人姓名
+        receive_mobile:_that.data.addressPhone,//收件人电话
+        receive_city_name:_that.data.cityName,//收件人城市
+        receive_address:_that.data.addressDetails,//收件人详细地址
+        send_mobile:'',//发送人电话
+        send_name:'',//发送人姓名
+        receive_msg_flag:'',
+        postcard_picture_url:'',//明信片原图
+        postcard_picture_type:app.globalData.postcard_picture_type,//	0:横图 1:竖图
+        postcard_picture_width:app.globalData.postcard_picture_width,//图片宽度
+        postcard_picture_height:app.globalData.postcard_picture_height,//图片高度
+        postcard_front_url:app.globalData.postcard_front_url,//明信片正面
+        postcard_template:_that.data.currentIndex,//明信片模板
+        coupon_ids:'',//优惠券ID
+        order_fee:app.globalData.original_price,//订单金额(分为单位)
+        pay_type:0,//0-微信 1-支付宝
+        order_no:''//	订单号
+      }
+    }
+    utils.Md5http(url, (dataStr) => {
+      console.log('dataStr', dataStr);
+      if (dataStr.rc.c == 0) {
+        console.log('dataStr.order_no',dataStr.postcard_order_info.order_no);
+        console.log('dataStr.pay_sign',dataStr.postcard_order_info.pay_sign);
+        var pay_sign = dataStr.postcard_order_info.pay_sign;
+        pay_sign = JSON.parse(Base64.decode(pay_sign));
+        console.log('pay_sign',pay_sign);
 
+        wx.requestPayment({
+          timeStamp:pay_sign.timeStamp,
+          nonceStr:pay_sign.nonceStr,
+          package:pay_sign.package,
+          signType:pay_sign.signType,
+          paySign:pay_sign.paySign,
+          success:function () {
+            console.log('成功');
+          },
+          fail:function(){
+            console.log('失败');
+          }
+        })
+      }
+    }, reqbody);
+    // 获取接口数据
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -102,7 +233,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.hideShareMenu();
   },
 
   /**
@@ -138,5 +269,6 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
 })

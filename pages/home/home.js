@@ -54,6 +54,13 @@ Page({
               _that.setData({
                 getUserInfo: true
               })
+              var userInfo = res.userInfo
+              app.globalData.nickName = userInfo.nickName
+              app.globalData.avatarUrl = userInfo.avatarUrl
+              app.globalData.gender = userInfo.gender //性别 0：未知、1：男、2：女
+              app.globalData.province = userInfo.province
+              app.globalData.city = userInfo.city
+              app.globalData.country = userInfo.country
             }
           })
         }else {
@@ -64,14 +71,20 @@ Page({
       },
     });
 
-    app.getOpenid().then(function (userId) {
-      console.log('获取登陆成功userInfo', userId);
+    app.getOpenid().then(function (userInfo) {
+      console.log('获取登陆成功userInfo', userInfo);
+      app.globalData.userId = userInfo.userId;
+      app.globalData.openId = userInfo.openId;
+      app.globalData.session_id = userInfo.session_id;
     })
   },
   //主动获取用户信息权限
+  onGotUser(){
+    utils.throttle(this.onGotUserInfo(arguments),500);
+  },
   onGotUserInfo: function (e) {
-    console.log('onGotUserInfo', e.detail.userInfo);
-    let userInfo = e.detail.userInfo;
+    let userInfo = e[0].detail.userInfo;
+      console.log('onGotUserInfo', e[0].detail.userInfo);
     if (!userInfo) {
       this.setData({
         getUserInfo: true
@@ -93,7 +106,13 @@ Page({
       this.setData({
         getUserInfo: true
       })
-      const self = this
+      console.log('e[0].detail.userInfo', e[0].detail.userInfo);
+      app.globalData.nickName = userInfo.nickName
+      app.globalData.avatarUrl = userInfo.avatarUrl
+      app.globalData.gender = userInfo.gender //性别 0：未知、1：男、2：女
+      app.globalData.province = userInfo.province
+      app.globalData.city = userInfo.city
+      app.globalData.country = userInfo.country
       wx.chooseImage({
         count: 1, // 默认9
         sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
