@@ -203,7 +203,7 @@ Page({
         console.log('dataStr.pay_sign',dataStr.postcard_order_info.pay_sign);
         var pay_sign = dataStr.postcard_order_info.pay_sign;
         pay_sign = JSON.parse(Base64.decode(pay_sign));
-        console.log('pay_sign',pay_sign);
+        // console.log('pay_sign',pay_sign);
 
         wx.requestPayment({
           timeStamp:pay_sign.timeStamp,
@@ -211,11 +211,16 @@ Page({
           package:pay_sign.package,
           signType:pay_sign.signType,
           paySign:pay_sign.paySign,
-          success:function () {
+          success:function (res) {
+            console.log(res);
             console.log('成功');
           },
-          fail:function(){
+          fail:function(res){
+            console.log(res);
             console.log('失败');
+            wx.reLaunch({
+              url:'../orderDetail/orderDetail?path='+'order'
+            })
           }
         })
       }

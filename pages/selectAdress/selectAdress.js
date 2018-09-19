@@ -99,7 +99,7 @@ Page({
 
         if (data.code == 0) {
           app.globalData.postcard_front_url = data.path;
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../postCard/postCard?cityName=' + _that.data.cityName
           })
         }

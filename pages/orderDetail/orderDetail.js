@@ -9,20 +9,26 @@ Page({
   data: {
     orderTitle:'all',
     noDetails:false,
-    order_list:[]
+    order_list:[],
+    backFlag:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.path && options.path =='order') {
+      this.setData({
+        backFlag:'order'
+      })
+    }
     // ---获取接口数据---
     var platform = app.globalData.platform;
     var url = app.globalData.baseUrlTpost + 'order/order_list?';
     var reqbody = {
       common: {
-        'snsid': '100001236',
-        'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+        'snsid': app.globalData.userId,
+        'sid': app.globalData.session_id,
         'platform': platform,
         'uid':0,
         "language": "CN"
@@ -72,8 +78,8 @@ Page({
         var url = app.globalData.baseUrlTpost + 'order/order_list?';
         var reqbody = {
           common: {
-            'snsid': '100001236',
-            'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+            'snsid': app.globalData.userId,
+            'sid': app.globalData.session_id,
             'platform': platform,
             'uid':0,
             "language": "CN"
@@ -120,8 +126,8 @@ Page({
         var url = app.globalData.baseUrlTpost + 'order/order_list?';
         var reqbody = {
           common: {
-            'snsid': '100001236',
-            'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+            'snsid': app.globalData.userId,
+            'sid': app.globalData.session_id,
             'platform': platform,
             'uid':0,
             "language": "CN"
@@ -167,8 +173,8 @@ Page({
         var url = app.globalData.baseUrlTpost + 'order/order_list?';
         var reqbody = {
           common: {
-            'snsid': '100001236',
-            'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+            'snsid': app.globalData.userId,
+            'sid': app.globalData.session_id,
             'platform': platform,
             'uid':0,
             "language": "CN"
@@ -214,8 +220,8 @@ Page({
         var url = app.globalData.baseUrlTpost + 'order/order_list?';
         var reqbody = {
           common: {
-            'snsid': '100001236',
-            'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+            'snsid': app.globalData.userId,
+            'sid': app.globalData.session_id,
             'platform': platform,
             'uid':0,
             "language": "CN"
@@ -261,8 +267,8 @@ Page({
           var url = app.globalData.baseUrlTpost + 'order/order_list?';
           var reqbody = {
             common: {
-              'snsid': '100001236',
-              'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+              'snsid': app.globalData.userId,
+              'sid': app.globalData.session_id,
               'platform': platform,
               'uid':0,
               "language": "CN"
@@ -304,9 +310,16 @@ Page({
     }
   },
   cardActive(){
-    wx.navigateBack({
-      url: '../home/home',
-    })
+    if (this.data.backFlag == 'order') {
+      wx.redirectTo({
+        url: '../home/home',
+      })
+    }else{
+      wx.navigateBack({
+        url: '../home/home',
+      })
+    }
+
   },
   delete_Ord(e){
     var that = this;
@@ -321,8 +334,8 @@ Page({
           var url = app.globalData.baseUrlTpost + 'order/del_order?';
           var reqbody = {//删除订单请求体
             common: {
-              'snsid': '100001236',
-              'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+              'snsid': app.globalData.userId,
+              'sid': app.globalData.session_id,
               'platform': platform,
               'uid':0,
               "language": "CN"
@@ -337,8 +350,8 @@ Page({
               var url = app.globalData.baseUrlTpost + 'order/order_list?';
               var reqbody = {
                 common: {
-                  'snsid': '100001236',
-                  'sid': 'AES5A65396678476B68773864497278596B6559764F59513D3D',
+                  'snsid': app.globalData.userId,
+                  'sid': app.globalData.session_id,
                   'platform': platform,
                   'uid':0,
                   "language": "CN"
@@ -422,7 +435,7 @@ Page({
    */
   onUnload: function () {
 
-  },
+ },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作

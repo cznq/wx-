@@ -8,7 +8,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    backFlag: false,
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
@@ -216,11 +215,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-    if (!this.data.backFlag) {
-      wx.navigateBack({
-        url: '../make/make',
-      })
-    }
+
   },
 
   /**

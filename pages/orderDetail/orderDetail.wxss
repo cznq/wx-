@@ -18,7 +18,7 @@ page{
 }
 .order-content-box{
   margin-top: 100rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 100rpx;
 }
 .orderTitle li{
   height:80rpx;
