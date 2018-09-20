@@ -43,6 +43,7 @@ Page({
       console.log('获取订单详情信息', dataStr);
       if (dataStr.rc.c == 0) {
       var  order_list = dataStr.order_list;
+      console.log('order_list',order_list);
       if (order_list.length == 0) {
         this.setData({
           noDetails:true
@@ -320,6 +321,77 @@ Page({
       })
     }
 
+  },
+  paybtn(e){
+    var _that = this;
+    console.log('e.currentTarget.dataset.index',e.currentTarget.dataset.index);
+    var index = e.currentTarget.dataset.index;
+    _that.data.order_list[index]
+    // ---获取接口数据---
+    var platform = app.globalData.platform;
+    var url = app.globalData.baseUrlTpost + 'order/init_order?';
+    var reqbody = {
+      common: {
+        'snsid': app.globalData.userId,
+        'sid': app.globalData.session_id,
+        'platform': platform,
+        'uid': 0,
+        "language": "CN"
+      },
+      params: {
+        postcard_receive_name:'',//明信片上的接收人
+        postcard_send_name:'',//明信片上的发送人
+        post_mark:'',//邮戳
+        postcard_content:'',//明信片上的寄语
+        receive_name:_that.data.order_list[index].receive_name,//收件人姓名
+        receive_mobile:_that.data.order_list[index].receive_mobile,//收件人电话
+        receive_city_name:_that.data.order_list[index].receive_city_name,//收件人城市
+        receive_address:_that.data.order_list[index].receive_address,//收件人详细地址
+        send_mobile:'',//发送人电话
+        send_name:'',//发送人姓名
+        receive_msg_flag:'',
+        postcard_picture_url:'',//明信片原图
+        postcard_picture_type:0,//	0:横图 1:竖图
+        postcard_picture_width:0,//图片宽度
+        postcard_picture_height:0,//图片高度
+        postcard_front_url:_that.data.order_list[index].postcard_front_url_list[0],//明信片正面
+        postcard_template:0,//明信片模板
+        coupon_ids:'',//优惠券ID
+        order_fee:_that.data.order_list[index].order_fee,//订单金额(分为单位)
+        pay_type:0,//0-微信 1-支付宝
+        order_no:_that.data.order_list[index].order_no//	订单号
+      }
+    }
+    utils.Md5http(url, (dataStr) => {
+      console.log('dataStr', dataStr);
+      if (dataStr.rc.c == 0) {
+        console.log('dataStr.order_no',dataStr.postcard_order_info.order_no);
+        console.log('dataStr.pay_sign',dataStr.postcard_order_info.pay_sign);
+        var pay_sign = dataStr.postcard_order_info.pay_sign;
+        pay_sign = JSON.parse(Base64.decode(pay_sign));
+        // console.log('pay_sign',pay_sign);
+
+        wx.requestPayment({
+          timeStamp:pay_sign.timeStamp,
+          nonceStr:pay_sign.nonceStr,
+          package:pay_sign.package,
+          signType:pay_sign.signType,
+          paySign:pay_sign.paySign,
+          success:function (res) {
+            console.log(res);
+            console.log('成功');
+          },
+          fail:function(res){
+            console.log(res);
+            console.log('失败');
+            wx.reLaunch({
+              url:'../orderDetail/orderDetail?path='+'order'
+            })
+          }
+        })
+      }
+    }, reqbody);
+    // 获取接口数据
   },
   delete_Ord(e){
     var that = this;

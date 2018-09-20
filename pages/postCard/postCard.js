@@ -13,7 +13,7 @@ Page({
     interval: 5000,
     duration: 1000,
     Addressee: '', //收件人
-    areaVal: '所有快乐，无需假装；此生尽兴，赤城善良。', //信件内容
+    areaVal: '所有快乐，无需假装；此生尽兴，赤诚善良。', //信件内容
     sender: '', //寄件人
     setTime: '2019-10-03',
     selAddress: '', //地址

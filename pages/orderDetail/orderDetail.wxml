@@ -18,20 +18,20 @@
 </view>
 <!-- wx:for='{{orderDetails}}' wx:for-item='item' wx:key="unique" -->
 <view class='order-content-box' >
-  <block wx:if="{{orderTitle ==='all' && !noDetails}}" wx:for='{{order_list}}' wx:for-item='item' wx:key="unique" >
+  <block wx:if="{{orderTitle ==='all' && !noDetails}}" wx:for='{{order_list}}' wx:for-item='item' wx:for-index='indx' wx:key="unique" >
     <view class="marg10-top">
       <view class="orderInfo padding0-10">
       <view class="title row cen-space">
           <view>
             <text class='ft12 gray-32'>{{item.time}}</text>
           </view>
-          <text wx:if='{{item.order_status == 0}}' class='ft12 start qrcolo'>待支付</text>
+          <text  wx:if='{{item.order_status == 0}}' class='ft12 start qrcolo'>待支付</text>
           <text wx:if='{{item.order_status == 1}}' class='ft12 start qrcolo'>已付款,代发货 </text>
           <text wx:if='{{item.order_status == 2}}' class='ft12 start qrcolo'>已失效</text>
           <text wx:if='{{item.order_status == 3}}' class='ft12 start qrcolo'>已发货</text>
       </view>
       <view class="middle row padding10-top">
-        <image class='order_image' src='../../images/zw.png'></image>
+        <image class='order_image' src='{{item.postcard_front_url_list[0]}}'></image>
           <view class='right_text column'>
             <text>{{item.order_body}}</text>
             <view class='middle_address gray-9 ft12 column'>
@@ -44,7 +44,7 @@
           <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee}}</text></text>
           <view class='row cen-start'>
             <!-- <view class='btn_ordetail'>订单详情</view> -->
-            <view wx:if='{{item.order_status == 0}}' class='btn_pay'>立即支付</view>
+            <view catchtap='paybtn' data-index='{{indx}}' wx:if='{{item.order_status == 0}}' class='btn_pay'>立即支付</view>
           </view>
       </view>
     </view>

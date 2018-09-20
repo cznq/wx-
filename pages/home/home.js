@@ -205,7 +205,16 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    console.log(3333333);
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '墨迹时光邮局/明信片小程序制作',
+      imageUrl: '../../images/share.jpg',
+      path: '/pages/home/home'
+    }
   }
 })
