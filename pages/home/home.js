@@ -206,7 +206,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    console.log(3333333);
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)

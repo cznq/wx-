@@ -152,10 +152,6 @@ Page({
    */
   onLoad: function(options) {
     var self = this;
-    wx.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: '000000'
-    })
     self.showCavs();
     console.log('options.src', options.src);
     if (options.src) { //首次加载图片

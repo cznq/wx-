@@ -61,7 +61,7 @@
           <text wx:if='{{item.order_status == 0}}' class='ft12 start qrcolo'>待支付</text>
       </view>
       <view class="middle row padding10-top">
-        <image class='order_image' src='../../images/zw.png'></image>
+        <image class='order_image' src='{{item.postcard_front_url_list[0]}}'></image>
           <view class='right_text column'>
             <text>{{item.order_body}}</text>
             <view class='middle_address gray-9 ft12 column'>
@@ -91,7 +91,7 @@
           <text wx:if='{{item.order_status == 1}}' class='ft12 start qrcolo'>已付款,代发货 </text>
       </view>
       <view class="middle row padding10-top">
-        <image class='order_image' src='../../images/zw.png'></image>
+        <image class='order_image' src='{{item.postcard_front_url_list[0]}}'></image>
           <view class='right_text column'>
             <text>{{item.order_body}}</text>
             <view class='middle_address gray-9 ft12 column'>
@@ -121,7 +121,7 @@
           <text wx:if='{{item.order_status == 3}}' class='ft12 start qrcolo'>已发货</text>
       </view>
       <view class="middle row padding10-top">
-        <image class='order_image' src='../../images/zw.png'></image>
+        <image class='order_image' src='{{item.postcard_front_url_list[0]}}'></image>
           <view class='right_text column'>
             <text>{{item.order_body}}</text>
             <view class='middle_address gray-9 ft12 column'>
@@ -151,7 +151,7 @@
           <text wx:if='{{item.order_status == 2}}' class='ft12 start qrcolo'>已失效</text>
       </view>
       <view class="middle row padding10-top">
-        <image class='order_image' src='../../images/zw.png'></image>
+        <image class='order_image' src='{{item.postcard_front_url_list[0]}}'></image>
           <view class='right_text column'>
             <text>{{item.order_body}}</text>
             <view class='middle_address gray-9 ft12 column'>

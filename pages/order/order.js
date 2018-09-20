@@ -90,9 +90,10 @@ Page({
     var post_bg = options.post_bg //背景
     var selAddress = options.selAddress //选择的地址
     var imgName  = options.imgName
+    var original_price = app.globalData.original_price + app.globalData.postage_fee //订单总价
     that.setData({
       post_bg:post_bg,
-      original_price:app.globalData.original_price, //订单总价
+      original_price:original_price, //订单总价
       postage_copywriting:app.globalData.postage_copywriting,//邮费文案
       express_delivery_copywriting:app.globalData.express_delivery_copywriting,//快递文案
       original_copywriting:app.globalData.original_copywriting,//原价文案
@@ -191,7 +192,7 @@ Page({
         postcard_front_url:app.globalData.postcard_front_url,//明信片正面
         postcard_template:_that.data.currentIndex,//明信片模板
         coupon_ids:'',//优惠券ID
-        order_fee:app.globalData.original_price,//订单金额(分为单位)
+        order_fee:_that.data.original_price,//订单金额(分为单位)
         pay_type:0,//0-微信 1-支付宝
         order_no:''//	订单号
       }
@@ -214,6 +215,9 @@ Page({
           success:function (res) {
             console.log(res);
             console.log('成功');
+            wx.navigateTo({
+              url:'../payComplete/payComplete?path='+'order'
+            })
           },
           fail:function(res){
             console.log(res);

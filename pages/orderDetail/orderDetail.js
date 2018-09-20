@@ -1,6 +1,8 @@
 // pages/orderDetail/orderDetail.js
 const app = getApp();
 const utils = require('../../utils/util.js');
+const base64 = require('../../utils/base64.js');
+var Base64 = base64.Base64;
 Page({
 
   /**
@@ -380,13 +382,18 @@ Page({
           success:function (res) {
             console.log(res);
             console.log('成功');
+            wx.navigateTo({
+              url:'../payComplete/payComplete?path='+'orderDetail'
+            })
           },
           fail:function(res){
             console.log(res);
             console.log('失败');
-            wx.reLaunch({
-              url:'../orderDetail/orderDetail?path='+'order'
+            wx.showToast({
+              title:'支付失败',
+              icon:'none'
             })
+
           }
         })
       }
@@ -485,7 +492,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    wx.hideShareMenu()
   },
 
   /**
