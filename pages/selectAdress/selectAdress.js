@@ -112,7 +112,7 @@ Page({
     })
     //上传进度
     uploadTask.onProgressUpdate((res) => {
-      console.log('上传进度', res.progress);
+      // console.log('上传进度', res.progress);
       var progress = res.progress + '%'
       _that.setData({
         progress: progress

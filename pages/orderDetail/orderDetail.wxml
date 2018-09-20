@@ -41,7 +41,7 @@
           </view>
       </view>
       <view class="bottom row cen-space">
-          <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee}}</text></text>
+          <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee / 100}}</text></text>
           <view class='row cen-start'>
             <!-- <view class='btn_ordetail'>订单详情</view> -->
             <view catchtap='paybtn' data-index='{{indx}}' wx:if='{{item.order_status == 0}}' class='btn_pay'>立即支付</view>
@@ -71,7 +71,7 @@
           </view>
       </view>
       <view class="bottom row cen-space">
-          <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee}}</text></text>
+          <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee / 100}}</text></text>
           <view class='row cen-start'>
             <view wx:if='{{item.order_status == 2}}' class='btn_ordetail'>删除</view>
             <view wx:if='{{item.order_status == 0}}' class='btn_pay'>立即支付</view>
@@ -101,7 +101,7 @@
           </view>
       </view>
       <view class="bottom row cen-space">
-          <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee}}</text></text>
+          <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee / 100}}</text></text>
           <view class='row cen-start'>
             <!-- <view class='btn_ordetail'>订单详情</view> -->
             <!-- <view class='btn_pay'>立即支付</view> -->
@@ -131,7 +131,7 @@
           </view>
       </view>
       <view class="bottom row cen-space">
-          <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee}}</text></text>
+          <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee / 100}}</text></text>
           <view class='row cen-start'>
             <!-- <view class='btn_ordetail'>订单详情</view> -->
             <!-- <view class='btn_pay'>立即支付</view> -->
@@ -161,7 +161,7 @@
           </view>
       </view>
       <view class="bottom row cen-space">
-          <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee}}</text></text>
+          <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee / 100}}</text></text>
           <view class='row cen-start'>
             <view wx:if='{{item.order_status == 2}}' data-ord_no='{{item.order_no}}' bindtap='delete_Ord' class='btn_ordetail'>删除</view>
           </view>

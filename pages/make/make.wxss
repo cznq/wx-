@@ -152,7 +152,13 @@ page{
     height: 50px;
     line-height: 50px;
 }
-
+@media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
+    .cropper-buttons {
+        height: 168rpx;
+        padding-bottom:68rpx;
+        box-sizing: border-box;
+    }
+}
 .cropper-buttons .upload, .cropper-buttons .getCropperImage{
     width: 50%;
     text-align: center;
@@ -164,17 +170,7 @@ page{
     top: 0;
     left: 0;
 }
-.head{
-  position: fixed;
-  width:70%;
-  text-align: center;
-  left:50%;
-  top:50px;
-  transform:translateX(-50%);
-  color:#fff;
-  font-size: 12px;
-  z-index:999999;
-}
+
 .cropper-buttons{
     background-color: rgba(0, 0, 0, 0.95);
     color: #04b00f;

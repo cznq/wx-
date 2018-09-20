@@ -192,7 +192,7 @@ Page({
         postcard_front_url:app.globalData.postcard_front_url,//明信片正面
         postcard_template:_that.data.currentIndex,//明信片模板
         coupon_ids:'',//优惠券ID
-        order_fee:_that.data.original_price,//订单金额(分为单位)
+        order_fee:_that.data.original_price * 100,//订单金额(分为单位)
         pay_type:0,//0-微信 1-支付宝
         order_no:''//	订单号
       }

@@ -34,8 +34,8 @@ Page({
         _that.setData({
           picture_list:picture_list
         })
-        app.globalData.original_price = dataStr.original_price //订单总价
-        app.globalData.postage_fee = dataStr.postage_fee//邮费0不展示
+        app.globalData.original_price = dataStr.original_price / 100 //订单总价
+        app.globalData.postage_fee = dataStr.postage_fee / 100 //邮费0不展示
         app.globalData.postage_copywriting = dataStr.postage_copywriting//邮费文案
         app.globalData.express_delivery_copywriting = dataStr.express_delivery_copywriting//快递文案
         app.globalData.original_copywriting = dataStr.original_copywriting//原价文案

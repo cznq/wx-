@@ -2,8 +2,15 @@
 import WeCropper from '../we-cropper/we-cropper.js'
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
-const height = device.windowHeight - 50
 const app = getApp();
+var height = 0;
+// 兼容iphoneX
+if (device.pixelRatio ===3 && device.screenHeight === 812 && device.screenWidth === 375) {
+   height = device.windowHeight - 84
+}else{
+   height = device.windowHeight - 50
+}
+
 
 Page({
 
@@ -67,7 +74,7 @@ Page({
             if (res.confirm) { //用户点击确认
               console.log(src)
               self.wecropper.pushOrign(src)
-              wx.getImageInfo({//获取图信息
+              wx.getImageInfo({ //获取图信息
                 src: src,
                 success(res) {
                   app.globalData.postcard_picture_width = res.width

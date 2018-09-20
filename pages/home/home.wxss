@@ -13,6 +13,12 @@
   padding:0 90rpx;
   box-sizing: border-box;
 }
+@media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
+    .buttom {
+        height:164rpx;
+        padding:0 90rpx 68rpx;
+    }
+}
 .postCard .cardtext.activeColor{
   color:#4294EA;
 }
