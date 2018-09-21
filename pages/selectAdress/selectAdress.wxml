@@ -79,6 +79,31 @@
       </view>
       <view class='addrTwo row cen-space'>
         <view data-cityname='澳门特别行政区' class="aline {{cityName =='澳门特别行政区'? 'active':''}}">澳门特别行政区</view>
+        <view data-cityname='澳大利亚' class="aline {{cityName =='澳大利亚'? 'active':''}}">澳大利亚</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='意大利' class="aline {{cityName =='意大利'? 'active':''}}">意大利</view>
+        <view data-cityname='罗马' class="aline {{cityName =='罗马'? 'active':''}}">罗马</view>
+        <view data-cityname='日本' class="aline {{cityName =='日本'? 'active':''}}">日本</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='韩国' class="aline {{cityName =='韩国'? 'active':''}}">韩国</view>
+        <view data-cityname='泰国' class="aline {{cityName =='泰国'? 'active':''}}">泰国</view>
+        <view data-cityname='新西兰' class="aline {{cityName =='新西兰'? 'active':''}}">新西兰</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='美国' class="aline {{cityName =='美国'? 'active':''}}">美国</view>
+        <view data-cityname='法国' class="aline {{cityName =='法国'? 'active':''}}">法国</view>
+        <view data-cityname='印度' class="aline {{cityName =='印度'? 'active':''}}">印度</view>
+      </view>
+      <view class='address row cen-space'>
+        <view data-cityname='西班牙' class="aline {{cityName =='西班牙'? 'active':''}}">西班牙</view>
+        <view data-cityname='加拿大' class="aline {{cityName =='加拿大'? 'active':''}}">加拿大</view>
+        <view data-cityname='英国' class="aline {{cityName =='英国'? 'active':''}}">英国</view>
+      </view>
+      <view class='address row cen-start'>
+        <view data-cityname='埃及' class="aline margin-right50 {{cityName =='埃及'? 'active':''}}">埃及</view>
+        <view data-cityname='其他' class="aline  {{cityName =='其他'? 'active':''}}">其他</view>
       </view>
     </view>
   </view>

@@ -81,6 +81,7 @@ Page({
                   app.globalData.postcard_picture_height = res.height
                 }
               })
+              app.globalData.original_image = src;//获取本地切图
               self.setData({
                 cut_image: src
               })

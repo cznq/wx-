@@ -55,6 +55,25 @@
   width:252rpx;
   height:166rpx;
 }
+.preimg{
+  width:252rpx;
+  height:166rpx;
+}
+/* 旋转图容器 */
+.pre{
+  position: relative;
+  width:252rpx;
+  height:166rpx;
+}
+.preimgrotat{
+  width:166rpx;
+  height:252rpx;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform-origin: center center;
+  transform: translate(-50%,-50%) rotate(-90deg);
+}
 .song{
   margin-top:70rpx;
 }

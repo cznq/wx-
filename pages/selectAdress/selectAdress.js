@@ -20,7 +20,7 @@ Page({
   onLoad: function(options) {
     console.log('获取上页传入信息',options);
     console.log('图片方向0为横向',options.imgdir);
-    app.globalData.postcard_picture_type = options.imgdir;
+    app.globalData.postcard_picture_type = options.imgdir
     // wx.getImageInfo({
     //   src: options.src,
     //   success: function(res) {
@@ -41,6 +41,7 @@ Page({
         original_image: options.original_image
       })
     }
+
   },
   querySel() { //页面选择地址
     this.setData({
@@ -70,7 +71,7 @@ Page({
     var _that = this;
     if (!this.data.cityName) {
       wx.showToast({
-        title: '确认地址',
+        title: '请填写正确地址',
         icon: 'none'
       })
       return false;

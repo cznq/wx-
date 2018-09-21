@@ -89,6 +89,7 @@ App({
     gender: 1,
     nickName: "",
     province: "",
-    order_no:''
+    order_no:'',
+    original_image:''//本地切图
   }
 })

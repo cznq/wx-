@@ -80,9 +80,14 @@ Page({
     }, reqbody);
     // 获取接口数据
     let setTime = utils.mformatTime(new Date());
+    console.log('options.cityName',options.cityName);
+    var selAddress = options.cityName
+    if (selAddress == '其他') {
+      selAddress = '墨迹'
+    }
     that.setData({
       setTime: setTime,
-      selAddress: options.cityName
+      selAddress: selAddress
     })
     // console.log('选择的地址', options.cityName);
     var cityName = that.data.selAddress;

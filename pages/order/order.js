@@ -29,7 +29,10 @@ Page({
     areaVala:'', //内容
     currentIndex:'',//当前序列
     post_bg:'',//背景
-    selAddress:''//选择的地址
+    selAddress:'',//选择的地址
+    imgdir:'',
+    cut_image:''
+
   },
   // 选择地址
   bindChooseAddr() {
@@ -81,8 +84,22 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    that.setData({
+      cut_image:app.globalData.original_image
+    })
+    console.log('cut_image',app.globalData.original_image);
+    var picture_type = app.globalData.postcard_picture_type //	0:横图 1:竖图
+    if (picture_type == '1') {
+      that.setData({
+        imgdir:'1'
+      })
+    }else{
+      that.setData({
+        imgdir:'0'
+      })
+    }
 
-    console.log('传参',options);
+    console.log('that.data.imgdir',that.data.imgdir);
     var AddreName = options.Addressee //收件人
     var sender = options.sender //发送人姓名
     var areaVal = options.areaVal //内容

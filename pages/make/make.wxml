@@ -4,10 +4,10 @@
   <image wx:if='{{!is_chooseimg}}' src='{{fixtext}}' class='fix' bindtap='chooseImage'></image>
   <view class="cropper-buttons">
     <view  class="upload" bindtap="uploadTap">
-        {{text}}
+        重新选择图片
     </view>
     <view  class="getCropperImage"  bindtap="getCropperImage">
-        生成图片
+        生成明信片
     </view>
   </view>
 </view>

@@ -24,7 +24,11 @@
 <view class='intro padding10-left column'>
   <text class='title gray-32 ft14'>墨迹时光邮局明信片</text>
   <text class='name gray-9 ft12'>颜色：{{imgName}}</text>
-  <image class='post_bg' src='{{post_bg}}'></image>
+  <!-- <image class='post_bg' src='{{post_bg}}'></image> -->
+  <view wx:if="{{imgdir =='1'}}" class='pre'>
+    <image  class='preimgrotat' src='{{cut_image}}'></image>
+  </view>
+  <image wx:if="{{imgdir =='0'}}" class='preimg' src='{{cut_image}}'></image>
 </view>
 <view class='song padding0-10 row cen-space'>
   <view class='row cen-start'>
