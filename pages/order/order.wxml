@@ -47,15 +47,18 @@
   </view>
     <text class='kd gray-32 ft14'>微信支付</text>
 </view>
-<view class="button row cen-space padding0-10">
+<view class="button row cen-space ">
   <!-- <view class="tipAddress row cen-start">
     北京市朝阳区酒仙桥街路14号兆维华灯大厦A2区3门2层墨迹风云
 科技有限公司
   </view> -->
   <text class='ft14 gray-32'>总计：<text class='pay'>￥{{original_price}}</text></text>
-  <view catchtap='paybtn' class='btn'>
+  <view wx:if="{{!getUserInfo}}" class='btn'>
     立即下单
-    <button wx:if="{{!getUserInfo}}" plain='true' open-type="getUserInfo" class="getUserInfo" lang="zh_CN" catchgetuserinfo="onGotUser"></button>
+    <button  plain='true' open-type="getUserInfo" class="getUserInfo" lang="zh_CN" catchgetuserinfo="onGotUser"></button>
+  </view>
+  <view wx:if="{{getUserInfo}}" catchtap='paybtn' class='btn'>
+    立即下单
   </view>
 
 </view>

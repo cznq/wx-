@@ -1,8 +1,10 @@
-<view class='column cen-start'>
+<view class='column cen-start' >
+  <view bindtap='selImage' class='selImage'>
   <view wx:if="{{imgdir ==='1'}}" class='pre'>
     <image  class='preimgrotat' src='{{cut_image}}'></image>
   </view>
   <image wx:if="{{imgdir ==='0'}}" class='preimg' src='{{cut_image}}'></image>
+  </view>
   <view bindtap='querySel' class="addressInfo row cen-center">
     <image src='../../images/selectAddress.png'></image>
     <text wx:if="{{cityName == ''}}" class='addressText ft13'>点击这里补充照片拍摄地址信息</text>
@@ -11,8 +13,9 @@
     <text class='tiptext gray-9 ft10'>温馨提示：没有拍摄地址无法制作明信片哦</text>
     <view wx:if="{{cityName == ''}}" bindtap='querySubmit' class="querybtn row cen-center ft13">确认拍摄地址</view>
     <view wx:if="{{cityName != ''}}" bindtap='querySubmit' class="querybtn row cen-center ft13">确认上传{{progress}}</view>
+</view>
 <!-- 地址选择 -->
-<view wx:if='{{address_photo}}' class='loyer'>
+<view wx:if='{{address_photo}}' class='loyer' catchtouchmove='loyerbg'></view>
   <view class='photo_address {{address_photo ? "active":""}}'>
     <view class='title row cen-space gray-3'>
       <text bindtap='titCancel' class='cancel ft16'>取消</text>
@@ -107,5 +110,3 @@
       </view>
     </view>
   </view>
-  </view>
-</view>

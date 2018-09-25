@@ -10,28 +10,28 @@ Page({
    */
   data: {
     getUserInfo: false,
-    chooseAddr:false,
-    addressName:'王大陆',
-    addressPhone:33456677654,
-    provinceName:'',
-    cityName:'',
-    countyName:'',
-    addressDetails:'北京市朝阳区酒仙桥街路14号兆维华灯大厦A2区3门2层墨迹风云科技有限公司',
-    post_bg:'',
-    original_price:0, //订单总价
-    postage_fee:0, //邮费0不展示
-    postage_copywriting:'',//邮费文案
-    express_delivery_copywriting:'',//快递文案
-    original_copywriting:'',//原价文案
-    imgName:'',
-    AddreName:'',//收件人
-    sender:'',//发送人姓名
-    areaVala:'', //内容
-    currentIndex:'',//当前序列
-    post_bg:'',//背景
-    selAddress:'',//选择的地址
-    imgdir:'',
-    cut_image:''
+    chooseAddr: false,
+    addressName: '王大陆',
+    addressPhone: 33456677654,
+    provinceName: '',
+    cityName: '',
+    countyName: '',
+    addressDetails: '北京市朝阳区酒仙桥街路14号兆维华灯大厦A2区3门2层墨迹风云科技有限公司',
+    post_bg: '',
+    original_price: 0, //订单总价
+    postage_fee: 0, //邮费0不展示
+    postage_copywriting: '', //邮费文案
+    express_delivery_copywriting: '', //快递文案
+    original_copywriting: '', //原价文案
+    imgName: '',
+    AddreName: '', //收件人
+    sender: '', //发送人姓名
+    areaVala: '', //内容
+    currentIndex: '', //当前序列
+    post_bg: '', //背景
+    selAddress: '', //选择的地址
+    imgdir: '',
+    cut_image: ''
 
   },
   // 选择地址
@@ -40,13 +40,13 @@ Page({
     wx.chooseAddress({
       success(res) {
         that.setData({
-          addressName:res.userName,
+          addressName: res.userName,
           addressPhone: res.telNumber,
-          addressDetails:res.detailInfo,
-          provinceName:res.provinceName,
-          cityName:res.cityName,
-          countyName:res.countyName,
-          chooseAddr:true
+          addressDetails: res.detailInfo,
+          provinceName: res.provinceName,
+          cityName: res.cityName,
+          countyName: res.countyName,
+          chooseAddr: true
         })
 
         console.log(res.userName)
@@ -59,7 +59,7 @@ Page({
         console.log(res.telNumber)
       },
       fail(res) {
-        console.log('res',res);
+        console.log('res', res);
         wx.getSetting({
           success(res) {
             if (!res.authSetting['scope.address']) {
@@ -74,7 +74,7 @@ Page({
           }
         })
         that.setData({
-          chooseAddr:false
+          chooseAddr: false
         })
       }
     })
@@ -82,53 +82,54 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this;
+    console.log('that.globalData.platform', app.globalData.platform);
     that.setData({
-      cut_image:app.globalData.original_image
+      cut_image: app.globalData.original_image
     })
-    console.log('cut_image',app.globalData.original_image);
+    console.log('cut_image', app.globalData.original_image);
     var picture_type = app.globalData.postcard_picture_type //	0:横图 1:竖图
     if (picture_type == '1') {
       that.setData({
-        imgdir:'1'
+        imgdir: '1'
       })
-    }else{
+    } else {
       that.setData({
-        imgdir:'0'
+        imgdir: '0'
       })
     }
 
-    console.log('that.data.imgdir',that.data.imgdir);
+    console.log('that.data.imgdir', that.data.imgdir);
     var AddreName = options.Addressee //收件人
     var sender = options.sender //发送人姓名
     var areaVal = options.areaVal //内容
     var currentIndex = options.currentIndex //当前序列
     var post_bg = options.post_bg //背景
     var selAddress = options.selAddress //选择的地址
-    var imgName  = options.imgName
+    var imgName = options.imgName
     var original_price = app.globalData.original_price + app.globalData.postage_fee //订单总价
     that.setData({
-      post_bg:post_bg,
-      original_price:original_price, //订单总价
-      postage_copywriting:app.globalData.postage_copywriting,//邮费文案
-      express_delivery_copywriting:app.globalData.express_delivery_copywriting,//快递文案
-      original_copywriting:app.globalData.original_copywriting,//原价文案
-      imgName:imgName,
-      AddreName:AddreName,
-      sender:sender,
-      areaVal:areaVal,
-      currentIndex:currentIndex,
-      post_bg:post_bg,
-      selAddress:selAddress
+      post_bg: post_bg,
+      original_price: original_price, //订单总价
+      postage_copywriting: app.globalData.postage_copywriting, //邮费文案
+      express_delivery_copywriting: app.globalData.express_delivery_copywriting, //快递文案
+      original_copywriting: app.globalData.original_copywriting, //原价文案
+      imgName: imgName,
+      AddreName: AddreName,
+      sender: sender,
+      areaVal: areaVal,
+      currentIndex: currentIndex,
+      post_bg: post_bg,
+      selAddress: selAddress
     })
     wx.getSetting({ // 查看是否授权
-      success: function (res) {
+      success: function(res) {
         if (!res.authSetting['scope.userInfo']) {
           that.setData({
             getUserInfo: false
           })
-        }else{
+        } else {
           that.setData({
             getUserInfo: true
           })
@@ -137,17 +138,17 @@ Page({
     });
   },
   //主动获取用户信息权限
-  onGotUser(){
-    utils.throttle(this.onGotUserInfo(arguments),500);
+  onGotUser() {
+    utils.throttle(this.onGotUserInfo(arguments), 500);
   },
-  onGotUserInfo: function (e) {
+  onGotUserInfo: function(e) {
     let userInfo = e[0].detail.userInfo;
-      console.log('onGotUserInfo', e[0].detail.userInfo);
+    console.log('onGotUserInfo', e[0].detail.userInfo);
     if (!userInfo) {
       wx.getSetting({
         success(res) {
           if (!res.authSetting['scope.userInfo']) {
-            wx.openSetting({//打开设置
+            wx.openSetting({ //打开设置
               success(res) {
                 res.authSetting = {
                   "scope.userInfo": true,
@@ -170,7 +171,9 @@ Page({
       app.globalData.country = userInfo.country
     }
   },
-  paybtn(){
+  paybtn() {
+
+
     var _that = this;
     if (!_that.data.chooseAddr) {
       wx.showToast({
@@ -191,109 +194,121 @@ Page({
         "language": "CN"
       },
       params: {
-        postcard_receive_name:_that.data.AddreName,//明信片上的接收人
-        postcard_send_name:_that.data.sender,//明信片上的发送人
-        post_mark:_that.data.selAddress,//邮戳
-        postcard_content:_that.data.areaVal,//明信片上的寄语
-        receive_name:_that.data.addressName,//收件人姓名
-        receive_mobile:_that.data.addressPhone,//收件人电话
-        receive_city_name:_that.data.cityName,//收件人城市
-        receive_address:_that.data.addressDetails,//收件人详细地址
-        send_mobile:'',//发送人电话
-        send_name:'',//发送人姓名
-        receive_msg_flag:'',
-        postcard_picture_url:'',//明信片原图
-        postcard_picture_type:app.globalData.postcard_picture_type,//	0:横图 1:竖图
-        postcard_picture_width:app.globalData.postcard_picture_width,//图片宽度
-        postcard_picture_height:app.globalData.postcard_picture_height,//图片高度
-        postcard_front_url:app.globalData.postcard_front_url,//明信片正面
-        postcard_template:_that.data.currentIndex,//明信片模板
-        coupon_ids:'',//优惠券ID
-        order_fee:_that.data.original_price * 100,//订单金额(分为单位)
-        pay_type:0,//0-微信 1-支付宝
-        order_no:''//	订单号
+        postcard_receive_name: _that.data.AddreName, //明信片上的接收人
+        postcard_send_name: _that.data.sender, //明信片上的发送人
+        post_mark: _that.data.selAddress, //邮戳
+        postcard_content: _that.data.areaVal, //明信片上的寄语
+        receive_name: _that.data.addressName, //收件人姓名
+        receive_mobile: _that.data.addressPhone, //收件人电话
+        receive_city_name: _that.data.cityName, //收件人城市
+        receive_address: _that.data.addressDetails, //收件人详细地址
+        send_mobile: '', //发送人电话
+        send_name: '', //发送人姓名
+        receive_msg_flag: '',
+        postcard_picture_url: '', //明信片原图
+        postcard_picture_type: app.globalData.postcard_picture_type, //	0:横图 1:竖图
+        postcard_picture_width: app.globalData.postcard_picture_width, //图片宽度
+        postcard_picture_height: app.globalData.postcard_picture_height, //图片高度
+        postcard_front_url: app.globalData.postcard_front_url, //明信片正面
+        postcard_template: _that.data.currentIndex, //明信片模板
+        coupon_ids: '', //优惠券ID
+        order_fee: _that.data.original_price * 100, //订单金额(分为单位)
+        pay_type: 0, //0-微信 1-支付宝
+        order_no: '' //	订单号
       }
     }
     utils.Md5http(url, (dataStr) => {
       console.log('dataStr', dataStr);
       if (dataStr.rc.c == 0) {
-        console.log('dataStr.order_no',dataStr.postcard_order_info.order_no);
-        console.log('dataStr.pay_sign',dataStr.postcard_order_info.pay_sign);
+        console.log('dataStr.order_no', dataStr.postcard_order_info.order_no);
+        console.log('dataStr.pay_sign', dataStr.postcard_order_info.pay_sign);
         var pay_sign = dataStr.postcard_order_info.pay_sign;
         pay_sign = JSON.parse(Base64.decode(pay_sign));
         // console.log('pay_sign',pay_sign);
 
         wx.requestPayment({
-          timeStamp:pay_sign.timeStamp,
-          nonceStr:pay_sign.nonceStr,
-          package:pay_sign.package,
-          signType:pay_sign.signType,
-          paySign:pay_sign.paySign,
-          success:function (res) {
+          timeStamp: pay_sign.timeStamp,
+          nonceStr: pay_sign.nonceStr,
+          package: pay_sign.package,
+          signType: pay_sign.signType,
+          paySign: pay_sign.paySign,
+          success: function(res) {
             console.log(res);
             console.log('成功');
             wx.navigateTo({
-              url:'../payComplete/payComplete?path='+'order'
+              url: '../payComplete/payComplete?path=' + 'order'
             })
           },
-          fail:function(res){
+          fail: function(res) {
             console.log(res);
             console.log('失败');
-            wx.reLaunch({
-              url:'../orderDetail/orderDetail?path='+'order'
-            })
+            if (app.globalData.platform == 'android') {
+              _that.leLaunch()
+            } else {
+              wx.reLaunch({
+                url: '../orderDetail/orderDetail?path=' + 'order'
+              })
+            }
+
           }
         })
       }
     }, reqbody);
     // 获取接口数据
   },
+  leLaunch() {
+    timer = setTimeout(function() {
+      wx.reLaunch({
+        url: '../orderDetail/orderDetail?path=' + 'order'
+      })
+    }, 300)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     wx.hideShareMenu();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 

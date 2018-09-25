@@ -5,11 +5,11 @@
     <!--  -->
     <image class='card_bg' src='{{mainbg}}'></image>
     <!-- 收件人 -->
-    <input class='content-input' style='color:{{color}}' value='{{Addressee}}' bindblur='addressee' maxlength='8' type="text"/>
+    <input class='content-input' style='color:{{color}}' bindinput='addressInput' value='{{Addressee}}' bindblur='addressee' maxlength='8' type="text"/>
     <!-- 信件内容 -->
     <textarea bindinput='noExpre' bindblur='areaVal' style='color:{{color}}' class='{{platform =="iphone"?"textaios":"textarea"}}' value="{{areaVal}}" maxlength='39' />
     <!-- 寄件人 -->
-    <input class='content-input position-j' bindblur='sender' value='{{sender}}' style='color:{{color}}' maxlength='8' type="text"/>
+    <input class='content-input position-j' bindinput='sendInput' bindblur='sender' value='{{sender}}' style='color:{{color}}' maxlength='8' type="text"/>
     <!-- 地址 -->
     <text style='color:{{color}}' class='{{platform =="iphone"? selAddressLen == 6? "addressIos6":selAddressLen >= 7? "addressIos7":"addressIos5" :selAddressLen == 6? "addressAndro6":selAddressLen >= 7? "addressAndro7":"addressAndro5"}}'>{{selAddress}}</text>
     <!-- 日期 -->

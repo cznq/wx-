@@ -1,4 +1,5 @@
 // pages/plan2/plan2.js
+const html2canvas = require('../../utils/html2canvas.js');
 const app = getApp();
 Page({
 
@@ -18,6 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log('html2canvas',html2canvas);
     console.log('获取上页传入信息',options);
     console.log('图片方向0为横向',options.imgdir);
     app.globalData.postcard_picture_type = options.imgdir
@@ -43,6 +45,16 @@ Page({
     }
 
   },
+  // selImage(){
+  //   console.log(222);
+  //   // var source = document.querySelector('.selImage');
+  //   html2canvas(this.data.original_image).then(function(canvas) {
+  //          var imageData = canvas.toDataURL(1);
+  //          console.log('imageData',imageData);
+  //
+  //  });
+  //
+  // },
   querySel() { //页面选择地址
     this.setData({
       address_photo: true
@@ -122,6 +134,9 @@ Page({
     })
 
   },
+  loyerbg: function(){
+    return false;
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -154,7 +169,6 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
   },
 
   /**

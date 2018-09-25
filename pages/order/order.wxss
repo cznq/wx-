@@ -99,7 +99,14 @@
   left: 0;
   width:750rpx;
   height:92rpx;
+  padding: 0 10px;
   box-sizing: border-box;
+}
+@media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
+    .button {
+        height:180rpx;
+        padding:0px 10px 68rpx;
+    }
 }
 .tipAddress{
   position: absolute;

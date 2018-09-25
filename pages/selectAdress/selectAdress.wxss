@@ -1,4 +1,5 @@
 /* pages/plan2/plan2.wxss */
+
 .preimg{
   width:726rpx;
   height:414rpx;
@@ -57,6 +58,7 @@
   overflow-y: hidden;
   background-color: #fff;
   transition: height .3s;
+  z-index: 99;
 }
 .photo_address.active{
   height:928rpx;
@@ -136,6 +138,7 @@
   left: 0;
   bottom: 0;
   background: rgba(0,0,0,.3);
+  z-index: 1;
 }
 .margin-right50{
   margin-right: 90rpx;

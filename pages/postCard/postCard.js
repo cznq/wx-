@@ -50,8 +50,6 @@ Page({
     // ---获取接口数据---
     var platform = that.data.platform;
     var url = app.globalData.baseUrlTpost + 'config/bg_list_v1?';
-// console.log('app.globalData.userId', app.globalData.userId);
-// console.log('app.globalData.session_id', app.globalData.session_id);
     var reqbody = {
       common: {
         'snsid': app.globalData.userId,
@@ -111,6 +109,7 @@ Page({
     var val = e.detail.value;
     var regStr = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F\uDE80-\uDEFF]/g
     var regStr2 = /^ +| +$/g
+      var regStr3 = /\n/g
     if (regStr.test(val)) {
       val = val.replace(regStr, '')
       wx.showToast({
@@ -125,12 +124,46 @@ Page({
         icon: 'none'
       })
     }
+    if (regStr3.test(val)) {
+      val = val.replace(regStr3, '')
+      wx.showToast({
+        title: '不支持换行',
+        icon: 'none'
+      })
+    }
     this.setData({
       areaVal: val
     })
     console.log(val);
   },
-
+addressInput(e){
+  var val = e.detail.value;
+  var regStr = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F\uDE80-\uDEFF]/g
+  if (regStr.test(val)) {
+    val = val.replace(regStr, '')
+    wx.showToast({
+      title: '不支持表情填写',
+      icon: 'none'
+    })
+    this.setData({
+      Addressee: val
+    })
+  }
+},
+sendInput(e){
+  var val = e.detail.value;
+  var regStr = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F\uDE80-\uDEFF]/g
+  if (regStr.test(val)) {
+    val = val.replace(regStr, '')
+    wx.showToast({
+      title: '不支持表情填写',
+      icon: 'none'
+    })
+    this.setData({
+      sender: val
+    })
+  }
+},
   addressee(e) {
     console.log(e.detail.value);
     this.setData({
