@@ -45,9 +45,9 @@ Page({
       scale: 2.5,
       zoom: 8,
       cut: {
-        x: (width - 287) / 2,
+        x: (width - 301) / 2,
         y: (height - 443) / 2,
-        width: 287,
+        width: 301,
         height: 443
       }
     },
@@ -121,9 +121,9 @@ Page({
                 cutH = 'cropperOpt.cut.height';
               self.setData({
                 [cutx]: (width - 343) / 2,
-                [cuty]: (height - 187) / 2,
+                [cuty]: (height - 233) / 2,
                 [cutW]: 343,
-                [cutH]: 187,
+                [cutH]: 233,
                 imgdir: 0, //横图 0
                 original_image: src
               })
@@ -138,9 +138,9 @@ Page({
                 cutW = 'cropperOpt.cut.width',
                 cutH = 'cropperOpt.cut.height';
               self.setData({
-                [cutx]: (width - 287) / 2,
+                [cutx]: (width - 301) / 2,
                 [cuty]: (height - 443) / 2,
-                [cutW]: 287,
+                [cutW]: 301,
                 [cutH]: 443,
                 imgdir: 1,
                 original_image: src
@@ -176,9 +176,9 @@ Page({
               cutH = 'cropperOpt.cut.height';
             self.setData({
               [cutx]: (width - 343) / 2,
-              [cuty]: (height - 187) / 2,
+              [cuty]: (height - 233) / 2,
               [cutW]: 343,
-              [cutH]: 187,
+              [cutH]: 233,
               imgdir: 0, //横图 0
               original_image: options.src
             })
@@ -191,9 +191,9 @@ Page({
               cutW = 'cropperOpt.cut.width',
               cutH = 'cropperOpt.cut.height';
             self.setData({
-              [cutx]: (width - 287) / 2,
+              [cutx]: (width - 301) / 2,
               [cuty]: (height - 443) / 2,
-              [cutW]: 287,
+              [cutW]: 301,
               [cutH]: 443,
               imgdir: 1
             })

@@ -81,6 +81,13 @@ Page({
   },
   querySubmit() {
     var _that = this;
+    if(!app.globalData.isConnected || app.globalData.networkType == 'none'){
+      wx.showToast({
+        title: '网络异常',
+        icon: 'none'
+      })
+      return false;
+    }
     if (!this.data.cityName) {
       wx.showToast({
         title: '请填写正确地址',

@@ -1,21 +1,21 @@
 /* pages/plan2/plan2.wxss */
 
 .preimg{
-  width:726rpx;
-  height:414rpx;
+  width:694rpx;
+  height:462rpx;
   margin-top: 200rpx;
 }
 /* 旋转图容器 */
 .pre{
   position: relative;
   width:750rpx;
-  height:414rpx;
+  height:462rpx;
   margin-top: 200rpx;
   box-sizing: border-box;
 }
 .preimgrotat{
-  width:414rpx;
-  height:726rpx;
+  width:462rpx;
+  height:694rpx;
   position: absolute;
   top:50%;
   left:50%;
@@ -62,6 +62,12 @@
 }
 .photo_address.active{
   height:928rpx;
+}
+@media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
+  .photo_address.active{
+    height:928rpx;
+    padding-bottom:68rpx;
+  }
 }
 .photo_address .title{
   height:80rpx;

@@ -20,6 +20,7 @@ page{
   margin-top: 100rpx;
   padding-bottom: 100rpx;
 }
+
 .orderTitle li{
   height:80rpx;
   line-height: 80rpx;
@@ -174,6 +175,9 @@ page{
     .buttom {
         height:164rpx;
         padding:0 90rpx 68rpx;
+    }
+    .order-content-box{
+      padding-bottom: 168rpx;
     }
 }
 .order .ordertext.activeColor{

@@ -36,6 +36,13 @@ Page({
   },
   // 选择地址
   bindChooseAddr() {
+    if(!app.globalData.isConnected || app.globalData.networkType == 'none'){
+      wx.showToast({
+        title: '网络异常',
+        icon: 'none'
+      })
+      return false;
+    }
     let that = this
     wx.chooseAddress({
       success(res) {
@@ -48,15 +55,6 @@ Page({
           countyName: res.countyName,
           chooseAddr: true
         })
-
-        console.log(res.userName)
-        console.log(res.postalCode)
-        console.log(res.provinceName)
-        console.log(res.cityName)
-        console.log(res.countyName)
-        console.log(res.detailInfo)
-        console.log(res.nationalCode)
-        console.log(res.telNumber)
       },
       fail(res) {
         console.log('res', res);
@@ -172,8 +170,14 @@ Page({
     }
   },
   paybtn() {
-
-
+      if(!app.globalData.isConnected || app.globalData.networkType == 'none'){
+        wx.showToast({
+          title: '网络异常',
+          icon: 'none'
+        })
+        return false;
+      }
+    // app.globalData.isConnected
     var _that = this;
     if (!_that.data.chooseAddr) {
       wx.showToast({

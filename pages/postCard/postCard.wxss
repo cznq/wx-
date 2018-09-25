@@ -254,8 +254,10 @@ textarea{resize:none}
   line-height: 20px;
 }
 .button_view{
+  position: relative;
   width:750rpx;
   height: 80rpx;
+  z-index: 999;
 }
 .button{
   width:690rpx;

@@ -937,13 +937,13 @@ function cut () {
 		// 绘制文字
 		console.log('carvaswidth',width);
 		console.log('carvasheight',height);
-		if (width === 287) {
+		if (width === 301) {
 			console.log('竖图');
 			self.ctx.font="14px Verdana";
 	    self.ctx.fillStyle = "#fff";
-			var leftx= x+5;
+			var leftx= x+10;
 			self.ctx.fillText("框内为打印区域，拖动，缩放可调整打印区域",leftx,y-20);
-			self.ctx.fillText("建议上传清晰度高的图片，打印效果更佳",leftx + 13,y + height + 30);
+			self.ctx.fillText("建议上传清晰度高的图片，打印效果更佳",leftx + 15,y + height + 30);
 		}else{
 			console.log('横图');
 			self.ctx.font="14px Verdana";

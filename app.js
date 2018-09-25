@@ -11,7 +11,20 @@ App({
     } catch (e) {
       console.log('获取系统信息失败');
     }
-
+    wx.getNetworkType({
+      success:function(res){
+        console.log('网络类型',res);
+        _that.globalData.networkType = res.networkType
+        if (_that.globalData.networkType !='none') {
+          _that.globalData.isConnected = true
+        }
+      }
+    })
+    wx.onNetworkStatusChange(function(res){
+      console.log('监听网络状态',res);
+      _that.globalData.isConnected = res.isConnected
+      _that.globalData.networkType = res.networkType
+    })
   },
   getOpenid: function() {
     var userInfo = {};
@@ -64,6 +77,8 @@ App({
     });
   },
   globalData: {
+    isConnected:false,
+    networkType:'none',
     userInfo: null,
     baseUrlT: 'http://192.168.1.232:8883/api/',
     baseUrl: 'https://uc.api.moji.com/mapi/',

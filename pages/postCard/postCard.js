@@ -198,6 +198,7 @@ sendInput(e){
     })
   },
   step_btn() {
+    console.log(11111);
     var that = this;
     if (that.data.Addressee == '') {
       wx.showToast({
@@ -220,6 +221,7 @@ sendInput(e){
       })
       return false
     }
+      console.log(2222);
     wx.navigateTo({
       url: '../order/order?post_bg=' + that.data.postCard_url +
         "&Addressee=" + that.data.Addressee +
