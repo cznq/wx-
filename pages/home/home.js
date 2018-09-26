@@ -18,7 +18,7 @@ Page({
    */
   onLoad: function (options) {
     var _that = this
-    var url = app.globalData.baseUrlTpost + 'config/get_config_information';
+    var url = app.globalData.baseUrlTpost + 'config/get_config_information?';
     var reqbody = {
       "common": {
         "uid": 0,
@@ -27,14 +27,14 @@ Page({
       },
       "params": {}
     }
-    utils.http(url, (dataStr) => {
+    utils.Md5http(url, (dataStr) => {
       console.log('获取首页配置信息',dataStr);
       if (dataStr.rc.c == 0) {
         var picture_list = dataStr.promotion_picture_list;
         _that.setData({
           picture_list:picture_list
         })
-        app.globalData.original_price = dataStr.original_price / 100 //订单总价
+        app.globalData.original_price = dataStr.total_fee / 100 //订单总价
         app.globalData.postage_fee = dataStr.postage_fee / 100 //邮费0不展示
         app.globalData.postage_copywriting = dataStr.postage_copywriting//邮费文案
         app.globalData.express_delivery_copywriting = dataStr.express_delivery_copywriting//快递文案

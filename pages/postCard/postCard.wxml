@@ -7,7 +7,7 @@
     <!-- 收件人 -->
     <input class='content-input' style='color:{{color}}' bindinput='addressInput' value='{{Addressee}}' bindblur='addressee' maxlength='8' type="text"/>
     <!-- 信件内容 -->
-    <textarea bindinput='noExpre' bindblur='areaVal' style='color:{{color}}' class='{{platform =="iphone"?"textaios":"textarea"}}' value="{{areaVal}}" maxlength='39' />
+    <textarea bindinput='noExpre' bindblur='areaVal' style='color:{{color}}' class='{{platform =="iphone"?"textaios": androidMix ? "textareamix":"textarea"}}' value="{{areaVal}}" maxlength='39' />
     <!-- 寄件人 -->
     <input class='content-input position-j' bindinput='sendInput' bindblur='sender' value='{{sender}}' style='color:{{color}}' maxlength='8' type="text"/>
     <!-- 地址 -->
@@ -32,6 +32,6 @@
    </block>
   </swiper>
 </view>
-<view class='button_view row cen-center'>
+<view class='button_view'>
 <view bindtap='step_btn' class='button'>下一步</view>
 </view>

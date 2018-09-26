@@ -27,7 +27,8 @@ Page({
       url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
       name: '父情节'
     }],
-    platform: 'iphone'
+    platform: 'iphone',
+    androidMix:false
   },
 
   /**
@@ -78,7 +79,7 @@ Page({
     }, reqbody);
     // 获取接口数据
     let setTime = utils.mformatTime(new Date());
-    console.log('options.cityName',options.cityName);
+    // console.log('options.cityName',options.cityName);
     var selAddress = options.cityName
     if (selAddress == '其他') {
       selAddress = '墨迹'
@@ -104,10 +105,16 @@ Page({
         selAddressLen: 8
       })
     }
+    if(app.globalData.model == 'MIX'){
+      that.setData({
+        androidMix: true
+      })
+
+    }
   },
   noExpre(e) {
     var val = e.detail.value;
-    var regStr = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F\uDE80-\uDEFF]/g
+    var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030|\uFFFD/ig;
     var regStr2 = /^ +| +$/g
       var regStr3 = /\n/g
     if (regStr.test(val)) {
@@ -119,10 +126,6 @@ Page({
     }
     if (regStr2.test(val)) {
       val = val.replace(regStr2, '')
-      wx.showToast({
-        title: '不支持表情填写',
-        icon: 'none'
-      })
     }
     if (regStr3.test(val)) {
       val = val.replace(regStr3, '')
@@ -138,31 +141,40 @@ Page({
   },
 addressInput(e){
   var val = e.detail.value;
-  var regStr = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F\uDE80-\uDEFF]/g
+  var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030|\uFFFD/ig;
+  var regStr2 = /^ +| +$/g
+  console.log('escape',escape(val));
   if (regStr.test(val)) {
     val = val.replace(regStr, '')
     wx.showToast({
       title: '不支持表情填写',
       icon: 'none'
     })
-    this.setData({
-      Addressee: val
-    })
   }
+  if (regStr2.test(val)) {
+    val = val.replace(regStr2, '')
+  }
+  this.setData({
+    Addressee: val
+  })
 },
 sendInput(e){
   var val = e.detail.value;
-  var regStr = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F\uDE80-\uDEFF]/g
+  var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030|\uFFFD/ig;
+  var regStr2 = /^ +| +$/g
   if (regStr.test(val)) {
     val = val.replace(regStr, '')
     wx.showToast({
       title: '不支持表情填写',
       icon: 'none'
     })
-    this.setData({
-      sender: val
-    })
   }
+  if (regStr2.test(val)) {
+    val = val.replace(regStr2, '')
+  }
+  this.setData({
+    sender: val
+  })
 },
   addressee(e) {
     console.log(e.detail.value);
@@ -198,7 +210,6 @@ sendInput(e){
     })
   },
   step_btn() {
-    console.log(11111);
     var that = this;
     if (that.data.Addressee == '') {
       wx.showToast({
@@ -221,7 +232,6 @@ sendInput(e){
       })
       return false
     }
-      console.log(2222);
     wx.navigateTo({
       url: '../order/order?post_bg=' + that.data.postCard_url +
         "&Addressee=" + that.data.Addressee +

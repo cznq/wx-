@@ -7,6 +7,7 @@ App({
       var res = wx.getSystemInfoSync();
       _that.globalData.platform = res.platform;
       _that.globalData.language = res.language;
+      _that.globalData.model = res.model;
       console.log('获取设备信息', res);
     } catch (e) {
       console.log('获取系统信息失败');
@@ -80,12 +81,13 @@ App({
     isConnected:false,
     networkType:'none',
     userInfo: null,
-    baseUrlT: 'http://192.168.1.232:8883/api/',
-    baseUrl: 'https://uc.api.moji.com/mapi/',
-    baseUrlTpost: 'http://192.168.1.232:8886/postcard/',
-    baseUrlPost: 'https://pcd.api.moji.com/',
+    baseUrl: 'http://192.168.1.232:8883/api/',
+    baseUrlT: 'https://uc.api.moji.com/mapi/',
+    baseUrlPost: 'http://192.168.1.232:8886/postcard/',
+    baseUrlTpost: 'https://pcd.api.moji.com/',
     language: '',
     platform: '',
+    model:'',
     userId: '',
     openId: '',
     session_id: '',

@@ -5,8 +5,8 @@
       <text wx:if='{{!chooseAddr}}' class='address_tip'>请填写收货地址</text>
       <view wx:if='{{chooseAddr}}' class='column start-cen'>
       <view>
-        <text class='addressee gray-32 ft16' >{{addressName}}</text>
-        <text class=' gray-32 ft16'>{{addressPhone}}</text>
+        <text class='addressee bold gray-32 ft16' >{{addressName}}</text>
+        <text class=' gray-32 bold ft16'>{{addressPhone}}</text>
       </view>
       <view class='order_details'>
         <text>收货地址：{{provinceName}}{{cityName}}{{countyName}}{{addressDetails}}</text>
@@ -21,7 +21,7 @@
 <view class="cutting">
   <image src='../../images/order-border.png' />
 </view>
-<view class='intro padding10-left column'>
+<view class='intro column'>
   <text class='title gray-32 ft14'>墨迹时光邮局明信片</text>
   <text class='name gray-9 ft12'>颜色：{{imgName}}</text>
   <!-- <image class='post_bg' src='{{post_bg}}'></image> -->
@@ -30,7 +30,8 @@
   </view>
   <image wx:if="{{imgdir =='0'}}" class='preimg' src='{{cut_image}}'></image>
 </view>
-<view class='song padding0-10 row cen-space'>
+<view class='pageMiddle'>
+<view class='songone title_border05  row cen-space'>
   <view class='row cen-start'>
     <image class='peisong' src='../../images/peisong.png'></image>
     <text class='gray-32 ft14'>配送方式</text>
@@ -40,12 +41,13 @@
     <text class='bay gray-9 ft12'>{{postage_copywriting}}</text>
   </view>
 </view>
-<view class='song padding0-10 row cen-space'>
+<view class='song row cen-space'>
   <view class='row cen-start'>
     <image class='peisong' src='../../images/wx.png'></image>
     <text class='gray-32 ft14'>支付方式</text>
   </view>
     <text class='kd gray-32 ft14'>微信支付</text>
+</view>
 </view>
 <view class="button row cen-space ">
   <!-- <view class="tipAddress row cen-start">

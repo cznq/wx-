@@ -1,6 +1,11 @@
+page{
+  height: 100%;
+  background: #F8F9FB;
+}
 .main{
   width:750rpx;
   height:auto;
+  background-color: #F8F9FB;
   box-sizing: border-box;
 }
 .card{
@@ -8,6 +13,8 @@
   width:690rpx;
   height:460rpx;
   margin-top: 120rpx;
+
+  padding-bottom:60rpx;
 }
 .card .card_bg{
   width:690rpx;
@@ -39,6 +46,17 @@ textarea{resize:none}
   top:142rpx;
   left:67rpx;
   width:358rpx;
+  height:180rpx;
+  line-height: 55rpx;
+  color:#fff;
+  /* border:1px solid blue; */
+  font-size: 28rpx;
+}
+.textareamix{
+  position: absolute;
+  top:142rpx;
+  left:67rpx;
+  width:356rpx;
   height:180rpx;
   line-height: 55rpx;
   color:#fff;
@@ -219,8 +237,7 @@ textarea{resize:none}
 /* pages/card_reverse /card_reverse.wxss */
 .s_content{
   width:750rpx;
-  height: 360rpx;
-  margin-top:112rpx;
+  height: 306rpx;
   background: #fff;
 }
 .s_content .title{
@@ -254,12 +271,19 @@ textarea{resize:none}
   line-height: 20px;
 }
 .button_view{
-  position: relative;
+  position: fixed;
+  left: 0;
+  bottom:0;
   width:750rpx;
-  height: 80rpx;
+  height: 158rpx;
+  background: #fff;
   z-index: 999;
 }
 .button{
+  position: absolute;
+  left:50%;
+  top:10rpx;
+  transform: translate(-50%,0);
   width:690rpx;
   height: 80rpx;
   background-color: #4294EA;

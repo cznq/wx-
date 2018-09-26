@@ -261,7 +261,7 @@ Page({
     // 获取接口数据
   },
   leLaunch() {
-    timer = setTimeout(function() {
+    var timer = setTimeout(function() {
       wx.reLaunch({
         url: '../orderDetail/orderDetail?path=' + 'order'
       })

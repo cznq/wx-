@@ -7,17 +7,18 @@
 
 <view class="buttom row cen-space">
   <view bindtap='cardActive' class="postCard column cen-center">
-    <image  class='cardimg' src='../../images/post_card.png' />
+    <image  class='cardimg' src='../../images/order.png' />
     <!-- <image wx:if='{{!cardActive}}' class='cardimg' src='../../images/npost_card.png' /> -->
     <text class='cardtext ft10 {{cardActive ? "activeColor":""}}'>明信片</text>
   </view>
-  <view class="makeCard">
+  <view class="makeCard column cen-center">
     <image bindtap='uploadTap' src='../../images/makecard.png' />
+    <text class='making ft10 '>制作</text>
     <button wx:if="{{!getUserInfo}}" plain='true' open-type="getUserInfo" class="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUser"></button>
   </view>
   <view bindtap='orderActive' class="order column cen-center">
     <!-- <image wx:if='{{orderActive}}' class='orderimg' src='../../images/order.png' /> -->
-    <image  class='orderimg' src='../../images/norder.png' />
+    <image  class='orderimg' src='../../images/npost_card.png' />
     <text class='ordertext ft10 {{orderActive ? "activeColor":""}}'>订单</text>
   </view>
 </view>

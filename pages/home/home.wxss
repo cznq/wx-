@@ -27,14 +27,26 @@
   height:86rpx;
 }
 .postCard .cardimg{
-  width: 48rpx;
-  height: 40rpx;
+  width: 60rpx;
+  height: 64rpx;
 }
 .postCard .cardtext{
   color:#B0B0B0;
 }
 .makeCard{
+  background: #fff;
+  padding: 10rpx;
+  border-radius: 50%;
   position: relative;
+  top:-25rpx;
+  /* border:1px solid red; */
+}
+.making{
+  position: absolute;
+  bottom:-20rpx;
+  left:50%;
+  transform: translate(-50%,0);
+  color:#B0B0B0;
 }
 .makeCard .getUserInfo{
   position: absolute;
@@ -47,16 +59,16 @@ button[plain]{
   border: none;
 }
 .makeCard image{
-  width:86rpx;
-  height:86rpx;
+  width:82rpx;
+  height:80rpx;
 }
 .order{
   width: 100rpx;
   height:86rpx;
 }
 .order .orderimg{
-  width: 42rpx;
-  height: 42rpx;
+  width: 60rpx;
+  height: 64rpx;
 }
 .order .ordertext{
   color:#B0B0B0;

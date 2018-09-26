@@ -18,7 +18,8 @@ page{
 }
 .order-content-box{
   margin-top: 100rpx;
-  padding-bottom: 100rpx;
+  padding-bottom: 130rpx;
+  background-color: #F8F9FB;
 }
 
 .orderTitle li{
@@ -28,8 +29,11 @@ page{
 .orderTitle li .active{
   color:#323232
 }
+.liblock{
+  background: #fff;
+}
 .orderInfo{
-  height:370rpx;
+  height:330rpx;
   box-sizing: border-box;
 }
 .orderInfo .title{
@@ -40,6 +44,7 @@ page{
   color:#FF973E;
 }
 .middle{
+  background: #fafafa;
   height:190rpx;
 }
 .middle .order_image{
@@ -177,7 +182,7 @@ page{
         padding:0 90rpx 68rpx;
     }
     .order-content-box{
-      padding-bottom: 168rpx;
+      padding-bottom: 198rpx;
     }
 }
 .order .ordertext.activeColor{
@@ -188,37 +193,39 @@ page{
   height:86rpx;
 }
 .postCard .cardimg{
-  width: 48rpx;
-  height: 40rpx;
+  width: 60rpx;
+  height: 60rpx;
 }
 .postCard .cardtext{
   color:#B0B0B0;
 }
 .makeCard{
+  background: #fff;
+  padding: 10rpx;
+  border-radius: 50%;
   position: relative;
+  top:-30rpx;
+  /* border:1px solid red; */
 }
-.makeCard .getUserInfo{
+.making{
   position: absolute;
-  left:0;
-  top:0;
-  width:86rpx;
-  height:86rpx;
-  z-index:1;
+  bottom:-20rpx;
+  left:50%;
+  transform: translate(-50%,0);
+  color:#B0B0B0;
 }
-button[plain]{
-  border: none;
-}
+
 .makeCard image{
-  width:86rpx;
-  height:86rpx;
+  width:82rpx;
+  height:80rpx;
 }
 .order{
   width: 100rpx;
   height:86rpx;
 }
 .order .orderimg{
-  width: 42rpx;
-  height: 42rpx;
+  width: 60rpx;
+  height: 60rpx;
 }
 .order .ordertext{
   color:#B0B0B0;
@@ -229,4 +236,10 @@ button[plain]{
 }
 .tipResult{
 
+}
+.inforTip{
+  margin-top:60rpx;
+}
+.inforTip .colornum{
+  color:#4294EA;
 }

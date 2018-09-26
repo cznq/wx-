@@ -19,9 +19,9 @@
 <!-- wx:for='{{orderDetails}}' wx:for-item='item' wx:key="unique" -->
 <view class='order-content-box' >
   <block wx:if="{{orderTitle ==='all' && !noDetails}}" wx:for='{{order_list}}' wx:for-item='item' wx:for-index='indx' wx:key="unique" >
-    <view class="marg10-top">
-      <view class="orderInfo padding0-10">
-      <view class="title row cen-space">
+    <view class="liblock marg10-top">
+      <view class="orderInfo ">
+      <view class="title padding0-10 row cen-space">
           <view>
             <text class='ft12 gray-32'>{{item.time}}</text>
           </view>
@@ -30,7 +30,7 @@
           <text wx:if='{{item.order_status == 2}}' class='ft12 start qrcolo'>已失效</text>
           <text wx:if='{{item.order_status == 3}}' class='ft12 start qrcolo'>已发货</text>
       </view>
-      <view class="middle row padding10-top">
+      <view class="middle padding0-10 row cen-start">
         <image class='order_image' src='{{item.postcard_front_url_list[0]}}'></image>
           <view class='right_text column'>
             <text>{{item.order_body}}</text>
@@ -40,9 +40,10 @@
             </view>
           </view>
       </view>
-      <view class="bottom row cen-space">
+      <view class="bottom padding0-10 row cen-space">
           <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee / 100}}</text></text>
           <view class='row cen-start'>
+            <text wx:if='{{item.order_status == 3}}' class='ft12 gray-6'>申通物流：{{item.ship_no}}</text>
             <!-- <view class='btn_ordetail'>订单详情</view> -->
             <view catchtap='paybtn' data-index='{{indx}}' wx:if='{{item.order_status == 0}}' class='btn_pay'>立即支付</view>
           </view>
@@ -52,15 +53,15 @@
   </block>
 
   <block wx:if="{{orderTitle ==='repay' && !noDetails}}" wx:for='{{order_list}}' wx:for-item='item' wx:key="unique" >
-    <view class="marg10-top">
-      <view class="orderInfo padding0-10">
-      <view class="title row cen-space">
+    <view class="liblock marg10-top">
+      <view class="orderInfo ">
+      <view class="title padding0-10 row cen-space">
           <view>
             <text class='ft12 gray-32'>{{item.time}}</text>
           </view>
           <text wx:if='{{item.order_status == 0}}' class='ft12 start qrcolo'>待支付</text>
       </view>
-      <view class="middle row padding10-top">
+      <view class="middle padding0-10 row cen-start">
         <image class='order_image' src='{{item.postcard_front_url_list[0]}}'></image>
           <view class='right_text column'>
             <text>{{item.order_body}}</text>
@@ -70,11 +71,11 @@
             </view>
           </view>
       </view>
-      <view class="bottom row cen-space">
+      <view class="bottom padding0-10 row cen-space">
           <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee / 100}}</text></text>
           <view class='row cen-start'>
             <view wx:if='{{item.order_status == 2}}' class='btn_ordetail'>删除</view>
-            <view wx:if='{{item.order_status == 0}}' class='btn_pay'>立即支付</view>
+            <view catchtap='paybtn' data-index='{{indx}}' wx:if='{{item.order_status == 0}}' class='btn_pay'>立即支付</view>
           </view>
       </view>
     </view>
@@ -82,15 +83,15 @@
   </block>
 
   <block wx:if="{{orderTitle ==='resend' && !noDetails}}" wx:for='{{order_list}}' wx:for-item='item' wx:key="unique" >
-    <view class="marg10-top">
-      <view class="orderInfo padding0-10">
-      <view class="title row cen-space">
+    <view class="liblock marg10-top">
+      <view class="orderInfo ">
+      <view class="title padding0-10 row cen-space">
           <view>
             <text class='ft12 gray-32'>{{item.time}}</text>
           </view>
           <text wx:if='{{item.order_status == 1}}' class='ft12 start qrcolo'>已付款,待发货 </text>
       </view>
-      <view class="middle row padding10-top">
+      <view class="middle padding0-10 row cen-start">
         <image class='order_image' src='{{item.postcard_front_url_list[0]}}'></image>
           <view class='right_text column'>
             <text>{{item.order_body}}</text>
@@ -100,7 +101,7 @@
             </view>
           </view>
       </view>
-      <view class="bottom row cen-space">
+      <view class="bottom padding0-10 row cen-space">
           <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee / 100}}</text></text>
           <view class='row cen-start'>
             <!-- <view class='btn_ordetail'>订单详情</view> -->
@@ -112,15 +113,15 @@
   </block>
 
   <block wx:if="{{orderTitle ==='sended' && !noDetails}}" wx:for='{{order_list}}' wx:for-item='item' wx:key="unique" >
-    <view class="marg10-top">
-      <view class="orderInfo padding0-10">
-      <view class="title row cen-space">
+    <view class="liblock marg10-top">
+      <view class="orderInfo ">
+      <view class="title padding0-10 row cen-space">
           <view>
             <text class='ft12 gray-32'>{{item.time}}</text>
           </view>
           <text wx:if='{{item.order_status == 3}}' class='ft12 start qrcolo'>已发货</text>
       </view>
-      <view class="middle row padding10-top">
+      <view class="middle padding0-10 row cen-start">
         <image class='order_image' src='{{item.postcard_front_url_list[0]}}'></image>
           <view class='right_text column'>
             <text>{{item.order_body}}</text>
@@ -130,9 +131,10 @@
             </view>
           </view>
       </view>
-      <view class="bottom row cen-space">
+      <view class="bottom padding0-10 row cen-space">
           <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee / 100}}</text></text>
           <view class='row cen-start'>
+            <text wx:if='{{item.order_status == 3}}' class='ft12 gray-6'>申通物流：{{item.ship_no}}</text>
             <!-- <view class='btn_ordetail'>订单详情</view> -->
             <!-- <view class='btn_pay'>立即支付</view> -->
           </view>
@@ -142,15 +144,15 @@
   </block>
 
   <block wx:if="{{orderTitle ==='Invalid' && !noDetails}}" wx:for='{{order_list}}' wx:for-item='item' wx:key="unique" >
-    <view class="marg10-top">
-      <view class="orderInfo padding0-10">
-      <view class="title row cen-space">
+    <view class="liblock marg10-top">
+      <view class="orderInfo ">
+      <view class="title padding0-10 row cen-space">
           <view>
             <text class='ft12 gray-32'>{{item.time}}</text>
           </view>
           <text wx:if='{{item.order_status == 2}}' class='ft12 start qrcolo'>已失效</text>
       </view>
-      <view class="middle row padding10-top">
+      <view class="middle padding0-10 row cen-start">
         <image class='order_image' src='{{item.postcard_front_url_list[0]}}'></image>
           <view class='right_text column'>
             <text>{{item.order_body}}</text>
@@ -160,7 +162,7 @@
             </view>
           </view>
       </view>
-      <view class="bottom row cen-space">
+      <view class="bottom padding0-10 row cen-space">
           <text class='gray-32 ft12'>共1件商品  合计<text class='price'>￥{{item.total_fee / 100}}</text></text>
           <view class='row cen-start'>
             <view wx:if='{{item.order_status == 2}}' data-ord_no='{{item.order_no}}' bindtap='delete_Ord' class='btn_ordetail'>删除</view>
@@ -170,25 +172,28 @@
     </view>
   </block>
 
-
+  <view wx:if='{{!noDetails}}' class='inforTip gray-9 ft12 column cen-center'>
+      <text>客服热线：<text class='colornum'>400 800 0559</text></text>
+      <text>QQ群官方联系群：<text class='colornum'>664907991</text></text>
+  </view>
   <view wx:if='{{noDetails}}' class='noResult gray-9 ft12 column cen-center'>
       <image class='resultImage' src='../../images/noResult.png'></image>
       <text class='tipResult gray-6 ft16'>您还没有订单哦</text>
       <text>可以去看看有没有想买的</text>
   </view>
 
-
-  </view>
+</view>
   <view class="buttom row cen-space">
     <view bindtap='cardActive' class="postCard column cen-center">
-      <image class='cardimg' src='../../images/npost_card.png' />
+      <image class='cardimg' src='../../images/norder.png' />
       <text class='cardtext ft10'>明信片</text>
     </view>
-    <view class="makeCard">
+    <view class="makeCard column cen-center">
       <image bindtap='uploadTap' src='../../images/makecard.png' />
+      <text class='making ft10 '>制作</text>
     </view>
     <view class="order column cen-center">
-      <image class='orderimg' src='../../images/order.png' />
+      <image class='orderimg' src='../../images/post_card.png' />
       <text class='ordertext ft10 activeColor'>订单</text>
     </view>
   </view>

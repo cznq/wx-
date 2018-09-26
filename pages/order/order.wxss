@@ -1,8 +1,13 @@
 /* pages/order/order.wxss */
+page{
+  height: 100%;
+  background: #F8F9FB;
+}
 .order_address{
   width: 750rpx;
   height:140rpx;
   padding:0 30rpx;
+  background: #fff;
   box-sizing: border-box;
 }
 .active{
@@ -11,7 +16,7 @@
 .order_address .left_image{
   width: 32rpx;
   height:36rpx;
-  margin-right: 10rpx;
+  margin-right: 15rpx;
 }
 .order_address .address_tip{
   color:#323232;
@@ -32,7 +37,7 @@
   height: 56rpx;
   color:#323232;
   font-size: 24rpx;
-  padding-top:10rpx;
+  padding-top:6rpx;
   line-height: 28rpx;
   overflow: scroll;
 }
@@ -43,6 +48,11 @@
 .cutting image{
   width:750rpx;
   height:8rpx;
+}
+
+.intro{
+  padding:0 0 20rpx 20rpx;
+  background: #fff;
 }
 .intro .title{
   padding-top:10rpx;
@@ -74,8 +84,39 @@
   transform-origin: center center;
   transform: translate(-50%,-50%) rotate(-90deg);
 }
+.pageMiddle{
+  height: 248rpx;
+  /* padding:20rpx 0; */
+  padding-top:15rpx;
+  box-sizing: border-box;
+  background: #fff;
+  margin-top:20rpx;
+}
+.title_border05 {
+    position: absolute;
+}
+.title_border05:before {
+    display: block;
+    content: "";
+    width: 199%;
+    width: calc(200%);
+    height: 1px;
+    position: absolute;
+    left: -50%;
+    bottom: 0;
+    background-color: rgba(0,0,0, .1);
+    transform: scale(0.5);
+    z-index: 1;
+}
+.songone{
+  position: relative;
+  height:115rpx;
+  padding:0 30rpx;
+
+}
 .song{
-  margin-top:70rpx;
+  height:109rpx;
+  padding:0 30rpx;
 }
 .peisong{
   width:36rpx;
