@@ -204,7 +204,7 @@ page{
   padding: 10rpx;
   border-radius: 50%;
   position: relative;
-  top:-30rpx;
+  top:-25rpx;
   /* border:1px solid red; */
 }
 .making{
@@ -214,7 +214,6 @@ page{
   transform: translate(-50%,0);
   color:#B0B0B0;
 }
-
 .makeCard image{
   width:82rpx;
   height:80rpx;

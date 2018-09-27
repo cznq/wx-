@@ -1,4 +1,3 @@
-// pages/photo/photo.js
 const app = getApp();
 const utils = require('../../utils/util.js');
 Page({
@@ -19,8 +18,11 @@ Page({
   onLoad: function (options) {
     var _that = this
     var url = app.globalData.baseUrlTpost + 'config/get_config_information?';
+    console.log('app.globalData.userId',app.globalData.userId);
+    var snsid = app.globalData.userId * 1;
     var reqbody = {
       "common": {
+        'snsid': snsid,
         "uid": 0,
         "platform": app.globalData.platform,
         "language": app.globalData.language
