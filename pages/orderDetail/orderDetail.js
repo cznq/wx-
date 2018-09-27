@@ -10,7 +10,7 @@ Page({
    */
   data: {
     orderTitle:'all',
-    noDetails:false,
+    noDetails:true,
     order_list:[],
     backFlag:''
   },
@@ -57,10 +57,12 @@ Page({
       if (dataStr.rc.c == 0) {
       var  order_list = dataStr.order_list;
       console.log('order_list',order_list);
-      if (order_list.length == 0) {
+      if (order_list.length === 0) {
+        console.log('length',order_list.length);
         this.setData({
           noDetails:true
         })
+        return false
       }
       var time_list = [], time;
       for (var item in order_list) {
@@ -70,7 +72,8 @@ Page({
         }
       }
       this.setData({
-        order_list:order_list
+        order_list:order_list,
+        noDetails:false
       })
     }else {
       this.setData({
@@ -86,7 +89,7 @@ Page({
       case "all":
         this.setData({
           orderTitle: "all",
-          noDetails: false
+          // noDetails: false
         });
         var platform = app.globalData.platform;
         var url = app.globalData.baseUrlTpost + 'order/order_list?';
@@ -112,6 +115,7 @@ Page({
             this.setData({
               noDetails:true
             })
+            return false
           }
           var time_list = [], time;
           for (var item in order_list) {
@@ -121,7 +125,8 @@ Page({
             }
           }
           this.setData({
-            order_list:order_list
+            order_list:order_list,
+            noDetails:false
           })
         }else {
           this.setData({
@@ -134,7 +139,7 @@ Page({
       case "repay":
         this.setData({
           'orderTitle': "repay",
-          noDetails: false
+          // noDetails: false
         });
         var platform = app.globalData.platform;
         var url = app.globalData.baseUrlTpost + 'order/order_list?';
@@ -160,6 +165,7 @@ Page({
             this.setData({
               noDetails:true
             })
+            return false
           }
           var time_list = [], time;
           for (var item in order_list) {
@@ -169,7 +175,8 @@ Page({
             }
           }
           this.setData({
-            order_list:order_list
+            order_list:order_list,
+            noDetails:false
           })
         }else {
           this.setData({
@@ -181,7 +188,7 @@ Page({
       case "resend":
         this.setData({
           orderTitle: "resend",
-          noDetails: false
+          // noDetails: false
         });
         var platform = app.globalData.platform;
         var url = app.globalData.baseUrlTpost + 'order/order_list?';
@@ -207,6 +214,7 @@ Page({
             this.setData({
               noDetails:true
             })
+            return false
           }
           var time_list = [], time;
           for (var item in order_list) {
@@ -216,7 +224,8 @@ Page({
             }
           }
           this.setData({
-            order_list:order_list
+            order_list:order_list,
+            noDetails:false
           })
         }else {
           this.setData({
@@ -228,7 +237,7 @@ Page({
       case "sended":
         this.setData({
           orderTitle: "sended",
-          noDetails: false
+          // noDetails: false
         });
         var platform = app.globalData.platform;
         var url = app.globalData.baseUrlTpost + 'order/order_list?';
@@ -254,6 +263,7 @@ Page({
             this.setData({
               noDetails:true
             })
+            return false
           }
           var time_list = [], time;
           for (var item in order_list) {
@@ -263,7 +273,8 @@ Page({
             }
           }
           this.setData({
-            order_list:order_list
+            order_list:order_list,
+            noDetails:false
           })
         }else {
           this.setData({
@@ -275,7 +286,7 @@ Page({
         case "Invalid":
           this.setData({
             orderTitle: "Invalid",
-            noDetails: false
+            // noDetails: false
           });
           var platform = app.globalData.platform;
           var url = app.globalData.baseUrlTpost + 'order/order_list?';
@@ -301,6 +312,7 @@ Page({
               this.setData({
                 noDetails:true
               })
+              return false
             }
             var time_list = [], time;
             for (var item in order_list) {
@@ -310,7 +322,8 @@ Page({
               }
             }
             this.setData({
-              order_list:order_list
+              order_list:order_list,
+              noDetails:false
             })
           }else{
             this.setData({
@@ -320,7 +333,7 @@ Page({
           }, reqbody);
           break;
       default:
-        console.log('^………');
+        console.log('无效的选择');
     }
   },
   cardActive(){

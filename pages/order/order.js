@@ -256,6 +256,11 @@ Page({
 
           }
         })
+      }else{
+        wx.showToast({
+          title:dataStr.rc.p,
+          icon:'none'
+        })
       }
     }, reqbody);
     // 获取接口数据

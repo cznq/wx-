@@ -52,7 +52,7 @@
     </view>
   </block>
 
-  <block wx:if="{{orderTitle ==='repay' && !noDetails}}" wx:for='{{order_list}}' wx:for-item='item' wx:key="unique" >
+  <block wx:if="{{orderTitle ==='repay' && !noDetails}}" wx:for='{{order_list}}' wx:for-item='item' wx:for-index='indx' wx:key="unique" >
     <view class="liblock marg10-top">
       <view class="orderInfo ">
       <view class="title padding0-10 row cen-space">
@@ -172,16 +172,19 @@
     </view>
   </block>
 
-  <view wx:if='{{!noDetails}}' class='inforTip gray-9 ft12 column cen-center'>
-      <text>客服热线：<text class='colornum'>400 800 0559</text></text>
-      <text>QQ群官方联系群：<text class='colornum'>664907991</text></text>
-  </view>
-  <view wx:if='{{noDetails}}' class='noResult gray-9 ft12 column cen-center'>
+<block wx:if='{{noDetails}}'>
+  <view  class='noResult gray-9 ft12 column cen-center'>
       <image class='resultImage' src='../../images/noResult.png'></image>
       <text class='tipResult gray-6 ft16'>您还没有订单哦</text>
       <text>可以去看看有没有想买的</text>
   </view>
-
+  </block>
+  <block wx:else>
+  <view  class='inforTip gray-9 ft12 column cen-center'>
+      <text>客服热线：<text class='colornum'>400-880-0599</text></text>
+      <text>QQ群官方联系群：<text class='colornum'>664907991</text></text>
+  </view>
+  </block>
 </view>
   <view class="buttom row cen-space">
     <view bindtap='cardActive' class="postCard column cen-center">
