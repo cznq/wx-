@@ -141,7 +141,7 @@ Page({
   },
   onGotUserInfo: function(e) {
     let userInfo = e[0].detail.userInfo;
-    console.log('onGotUserInfo', e[0].detail.userInfo);
+    // console.log('onGotUserInfo', e[0].detail.userInfo);
     if (!userInfo) {
       wx.getSetting({
         success(res) {
@@ -167,6 +167,7 @@ Page({
       app.globalData.province = userInfo.province
       app.globalData.city = userInfo.city
       app.globalData.country = userInfo.country
+      this.paybtn();
     }
   },
   paybtn() {

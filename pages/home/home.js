@@ -17,35 +17,37 @@ Page({
    */
   onLoad: function (options) {
     var _that = this
-    var url = app.globalData.baseUrlTpost + 'config/get_config_information?';
-    console.log('app.globalData.userId',app.globalData.userId);
-    var snsid = app.globalData.userId * 1;
-    var reqbody = {
-      "common": {
-        'snsid': snsid,
-        "uid": 0,
-        "platform": app.globalData.platform,
-        "language": app.globalData.language
-      },
-      "params": {}
-    }
-    utils.Md5http(url, (dataStr) => {
-      console.log('获取首页配置信息',dataStr);
-      if (dataStr.rc.c == 0) {
-        var picture_list = dataStr.promotion_picture_list;
-        _that.setData({
-          picture_list:picture_list
-        })
-        app.globalData.original_price = dataStr.total_fee / 100 //订单总价
-        app.globalData.postage_fee = dataStr.postage_fee / 100 //邮费0不展示
-        app.globalData.postage_copywriting = dataStr.postage_copywriting//邮费文案
-        app.globalData.express_delivery_copywriting = dataStr.express_delivery_copywriting//快递文案
-        app.globalData.original_copywriting = dataStr.original_copywriting//原价文案
-
-      }else{
-        console.log('获取配置信息接口失败',dataStr);
+    app.getOpenid().then(function () {
+      // console.log('获取登陆成功userInfo', userInfo);
+      var url = app.globalData.baseUrlTpost + 'config/get_config_information?';
+      var snsid = app.globalData.userId * 1;
+      var reqbody = {
+        "common": {
+          'snsid': snsid,
+          "uid": 0,
+          "platform": app.globalData.platform,
+          "language": app.globalData.language
+        },
+        "params": {}
       }
-    }, reqbody);
+      utils.Md5http(url, (dataStr) => {
+        console.log('获取首页配置信息',dataStr);
+        if (dataStr.rc.c == 0) {
+          var picture_list = dataStr.promotion_picture_list;
+          _that.setData({
+            picture_list:picture_list
+          })
+          app.globalData.original_price = dataStr.total_fee / 100 //订单总价
+          app.globalData.postage_fee = dataStr.postage_fee / 100 //邮费0不展示
+          app.globalData.postage_copywriting = dataStr.postage_copywriting//邮费文案
+          app.globalData.express_delivery_copywriting = dataStr.express_delivery_copywriting//快递文案
+          app.globalData.original_copywriting = dataStr.original_copywriting//原价文案
+
+        }else{
+          console.log('获取配置信息接口失败',dataStr);
+        }
+      }, reqbody);
+    })
 
     wx.getSetting({ // 查看是否授权
       success: function (res) {
@@ -73,12 +75,7 @@ Page({
       },
     });
 
-    app.getOpenid().then(function (userInfo) {
-      console.log('获取登陆成功userInfo', userInfo);
-      app.globalData.userId = userInfo.userId;
-      app.globalData.openId = userInfo.openId;
-      app.globalData.session_id = userInfo.session_id;
-    })
+
   },
   //主动获取用户信息权限
   onGotUser(){
@@ -130,17 +127,6 @@ Page({
     }
   },
   cardActive(){//点击明信片
-    // if (this.data.cardActive) {
-    //   this.setData({
-    //     cardActive:false,
-    //     orderActive:false
-    //   })
-    // }else{
-    //   this.setData({
-    //     cardActive:true,
-    //     orderActive:false
-    //   })
-    // }
   },
   orderActive(){//点击订单
     wx.navigateTo({

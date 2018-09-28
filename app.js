@@ -1,4 +1,4 @@
-const aldstat = require('./utils/ald-stat.js')
+// const aldstat = require('./utils/ald-stat.js')
 const utils = require('./utils/util.js');
 //app.js
 App({
@@ -15,7 +15,7 @@ App({
     }
     wx.getNetworkType({
       success:function(res){
-        console.log('网络类型',res);
+        // console.log('网络类型',res);
         _that.globalData.networkType = res.networkType
         if (_that.globalData.networkType !='none') {
           _that.globalData.isConnected = true
@@ -29,10 +29,9 @@ App({
     })
   },
   getOpenid: function() {
+    var _that = this;
     var userInfo = {};
     // userInfo = wx.getStorageSync('userInfo');
-    console.log('获取登陆成功userInfo', userInfo);
-    var _that = this;
     return new Promise(function(resolve, reject) {
       // 登录
       wx.login({
@@ -42,7 +41,6 @@ App({
           _that.globalData.code = res.code;
           // 首次登陆调注册接口获取openid&&userid
           if (!userInfo.userId || userInfo.userId == undefined) {
-            console.log('登陆接口');
             var url = _that.globalData.baseUrlT + 'applet/loginByCode';
             var reqbody = {
               "common": {
@@ -60,15 +58,20 @@ App({
                 _that.globalData.userId = dataStr.sns_id;
                 _that.globalData.openId = dataStr.open_id;
                 _that.globalData.session_id = dataStr.session_id;
-                userInfo = {
-                  userId: _that.globalData.userId,
-                  openId: _that.globalData.openId,
-                  session_id: _that.globalData.session_id
-                }
-                wx.setStorageSync('userInfo', userInfo);
+                console.log('app.globalData.userId',_that.globalData.userId);
+                console.log('app.globalData.openId',_that.globalData.openId);
+                // userInfo = {
+                //   userId: _that.globalData.userId,
+                //   openId: _that.globalData.openId,
+                //   session_id: _that.globalData.session_id
+                // }
+                // wx.setStorageSync('userInfo', userInfo);
                 resolve(userInfo);
               } else {
-                console.log('登陆接口失败', dataStr);
+                wx:showToast({
+                  title:'登陆接口失败',
+                  icon:'none'
+                })
               }
             }, reqbody);
           } else {

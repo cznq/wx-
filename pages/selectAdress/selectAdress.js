@@ -1,5 +1,5 @@
 // pages/plan2/plan2.js
-const html2canvas = require('../../utils/html2canvas.js');
+// const html2canvas = require('../../utils/html2canvas.js');
 const app = getApp();
 Page({
 
@@ -19,9 +19,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('html2canvas',html2canvas);
-    console.log('获取上页传入信息',options);
-    console.log('图片方向0为横向',options.imgdir);
     app.globalData.postcard_picture_type = options.imgdir
     // wx.getImageInfo({
     //   src: options.src,
