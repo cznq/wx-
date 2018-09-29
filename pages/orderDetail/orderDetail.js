@@ -504,6 +504,31 @@ Page({
       sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
+        // 获取最新配置
+        var url = app.globalData.baseUrlTpost + 'config/get_config_information?';
+        var snsid = app.globalData.userId * 1;
+        var reqbody = {
+          "common": {
+            'snsid': snsid,
+            "uid": 0,
+            "platform": app.globalData.platform,
+            "language": app.globalData.language
+          },
+          "params": {}
+        }
+        utils.Md5http(url, (dataStr) => {
+          console.log('show首页配置信息',dataStr);
+          if (dataStr.rc.c == 0) {
+            app.globalData.original_price = dataStr.total_fee / 100 //订单总价
+            app.globalData.postage_fee = dataStr.postage_fee / 100 //邮费0不展示
+            app.globalData.postage_copywriting = dataStr.postage_copywriting//邮费文案
+            app.globalData.express_delivery_copywriting = dataStr.express_delivery_copywriting//快递文案
+            app.globalData.original_copywriting = dataStr.original_copywriting//原价文案
+
+          }else{
+            console.log('获取配置信息接口失败',dataStr);
+          }
+        }, reqbody);
         const src = res.tempFilePaths[0]
         //  获取裁剪图片资源后，给data添加src属性及其值
         wx.navigateTo({

@@ -24,6 +24,7 @@ Page({
     express_delivery_copywriting: '', //快递文案
     original_copywriting: '', //原价文案
     imgName: '',
+    model_type: '',
     AddreName: '', //收件人
     sender: '', //发送人姓名
     areaVala: '', //内容
@@ -106,6 +107,7 @@ Page({
     var post_bg = options.post_bg //背景
     var selAddress = options.selAddress //选择的地址
     var imgName = options.imgName
+    var model_type = options.model_type
     var original_price = app.globalData.original_price + app.globalData.postage_fee //订单总价
     that.setData({
       post_bg: post_bg,
@@ -114,6 +116,7 @@ Page({
       express_delivery_copywriting: app.globalData.express_delivery_copywriting, //快递文案
       original_copywriting: app.globalData.original_copywriting, //原价文案
       imgName: imgName,
+      model_type:model_type,
       AddreName: AddreName,
       sender: sender,
       areaVal: areaVal,
@@ -167,6 +170,27 @@ Page({
       app.globalData.province = userInfo.province
       app.globalData.city = userInfo.city
       app.globalData.country = userInfo.country
+      // 通知服务端
+      var url = app.globalData.baseUrlT + 'json/profile/set_info';
+      var reqbody = {
+        "common": {
+          "snsid":app.globalData.userId,
+          "uid": 0, //先写死--
+          "platform": app.globalData.platform,
+          "language": app.globalData.language
+        },
+        "params": {
+          "nick":app.globalData.nickName,
+          "face": app.globalData.avatarUrl,
+          "sex":app.globalData.gender === 1 ? '男':'女',
+          "city":app.globalData.province+app.globalData.city+app.globalData.country
+        }
+      }
+      utils.http(url, (dataStr) => {
+        console.log('微信用户信息', dataStr);
+        if (dataStr.rc.c == 0) {}
+
+      }, reqbody);
       this.paybtn();
     }
   },
@@ -215,7 +239,7 @@ Page({
         postcard_picture_width: app.globalData.postcard_picture_width, //图片宽度
         postcard_picture_height: app.globalData.postcard_picture_height, //图片高度
         postcard_front_url: app.globalData.postcard_front_url, //明信片正面
-        postcard_template: _that.data.currentIndex, //明信片模板
+        postcard_template: _that.data.model_type, //明信片模板
         coupon_ids: '', //优惠券ID
         order_fee: _that.data.original_price * 100, //订单金额(分为单位)
         pay_type: 0, //0-微信 1-支付宝

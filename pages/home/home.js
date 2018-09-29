@@ -17,37 +17,40 @@ Page({
    */
   onLoad: function (options) {
     var _that = this
-    app.getOpenid().then(function () {
-      // console.log('获取登陆成功userInfo', userInfo);
-      var url = app.globalData.baseUrlTpost + 'config/get_config_information?';
-      var snsid = app.globalData.userId * 1;
-      var reqbody = {
-        "common": {
-          'snsid': snsid,
-          "uid": 0,
-          "platform": app.globalData.platform,
-          "language": app.globalData.language
-        },
-        "params": {}
-      }
-      utils.Md5http(url, (dataStr) => {
-        console.log('获取首页配置信息',dataStr);
-        if (dataStr.rc.c == 0) {
-          var picture_list = dataStr.promotion_picture_list;
-          _that.setData({
-            picture_list:picture_list
-          })
-          app.globalData.original_price = dataStr.total_fee / 100 //订单总价
-          app.globalData.postage_fee = dataStr.postage_fee / 100 //邮费0不展示
-          app.globalData.postage_copywriting = dataStr.postage_copywriting//邮费文案
-          app.globalData.express_delivery_copywriting = dataStr.express_delivery_copywriting//快递文案
-          app.globalData.original_copywriting = dataStr.original_copywriting//原价文案
-
-        }else{
-          console.log('获取配置信息接口失败',dataStr);
+      app.getOpenid().then(function () {
+        _that.setData({
+          onloaded:true
+        })
+        var url = app.globalData.baseUrlTpost + 'config/get_config_information?';
+        var snsid = app.globalData.userId * 1;
+        var reqbody = {
+          "common": {
+            'snsid': snsid,
+            "uid": 0,
+            "platform": app.globalData.platform,
+            "language": app.globalData.language
+          },
+          "params": {}
         }
-      }, reqbody);
-    })
+        utils.Md5http(url, (dataStr) => {
+          console.log('onload首页配置信息',dataStr);
+          if (dataStr.rc.c == 0) {
+            var picture_list = dataStr.promotion_picture_list;
+            _that.setData({
+              picture_list:picture_list
+            })
+            app.globalData.original_price = dataStr.total_fee / 100 //订单总价
+            app.globalData.postage_fee = dataStr.postage_fee / 100 //邮费0不展示
+            app.globalData.postage_copywriting = dataStr.postage_copywriting//邮费文案
+            app.globalData.express_delivery_copywriting = dataStr.express_delivery_copywriting//快递文案
+            app.globalData.original_copywriting = dataStr.original_copywriting//原价文案
+
+          }else{
+            console.log('获取配置信息接口失败',dataStr);
+          }
+        }, reqbody);
+      })
+
 
     wx.getSetting({ // 查看是否授权
       success: function (res) {
@@ -75,8 +78,8 @@ Page({
       },
     });
 
-
   },
+
   //主动获取用户信息权限
   onGotUser(){
     utils.throttle(this.onGotUserInfo(arguments),500);
@@ -112,6 +115,28 @@ Page({
       app.globalData.province = userInfo.province
       app.globalData.city = userInfo.city
       app.globalData.country = userInfo.country
+      // 通知服务端
+      var url = app.globalData.baseUrlT + 'json/profile/set_info';
+      var reqbody = {
+        "common": {
+          "snsid":app.globalData.userId,
+          "uid": 0, //先写死--
+          "platform": app.globalData.platform,
+          "language": app.globalData.language
+        },
+        "params": {
+          "nick":app.globalData.nickName,
+          "face": app.globalData.avatarUrl,
+          "sex":app.globalData.gender === 1 ? '男':'女',
+          "city":app.globalData.province+app.globalData.city+app.globalData.country
+        }
+      }
+      utils.http(url, (dataStr) => {
+        console.log('微信用户信息', dataStr);
+        if (dataStr.rc.c == 0) {}
+
+      }, reqbody);
+
       wx.chooseImage({
         count: 1, // 默认9
         sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
@@ -140,6 +165,32 @@ Page({
       sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
+        // 获取最新配置
+        var url = app.globalData.baseUrlTpost + 'config/get_config_information?';
+        var snsid = app.globalData.userId * 1;
+        var reqbody = {
+          "common": {
+            'snsid': snsid,
+            "uid": 0,
+            "platform": app.globalData.platform,
+            "language": app.globalData.language
+          },
+          "params": {}
+        }
+        utils.Md5http(url, (dataStr) => {
+          console.log('show首页配置信息',dataStr);
+          if (dataStr.rc.c == 0) {
+            app.globalData.original_price = dataStr.total_fee / 100 //订单总价
+            app.globalData.postage_fee = dataStr.postage_fee / 100 //邮费0不展示
+            app.globalData.postage_copywriting = dataStr.postage_copywriting//邮费文案
+            app.globalData.express_delivery_copywriting = dataStr.express_delivery_copywriting//快递文案
+            app.globalData.original_copywriting = dataStr.original_copywriting//原价文案
+
+          }else{
+            console.log('获取配置信息接口失败',dataStr);
+          }
+        }, reqbody);
+        // 获取最新配置
         const src = res.tempFilePaths[0]
         //  获取裁剪图片资源后，给data添加src属性及其值
         wx.navigateTo({
@@ -166,7 +217,6 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
   /**
@@ -199,7 +249,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '墨迹时光邮局/明信片小程序制作',
+      title: '多久没寄明信片了？新用户首单仅1.9元',
       imageUrl: '../../images/share.jpg',
       path: '/pages/home/home'
     }

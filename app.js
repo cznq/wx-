@@ -1,4 +1,4 @@
-// const aldstat = require('./utils/ald-stat.js')
+const aldstat = require('./utils/ald-stat.js')
 const utils = require('./utils/util.js');
 //app.js
 App({

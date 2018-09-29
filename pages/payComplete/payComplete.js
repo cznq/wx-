@@ -78,7 +78,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '墨迹时光邮局/明信片小程序制作',
+      title: '多久没寄明信片了？新用户首单仅1.9元',
       imageUrl: '../../images/share.jpg',
       path: '/pages/home/home'
     }

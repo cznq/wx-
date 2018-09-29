@@ -1,7 +1,10 @@
 // pages/card_reverse /card_reverse.js
 const app = getApp();
 const utils = require('../../utils/util.js');
-
+var fistLine = '';
+var secendLine = '';
+var areaValRel = '';
+var thirdLine = '';
 Page({
 
   /**
@@ -14,6 +17,7 @@ Page({
     duration: 1000,
     Addressee: '', //收件人
     areaVal: '所有快乐，无需假装；此生尽兴，赤诚善良。', //信件内容
+    areaValRel: '所有快乐，无需假装；此生尽\n兴，赤诚善良。',
     sender: '', //寄件人
     setTime: '2019-10-03',
     selAddress: '', //地址
@@ -23,12 +27,13 @@ Page({
     color: '',
     currentIndex: '0',
     imgName: '',
+    model_type: '',
     imgUrls: [{
       url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
       name: '父情节'
     }],
     platform: 'iphone',
-    androidMix:false
+    androidMix: false
   },
 
   /**
@@ -74,6 +79,7 @@ Page({
           postCard_url: that.data.imgUrls[0].url,
           color: that.data.imgUrls[0].color,
           imgName: that.data.imgUrls[0].name,
+          model_type: that.data.imgUrls[0].model_type,
         })
       }
     }, reqbody);
@@ -105,7 +111,7 @@ Page({
         selAddressLen: 8
       })
     }
-    if(app.globalData.model == 'MIX'){
+    if (app.globalData.model == 'MIX') {
       that.setData({
         androidMix: true
       })
@@ -116,7 +122,7 @@ Page({
     var val = e.detail.value;
     var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030|\uFFFD/ig;
     var regStr2 = /^ +| +$/g
-      var regStr3 = /\n/g
+    var regStr3 = /\n/g
     if (regStr.test(val)) {
       val = val.replace(regStr, '')
       wx.showToast({
@@ -134,48 +140,107 @@ Page({
         icon: 'none'
       })
     }
+    var valLen = this.getByteLen(val);
+    console.log('valLen', valLen);
+    if (valLen <= 26) { //第一行
+      this.setData({
+        areaValRel: val
+      })
+      console.log('this.data.areaValRel',this.data.areaValRel);
+    }
+    if (valLen > 26 && valLen <= 52) { //第二行
+      fistLine = this.cut_str(val, 26);
+      secendLine = val.split(fistLine)[1];
+      areaValRel = fistLine + '\n' + secendLine;
+
+      this.setData({
+        areaValRel:areaValRel
+      })
+      console.log('secendLine', secendLine);
+      console.log('areaValRel', areaValRel);
+    }
+    if (valLen > 52) {
+      var one = this.cut_str(val, 52);
+      thirdLine = val.split(one)[1];
+      console.log('fistLine',fistLine);
+      console.log('secendLine', secendLine);
+      console.log('thirdLine',thirdLine);
+      areaValRel = fistLine + '\n' + secendLine + '\n' + thirdLine
+      this.setData({
+        areaValRel:areaValRel
+      })
+      console.log('areaValRel',areaValRel);
+    }
     this.setData({
       areaVal: val
     })
-    console.log(val);
   },
-addressInput(e){
-  var val = e.detail.value;
-  var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030|\uFFFD/ig;
-  var regStr2 = /^ +| +$/g
-  console.log('escape',escape(val));
-  if (regStr.test(val)) {
-    val = val.replace(regStr, '')
-    wx.showToast({
-      title: '不支持表情填写',
-      icon: 'none'
+  cut_str(str, len, end = 0) {
+    var char_length = 0;
+    if (end == 0) {
+      for (var i = 0; i < str.length; i++) {
+        var son_str = str.charAt(i);
+        encodeURI(son_str).length > 2 ? char_length += 2 : char_length += 1;
+        console.log('char_length', char_length);
+        console.log('len', len);
+        if (char_length >= len) {
+          var sub_len = char_length == len ? i + 1 : i;
+          str = str.substr(0, sub_len);
+          return str
+        }
+      }
+    }
+
+  },
+  getByteLen(val) {
+    var len = 0;
+    for (var i = 0; i < val.length; i++) {
+      var length = val.charCodeAt(i);
+      if (length >= 0 && length <= 128) {
+        len += 1;
+      } else {
+        len += 2;
+      }
+    }
+    return len;
+  },
+  addressInput(e) {
+    var val = e.detail.value;
+    var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030|\uFFFD/ig;
+    var regStr2 = /^ +| +$/g
+    console.log('escape', escape(val));
+    if (regStr.test(val)) {
+      val = val.replace(regStr, '')
+      wx.showToast({
+        title: '不支持表情填写',
+        icon: 'none'
+      })
+    }
+    if (regStr2.test(val)) {
+      val = val.replace(regStr2, '')
+    }
+    this.setData({
+      Addressee: val
     })
-  }
-  if (regStr2.test(val)) {
-    val = val.replace(regStr2, '')
-  }
-  this.setData({
-    Addressee: val
-  })
-},
-sendInput(e){
-  var val = e.detail.value;
-  var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030|\uFFFD/ig;
-  var regStr2 = /^ +| +$/g
-  if (regStr.test(val)) {
-    val = val.replace(regStr, '')
-    wx.showToast({
-      title: '不支持表情填写',
-      icon: 'none'
+  },
+  sendInput(e) {
+    var val = e.detail.value;
+    var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030|\uFFFD/ig;
+    var regStr2 = /^ +| +$/g
+    if (regStr.test(val)) {
+      val = val.replace(regStr, '')
+      wx.showToast({
+        title: '不支持表情填写',
+        icon: 'none'
+      })
+    }
+    if (regStr2.test(val)) {
+      val = val.replace(regStr2, '')
+    }
+    this.setData({
+      sender: val
     })
-  }
-  if (regStr2.test(val)) {
-    val = val.replace(regStr2, '')
-  }
-  this.setData({
-    sender: val
-  })
-},
+  },
   addressee(e) {
     console.log(e.detail.value);
     this.setData({
@@ -201,12 +266,14 @@ sendInput(e){
     var postCard_url = this.data.imgUrls[currentIndex].url
     var color = this.data.imgUrls[currentIndex].color;
     var imgName = this.data.imgUrls[currentIndex].name;
+    var model_type = this.data.imgUrls[currentIndex].model_type;
     this.setData({
       currentIndex: currentIndex,
       mainbg: mainbg,
       color: color,
       postCard_url: postCard_url,
-      imgName: imgName
+      imgName: imgName,
+      model_type: model_type
     })
   },
   step_btn() {
@@ -235,9 +302,10 @@ sendInput(e){
     wx.navigateTo({
       url: '../order/order?post_bg=' + that.data.postCard_url +
         "&Addressee=" + that.data.Addressee +
-        "&areaVal=" + that.data.areaVal + "&sender=" + that.data.sender +
+        "&areaVal=" + that.data.areaValRel + "&sender=" + that.data.sender +
         "&selAddress=" + that.data.selAddress +
-        "&currentIndex=" + that.data.currentIndex + "&imgName=" + that.data.imgName
+        "&currentIndex=" + that.data.currentIndex + "&imgName=" + that.data.imgName +
+        "&model_type=" + that.data.model_type
     })
   },
   /**

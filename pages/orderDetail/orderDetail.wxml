@@ -176,7 +176,7 @@
   <view  class='noResult gray-9 ft12 column cen-center'>
       <image class='resultImage' src='../../images/noResult.png'></image>
       <text class='tipResult gray-6 ft16'>您还没有订单哦</text>
-      <text>可以去看看有没有想买的</text>
+      <text>点击底部“+”号按钮制作明信片</text>
   </view>
   </block>
   <block wx:else>
