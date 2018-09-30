@@ -9,7 +9,8 @@ Page({
     cardActive:true,
     orderActive:false,
     getUserInfo:false,
-    picture_list:[]
+    picture_list:[],
+    sharebtn:false
   },
 
   /**
@@ -82,7 +83,7 @@ Page({
 
   //主动获取用户信息权限
   onGotUser(){
-    utils.throttle(this.onGotUserInfo(arguments),500);
+    utils.throttle(this.onGotUserInfo(arguments),800);
   },
   onGotUserInfo: function (e) {
     let userInfo = e[0].detail.userInfo;
@@ -127,8 +128,7 @@ Page({
         "params": {
           "nick":app.globalData.nickName,
           "face": app.globalData.avatarUrl,
-          "sex":app.globalData.gender === 1 ? '男':'女',
-          "city":app.globalData.province+app.globalData.city+app.globalData.country
+          "sex":app.globalData.gender
         }
       }
       utils.http(url, (dataStr) => {
@@ -239,7 +239,67 @@ Page({
   onReachBottom: function () {
 
   },
-
+  loyer(){
+    this.setData({
+      sharebtn:false
+    })
+  },
+  loyerbtn(){
+    var that = this;
+    if(!app.globalData.isConnected || app.globalData.networkType == 'none'){
+      wx.showToast({
+        title: '网络异常',
+        icon: 'none'
+      })
+      return false;
+    }
+    wx.showLoading({
+      title: '进行中...',
+      mask: true
+    })
+    var imgSrc = "https://oss4liview.moji.com/2018/09/30/2b69bd3f59f61d7bbb6a1a4daaa4f45a.jpg"
+    wx.downloadFile({
+      url: imgSrc,
+      success: function(res) {
+        console.log(res); //图片保存到本地
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: function(data) {
+            wx.hideLoading();
+            wx.showToast({
+              title:'图片已保存到相册'
+            })
+            that.setData({
+              sharebtn:false
+            })
+          },
+          fail: function(err) {
+            wx.hideLoading();
+            console.log(err);
+            if (err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+              // console.log('打开设置窗口')
+              wx.openSetting({
+                success(res) {
+                  console.log(res)
+                  res.authSetting = {
+                    'scope.writePhotosAlbum': true
+                  }
+                }
+              })
+            }
+            that.setData({
+              sharebtn:false
+            })
+          }
+        })
+      }
+    })
+  },
+  sharebtn(){
+    this.setData({
+      sharebtn:true
+    })
+  },
   /**
    * 用户点击右上角分享
    */
@@ -249,7 +309,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '多久没寄明信片了？新用户首单仅1.9元',
+      title: '多久没寄明信片了？国庆期间新用户首单仅1.9元',
       imageUrl: '../../images/share.jpg',
       path: '/pages/home/home'
     }

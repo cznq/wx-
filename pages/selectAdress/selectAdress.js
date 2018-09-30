@@ -99,7 +99,7 @@ Page({
       title: '上传中',
     })
     const uploadTask = wx.uploadFile({ //上传cut_imgage
-      url: 'https://snsup.moji.com/snsupload/upload/json/upload', //http://snsforum.mojitest.com/snsupload/upload/json/upload
+      url: app.globalData.baseUrlTuploadFile, //
       filePath: _that.data.cut_image,
       name: 'image',
       header: {

@@ -35,8 +35,11 @@ Page({
     cut_image: ''
 
   },
-  // 选择地址
   bindChooseAddr() {
+    utils.throttle(this.bindChooseAddrM(),1000);
+  },
+  // 选择地址
+  bindChooseAddrM() {
     if(!app.globalData.isConnected || app.globalData.networkType == 'none'){
       wx.showToast({
         title: '网络异常',
@@ -59,6 +62,12 @@ Page({
       },
       fail(res) {
         console.log('res', res);
+        if (res.errMsg =='chooseAddress:cancel') {
+          that.setData({
+            chooseAddr: false
+          })
+          return false
+        }
         wx.getSetting({
           success(res) {
             if (!res.authSetting['scope.address']) {
@@ -182,8 +191,7 @@ Page({
         "params": {
           "nick":app.globalData.nickName,
           "face": app.globalData.avatarUrl,
-          "sex":app.globalData.gender === 1 ? '男':'女',
-          "city":app.globalData.province+app.globalData.city+app.globalData.country
+          "sex":app.globalData.gender,
         }
       }
       utils.http(url, (dataStr) => {
@@ -229,7 +237,7 @@ Page({
         postcard_content: _that.data.areaVal, //明信片上的寄语
         receive_name: _that.data.addressName, //收件人姓名
         receive_mobile: _that.data.addressPhone, //收件人电话
-        receive_city_name: _that.data.cityName, //收件人城市
+        receive_city_name: _that.data.provinceName+_that.data.cityName+_that.data.countyName, //收件人城市
         receive_address: _that.data.addressDetails, //收件人详细地址
         send_mobile: '', //发送人电话
         send_name: '', //发送人姓名

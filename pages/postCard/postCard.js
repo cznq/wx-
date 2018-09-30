@@ -152,26 +152,24 @@ Page({
       fistLine = this.cut_str(val, 26);
       secendLine = val.split(fistLine)[1];
       areaValRel = fistLine + '\n' + secendLine;
-
-      this.setData({
-        areaValRel:areaValRel
-      })
       console.log('secendLine', secendLine);
       console.log('areaValRel', areaValRel);
     }
     if (valLen > 52) {
       var one = this.cut_str(val, 52);
+
+      fistLine = this.cut_str(one, 26);
+      secendLine = one.split(fistLine)[1]
       thirdLine = val.split(one)[1];
+      console.log('one',one);
       console.log('fistLine',fistLine);
       console.log('secendLine', secendLine);
       console.log('thirdLine',thirdLine);
-      areaValRel = fistLine + '\n' + secendLine + '\n' + thirdLine
-      this.setData({
-        areaValRel:areaValRel
-      })
+      areaValRel = fistLine + '\n' + secendLine + '\n' + thirdLine;
       console.log('areaValRel',areaValRel);
     }
     this.setData({
+      areaValRel:areaValRel,
       areaVal: val
     })
   },

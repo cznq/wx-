@@ -5,7 +5,16 @@
 </block>
 <view class='padding50'></view>
 
+<view catchtap='loyer' wx:if='{{sharebtn}}' class="loyer">
+  <view class="loyerview">
+    <image class='loyerinstr' src='../../images/loyerinstr.png'></image>
+    <image catchtap="loyerbtn" class='loyerbtn' src='../../images/loyerbtn.png'></image>
+  </view>
+</view>
+
+
 <view class="buttom row cen-space">
+  <image catchtap='sharebtn' class='sharebtn' src='../../images/sharebtn.png'></image>
   <view bindtap='cardActive' class="postCard column cen-center">
     <image  class='cardimg' src='../../images/order.png' />
     <!-- <image wx:if='{{!cardActive}}' class='cardimg' src='../../images/npost_card.png' /> -->

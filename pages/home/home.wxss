@@ -13,6 +13,41 @@
   padding:0 90rpx;
   box-sizing: border-box;
 }
+.sharebtn{
+  position: absolute;
+  top:-160rpx;
+  right:0;
+  width:192rpx;
+  height:96rpx;
+}
+.loyer{
+  position: fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  top:0;
+  background: rgba(0,0,0,.5);
+  z-index: 99
+}
+.loyerview{
+  position: absolute;
+  left:50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+  border-radius: 4rpx;
+  width:572rpx;
+  height:auto;
+  background: transparent;
+}
+.loyerinstr{
+  width:572rpx;
+  height:648rpx;
+}
+.loyerbtn{
+  margin-top:10rpx;
+  width:572rpx;
+  height:91rpx;
+}
 @media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
     .buttom {
         height:164rpx;

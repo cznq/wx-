@@ -85,10 +85,12 @@ App({
     isConnected:false,
     networkType:'none',
     userInfo: null,
-    baseUrl: 'http://192.168.1.232:8883/api/',
-    baseUrlT: 'https://uc.api.moji.com/mapi/',
-    baseUrlPost: 'http://192.168.1.232:8886/postcard/',
-    baseUrlTpost: 'https://pcd.api.moji.com/',
+    baseUrlT: 'http://192.168.1.232:8883/api/',//登陆接口
+    baseUrl: 'https://uc.api.moji.com/mapi/',//登陆接口线上接口
+    baseUrlTpost: 'http://192.168.1.232:8886/postcard/',//明信片接口
+    baseUrlPost: 'https://pcd.api.moji.com/',//明信片线上接口
+    baseUrlTuploadFile:'http://snsforum.mojitest.com/snsupload/upload/json/upload',//上传接口
+    baseUrluploadFile:'https://snsup.moji.com/snsupload/upload/json/upload',//上传线上接口
     language: '',
     platform: '',
     model:'',
