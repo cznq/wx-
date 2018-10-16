@@ -42,6 +42,7 @@ page{
 input,button,select,textarea{outline:none}
 textarea{resize:none}
 .textarea{
+  display: block;
   position: absolute;
   top:142rpx;
   left:67rpx;
@@ -49,10 +50,13 @@ textarea{resize:none}
   height:180rpx;
   line-height: 55rpx;
   color:#fff;
+  word-wrap:break-word;
+  white-space:pre-wrap;
   /* border:1px solid blue; */
   font-size: 28rpx;
 }
 .textareamix{
+  display: block;
   position: absolute;
   top:142rpx;
   left:67rpx;
@@ -60,6 +64,8 @@ textarea{resize:none}
   height:180rpx;
   line-height: 55rpx;
   color:#fff;
+  word-wrap:break-word;
+  white-space:pre-wrap;
   /* border:1px solid blue; */
   font-size: 28rpx;
 }
@@ -71,6 +77,8 @@ textarea{resize:none}
   height:180rpx;
   line-height: 55rpx;
   color:#fff;
+  word-wrap:break-word;
+  white-space:pre-wrap;
   /* border:1px solid yellow; */
   font-size: 28rpx;
 }

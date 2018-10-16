@@ -60,9 +60,13 @@ Page({
       common: {
         'snsid': app.globalData.userId,
         'sid': app.globalData.session_id,
-        'platform': platform,
         'uid': 0,
-        "language": "CN"
+        "platform": app.globalData.platform,
+        "language": 'CN',
+        "device": app.globalData.brand,
+        "os_version": app.globalData.system + "-" + app.globalData.version,
+        "width": app.globalData.width,
+        "height": app.globalData.height,
       },
       params: {}
     }
@@ -140,13 +144,15 @@ Page({
         icon: 'none'
       })
     }
+    //匹配这些中文标点符号 。 ？ ！ ， 、 ； ： “ ” ‘ ' （ ） 《 》 〈 〉 【 】 『 』 「 」 ﹃ ﹄ 〔 〕 … — ～ ﹏ ￥
+ // var reg = /[\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5]/;
     var valLen = this.getByteLen(val);
     console.log('valLen', valLen);
     if (valLen <= 26) { //第一行
       this.setData({
         areaValRel: val
       })
-      console.log('this.data.areaValRel',this.data.areaValRel);
+      console.log('第一行areaValRel',this.data.areaValRel);
     }
     if (valLen > 26 && valLen <= 52) { //第二行
       fistLine = this.cut_str(val, 26);
@@ -168,6 +174,7 @@ Page({
       areaValRel = fistLine + '\n' + secendLine + '\n' + thirdLine;
       console.log('areaValRel',areaValRel);
     }
+    console.log('input',val);
     this.setData({
       areaValRel:areaValRel,
       areaVal: val
@@ -175,7 +182,6 @@ Page({
   },
   cut_str(str, len, end = 0) {
     var char_length = 0;
-    if (end == 0) {
       for (var i = 0; i < str.length; i++) {
         var son_str = str.charAt(i);
         encodeURI(son_str).length > 2 ? char_length += 2 : char_length += 1;
@@ -187,8 +193,6 @@ Page({
           return str
         }
       }
-    }
-
   },
   getByteLen(val) {
     var len = 0;
@@ -246,7 +250,7 @@ Page({
     })
   },
   areaVal(e) {
-    console.log(e.detail.value);
+    console.log("失去焦点后",e.detail.value);
     this.setData({
       areaVal: e.detail.value
     })

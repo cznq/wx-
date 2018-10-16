@@ -6,9 +6,17 @@ App({
     var _that = this;
     try {
       var res = wx.getSystemInfoSync();
+      if (res.platform =='ios') {
+        res.platform = 'iPhone'
+      }
       _that.globalData.platform = res.platform;
       _that.globalData.language = res.language;
-      _that.globalData.model = res.model;
+      _that.globalData.model = res.model;//手机型号
+      _that.globalData.system = res.system;//操作系统版本
+      _that.globalData.version = res.version;//微信版本号
+      _that.globalData.width = res.screenWidth;//屏幕宽度
+      _that.globalData.height = res.screenHeight;//屏幕高度
+      _that.globalData.brand = res.brand;//手机品牌
       console.log('获取设备信息', res);
     } catch (e) {
       console.log('获取系统信息失败');
@@ -85,15 +93,20 @@ App({
     isConnected:false,
     networkType:'none',
     userInfo: null,
-    baseUrlT: 'http://192.168.1.232:8883/api/',//登陆接口
-    baseUrl: 'https://uc.api.moji.com/mapi/',//登陆接口线上接口
-    baseUrlTpost: 'http://192.168.1.232:8886/postcard/',//明信片接口
-    baseUrlPost: 'https://pcd.api.moji.com/',//明信片线上接口
-    baseUrlTuploadFile:'http://snsforum.mojitest.com/snsupload/upload/json/upload',//上传接口
-    baseUrluploadFile:'https://snsup.moji.com/snsupload/upload/json/upload',//上传线上接口
+    baseUrl: 'http://192.168.1.232:8883/api/',//登陆接口
+    baseUrlT: 'https://uc.api.moji.com/mapi/',//登陆接口线上接口
+    baseUrlPost: 'http://192.168.1.232:8886/postcard/',//明信片接口
+    baseUrlTpost: 'https://pcd.api.moji.com/',//明信片线上接口
+    baseUrluploadFile:'http://snsforum.mojitest.com/snsupload/upload/json/upload',//上传接口
+    baseUrlTuploadFile:'https://snsup.moji.com/snsupload/upload/json/upload',//上传线上接口
     language: '',
     platform: '',
     model:'',
+    version:'',
+    system:'',
+    width:'',
+    height:'',
+    brand:'',
     userId: '',
     openId: '',
     session_id: '',
@@ -113,6 +126,8 @@ App({
     nickName: "",
     province: "",
     order_no:'',
+    postcard_picture_url:'',//上传到服务器端原图
+    originalImage:'',//选择原图
     original_image:''//本地切图
   }
 })

@@ -48,11 +48,11 @@ page{
   height:190rpx;
 }
 .middle .order_image{
-  width:196rpx;
-  height:128rpx;
+  width:200rpx;
+  height:136rpx;
 }
 .middle .right_text{
-  padding-left: 41rpx;
+  padding-left: 31rpx;
 }
 .middle .middle_address{
   padding-top:16rpx;

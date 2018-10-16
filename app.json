@@ -6,7 +6,8 @@
     "pages/postCard/postCard",
     "pages/order/order",
     "pages/orderDetail/orderDetail",
-    "pages/payComplete/payComplete"
+    "pages/payComplete/payComplete",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",

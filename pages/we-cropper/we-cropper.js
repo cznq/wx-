@@ -683,7 +683,7 @@ function methods () {
     switch (ARG_TYPE) {
       case '[object Object]':
         var ref = args[0];
-    var quality = ref.quality; if ( quality === void 0 ) quality = 10;
+    var quality = ref.quality; if ( quality === void 0 ) quality = 1;
 
         if (typeof (quality) !== 'number') {
           console.error(("quality：" + quality + " is invalid"));
@@ -698,6 +698,8 @@ function methods () {
           height: height,
           destWidth: width * quality / (deviceRadio * 10),
           destHeight: height * quality / (deviceRadio * 10),
+					quality: 1,
+					fileType: 'png',
           success: function success (res) {
             isFunction(fn) && fn.call(self, res.tempFilePath);
           },
@@ -706,14 +708,17 @@ function methods () {
           }
         }); break
       case '[object Function]':
+			// console.log(33333333333);
         wx.canvasToTempFilePath({
           canvasId: id,
           x: x,
           y: y,
           width: width,
           height: height,
-          destWidth: width / deviceRadio,
-          destHeight: height / deviceRadio,
+          destWidth: width * 3,
+          destHeight: height * 3,
+					fileType: 'png',
+					quality: 1,
           success: function success (res) {
             isFunction(fn) && fn.call(self, res.tempFilePath);
           },

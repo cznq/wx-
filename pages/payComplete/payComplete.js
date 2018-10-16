@@ -78,7 +78,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '多久没寄明信片了？国庆期间新用户首单仅1.9元',
+      title: '好久不见！我给你寄了张明信片',
       imageUrl: '../../images/share.jpg',
       path: '/pages/home/home'
     }

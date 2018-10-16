@@ -1,0 +1,12 @@
+.textarea{
+  display: block;
+
+  width:158rpx;
+  height:180rpx;
+  line-height: 55rpx;
+  color:black;
+  white-space:normal;
+  word-wrap:break-word;
+  border:1px solid blue;
+  font-size: 28rpx;
+}

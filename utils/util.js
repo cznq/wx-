@@ -147,6 +147,25 @@ function throttle(method, mustRunDelay) {
         }
     }
 }
+function howSize(limit){ //图片尺寸
+  var size = '';
+  if(limit  <  1024){    //小于0.1KB，则转化成B
+    size = limit.toFixed(0) + '-' + 'B'
+  }else if(limit <  1024 *1024){ //小于0.1MB，则转化成KB
+    size = (limit / 1000).toFixed(0) + '-' + 'KB'
+  }else if(limit <  1024 *1024 *1024){ //小于0.1GB，则转化成MB
+    size = (limit / (1024 *1024)).toFixed(1) + '-' +  'MB'
+  }else{                               //其他转化成GB
+      size = (limit/(1024 * 1024 * 1024)).toFixed(0) + '-' +  "GB"
+  }
+   var sizeStr = size + "";                            //转成字符串
+   var index = sizeStr.indexOf(".");                    //获取小数点处的索引
+   var dou = sizeStr.substr(index + 1 ,2)            //获取小数点后两位的值
+   if(dou == "00"){                                //判断后两位是否为00，如果是则删除00
+       return sizeStr.substring(0, index) +'-'+ sizeStr.substr(index + 3, 2)
+   }
+  return size
+}
 
 
 module.exports = {
@@ -155,5 +174,6 @@ module.exports = {
   http,
   mHttp,
   Md5http,
-  throttle
+  throttle,
+  howSize
 }

@@ -3,6 +3,7 @@ import WeCropper from '../we-cropper/we-cropper.js'
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const app = getApp();
+const utils = require('../../utils/util.js');
 var height = 0;
 // 兼容iphoneX
 if (device.pixelRatio ===3 && device.screenHeight === 812 && device.screenWidth === 375) {
@@ -23,11 +24,7 @@ Page({
     right: 500,
     bottom: 766,
     left: 0,
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
-    ],
+    imgUrls: [],
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
@@ -77,6 +74,8 @@ Page({
               wx.getImageInfo({ //获取图信息
                 src: src,
                 success(res) {
+                  console.log('图片宽度',res.width);
+                    console.log('图片高度',res.height);
                   app.globalData.postcard_picture_width = res.width
                   app.globalData.postcard_picture_height = res.height
                 }
@@ -106,7 +105,32 @@ Page({
       sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
+        var imageSize = res.tempFiles[0].size;
+        imageSize = utils.howSize(imageSize);
+        console.log('imageSize', imageSize);
+        var numSize = imageSize.split('-')[0];
+        var unitSize = imageSize.split('-')[1];
+        switch (unitSize) {
+          case 'B':
+            wx.showToast({
+              title: '图片质量太低请上传更高清晰度的图片',
+              icon: 'none'
+            })
+            return false
+            break;
+          case 'KB':
+            if (parseInt(numSize) < 300) {
+              wx.showToast({
+                title: '图片质量太低请上传更高清晰度的图片',
+                icon: 'none'
+              })
+              return false
+            }
+            break;
+          default:
+        }
         const src = res.tempFilePaths[0];
+        app.globalData.originalImage = src;
         //  获取裁剪图片资源后，给data添加src属性及其值
         wx.getImageInfo({
           src: res.tempFilePaths[0],
@@ -163,6 +187,7 @@ Page({
     self.showCavs();
     console.log('options.src', options.src);
     if (options.src) { //首次加载图片
+      app.globalData.originalImage = options.src;
       wx.getImageInfo({
         src: options.src,
         success: function(res) {

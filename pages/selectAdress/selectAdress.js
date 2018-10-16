@@ -9,7 +9,7 @@ Page({
   data: {
     cut_image: '',
     original_image: '',
-    imgdir: '0',//图片方向0为横向
+    imgdir: '0', //图片方向0为横向
     cityName: '',
     address_photo: false,
     progress: ''
@@ -78,7 +78,7 @@ Page({
   },
   querySubmit() {
     var _that = this;
-    if(!app.globalData.isConnected || app.globalData.networkType == 'none'){
+    if (!app.globalData.isConnected || app.globalData.networkType == 'none') {
       wx.showToast({
         title: '网络异常',
         icon: 'none'
@@ -94,6 +94,7 @@ Page({
     }
     console.log('cut_imgage', _that.data.cut_image);
     var filename = _that.data.cut_image.split('.');
+    var origImafilename = app.globalData.originalImage.split('.');
     console.log('filename.length', filename[filename.length - 1]);
     wx.showLoading({
       title: '上传中',
@@ -110,11 +111,40 @@ Page({
       },
       formData: {},
       success: function(res) {
-        console.log('上传cut_image完成',res);
-        wx.hideLoading();
-        var data = JSON.parse(res.data);
+        console.log('上传cut_image完成', res);
+        //上传原图
+        const uploadTask = wx.uploadFile({ //上传cut_imgage
+          url: app.globalData.baseUrlTuploadFile, //
+          filePath: app.globalData.originalImage,
+          name: 'image',
+          header: {
+            'snsid': app.globalData.userId,
+            'sid': app.globalData.session_id,
+            'filename': 'image.' + origImafilename[origImafilename.length - 1],
+            'platform': app.globalData.platform
+          },
+          formData: {},
+          success: function(res) {
+            console.log('上传原图完成', res);
 
+            wx.hideLoading();
+            var data = JSON.parse(res.data);
+
+            if (data.code == 0) {
+              app.globalData.postcard_picture_url = data.path;
+              console.log('app.globalData.postcard_picture_url', app.globalData.postcard_picture_url);
+            }
+          },
+          fail: function(e) {
+            console.log('上传原图失败');
+            wx.hideLoading();
+            console.log(e);
+          }
+        })
+        //上传原图
+        var data = JSON.parse(res.data);
         if (data.code == 0) {
+          wx.hideLoading();
           app.globalData.postcard_front_url = data.path;
           wx.redirectTo({
             url: '../postCard/postCard?cityName=' + _that.data.cityName
@@ -138,7 +168,7 @@ Page({
     })
 
   },
-  loyerbg: function(){
+  loyerbg: function() {
     return false;
   },
   /**
@@ -172,8 +202,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
-  },
+  onPullDownRefresh: function() {},
 
   /**
    * 页面上拉触底事件的处理函数

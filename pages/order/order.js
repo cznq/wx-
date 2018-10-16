@@ -186,7 +186,11 @@ Page({
           "snsid":app.globalData.userId,
           "uid": 0, //先写死--
           "platform": app.globalData.platform,
-          "language": app.globalData.language
+          "language": 'CN',
+          "device": app.globalData.brand,
+          "os_version": app.globalData.system + "-" + app.globalData.version,
+          "width": app.globalData.width,
+          "height": app.globalData.height,
         },
         "params": {
           "nick":app.globalData.nickName,
@@ -226,9 +230,13 @@ Page({
       common: {
         'snsid': app.globalData.userId,
         'sid': app.globalData.session_id,
-        'platform': platform,
         'uid': 0,
-        "language": "CN"
+        "platform": app.globalData.platform,
+        "language": 'CN',
+        "device": app.globalData.brand,
+        "os_version": app.globalData.system + "-" + app.globalData.version,
+        "width": app.globalData.width,
+        "height": app.globalData.height
       },
       params: {
         postcard_receive_name: _that.data.AddreName, //明信片上的接收人
@@ -242,7 +250,7 @@ Page({
         send_mobile: '', //发送人电话
         send_name: '', //发送人姓名
         receive_msg_flag: '',
-        postcard_picture_url: '', //明信片原图
+        postcard_picture_url: app.globalData.postcard_picture_url, //明信片原图
         postcard_picture_type: app.globalData.postcard_picture_type, //	0:横图 1:竖图
         postcard_picture_width: app.globalData.postcard_picture_width, //图片宽度
         postcard_picture_height: app.globalData.postcard_picture_height, //图片高度
