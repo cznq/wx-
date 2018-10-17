@@ -1,4 +1,11 @@
 <import src="../we-cropper/we-cropper.wxml"/>
+<!-- 新增canvas -->
+<canvas
+        class="targetCtx"
+        style="width:{{canvas2W}}px;height:{{canvas2H}}px;"
+        canvas-id="{{targetid}}">
+</canvas>
+  <!-- 新增canvas -->
 <view class="cropper-wrapper">
   <template wx:if='{{is_chooseimg}}' is="we-cropper" data="{{...cropperOpt}}"/>
   <image wx:if='{{!is_chooseimg}}' src='{{fixtext}}' class='fix' bindtap='chooseImage'></image>

@@ -9,6 +9,7 @@ App({
       if (res.platform =='ios') {
         res.platform = 'iPhone'
       }
+      _that.globalData.pixelRatio = res.pixelRatio;
       _that.globalData.platform = res.platform;
       _that.globalData.language = res.language;
       _that.globalData.model = res.model;//手机型号
@@ -99,6 +100,7 @@ App({
     baseUrlTpost: 'https://pcd.api.moji.com/',//明信片线上接口
     baseUrluploadFile:'http://snsforum.mojitest.com/snsupload/upload/json/upload',//上传接口
     baseUrlTuploadFile:'https://snsup.moji.com/snsupload/upload/json/upload',//上传线上接口
+    pixelRatio:1,//设备像素比
     language: '',
     platform: '',
     model:'',

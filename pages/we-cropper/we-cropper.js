@@ -708,15 +708,12 @@ function methods () {
           }
         }); break
       case '[object Function]':
-			// console.log(33333333333);
         wx.canvasToTempFilePath({
           canvasId: id,
           x: x,
           y: y,
           width: width,
           height: height,
-          destWidth: width * 3,
-          destHeight: height * 3,
 					fileType: 'png',
 					quality: 1,
           success: function success (res) {

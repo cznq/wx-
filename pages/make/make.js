@@ -3,13 +3,14 @@ import WeCropper from '../we-cropper/we-cropper.js'
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const app = getApp();
+var pixelRatio = app.globalData.pixelRatio;
 const utils = require('../../utils/util.js');
 var height = 0;
 // 兼容iphoneX
-if (device.pixelRatio ===3 && device.screenHeight === 812 && device.screenWidth === 375) {
-   height = device.windowHeight - 84
-}else{
-   height = device.windowHeight - 50
+if (device.pixelRatio === 3 && device.screenHeight === 812 && device.screenWidth === 375) {
+  height = device.windowHeight - 84
+} else {
+  height = device.windowHeight - 50
 }
 
 
@@ -48,6 +49,9 @@ Page({
         height: 443
       }
     },
+    canvas2W: width * pixelRatio,
+    canvas2H: height * pixelRatio,
+    targetid: 'canvas2',
     imgdir: 0,
     is_chooseimg: true //选择图片
   },
@@ -64,41 +68,93 @@ Page({
     const self = this
     this.wecropper.getCropperImage((src) => { //获取裁剪图片
       if (src) {
-        wx.showModal({ //预览后提示
-          title: '提示',
-          content: '为了防止图片被过度剪裁，请确认您已预览图片且人像完整',
-          success: function(res) {
-            if (res.confirm) { //用户点击确认
-              console.log(src)
-              self.wecropper.pushOrign(src)
-              wx.getImageInfo({ //获取图信息
-                src: src,
-                success(res) {
-                  console.log('图片宽度',res.width);
-                    console.log('图片高度',res.height);
-                  app.globalData.postcard_picture_width = res.width
-                  app.globalData.postcard_picture_height = res.height
-                }
-              })
-              app.globalData.original_image = src;//获取本地切图
-              self.setData({
-                cut_image: src
-              })
-              wx.navigateTo({
-                url: '../selectAdress/selectAdress?src=' + src + '&imgdir=' + self.data.imgdir + '&original_image=' + self.data.original_image + '&cut_image=' + self.data.cut_image
-              })
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
-        })
-
-      } else {
-        console.log('获取图片地址失败，请稍后重试')
+        let {
+          imgLeft,
+          imgTop,
+          scaleWidth,
+          scaleHeight
+        } = this.wecropper // 获取图片在原画布坐标位置及宽高
+        let {
+          x,
+          y,
+          width,
+          height
+        } = this.wecropper.cut // 获取裁剪框位置及大小
+        const targetCtx = wx.createCanvasContext('canvas2') // 这里是目标canvas画布的id值
+        // 所有参数乘设备像素比
+        imgLeft = imgLeft * pixelRatio
+        imgTop = imgTop * pixelRatio
+        scaleWidth = scaleWidth * pixelRatio
+        scaleHeight = scaleHeight * pixelRatio
+        x = x * pixelRatio
+        y = y * pixelRatio
+        width = width * pixelRatio
+        height = height * pixelRatio
+        // console.log('imgLeft', imgLeft);
+        // console.log('imgTop', imgTop);
+        // console.log('scaleWidth', scaleWidth);
+        // console.log('scaleHeight', scaleHeight);
+        // console.log('x', x);
+        // console.log('y', y);
+        // console.log('width', width);
+        // console.log('height', height);
+        // 新增canvas
+        targetCtx.drawImage(app.globalData.originalImage, imgLeft, imgTop, scaleWidth, scaleHeight) // tmp代表被裁剪图片的临时路径
+    // 新增canvas
+    wx.showModal({ //预览后提示
+      title: '提示',
+      content: '为了防止图片被过度剪裁，请确认您已预览图片且人像完整',
+      success: function(res) {
+        if (res.confirm) { //用户点击确认
+          var tmpPath = '';
+          targetCtx.draw(false,function(){
+            wx.canvasToTempFilePath({
+              canvasId: 'canvas2',
+              x,
+              y,
+              width,
+              height,
+              fileType:'jpg',
+              success(res) {
+                 tmpPath = res.tempFilePath
+                // console.log('tmpPath',tmpPath)
+                app.globalData.original_image = tmpPath; //获取本地切图
+                  console.log('全局本地切图',app.globalData.original_image);
+                  self.wecropper.pushOrign(src);
+                  wx.getImageInfo({ //获取图信息
+                    src: src,
+                    success(res) {
+                      // console.log('图片宽度', res.width);
+                      // console.log('图片高度', res.height);
+                      app.globalData.postcard_picture_width = res.width
+                      app.globalData.postcard_picture_height = res.height
+                    }
+                  })
+                  self.setData({
+                    cut_image: src
+                  })
+                  wx.navigateTo({
+                    url: '../selectAdress/selectAdress?src=' + src + '&imgdir=' + self.data.imgdir + '&original_image=' + self.data.original_image + '&cut_image=' + self.data.cut_image
+                  })
+              }
+            })
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
     })
-  },
-  uploadTap() { //选择图片
+
+  } else {
+    console.log('获取图片地址失败，请稍后重试')
+    wx.showToast({
+      title:'canvas渲染图片失败请重新尝试',
+      icon:'none'
+    })
+  }
+})
+},
+uploadTap() { //选择图片
     const self = this
     wx.chooseImage({
       count: 1, // 默认9
@@ -119,7 +175,7 @@ Page({
             return false
             break;
           case 'KB':
-            if (parseInt(numSize) < 300) {
+            if (parseInt(numSize) < 50) {
               wx.showToast({
                 title: '图片质量太低请上传更高清晰度的图片',
                 icon: 'none'
@@ -135,8 +191,6 @@ Page({
         wx.getImageInfo({
           src: res.tempFilePaths[0],
           success: function(res) {
-            console.log(res.width);
-            console.log(res.height);
             if (res.width >= res.height) {
               console.log('横图');
               let cutx = 'cropperOpt.cut.x',
@@ -187,7 +241,7 @@ Page({
     self.showCavs();
     console.log('options.src', options.src);
     if (options.src) { //首次加载图片
-      app.globalData.originalImage = options.src;
+      app.globalData.originalImage = options.src;//用户选择的原图
       wx.getImageInfo({
         src: options.src,
         success: function(res) {
@@ -205,7 +259,7 @@ Page({
               [cutW]: 343,
               [cutH]: 233,
               imgdir: 0, //横图 0
-              original_image: options.src
+              original_image: options.src//本地切图原图
             })
             self.showCavs();
             self.wecropper.pushOrign(options.src);

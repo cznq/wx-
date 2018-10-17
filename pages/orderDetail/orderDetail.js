@@ -585,7 +585,7 @@ Page({
             return false
             break;
           case 'KB':
-            if (parseInt(numSize) < 300) {
+            if (parseInt(numSize) < 50) {
               wx.showToast({
                 title: '图片质量太低请上传更高清晰度的图片',
                 icon: 'none'

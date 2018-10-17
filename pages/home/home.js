@@ -91,7 +91,7 @@ Page({
   },
   onGotUserInfo: function(e) {
     let userInfo = e[0].detail.userInfo;
-    console.log('onGotUserInfo', e[0].detail.userInfo);
+    // console.log('onGotUserInfo', e[0].detail.userInfo);
     if (!userInfo) {
       this.setData({
         getUserInfo: true
@@ -104,7 +104,7 @@ Page({
         success(res) {
           var imageSize = res.tempFiles[0].size;
           imageSize = utils.howSize(imageSize);
-          console.log('imageSize', imageSize);
+          // console.log('imageSize', imageSize);
           var numSize = imageSize.split('-')[0];
           var unitSize = imageSize.split('-')[1];
           console.log(numSize, unitSize);
@@ -117,7 +117,7 @@ Page({
               return false
               break;
             case 'KB':
-              if (parseInt(numSize) < 300) {
+              if (parseInt(numSize) < 50) {
                 wx.showToast({
                   title: '图片质量太低请上传更高清晰度的图片',
                   icon: 'none'
@@ -235,7 +235,7 @@ Page({
             return false
             break;
           case 'KB':
-            if (parseInt(numSize) < 300) {
+            if (parseInt(numSize) < 50) {
               wx.showToast({
                 title: '图片质量太低请上传更高清晰度的图片',
                 icon: 'none'

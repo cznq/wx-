@@ -92,16 +92,23 @@ Page({
       })
       return false;
     }
-    console.log('cut_imgage', _that.data.cut_image);
-    var filename = _that.data.cut_image.split('.');
-    var origImafilename = app.globalData.originalImage.split('.');
-    console.log('filename.length', filename[filename.length - 1]);
+    // console.log('cut_imgage', _that.data.cut_image);
+    console.log('全局本地切图:',app.globalData.original_image);
+    if (app.globalData.original_image == '') {
+      wx.showToast({
+        title:'切图生成失败重新尝试',
+        icon:'none'
+      })
+    }
+    var filename = app.globalData.original_image.split('.');//切图
+    var origImafilename = app.globalData.originalImage.split('.');//原图
+    // console.log('filename.length', filename[filename.length - 1]);
     wx.showLoading({
       title: '上传中',
     })
     const uploadTask = wx.uploadFile({ //上传cut_imgage
       url: app.globalData.baseUrlTuploadFile, //
-      filePath: _that.data.cut_image,
+      filePath: app.globalData.original_image,//_that.data.cut_image
       name: 'image',
       header: {
         'snsid': app.globalData.userId,
@@ -132,20 +139,25 @@ Page({
 
             if (data.code == 0) {
               app.globalData.postcard_picture_url = data.path;
-              console.log('app.globalData.postcard_picture_url', app.globalData.postcard_picture_url);
+              console.log('原图返回', app.globalData.postcard_picture_url);
             }
           },
           fail: function(e) {
             console.log('上传原图失败');
             wx.hideLoading();
             console.log(e);
+            wx.showToast({
+              title:'原图上传超时',
+              icon:'icon'
+            })
           }
         })
-        //上传原图
+        //上传原图结束
         var data = JSON.parse(res.data);
         if (data.code == 0) {
           wx.hideLoading();
           app.globalData.postcard_front_url = data.path;
+          console.log('切图返回URL',app.globalData.postcard_front_url);
           wx.redirectTo({
             url: '../postCard/postCard?cityName=' + _that.data.cityName
           })
@@ -155,6 +167,10 @@ Page({
         console.log('上传cut_image失败');
         wx.hideLoading();
         console.log(e);
+        wx.showToast({
+          title:'上传超时,请再次尝试',
+          icon:'none'
+        })
       }
     })
     //上传进度
