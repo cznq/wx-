@@ -22,6 +22,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    app.aldstat.sendEvent('program_postcard_order_manage_show');//我的订单管理页展示一次+1
     if (!app.globalData.isConnected) {
       wx.showToast({
         title: '无网络',
@@ -96,6 +97,7 @@ Page({
     // 获取接口数据
   },
   touchTit: function(e) {
+    app.aldstat.sendEvent('program_postcard_order_manage_switch');//各tab切换一次+1
     let tag = e.target.dataset.tag;
     switch (tag) {
       case "all":
@@ -402,6 +404,7 @@ Page({
 
   },
   paybtn(e) {
+    app.aldstat.sendEvent('program_postcard_order_manage_pay');//在我的订单页，待付款的订单点击立即支付按钮一次+1
     var _that = this;
     console.log('e.currentTarget.dataset.index', e.currentTarget.dataset.index);
     var index = e.currentTarget.dataset.index;
@@ -482,6 +485,7 @@ Page({
     // 获取接口数据
   },
   delete_Ord(e) {
+    app.aldstat.sendEvent('program_postcard_order_delete_click');//点击删除订单一次+1
     var that = this;
     wx.showModal({ //预览后提示
       title: '提示',

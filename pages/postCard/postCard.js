@@ -40,7 +40,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    app.aldstat.sendEvent('program_postcard_opposite_show');//编辑反面页展示一次+1
     var phone = wx.getSystemInfoSync();  //调用方法获取机型    
     var that = this;
     if (phone.platform == 'ios') {   

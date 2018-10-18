@@ -91,6 +91,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    app.aldstat.sendEvent('program_postcard_order_show');//编辑订单页展示一次+1
     var that = this;
     console.log('that.globalData.platform', app.globalData.platform);
     that.setData({
@@ -214,6 +215,7 @@ Page({
         })
         return false;
       }
+      app.aldstat.sendEvent('program_postcard_order_pay_click');//点击立即下单一次+1
     // app.globalData.isConnected
     var _that = this;
     if (!_that.data.chooseAddr) {
@@ -280,6 +282,9 @@ Page({
           success: function(res) {
             console.log(res);
             console.log('成功');
+              app.aldstat.sendEvent('program_postcard_pay',{
+                '0':'支付成功'
+              });//支付成功
             wx.navigateTo({
               url: '../payComplete/payComplete?path=' + 'order'
             })
@@ -287,6 +292,9 @@ Page({
           fail: function(res) {
             console.log(res);
             console.log('失败');
+            app.aldstat.sendEvent('program_postcard_pay',{
+              '1':'支付失败'
+            });//支付成功
             if (app.globalData.platform == 'android') {
               _that.leLaunch()
             } else {

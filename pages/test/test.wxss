@@ -9,4 +9,5 @@
   word-wrap:break-word;
   border:1px solid blue;
   font-size: 28rpx;
+  box-sizing:border-box;
 }

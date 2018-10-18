@@ -19,6 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    app.aldstat.sendEvent('program_postcard_photo_location_show');//补充地址按钮展示一次+1
     app.globalData.postcard_picture_type = options.imgdir
     // wx.getImageInfo({
     //   src: options.src,
@@ -53,6 +54,7 @@ Page({
   //
   // },
   querySel() { //页面选择地址
+    app.aldstat.sendEvent('program_postcard_photo_location_click');//补充地址按钮展示一次+1
     this.setData({
       address_photo: true
     })
@@ -64,6 +66,7 @@ Page({
     })
   },
   titQuery() { //表头确认
+    app.aldstat.sendEvent('program_postcard_photo_use_location_click');//点击确认使用拍摄地址一次+1
     this.setData({
       address_photo: false
     })

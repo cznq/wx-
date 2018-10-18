@@ -65,6 +65,7 @@ Page({
     this.wecropper.touchEnd(e)
   },
   getCropperImage() { //生成图片
+    app.aldstat.sendEvent('program_postcard_front_click');//正面生成+1
     const self = this
     this.wecropper.getCropperImage((src) => { //获取裁剪图片
       if (src) {
@@ -106,6 +107,10 @@ Page({
       content: '为了防止图片被过度剪裁，请确认您已预览图片且人像完整',
       success: function(res) {
         if (res.confirm) { //用户点击确认
+          wx.showLoading({
+            title:'生成中…',
+            mask:true
+          })
           var tmpPath = '';
           targetCtx.draw(false,function(){
             wx.canvasToTempFilePath({
@@ -128,6 +133,7 @@ Page({
                       // console.log('图片高度', res.height);
                       app.globalData.postcard_picture_width = res.width
                       app.globalData.postcard_picture_height = res.height
+                      wx.hideLoading();
                     }
                   })
                   self.setData({
@@ -237,6 +243,7 @@ uploadTap() { //选择图片
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    app.aldstat.sendEvent('program_postcard_front_show');//订单按钮点击一次+1
     var self = this;
     self.showCavs();
     console.log('options.src', options.src);

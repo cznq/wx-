@@ -1,2 +1,2 @@
 
-<canvas style="width: 300px; height: 400px; border:1px solid red" canvas-id="firstCanvas" ></canvas>
+<canvas bindtouchstart='fz' style="width: 300px; height: 400px; border:1px solid red" canvas-id="firstCanvas" ></canvas>

@@ -14,35 +14,21 @@ Page({
   onLoad: function(options) {
     var that = this;
     const ctx = wx.createCanvasContext('firstCanvas')
-    wx.chooseImage({
-      count: 1,
-      success(res){
-        console.log('restempFile',res.tempFiles[0].path);
-        console.log('size',res.tempFiles[0].size);
-        var imageSize = res.tempFiles[0].size;
-        imageSize = that.howSize(imageSize);
-        console.log('imageSize',imageSize);
-      }
-    })
+    // wx.chooseImage({
+    //   count: 1,
+    //   success(res){
+    //     console.log('restempFile',res.tempFiles[0].path);
+    //     console.log('size',res.tempFiles[0].size);
+    //     var imageSize = res.tempFiles[0].size;
+    //     imageSize = that.howSize(imageSize);
+    //     console.log('imageSize',imageSize);
+    //   }
+    // })
+
   },
-  howSize(limit){
-    var size = '';
-    if(limit  <  1024){    //小于0.1KB，则转化成B
-      size = limit.toFixed(0) + '-' + 'B'
-    }else if(limit <  1024 *1024){ //小于0.1MB，则转化成KB
-      size = (limit / 1000).toFixed(0) + '-' + 'KB'
-    }else if(limit <  1024 *1024 *1024){ //小于0.1GB，则转化成MB
-      size = (limit / (1024 *1024)).toFixed(1) + '-' +  'MB'
-    }else{                               //其他转化成GB
-        size = (limit/(1024 * 1024 * 1024)).toFixed(0) + '-' +  "GB"
-    }
-     var sizeStr = size + "";                            //转成字符串
-     var index = sizeStr.indexOf(".");                    //获取小数点处的索引
-     var dou = sizeStr.substr(index + 1 ,2)            //获取小数点后两位的值
-     if(dou == "00"){                                //判断后两位是否为00，如果是则删除00
-         return sizeStr.substring(0, index) +'-'+ sizeStr.substr(index + 3, 2)
-     }
-    return size
+
+  fz(){
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

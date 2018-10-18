@@ -12,9 +12,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    app.aldstat.sendEvent('program_postcard_success_show');//支付成功页展示一次+1
   },
   backMain() {
+    app.aldstat.sendEvent('program_postcard_success_click',{
+      '2':'回到首页'
+    });//支付成功页展示一次+1
     this.setData({
       activeReturn:false
     })
@@ -72,6 +75,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function(res) {
+    app.aldstat.sendEvent('program_postcard_success_click',{
+      '1':'分享朋友'
+    });//支付成功页展示一次+1
     console.log('res',res);
     if (res.from === 'button') {
       // 来自页面内转发按钮

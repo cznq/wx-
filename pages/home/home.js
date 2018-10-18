@@ -17,6 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    app.aldstat.sendEvent('program_postcard_first_show');//宣传页展示一次+1v
     var _that = this
     app.getOpenid().then(function() {
       _that.setData({
@@ -90,6 +91,7 @@ Page({
     utils.throttle(this.onGotUserInfo(arguments), 800);
   },
   onGotUserInfo: function(e) {
+    app.aldstat.sendEvent('program_postcard_first_make_click');//宣传页制作按钮点击一次+1
     let userInfo = e[0].detail.userInfo;
     // console.log('onGotUserInfo', e[0].detail.userInfo);
     if (!userInfo) {
@@ -183,6 +185,7 @@ Page({
   cardActive() { //点击明信片
   },
   orderActive() { //点击订单
+    app.aldstat.sendEvent('program_postcard_first_order_click');//订单按钮点击一次+1
     wx.navigateTo({
       url: '../orderDetail/orderDetail'
     })
@@ -361,6 +364,7 @@ Page({
       // 来自页面内转发按钮
       console.log(res.target)
     }
+      app.aldstat.sendEvent('program_postcard_choice_share');//分享+1v
     return {
       title: '好久不见！我给你寄了张明信片',
       imageUrl: '../../images/share.jpg',
