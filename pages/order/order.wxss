@@ -186,3 +186,7 @@ page{
 button[plain]{
   border: none;
 }
+.addresseeName{
+  width: 140rpx;
+  height: 24rpx;
+}

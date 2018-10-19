@@ -22,7 +22,7 @@
   <image src='../../images/order-border.png' />
 </view>
 <view class='padding10'>
-  
+  <text class='addresseeName'>发件人姓名</text><input class='addressee' type="text"/>
 </view>
 <view class='intro column'>
   <text class='title gray-32 ft14'>墨迹时光邮局明信片</text>
