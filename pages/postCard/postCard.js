@@ -144,8 +144,6 @@ Page({
         icon: 'none'
       })
     }
-    //匹配这些中文标点符号 。 ？ ！ ， 、 ； ： “ ” ‘ ' （ ） 《 》 〈 〉 【 】 『 』 「 」 ﹃ ﹄ 〔 〕 … — ～ ﹏ ￥
- // var reg = /[\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5]/;
     var valLen = this.getByteLen(val);
     console.log('valLen', valLen);
     if (valLen <= 26) { //第一行
@@ -251,6 +249,47 @@ Page({
   },
   areaVal(e) {
     console.log("失去焦点后",e.detail.value);
+    // 新增css处理结果
+    areaValRel = this.data.areaValRel;
+    fistLine = areaValRel.split('\n')[0];
+    secendLine = areaValRel.split('\n')[1];
+    thirdLine = areaValRel.split('\n')[2];
+    if (secendLine != undefined) {//从在第二行
+      var secendsign = secendLine.substr(0,1);//第二行是否为标点
+      console.log('secendsign',secendsign);
+
+      //匹配这些中文标点符号 。 ？ ！ ， 、 ； ： “ ” ‘ ' （ ） 《 》 〈 〉 【 】 『 』 「 」 ﹃ ﹄ 〔 〕 … — ～ ﹏ ￥
+      var signReg = /[\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5]/;
+      if (signReg.test(secendsign)) {//第二行测试 是否第一个问标点
+        console.log('我是标点符号');
+        secendLine = secendLine.substr(1);
+        console.log('我是第二行');
+        areaValRel = fistLine + secendsign + '\n' + secendLine;
+        if (thirdLine != undefined) {
+         areaValRel = fistLine + secendsign + '\n' + secendLine + '\n' + thirdLine;
+        }
+        this.setData({
+          areaValRel:areaValRel
+        })
+      }
+      if (thirdLine != undefined) {
+       var thirdLinesign = thirdLine.substr(0,1);//第三行是否为标点
+           if (signReg.test(thirdLinesign)) {//第三行测试 是否第一个问标点
+             thirdLine = thirdLine.substr(1);
+             areaValRel = fistLine + '\n' + secendLine + thirdLinesign + '\n' + thirdLine;
+           }
+      }
+      this.setData({
+        areaValRel:areaValRel
+      })
+    }
+
+    console.log('3333');
+    console.log('fistLine',fistLine);
+    console.log('secendLine', secendLine);
+    console.log('thirdLine',thirdLine);
+    console.log('areaValRel',areaValRel);
+    // 新增css处理结果
     this.setData({
       areaVal: e.detail.value
     })
