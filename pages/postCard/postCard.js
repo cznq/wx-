@@ -251,6 +251,10 @@ Page({
   },
   areaVal(e) {
     console.log("失去焦点后",e.detail.value);
+    // 新增css处理结果
+    var value = e.detail.value;
+    var vallengh = this.getByteLen(value);
+    // 新增css处理结果
     this.setData({
       areaVal: e.detail.value
     })
