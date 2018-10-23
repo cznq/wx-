@@ -21,6 +21,10 @@
 <view class="cutting">
   <image src='../../images/order-border.png' />
 </view>
+<view class='addresseeInfo padding10'>
+  <view class='row cen-start'><text class='addresseeName gray-32 ft14'>发件人姓名</text><input class='addresseeInput padding0-10 gray-32 ft14' type="text"/></view>
+  <view class='row cen-start marg10-top'><text class='addresseeName gray-32 ft14'>发件人电话</text><input class='addresseeInput padding0-10 gray-32 ft14' type="text"/></view>
+</view>
 <view class='intro column'>
   <text class='title gray-32 ft14'>墨迹时光邮局明信片</text>
   <text class='name gray-9 ft12'>颜色：{{imgName}}</text>

@@ -1,0 +1,55 @@
+/* pages/orderDetail2/orderDetail2.wxss */
+.loyer{
+  position: fixed;
+  left:0;
+  bottom:0;
+  top:0;
+  right:0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.contactWay{
+  position: absolute;
+  bottom:20rpx;
+  width: 90%;
+  height:362rpx;
+  box-sizing:border-box;
+}
+.contact1{
+  box-sizing:border-box;
+  width: 100%;
+  height: 114rpx;
+  padding:0 30rpx;
+  background: #fff;
+  border-radius:8rpx 8rpx 0 0;
+}
+.instrqq{
+  width: 60%;
+  height: 100%;
+}
+.qqtitleImage{
+  width:44rpx;
+  height:44rpx;
+}
+.instrbtnImage{
+  width:44rpx;
+  height:44rpx;
+}
+.contact2{
+  box-sizing:border-box;
+  width: 100%;
+  height: 114rpx;
+  padding:0 30rpx;
+  background: #fff;
+  border-radius:0 0 8rpx 8rpx;
+}
+.contact3{
+  box-sizing:border-box;
+  width: 100%;
+  height: 114rpx;
+  background: #fff;
+  border-radius: 8rpx;
+  color:#4294EA;
+  line-height: 114rpx;
+  text-align: center;
+  margin-top:20rpx;
+}

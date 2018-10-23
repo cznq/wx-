@@ -484,6 +484,12 @@ Page({
     }, reqbody);
     // 获取接口数据
   },
+  orderDetail2(e){
+    var ord_no = e.currentTarget.dataset.ord_no;
+    wx.navigateTo({
+      url:'../orderDetail2/orderDetail2?ord_no='+ord_no
+    })
+  },
   delete_Ord(e) {
     app.aldstat.sendEvent('program_postcard_order_delete_click');//点击删除订单一次+1
     var that = this;

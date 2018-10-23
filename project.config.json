@@ -33,14 +33,8 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 5,
 			"list": [
-				{
-					"id": -1,
-					"name": "selectAddress",
-					"pathName": "pages/selectAdress/selectAdress",
-					"query": ""
-				},
 				{
 					"id": -1,
 					"name": "postCard",
@@ -54,12 +48,6 @@
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "make",
-					"pathName": "pages/make/make",
-					"query": ""
-				},
-				{
 					"id": 4,
 					"name": "orderDetails",
 					"pathName": "pages/orderDetail/orderDetail",
@@ -67,14 +55,21 @@
 				},
 				{
 					"id": -1,
-					"name": "paySuccess",
-					"pathName": "pages/payComplete/payComplete",
+					"name": "test",
+					"pathName": "pages/test/test",
 					"query": ""
 				},
 				{
 					"id": -1,
-					"name": "test",
-					"pathName": "pages/test/test"
+					"name": "订单详情2",
+					"pathName": "pages/orderDetail2/orderDetail2",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "物流信息",
+					"pathName": "pages/expressInfo/expressInfo",
+					"query": ""
 				}
 			]
 		}

@@ -1,0 +1,15 @@
+<view class="title padding0-15 row cen-space">
+  <view class="column start-cen text ft14">
+    <text class='line-h25'>物流信息：<text>申通快递</text></text>
+    <text class='line-h25'>物流单号：<text>339816775009</text></text>
+    <view class='line-h25 row'>
+      发货时间：
+      <view class='row'>
+        <text>2018-08-20</text><text>15;15:29</text>
+      </view>
+    </view>
+  </view>
+  <view class="btn ft12">
+    复制
+  </view>
+</view>
