@@ -69,14 +69,14 @@ page{
   font-size: 32rpx;
 }
 .bottom .btn_ordetail{
-  width:160rpx;
+  width:120rpx;
   height:52rpx;
   text-align: center;
   line-height: 52rpx;
   border-radius: 8rpx;
   box-sizing: border-box;
   font-size: 24rpx;
-  border: 2rpx solid rgba(50,50,50,.3);
+  border: 1rpx solid rgba(50,50,50,.4);
   color:#323232;
 
 }

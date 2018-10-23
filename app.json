@@ -8,7 +8,8 @@
     "pages/orderDetail/orderDetail",
     "pages/payComplete/payComplete",
     "pages/test/test",
-    "pages/orderDetail2/orderDetail2"
+    "pages/orderDetail2/orderDetail2",
+    "pages/expressInfo/expressInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",

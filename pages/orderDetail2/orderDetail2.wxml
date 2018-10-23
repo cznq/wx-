@@ -1,2 +1,34 @@
-<!--pages/orderDetail2/orderDetail2.wxml-->
-<text>pages/orderDetail2/orderDetail2.wxml</text>
+<view class="loyer row cen-center">
+  <view class="contactWay">
+    <view class="contact1 row cen-space">
+      <view class="instrqq column start-cen">
+        <view class="qqtitle row cen-start">
+          <image src='../../images/order.png' class='qqtitleImage' />
+          <text class=' ft16 gray-32'>官方QQ群</text>
+        </view>
+        <view class="qqcontent">
+          <text class='ft14 gray-9'>群号:664907791</text>
+        </view>
+      </view>
+      <view class="instrbtn cen-end">
+        <image src='../../images/order.png' class='instrbtnImage' />
+      </view>
+    </view>
+    <view class="contact2 row cen-space">
+      <view class="instrqq column start-cen">
+        <view class="qqtitle">
+          <text class=' ft16 gray-32'>客服电话</text>
+        </view>
+        <view class="qqcontent">
+          <text class='ft14 gray-9'>工作日9:00-18:00</text>
+        </view>
+      </view>
+      <view class="instrbtn cen-end">
+        <image src='../../images/order.png' class='instrbtnImage' />
+      </view>
+    </view>
+    <view class="contact3 ft18">
+      取消
+    </view>
+  </view>
+</view>

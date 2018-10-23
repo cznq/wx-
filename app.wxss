@@ -236,6 +236,12 @@ page{
 .marg5-right {
   margin-right: 5px;
 }
+.margin_r15{
+  margin-right: 30rpx;
+}
+.margin_l15{
+  margin-left: 30rpx;
+}
 .marg5-top {
     margin-top: 5px;
 }
