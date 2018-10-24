@@ -1,3 +1,40 @@
+<view class="orderTitle row padding0-15">
+  <image class='orderTitleBg ' src='../../images/orderTitleBg.png' />
+
+  <view class="title_r column start-cen">
+    <text class='white ft16'>已发货</text>
+    <text class='white ft14'>物流信息：申通  3317684988950</text>
+  </view>
+  <view class="title_l row cen-end">
+    <view class="btn white ft12">复制</view>
+  </view>
+</view>
+<!-- title结束 -->
+<view class="white_bg padding15-left gray-6 ft14">
+  <view class="addressNav row cen-start padding15-right">
+  <image class='navImage' src='../../images/addressnav.png' />
+  <view class="navcontent column start-cen">
+    <view class='navName row cen-space'>
+      <text>收件人：王大陆</text>
+      <text>18829287373</text>
+    </view>
+    <view class='ft12'>收货地址：北京市朝阳区酒仙桥街路14号兆维华灯大厦A2区3门2层墨迹风云科技有限公司</view>
+  </view>
+  </view>
+  <view class="boxsiz_box row cen-end padding15-right">
+    <view class="addresseeInfo row cen-space">
+      <text>发件人：东东</text>
+      <text>13922389673</text>
+    </view>
+  </view>
+</view>
+<view class="white_bg">
+  
+</view>
+
+
+
+<!-- loyer -->
 <view class="loyer row cen-center">
   <view class="contactWay">
     <view class="contact1 row cen-space">

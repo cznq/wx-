@@ -192,13 +192,13 @@ page{
     padding-bottom: 10px;
 }
 .padding15 {
-    padding: 15px;
+    padding: 30rpx;
 }
 .padding15-left {
-    padding-left: 15px;
+    padding-left: 30rpx;
 }
 .padding15-right {
-    padding-right: 15px;
+    padding-right: 30rpx;
 }
 .padding0-5 {
     padding: 0 5px;
@@ -269,8 +269,12 @@ page{
 .marg10-bottom {
     margin-bottom: 10px;
 }
-
-
+.white_bg{
+  background: #fff;
+}
+.boxsiz_box{
+  box-sizing: border-box;
+}
 /* 0.5px border */
 .border_left05,
 .border_top05,
