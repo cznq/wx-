@@ -1,54 +1,114 @@
+<view wx:if='{{showView}}' class="showView">
 <view class="orderTitle row padding0-15">
   <image class='orderTitleBg ' src='../../images/orderTitleBg.png' />
 
   <view class="title_r column start-cen">
-    <text class='white ft16'>已发货</text>
-    <text class='white ft14'>物流信息：申通  3317684988950</text>
+    <text wx:if='{{order_status ===0}}' class='white ft16'>待付款</text>
+    <text wx:if='{{order_status ===1}}' class='white ft16'>已付款，待发货</text>
+    <text wx:if='{{order_status ===2}}' class='white ft16'>已失效</text>
+    <text wx:if='{{order_status ===3}}' class='white ft16'>已发货</text>
+    <text wx:if='{{order_status ===0}}' class='white ft14'>剩余支付时间：{{hours}}时{{minutes}}分{{seconds}}秒</text>
+    <text wx:if='{{order_status ===3}}' class='white ft14'>物流信息：{{ship_company}} {{ship_no}}</text>
   </view>
   <view class="title_l row cen-end">
-    <view class="btn white ft12">复制</view>
+    <view wx:if='{{order_status ===3}}' catchtap='copyShipId' class="btn white ft12">复制</view>
   </view>
 </view>
 <!-- title结束 -->
+<!-- 快递状态 -->
+<view wx:if='{{ship}}' catchtap='shipDetail' class="white_bg shipstart row cen-space">
+  <view class="startleft row cen-start">
+    <image class='start_image' src='../../images/shipstart.png'></image>
+    <view class="startText column start-cen">
+      <text class='ship_content ft14'>{{ship_status}}，{{ship_context}}</text>
+      <text class='ft12 gray-9'>{{ship_time}}</text>
+    </view>
+  </view>
+  <view  class="startright">
+    <image class='rightImage' src='../../images/jt.png'></image>
+  </view>
+</view>
 <view class="white_bg padding15-left gray-6 ft14">
-  <view class="addressNav row cen-start padding15-right">
+  <view class="addressNav row cen-start ">
   <image class='navImage' src='../../images/addressnav.png' />
   <view class="navcontent column start-cen">
     <view class='navName row cen-space'>
-      <text>收件人：王大陆</text>
-      <text>18829287373</text>
+      <text >收件人：{{receive_name}}</text>
+      <text >{{receive_mobile}}</text>
     </view>
-    <view class='ft12'>收货地址：北京市朝阳区酒仙桥街路14号兆维华灯大厦A2区3门2层墨迹风云科技有限公司</view>
+    <view class='ft12'>收货地址：{{receive_address}}</view>
   </view>
   </view>
   <view class="boxsiz_box row cen-end padding15-right">
     <view class="addresseeInfo row cen-space">
-      <text>发件人：东东</text>
-      <text>13922389673</text>
+      <text wx:if='{{send_name !=""}}'>发件人：{{send_name}}</text>
+      <view wx:if='{{send_name ==""}}'>收件人：<text class='gray-9'>未填写收件人</text></view>
+      <text wx:if='{{send_mobile !=""}}'>{{send_mobile}}</text>
+      <text class='gray-9' wx:if='{{send_mobile ==""}}'>未填写电话</text>
     </view>
   </view>
 </view>
-<view class="white_bg">
-  
+<view class="navtwo white_bg">
+  <view class="row marg10-bottom">
+  <view class="previewA">
+    <image class='front' src='../../images/front.png' />
+    <image class='frontImage' src='{{postcard_front_url}}' />
+  </view>
+  <view class="previewB">
+    <image class='front' src='../../images/back.png' />
+    <image class='frontImage' src='{{postcard_back_url}}' />
+  </view>
+  </view>
+  <view class="list gray-32 ft14 row cen-space">
+    <text>商品总价</text><text>￥{{total_fee}}</text>
+  </view>
+  <view wx:if='{{postage_fee !=0}}' class="list gray-32 ft14 row cen-space">
+    <text>运费</text><text>￥{{postage_fee}}</text>
+  </view>
+  <view class="list gray-32 ft14 row cen-space">
+    <text>实付款</text><text class='red2'>￥{{order_fee}}</text>
+  </view>
+</view>
+<view class="navthree white_bg">
+<view class="row cen-space">
+  <view class="orderInfo column start-cen">
+    <view class='row cen-start ft14 lin-25'><text class='gray-9'>订单编号：</text><text class='gray-3'>{{order_id}}</text></view>
+    <view class='row cen-start ft14 lin-25'><text class='gray-9'>下单时间：</text><text class='gray-3'>{{create_time}}</text></view>
+    <view wx:if='{{pay_type !=0}}' class='row cen-start ft14 lin-25'><text class='gray-9'>支付时间：</text><text class='gray-3'>{{pay_type}}</text></view>
+    <view class='row cen-start ft14 lin-25'><text class='gray-9'>支付方式：</text><text class='gray-3'>{{pay_type == 0? '微信':'支付宝'}}</text></view>
+  </view>
+  <view class="orderInfoCopy row start-end">
+    <view catchtap='copyOrderId' class="btn">复制</view>
+  </view>
+</view>
 </view>
 
-
-
+<view class="bottomBtn row">
+  <view catchtap='contact_custorm' class="lxKF ft12 gray-32 row cen-center">
+    <image class='lxkfimage' src='../../images/lxkf.png' />
+    <text>联系客服</text>
+  </view>
+  <view catchtap='keepMake' class="lxKF ft12 gray-32 row cen-center">
+    <image class='lxkfimage' src='../../images/jxmake.png' />
+    <text>继续制作</text>
+  </view>
+  <view class="cutLine"></view>
+</view>
 <!-- loyer -->
-<view class="loyer row cen-center">
-  <view class="contactWay">
+<view wx:if='{{kefu}}' class="loyer row cen-center">
+  <view class="contactWay {{kefu ? 'active':''}}">
     <view class="contact1 row cen-space">
       <view class="instrqq column start-cen">
         <view class="qqtitle row cen-start">
-          <image src='../../images/order.png' class='qqtitleImage' />
+          <image src='../../images/tj.png' class='qqtitleImage' />
           <text class=' ft16 gray-32'>官方QQ群</text>
         </view>
         <view class="qqcontent">
           <text class='ft14 gray-9'>群号:664907791</text>
         </view>
       </view>
-      <view class="instrbtn cen-end">
-        <image src='../../images/order.png' class='instrbtnImage' />
+      <view catchtap='copy_qq' class="instrbtn cen-end">
+        <image src='../../images/copy.png' class='instrbtnImage' />
       </view>
     </view>
     <view class="contact2 row cen-space">
@@ -60,12 +120,13 @@
           <text class='ft14 gray-9'>工作日9:00-18:00</text>
         </view>
       </view>
-      <view class="instrbtn cen-end">
-        <image src='../../images/order.png' class='instrbtnImage' />
+      <view catchtap='contactCusSer' class="instrbtn cen-end">
+        <image src='../../images/phone.png' class='instrbtnImage' />
       </view>
     </view>
-    <view class="contact3 ft18">
+    <view catchtap='cancelKF' class="contact3 ft18">
       取消
     </view>
   </view>
+</view>
 </view>

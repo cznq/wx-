@@ -33,7 +33,7 @@ page{
   background: #fff;
 }
 .orderInfo{
-  height:330rpx;
+  height:350rpx;
   box-sizing: border-box;
 }
 .orderInfo .title{
@@ -62,7 +62,7 @@ page{
   padding-top:10rpx;
 }
 .orderInfo .bottom{
-  height:64rpx;
+  height:88rpx;
 }
 .bottom .price{
   color:#FF973E;

@@ -484,6 +484,12 @@ Page({
     }, reqbody);
     // 获取接口数据
   },
+  keepShip(e){
+    var ord_no = e.currentTarget.dataset.ord_no;
+    wx.navigateTo({
+      url:'../expressInfo/expressInfo?ord_no='+ord_no
+    })
+  },
   orderDetail2(e){
     var ord_no = e.currentTarget.dataset.ord_no;
     wx.navigateTo({

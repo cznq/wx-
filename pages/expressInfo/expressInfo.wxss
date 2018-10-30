@@ -22,3 +22,33 @@
   line-height: 52rpx;
   text-align: center;
 }
+.content{
+  margin-top:40rpx;
+}
+.shipInfo{
+  overflow: hidden;
+}
+.shipInfo .sign{
+  width: 96rpx;
+}
+.shipInfo .shipContent{
+  width: 100%;
+  padding-bottom:40rpx;
+  box-sizing: border-box;
+  padding-right: 30rpx;
+}
+.mar_top_-2{
+  margin-top:-7rpx;
+}
+.blueD{
+  width: 12rpx;
+  height:12rpx;
+}
+.shipSuc{
+  width: 44rpx;
+  height: 44rpx;
+}
+.graySx{
+  width:6rpx;
+  height: 100%;
+}

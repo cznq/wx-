@@ -11,8 +11,8 @@
     <text wx:if="{{cityName != ''}}" class='addressText ft13'>{{cityName}}</text>
   </view>
     <text class='tiptext gray-9 ft10'>温馨提示：没有拍摄地址无法制作明信片哦</text>
-    <view wx:if="{{cityName == ''}}" bindtap='querySubmit' class="querybtn row cen-center ft13">确认拍摄地址</view>
-    <view wx:if="{{cityName != ''}}" bindtap='querySubmit' class="querybtn row cen-center ft13">确认上传{{progress}}</view>
+    <view wx:if="{{cityName == ''}}" bindtap='querySubmit' class="querybtn row cen-center ft16">确认拍摄地址</view>
+    <view wx:if="{{cityName != ''}}" bindtap='querySubmit' class="querybtn row cen-center ft16">确认上传{{progress}}</view>
 </view>
 <!-- 地址选择 -->
 <view wx:if='{{address_photo}}' class='loyer' catchtouchmove='loyerbg'></view>

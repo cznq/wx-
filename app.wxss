@@ -117,6 +117,12 @@ page{
   align-items: center;
   justify-content: flex-end;
 }
+.start-end {
+  -webkit-box-align: end;
+  -webkit-box-pack: start;
+  align-items: start;
+  justify-content: flex-end;
+}
 .cen-center {
   -webkit-box-align: center;
   -webkit-box-pack: center;
@@ -154,6 +160,9 @@ page{
 }
 .grass-green{
   color: rgb(71, 212, 101);
+}
+.red2 {
+  color: #FF973E;
 }
 .bold{
   font-weight:bold;

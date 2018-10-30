@@ -6,9 +6,10 @@
 <view class='padding50'></view>
 
 <view catchtap='loyer' wx:if='{{sharebtn}}' class="loyer">
-  <view class="loyerview">
-    <image class='loyerinstr' src='../../images/loyerinstr.png'></image>
-    <image catchtap="loyerbtn" class='loyerbtn' src='../../images/loyerbtn.png'></image>
+  <view class="loyerview column cen-center">
+    <image class='loyerinstr' src='../../images/homeShare.jpg'></image>
+    <view catchtap="loyerbtn" class='loyerbtn'>保存图片</view>
+    <!-- <image  src='../../images/loyerbtn.png'></image> -->
   </view>
 </view>
 

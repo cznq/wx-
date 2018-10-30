@@ -1,15 +1,30 @@
 <view class="title padding0-15 row cen-space">
   <view class="column start-cen text ft14">
-    <text class='line-h25'>物流信息：<text>申通快递</text></text>
-    <text class='line-h25'>物流单号：<text>339816775009</text></text>
+    <text class='line-h25'>物流信息：<text>{{ship_company}}</text></text>
+    <text class='line-h25'>物流单号：<text>{{ship_no}}</text></text>
     <view class='line-h25 row'>
       发货时间：
       <view class='row'>
-        <text>2018-08-20</text><text>15;15:29</text>
+        <text>{{ship_time}}</text>
       </view>
     </view>
   </view>
-  <view class="btn ft12">
+  <view catchtap='copyOrder' class="btn ft12">
     复制
+  </view>
+</view>
+<view class="content">
+  <view wx:for='{{ship_list}}' wx:for-item='item' wx:for-index='indx' wx:key='unique' class="shipInfo row">
+    <view class="sign column cen-start">
+      <image wx:if='{{indx==0 && item.status =="签收"}}' src='../../images/shipSuc.png' class="shipSuc" />
+      <image wx:if='{{indx==0 && item.status !="签收"}}' src='../../images/blueicon.png' class="blueD" />
+      <image wx:if='{{indx!=0}}' src='../../images/gray-6.png' class="blueD" />
+      <image wx:if='{{indx !=(ship_listLen-1)}}' src='../../images/grayline.png' class="graySx" />
+    </view>
+    <view class="shipContent column">
+      <text class='ft14 gray-32 {{ indx!=0? "gray-9" :""}} mar_top_-2'>{{item.status}}</text>
+      <text class='ft112 gray-32 {{ indx!=0? "gray-9" :""}}'>{{item.context}}</text>
+      <text class='ft112 gray-9'>{{item.time}}</text>
+    </view>
   </view>
 </view>

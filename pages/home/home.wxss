@@ -35,18 +35,24 @@
   top:50%;
   transform: translate(-50%,-50%);
   border-radius: 4rpx;
-  width:572rpx;
+  width:650rpx;
   height:auto;
   background: transparent;
 }
 .loyerinstr{
-  width:572rpx;
-  height:648rpx;
+  width:650rpx;
+  height:967.6rpx;
 }
 .loyerbtn{
-  margin-top:10rpx;
-  width:572rpx;
-  height:91rpx;
+  margin-top:46rpx;
+  width:400rpx;
+  height:81rpx;
+  line-height: 81rpx;
+  color:#fff;
+  font-size: 28rpx;
+  background-color: #4294Ea;
+  border-radius: 8rpx;
+  text-align: center;
 }
 @media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
     .buttom {
