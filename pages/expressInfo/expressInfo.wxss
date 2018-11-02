@@ -46,7 +46,7 @@
 }
 .shipSuc{
   width: 44rpx;
-  height: 44rpx;
+  height: 54rpx;
 }
 .graySx{
   width:6rpx;

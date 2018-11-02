@@ -145,8 +145,8 @@ page{
   width:70%;
 }
 .orderInfoCopy{
-  width:30%;
-  padding-top:4rpx;
+  width:131rpx;
+  border: 1rpx solid rgba(0,0,0,0);
   box-sizing: border-box;
   height: 138rpx;
 }
@@ -170,14 +170,23 @@ page{
   background: #fff;
   border-top:1rpx solid rgba(0,0,0,.1);
 }
+
 .cutLine{
   position: absolute;
   left:50%;
-  top: 50%;
+  top: 25%;
   transform: translate(-50%,-50%);
   width: 1rpx;
   height: 30rpx;
   background-color: rgba(0,0,0, .1);
+}
+@media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
+    .bottomBtn{
+      padding-bottom:68rpx;
+    }
+    .cutLine{
+      top: 25%;
+    }
 }
 .lxKF{
   width: 376rpx;
@@ -201,7 +210,7 @@ page{
 .contactWay{
   position: absolute;
   bottom:20rpx;
-  width: 90%;
+  width: 710rpx;
   height:0;
   transition: height 1s;
   box-sizing:border-box;

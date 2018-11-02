@@ -23,7 +23,8 @@
     </view>
     <view class="shipContent column">
       <text class='ft14 gray-32 {{ indx!=0? "gray-9" :""}} mar_top_-2'>{{item.status}}</text>
-      <text class='ft112 gray-32 {{ indx!=0? "gray-9" :""}}'>{{item.context}}</text>
+      <text wx:if='{{indx == 0}}' class='ft112 gray-32'>{{receive_address}}</text>
+      <text class='ft112 gray-32 {{ indx!=0? "gray-9" :"blue"}}'>{{item.context}}</text>
       <text class='ft112 gray-9'>{{item.time}}</text>
     </view>
   </view>

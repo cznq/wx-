@@ -12,6 +12,7 @@ Page({
     ship_time:'',
     ship_list:[],
     ship_listLen:0,
+    receive_address:''
   },
 
   /**
@@ -42,19 +43,20 @@ Page({
     }
     utils.Md5http(url, (dataStr) => {
       console.log('物流信息', dataStr);
-      console.log('物流信息', dataStr.ship_list);
       if (dataStr.rc.c == 0) {
           var ship_company = dataStr.ship_company;
           var ship_no = dataStr.ship_no;
           var ship_time = dataStr.ship_time;
           var ship_list = dataStr.ship_list;
           var ship_listLen = dataStr.ship_list.length;
+          var receive_address = dataStr.receive_city_name + dataStr.receive_address ;
           that.setData({
             ship_list: ship_list,
             ship_listLen:ship_listLen,
             ship_company:ship_company,
             ship_no:ship_no,
-            ship_time:ship_time
+            ship_time:ship_time,
+            receive_address:receive_address
           })
       } else {
         console.log('获取配置信息接口失败', dataStr);

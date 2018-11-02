@@ -78,17 +78,17 @@ page{
   font-size: 24rpx;
   border: 1rpx solid rgba(50,50,50,.4);
   color:#323232;
-
+  margin-left:30rpx;
 }
 .bottom .btn_pay{
-  width:160rpx;
+  width:120rpx;
   height:52rpx;
   text-align: center;
   line-height: 52rpx;
   border-radius: 8rpx;
-  background-color: #EE973E;
+  background-color: #FF973E;
   color:#FFFFFF;
-    box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 24rpx;
   border: 1rpx solid #EE973E;
   margin-left:30rpx;

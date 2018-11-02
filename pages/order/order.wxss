@@ -44,6 +44,7 @@ page{
 .cutting{
   position: relative;
   margin-top: -32rpx;
+  background: #fff;
 }
 .cutting image{
   width:750rpx;
@@ -142,6 +143,7 @@ page{
   height:92rpx;
   padding: 0 10px;
   box-sizing: border-box;
+  background: #fff;
 }
 @media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
     .button {
@@ -187,13 +189,14 @@ button[plain]{
   border: none;
 }
 .addresseeName{
-  width: 140rpx;
+  width: 160rpx;
   height: 60rpx;
   line-height: 60rpx;
   margin-right: 20rpx;
 }
+
 .addresseeInput{
-  width:530rpx;
+  width:510rpx;
   height:60rpx;
   line-height: 60rpx;
   background-color: #f8f8f8;
@@ -201,4 +204,5 @@ button[plain]{
 }
 .addresseeInfo{
   background: #fff;
+  margin-bottom:20rpx;
 }

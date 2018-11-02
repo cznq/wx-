@@ -156,7 +156,7 @@ page{
     color: #23beae;
 }
 .blue {
-    color: #00a0ff;
+    color: #4294EA;
 }
 .grass-green{
   color: rgb(71, 212, 101);

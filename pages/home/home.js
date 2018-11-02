@@ -313,7 +313,7 @@ Page({
       title: '进行中...',
       mask: true
     })
-    var imgSrc = "https://oss4liview.moji.com/2018/09/30/2b69bd3f59f61d7bbb6a1a4daaa4f45a.jpg"
+    var imgSrc = "https://oss4liview.moji.com/feedstream/2018/11/01/382d0965a933783eff7359b02240f2de.jpg"
     wx.downloadFile({
       url: imgSrc,
       success: function(res) {

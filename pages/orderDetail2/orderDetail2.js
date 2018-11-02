@@ -92,10 +92,10 @@ Page({
           var postcard_back_url = order.postcard_list[0].postcard_back_url;//明信片背面
           var postcard_front_url = order.postcard_list[0].postcard_front_url;//明信片正面
           var postcard_send_name = order.postcard_list[0].postcard_send_name;//明信片上的发送人
-          var total_fee = order.total_fee / 100;//商品总价
-          var postage_fee = order.postage_fee / 100;//邮费(以分为单位)
-          var coupon_fee = order.coupon_fee / 100;//优惠劵金额(以分为单位)
-          var order_fee = order.order_fee / 100;//订单金额(以分为单位)
+          var total_fee = (order.total_fee / 100).toFixed(2);//商品总价
+          var postage_fee = (order.postage_fee / 100).toFixed(2);//邮费(以分为单位)
+          var coupon_fee = (order.coupon_fee / 100).toFixed(2);//优惠劵金额(以分为单位)
+          var order_fee = (order.order_fee / 100).toFixed(2);//订单金额(以分为单位)
           var pay_type = order.pay_type;//支付类型0-微信 1-支付宝
           var order_status_desc = order.order_status_desc;//根据expire_time自己显示
           var refund_status = order.refund_status;//退款状态
@@ -165,6 +165,18 @@ expireTime(){
     })
   },1000)
 },
+previewfront(){
+  wx.previewImage({
+  current: this.data.postcard_front_url, // 当前显示图片的http链接
+  urls: [this.data.postcard_front_url,this.data.postcard_back_url] // 需要预览的图片http链接列表
+})
+},
+previewback(){
+  wx.previewImage({
+  current: this.data.postcard_back_url, // 当前显示图片的http链接
+  urls: [this.data.postcard_back_url,this.data.postcard_front_url] // 需要预览的图片http链接列表
+})
+},
 shipDetail(){
   wx.navigateTo({
     url:'../expressInfo/expressInfo?ord_no='+ this.data.ord_no
@@ -194,6 +206,14 @@ copy_qq(){
   wx.setClipboardData({
   data: this.data.qq_number
 })
+},
+loyerblock(){
+  return false;
+},
+loyerbtn(){
+  this.setData({
+    kefu:false
+  })
 },
   /**
    * 生命周期函数--监听页面初次渲染完成

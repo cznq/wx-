@@ -32,7 +32,9 @@ Page({
     post_bg: '', //背景
     selAddress: '', //选择的地址
     imgdir: '',
-    cut_image: ''
+    cut_image: '',
+    send_mobile:'',
+    send_name:''
 
   },
   bindChooseAddr() {
@@ -152,6 +154,48 @@ Page({
   onGotUser() {
     utils.throttle(this.onGotUserInfo(arguments), 500);
   },
+  senderName(e){
+    var val = e.detail.value;
+    var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030|\uFFFD/ig;
+    if (regStr.test(val)) {
+      val = val.replace(regStr, '')
+      wx.showToast({
+        title: '不支持填写表情哦',
+        icon: 'none'
+      })
+    }
+    this.setData({
+      send_name:val
+    })
+  },
+  senderblur(e){
+    var val = e.detail.value;
+    this.setData({
+      send_name:val
+    })
+    console.log('send_name',this.data.send_name);
+  },
+  senderPhone(e){
+    var val = e.detail.value;
+    var regStr = /[^\d]/g;
+    if (regStr.test(val)) {
+        val = val.replace(/[^\d]/g,'')
+      wx.showToast({
+        title: '支持数字',
+        icon: 'none'
+      })
+    }
+    this.setData({
+      send_mobile:val
+    })
+  },
+  senderPhoneblur(e){
+    var val = e.detail.value;
+    this.setData({
+      send_mobile:val
+    })
+    console.log('send_mobile',this.data.send_mobile);
+  },
   onGotUserInfo: function(e) {
     let userInfo = e[0].detail.userInfo;
     // console.log('onGotUserInfo', e[0].detail.userInfo);
@@ -249,8 +293,8 @@ Page({
         receive_mobile: _that.data.addressPhone, //收件人电话
         receive_city_name: _that.data.provinceName+_that.data.cityName+_that.data.countyName, //收件人城市
         receive_address: _that.data.addressDetails, //收件人详细地址
-        send_mobile: '', //发送人电话
-        send_name: '', //发送人姓名
+        send_mobile: _that.data.send_mobile, //发送人电话
+        send_name: _that.data.send_name, //发送人姓名
         receive_msg_flag: '',
         postcard_picture_url: app.globalData.postcard_picture_url, //明信片原图
         postcard_picture_type: app.globalData.postcard_picture_type, //	0:横图 1:竖图

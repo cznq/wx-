@@ -18,12 +18,18 @@
     <image class='right_image' src='../../images/jt.png' />
   </view>
 </view>
-<view class="cutting">
+<view class="cutting ">
   <image src='../../images/order-border.png' />
 </view>
 <view class='addresseeInfo padding10'>
-  <view class='row cen-start'><text class='addresseeName gray-32 ft14'>发件人姓名</text><input class='addresseeInput padding0-10 gray-32 ft14' type="text"/></view>
-  <view class='row cen-start marg10-top'><text class='addresseeName gray-32 ft14'>发件人电话</text><input class='addresseeInput padding0-10 gray-32 ft14' type="text"/></view>
+  <view class='row cen-start'>
+    <text class='addresseeName gray-32 ft14'>发件人姓名</text>
+    <input bindinput='senderName' bindblur='senderblur' maxlength='8' placeholder="选填" placeholder-class='gray-9 ft14' value='{{send_name}}' class='addresseeInput padding0-10 gray-32 ft14' type="text"/>
+  </view>
+  <view class='row cen-start marg10-top'>
+    <text class='addresseeName gray-32 ft14'>发件人电话</text>
+    <input bindinput='senderPhone' bindblur='senderPhoneblur' maxlength='11' placeholder="输入发件人电话会收到短信通知(选填)" value='{{send_mobile}}' placeholder-class='gray-9 ft14' class='addresseeInput padding0-10 gray-32 ft14' type="number"/>
+  </view>
 </view>
 <view class='intro column'>
   <text class='title gray-32 ft14'>墨迹时光邮局明信片</text>
