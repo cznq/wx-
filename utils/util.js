@@ -26,6 +26,17 @@ const mformatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
+ // 将时间戳转换成日期格式
+function timestampToTime(timestamp) {
+        var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        var D = (date.getDate() < 10 ? '0'+ date.getDate() : date.getDate()) + ' ';
+        var h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
+        var m = formatNumber(date.getMinutes());
+        // var s = date.getSeconds();
+        return Y+M+D+h+m;
+    }
 /**
  * 获取数据模块
  *
@@ -175,5 +186,6 @@ module.exports = {
   mHttp,
   Md5http,
   throttle,
-  howSize
+  howSize,
+  timestampToTime
 }

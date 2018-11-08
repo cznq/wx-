@@ -76,7 +76,7 @@
   <view class="orderInfo column start-cen">
     <view class='row cen-start ft14 lin-25'><text class='gray-9'>订单编号：</text><text class='gray-3'>{{order_id}}</text></view>
     <view class='row cen-start ft14 lin-25'><text class='gray-9'>下单时间：</text><text class='gray-3'>{{create_time}}</text></view>
-    <view wx:if='{{pay_type !=0}}' class='row cen-start ft14 lin-25'><text class='gray-9'>支付时间：</text><text class='gray-3'>{{pay_type}}</text></view>
+    <view wx:if='{{order_status !=0 && order_status !=2}}' class='row cen-start ft14 lin-25'><text class='gray-9'>支付时间：</text><text class='gray-3'>{{pay_time}}</text></view>
     <view class='row cen-start ft14 lin-25'><text class='gray-9'>支付方式：</text><text class='gray-3'>{{pay_type == 0? '微信':'支付宝'}}</text></view>
   </view>
   <view class="orderInfoCopy row start-end">
@@ -90,9 +90,13 @@
     <image class='lxkfimage' src='../../images/lxkf.png' />
     <text>联系客服</text>
   </view>
-  <view catchtap='keepMake' class="lxKF ft12 gray-32 row cen-center">
+  <view wx:if='{{order_status!=0}}' catchtap='keepMake' class="lxKF ft12 gray-32 row cen-center">
     <image class='lxkfimage' src='../../images/jxmake.png' />
     <text>继续制作</text>
+  </view>
+  <view wx:if='{{order_status ===0}}' catchtap='paybtn' class="lxKF ft12 gray-32 row cen-center">
+    <image class='lxkfimage' src='../../images/zhifu.png' />
+    <text>立即支付</text>
   </view>
   <view class="cutLine"></view>
 </view>

@@ -1,0 +1,41 @@
+page{
+  background-color: #F4F5F7;
+}
+.canvasStyle{
+  width:750rpx;
+  height:810rpx;
+  position:relative;
+  margin-top: 40rpx;
+  box-sizing: border-box;
+}
+.myCanvas{
+  width:750rpx;
+  height:820rpx;
+  border:1px solid blue;
+}
+@media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
+  .myCanvas{
+    width:750rpx;
+    height:950rpx;
+    border:1px solid red;
+  }
+}
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width: 750rpx;
+  height: 160rpx;
+  background-color: #fff;
+  padding-top:20rpx;
+}
+.saveImage{
+  width: 300rpx;
+  height: 80rpx;
+  background: #4294EA;
+  border-radius: 8rpx;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+}

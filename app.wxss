@@ -131,6 +131,7 @@ page{
 }
 
 /*通用字体颜色*/
+
 .gray-32 {
     color: #323232;
 }
@@ -242,6 +243,12 @@ page{
 .marg15-left {
     margin-left: 15px;
 }
+.marg20-top {
+    margin-top: 40rpx;
+}
+.marg20-right {
+    margin-right: 40rpx;
+}
 .marg5-right {
   margin-right: 5px;
 }
@@ -280,6 +287,9 @@ page{
 }
 .white_bg{
   background: #fff;
+}
+.gray_bg{
+  background-color: #F4F5F7;
 }
 .boxsiz_box{
   box-sizing: border-box;

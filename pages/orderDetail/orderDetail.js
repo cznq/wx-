@@ -62,7 +62,7 @@ Page({
     }
     utils.Md5http(url, (dataStr) => {
       console.log('获取订单详情信息', dataStr);
-      if (dataStr.rc.c == 0) {
+      if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
         var order_list = dataStr.order_list;
         var total_count = dataStr.total_count;
         console.log('total_count', total_count);
@@ -127,7 +127,7 @@ Page({
         }
         utils.Md5http(url, (dataStr) => {
           console.log('获取订单详情信息', dataStr);
-          if (dataStr.rc.c == 0) {
+          if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
             var order_list = dataStr.order_list;
             total_count = dataStr.total_count;
             currentPage_no = 1;
@@ -185,7 +185,7 @@ Page({
         }
         utils.Md5http(url, (dataStr) => {
           console.log('获取订单详情待付款', dataStr);
-          if (dataStr.rc.c == 0) {
+          if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
             var order_list = dataStr.order_list;
             total_count = dataStr.total_count;
             currentPage_no = 1;
@@ -242,7 +242,7 @@ Page({
         }
         utils.Md5http(url, (dataStr) => {
           console.log('获取订单详情已付款', dataStr);
-          if (dataStr.rc.c == 0) {
+          if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
             var order_list = dataStr.order_list;
             total_count = dataStr.total_count;
             currentPage_no = 1;
@@ -299,7 +299,7 @@ Page({
         }
         utils.Md5http(url, (dataStr) => {
           console.log('获取订单详情已发货', dataStr);
-          if (dataStr.rc.c == 0) {
+          if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
             var order_list = dataStr.order_list;
             total_count = dataStr.total_count;
             currentPage_no = 1;
@@ -357,7 +357,7 @@ Page({
         }
         utils.Md5http(url, (dataStr) => {
           console.log('获取订单详情已失效', dataStr);
-          if (dataStr.rc.c == 0) {
+          if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
             var order_list = dataStr.order_list;
             total_count = dataStr.total_count;
             currentPage_no = 1;
@@ -450,7 +450,7 @@ Page({
     }
     utils.Md5http(url, (dataStr) => {
       console.log('dataStr', dataStr);
-      if (dataStr.rc.c == 0) {
+      if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
         console.log('dataStr.order_no', dataStr.postcard_order_info.order_no);
         console.log('dataStr.pay_sign', dataStr.postcard_order_info.pay_sign);
         var pay_sign = dataStr.postcard_order_info.pay_sign;
@@ -525,7 +525,7 @@ Page({
             }
           }
           utils.Md5http(url, (dataStr) => {
-            if (dataStr.rc.c == 0) { //删除订单成功--从新请求
+            if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) { //删除订单成功--从新请求
               var platform = app.globalData.platform;
               var url = app.globalData.baseUrlTpost + 'order/order_list?';
               var reqbody = {
@@ -547,7 +547,7 @@ Page({
                 }
               }
               utils.Md5http(url, (dataStr) => { //刷新请求
-                if (dataStr.rc.c == 0) {
+                if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
                   var order_list = dataStr.order_list;
                   if (order_list.length == 0) {
                     that.setData({
@@ -734,7 +734,7 @@ Page({
       }
       utils.Md5http(url, (dataStr) => {
         console.log('获取订单详情信息', dataStr);
-        if (dataStr.rc.c == 0) {
+        if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
           var order_list = dataStr.order_list;
           total_count = dataStr.total_count;
           // console.log('total_count',total_count);

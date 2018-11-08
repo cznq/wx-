@@ -95,11 +95,53 @@ Page({
   onLoad: function(options) {
     app.aldstat.sendEvent('program_postcard_order_show');//编辑订单页展示一次+1
     var that = this;
-    console.log('that.globalData.platform', app.globalData.platform);
+    // console.log('that.globalData.platform', app.globalData.platform);
+    //获取上一次的邮寄地址接口
+    var url = app.globalData.baseUrlTpost + 'address/get_lately_ship_address?';
+    var snsid = app.globalData.userId * 1;
+    var reqbody = {
+      "common": {
+        'snsid': app.globalData.userId,
+        'sid': app.globalData.session_id,
+        "uid": 0,
+        "platform": app.globalData.platform,
+        "language": 'CN',
+        "device": app.globalData.brand,
+        "os_version": app.globalData.system + "-" + app.globalData.version,
+        "width": app.globalData.width,
+        "height": app.globalData.height,
+      },
+      "params": {}
+    }
+    utils.Md5http(url, (dataStr) => {
+      console.log('获取上一次的邮寄地址接口',dataStr);
+      if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
+        if (dataStr.send_mobile !=undefined && dataStr.send_mobile !='') {
+              var send_mobile = dataStr.send_mobile;
+              that.setData({
+                send_mobile:send_mobile
+              })
+        }
+        if (dataStr.send_name !=undefined && dataStr.send_name !='') {
+          var send_name = dataStr.send_name;
+          that.setData({
+            send_name:send_name
+          })
+        }
+
+      } else {
+        console.log('获取配置信息接口失败', dataStr);
+        wx.showToast({
+          title:dataStr.rc.p,
+          icon:'none'
+        })
+      }
+    }, reqbody);
+    //获取上一次的邮寄地址接口over
     that.setData({
       cut_image: app.globalData.original_image
     })
-    console.log('cut_image', app.globalData.original_image);
+    console.log('本地切图', app.globalData.original_image);
     var picture_type = app.globalData.postcard_picture_type //	0:横图 1:竖图
     if (picture_type == '1') {
       that.setData({
@@ -111,7 +153,7 @@ Page({
       })
     }
 
-    console.log('that.data.imgdir', that.data.imgdir);
+    // console.log('that.data.imgdir', that.data.imgdir);
     var AddreName = options.Addressee //收件人
     var sender = options.sender //发送人姓名
     var areaVal = options.areaVal //内容
@@ -252,6 +294,16 @@ Page({
     }
   },
   paybtn() {
+    if (this.data.send_mobile !='') {
+      var numLen = this.data.send_mobile.length;
+      if (numLen != 11) {
+        wx.showToast({
+          title: '请输入11位手机号',
+          icon: 'none'
+        })
+        return false;
+      }
+    }
       if(!app.globalData.isConnected || app.globalData.networkType == 'none'){
         wx.showToast({
           title: '网络异常',

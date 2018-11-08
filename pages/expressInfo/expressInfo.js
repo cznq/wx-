@@ -49,7 +49,9 @@ Page({
           var ship_time = dataStr.ship_time;
           var ship_list = dataStr.ship_list;
           var ship_listLen = dataStr.ship_list.length;
-          var receive_address = dataStr.receive_city_name + dataStr.receive_address ;
+          var receive_address = dataStr.receive_city_name + dataStr.receive_address;
+              receive_address = receive_address.replace(/[\n]/g,"");
+          console.log('receive_address',receive_address);
           that.setData({
             ship_list: ship_list,
             ship_listLen:ship_listLen,

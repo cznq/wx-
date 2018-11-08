@@ -9,7 +9,9 @@
     "pages/payComplete/payComplete",
     "pages/test/test",
     "pages/orderDetail2/orderDetail2",
-    "pages/expressInfo/expressInfo"
+    "pages/expressInfo/expressInfo",
+    "pages/changeMiddle/changeMiddle",
+    "pages/forumMiddle/forumMiddle"
   ],
   "window": {
     "backgroundTextStyle": "light",

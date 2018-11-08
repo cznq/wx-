@@ -52,7 +52,7 @@ var DEFAULT = {
     },
     set: function set (value) {
       if (typeof (value) !== 'string') {
-        console.error(("id：" + value + " is invalid"));
+        // console.error(("id：" + value + " is invalid"));
       }
       tmp.id = value;
     }
@@ -64,7 +64,7 @@ var DEFAULT = {
     },
     set: function set (value) {
       if (typeof (value) !== 'number') {
-        console.error(("width：" + value + " is invalid"));
+        // console.error(("width：" + value + " is invalid"));
       }
       tmp.width = value;
     }
@@ -76,7 +76,7 @@ var DEFAULT = {
     },
     set: function set (value) {
       if (typeof (value) !== 'number') {
-        console.error(("height：" + value + " is invalid"));
+        // console.error(("height：" + value + " is invalid"));
       }
       tmp.height = value;
     }
@@ -88,7 +88,7 @@ var DEFAULT = {
     },
     set: function set (value) {
       if (typeof (value) !== 'number') {
-        console.error(("scale：" + value + " is invalid"));
+        // console.error(("scale：" + value + " is invalid"));
       }
       tmp.scale = value;
     }
@@ -654,6 +654,7 @@ function methods () {
         self.updateCanvas();
 
         isFunction(self.onImageLoad) && self.onImageLoad(self.ctx, self);
+				wx.hideLoading();
       }
     });
 

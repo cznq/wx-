@@ -1,6 +1,6 @@
 <view class="title padding0-15 row cen-space">
   <view class="column start-cen text ft14">
-    <text class='line-h25'>物流信息：<text>{{ship_company}}</text></text>
+    <text class='line-h25'>物流公司：<text>{{ship_company}}</text></text>
     <text class='line-h25'>物流单号：<text>{{ship_no}}</text></text>
     <view class='line-h25 row'>
       发货时间：
@@ -23,7 +23,7 @@
     </view>
     <view class="shipContent column">
       <text class='ft14 gray-32 {{ indx!=0? "gray-9" :""}} mar_top_-2'>{{item.status}}</text>
-      <text wx:if='{{indx == 0}}' class='ft112 gray-32'>{{receive_address}}</text>
+      <text wx:if='{{indx == 0}}' class='ft112 gray-32'>[收货地址]：{{receive_address}}</text>
       <text class='ft112 gray-32 {{ indx!=0? "gray-9" :"blue"}}'>{{item.context}}</text>
       <text class='ft112 gray-9'>{{item.time}}</text>
     </view>

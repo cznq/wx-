@@ -17,6 +17,8 @@ App({
       _that.globalData.version = res.version;//微信版本号
       _that.globalData.width = res.screenWidth;//屏幕宽度
       _that.globalData.height = res.screenHeight;//屏幕高度
+      _that.globalData.widWidth = res.windowWidth;//屏幕宽度
+      _that.globalData.widHeight = res.windowHeight;//屏幕高度
       _that.globalData.brand = res.brand;//手机品牌
       console.log('获取设备信息', res);
     } catch (e) {
@@ -94,12 +96,12 @@ App({
     isConnected:false,
     networkType:'none',
     userInfo: null,
-    baseUrl: 'http://192.168.1.232:8883/api/',//登陆接口
-    baseUrlT: 'https://uc.api.moji.com/mapi/',//登陆接口线上接口
-    baseUrlPost: 'http://192.168.1.232:8886/postcard/',//明信片接口
-    baseUrlTpost: 'https://pcd.api.moji.com/',//明信片线上接口
-    baseUrluploadFile:'http://snsforum.mojitest.com/snsupload/upload/json/upload',//上传接口
-    baseUrlTuploadFile:'https://snsup.moji.com/snsupload/upload/json/upload',//上传线上接口
+    // baseUrlT: 'https://uc.api.moji.com/mapi/',//登陆接口线上接口
+    // baseUrlTpost: 'https://pcd.api.moji.com/',//明信片线上接口
+    // baseUrlTuploadFile:'https://snsup.moji.com/snsupload/upload/json/upload',//上传线上接口
+    baseUrlT: 'http://192.168.1.232:8883/api/',//登陆接口
+    baseUrlTpost: 'http://192.168.1.232:8886/postcard/',//明信片接口
+    baseUrlTuploadFile:'http://snsforum.mojitest.com/snsupload/upload/json/upload',//上传接口
     pixelRatio:1,//设备像素比
     language: '',
     platform: '',
@@ -108,6 +110,8 @@ App({
     system:'',
     width:'',
     height:'',
+    widWidth:0,
+    widHeight:0,
     brand:'',
     userId: '',
     openId: '',

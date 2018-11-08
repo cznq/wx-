@@ -1,0 +1,95 @@
+/* pages/forumMiddle/forumMiddle.wxss */
+page{
+  background-color: #F4F5F7;
+}
+.main{
+  margin: 40rpx auto 0;
+  width: 690rpx;
+  height: auto;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.2);
+}
+.imaWarp{
+  position: relative;
+    z-index: 1;
+}
+.hotImage{
+  width:86rpx;
+  height: 32rpx;
+  position: absolute;
+  bottom:20rpx;
+  right:20rpx;
+  z-index: 2;
+}
+.sharebig{
+  width: 690rpx;
+  height: 518rpx;
+}
+.w_Phont{
+  width: 124rpx;
+  white-space: nowrap;
+}
+.userFace{
+  position: relative;
+  width:690rpx;
+  height: 78rpx;
+  margin-top:-39rpx;
+  z-index: 10;
+}
+.userimage{
+  width:74rpx;
+  height: 74rpx;
+  border-radius: 50%;
+  border:4rpx solid #fff;
+}
+.middle_instr{
+  width: 690rpx;
+}
+.line-h22{
+  line-height: 44rpx;
+}
+.line-h32{
+  line-height: 64rpx;
+}
+.goMoji{
+  padding-bottom:220rpx;
+}
+.goMoji text{
+  text-decoration: underline;
+}
+.comment{
+  width:630rpx;
+  height: 170rpx;
+  background: #F8F9FB;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  padding:20rpx;
+  box-sizing: border-box;
+}
+.commentStart{
+  width:168rpx;
+  height: 23rpx;
+  margin-left:20rpx;
+}
+.marig10-top{
+  margin-top:20rpx;
+}
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width: 750rpx;
+  height: 160rpx;
+  background-color: #fff;
+  padding-top:20rpx;
+  z-index: 999;
+}
+.saveImage{
+  width: 300rpx;
+  height: 80rpx;
+  background: #4294EA;
+  border-radius: 8rpx;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+}

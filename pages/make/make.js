@@ -124,7 +124,7 @@ Page({
                  tmpPath = res.tempFilePath
                 // console.log('tmpPath',tmpPath)
                 app.globalData.original_image = tmpPath; //获取本地切图
-                  console.log('全局本地切图',app.globalData.original_image);
+                  console.log('make全局本地切图',app.globalData.original_image);
                   self.wecropper.pushOrign(src);
                   wx.getImageInfo({ //获取图信息
                     src: src,
@@ -243,17 +243,16 @@ uploadTap() { //选择图片
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.showLoading();
     app.aldstat.sendEvent('program_postcard_front_show');//订单按钮点击一次+1
     var self = this;
     self.showCavs();
-    console.log('options.src', options.src);
     if (options.src) { //首次加载图片
-      app.globalData.originalImage = options.src;//用户选择的原图
       wx.getImageInfo({
         src: options.src,
         success: function(res) {
-          console.log(res.width);
-          console.log(res.height);
+          app.globalData.originalImage = res.path;
+          console.log('用户选择原图', app.globalData.originalImage);
           if (res.width >= res.height) {
             console.log('横图');
             let cutx = 'cropperOpt.cut.x',
@@ -270,6 +269,7 @@ uploadTap() { //选择图片
             })
             self.showCavs();
             self.wecropper.pushOrign(options.src);
+
           } else {
             console.log('竖图');
             let cutx = 'cropperOpt.cut.x',
@@ -284,8 +284,13 @@ uploadTap() { //选择图片
               imgdir: 1
             })
             self.showCavs();
+
             self.wecropper.pushOrign(options.src);
+
           }
+          // setTimeout(function(){
+          //   wx.hideLoading();
+          // },1500)
 
         }
       })
@@ -299,19 +304,19 @@ uploadTap() { //选择图片
 
     new WeCropper(cropperOpt)
       .on('ready', (ctx) => {
-        console.log(`wecropper is ready for work!`)
+        // console.log(`wecropper is ready for work!`)
       })
       .on('beforeImageLoad', (ctx) => {
-        console.log(`before picture loaded, i can do something`)
-        console.log(`current canvas context:`, ctx)
+        // console.log(`before picture loaded, i can do something`)
+        // console.log(`current canvas context:`, ctx)
       })
       .on('imageLoad', (ctx) => {
-        console.log(`picture loaded`)
-        console.log(`current canvas context:`, ctx)
+        // console.log(`picture loaded`)
+        // console.log(`current canvas context:`, ctx)
       })
       .on('beforeDraw', (ctx, instance) => {
-        console.log(`before canvas draw,i can do something`)
-        console.log(`current canvas context:`, ctx)
+        // console.log(`before canvas draw,i can do something`)
+        // console.log(`current canvas context:`, ctx)
       })
       .updateCanvas();
   },

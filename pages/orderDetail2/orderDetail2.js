@@ -1,6 +1,8 @@
 // pages/orderDetail2/orderDetail2.js
 const app = getApp();
 const utils = require('../../utils/util.js');
+const base64 = require('../../utils/base64.js');
+var Base64 = base64.Base64;
 Page({
 
   /**
@@ -12,6 +14,7 @@ Page({
     order_status:4,
     receive_name:'',
     receive_mobile:'',
+    receive_name:'',
     receive_address:'',
     send_name:'',
     send_mobile:'',
@@ -23,6 +26,7 @@ Page({
     order_id:'',
     create_time:'',
     pay_type:0,
+    pay_time:'',
     help_mobile:0,
     qq_number:0,
     expire_time:0,
@@ -35,7 +39,9 @@ Page({
     ship_context:'',
     ship_status:'',
     ship_time:'',
-    kefu:false
+    kefu:false,
+    order_fee_pay:0,
+    order_no:''
   },
 
   /**
@@ -84,9 +90,16 @@ Page({
               })
               that.expireTime();
           }
+          if (order_status !=0 && order_status !=2) {
+            var pay_time = order.pay_time;//	付款时间
+              that.setData({
+                pay_time:pay_time
+              })
+          }
           var receive_name = order.receive_name;//收件人
           var receive_mobile = order.receive_mobile;//收件人电话
           var receive_address = order.receive_city_name + order.receive_address;//收件地址
+          var receive_name = order.receive_city_name;
           var send_name = order.send_name;//发件人
           var send_mobile = order.send_mobile;//发件人电话
           var postcard_back_url = order.postcard_list[0].postcard_back_url;//明信片背面
@@ -96,6 +109,7 @@ Page({
           var postage_fee = (order.postage_fee / 100).toFixed(2);//邮费(以分为单位)
           var coupon_fee = (order.coupon_fee / 100).toFixed(2);//优惠劵金额(以分为单位)
           var order_fee = (order.order_fee / 100).toFixed(2);//订单金额(以分为单位)
+          var order_fee_pay = order.order_fee;//订单金额支付使用
           var pay_type = order.pay_type;//支付类型0-微信 1-支付宝
           var order_status_desc = order.order_status_desc;//根据expire_time自己显示
           var refund_status = order.refund_status;//退款状态
@@ -107,7 +121,7 @@ Page({
           var ship_no = order.ship_no;//邮寄单号
           var help_mobile = order.help_mobile;//客服电话
           var qq_number = order.qq_number;//	QQ群号
-          var pay_time = order.pay_time;//	付款时间
+
           if (ship_company != void 0) {//存在物流信息
             var ship_context = order.ship.context
             var ship_status = order.ship.status
@@ -126,6 +140,7 @@ Page({
             order_status:order_status,
             receive_name:receive_name,
             receive_mobile:receive_mobile,
+            receive_name:receive_name,
             receive_address:receive_address,
             send_name:send_name,
             send_mobile:send_mobile,
@@ -134,12 +149,14 @@ Page({
             total_fee:total_fee,
             postage_fee:postage_fee,
             order_fee:order_fee,
+            order_fee_pay:order_fee_pay,
             order_id:order_id,
             create_time:create_time,
             pay_type:pay_type,
             help_mobile:help_mobile,
             qq_number:qq_number,
-            showView:true
+            showView:true,
+            order_no:order_no
           })
 
 
@@ -176,6 +193,83 @@ previewback(){
   current: this.data.postcard_back_url, // 当前显示图片的http链接
   urls: [this.data.postcard_back_url,this.data.postcard_front_url] // 需要预览的图片http链接列表
 })
+},
+paybtn() {
+  var _that = this;
+  // ---获取接口数据---
+  var platform = app.globalData.platform;
+  var url = app.globalData.baseUrlTpost + 'order/init_order?';
+  var reqbody = {
+    common: {
+      'snsid': app.globalData.userId,
+      'sid': app.globalData.session_id,
+      'uid': 0,
+      "platform": app.globalData.platform,
+      "language": 'CN',
+      "device": app.globalData.brand,
+      "os_version": app.globalData.system + "-" + app.globalData.version,
+      "width": app.globalData.width,
+      "height": app.globalData.height,
+    },
+    params: {
+      postcard_receive_name: '', //明信片上的接收人
+      postcard_send_name: '', //明信片上的发送人
+      post_mark: '', //邮戳
+      postcard_content: '', //明信片上的寄语
+      receive_name: _that.data.receive_name, //收件人姓名
+      receive_mobile: _that.data.receive_mobile, //收件人电话
+      receive_city_name: _that.data.receive_city_name, //收件人城市
+      receive_address: _that.data.receive_address, //收件人详细地址
+      send_mobile: '', //发送人电话
+      send_name: '', //发送人姓名
+      receive_msg_flag: '',
+      postcard_picture_url: '', //明信片原图
+      postcard_picture_type: 0, //	0:横图 1:竖图
+      postcard_picture_width: 0, //图片宽度
+      postcard_picture_height: 0, //图片高度
+      postcard_front_url: _that.data.postcard_front_url, //明信片正面
+      postcard_template: 0, //明信片模板
+      coupon_ids: '', //优惠券ID
+      order_fee: _that.data.order_fee_pay, //订单金额(分为单位)
+      pay_type: 0, //0-微信 1-支付宝
+      order_no: _that.data.order_no //	订单号
+    }
+  }
+  utils.Md5http(url, (dataStr) => {
+    console.log('dataStr', dataStr);
+    if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
+      console.log('dataStr.order_no', dataStr.postcard_order_info.order_no);
+      console.log('dataStr.pay_sign', dataStr.postcard_order_info.pay_sign);
+      var pay_sign = dataStr.postcard_order_info.pay_sign;
+      pay_sign = JSON.parse(Base64.decode(pay_sign));
+      // console.log('pay_sign',pay_sign);
+
+      wx.requestPayment({
+        timeStamp: pay_sign.timeStamp,
+        nonceStr: pay_sign.nonceStr,
+        package: pay_sign.package,
+        signType: pay_sign.signType,
+        paySign: pay_sign.paySign,
+        success: function(res) {
+          console.log(res);
+          console.log('成功');
+          wx.navigateTo({
+            url: '../payComplete/payComplete?path=' + 'orderDetail'
+          })
+        },
+        fail: function(res) {
+          console.log(res);
+          console.log('失败');
+          wx.showToast({
+            title: '支付失败',
+            icon: 'none'
+          })
+
+        }
+      })
+    }
+  }, reqbody);
+  // 获取接口数据
 },
 shipDetail(){
   wx.navigateTo({

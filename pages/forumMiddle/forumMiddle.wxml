@@ -1,0 +1,35 @@
+<view class="main white_bg padding10-bottom">
+  <view class='imaWarp'>
+  <image style='width:{{width}};height:{{height}}' class='sharebig' src='{{path}}'></image>
+  <image wx:if='{{is_hot === 1}}' class='hotImage' src='../../images/hotPic.png'></image>
+  </view>
+  <view class="userFace row start-cen">
+    <image class='userimage' src='{{face}}'></image>
+  </view>
+  <view class="middle_instr column cen-center">
+    <text class='ft14 gray-32 line-h22'>{{nick}}</text>
+    <text class='ft12 gray-9 line-h32'>{{sign}}</text>
+    <text class='ft18 gray-9'>/</text>
+    <text class='ft12 gray-9 line-h22'>{{time_type}}：{{upload_time}}</text>
+
+    <view wx:if="{{location !=''}}" class='ft12 gray-9 line-h22 padding0-10 row cen-center'>
+
+      <text class='w_Phont'>拍摄地址：</text>
+      <text>{{location}}</text>
+      </view>
+  </view>
+  <view wx:if='{{remark !=""}}' class="comment ">
+    <view class='row cen-start padding10-bottom'>
+    <text class='ft14 gray-6'>官方点评</text>
+    <image class='commentStart' src='../../images/start.png'></image>
+    </view>
+    <text class='gray-32 marig10-top ft12'>拍摄图片已多次成为官方推荐热图拍摄图片已多次成为官方推荐热图最多100字。</text>
+  </view>
+</view>
+<view class="goMoji marg20-top row cen-center">
+  <text catchtap='goMoji' class='blue ft14'>去墨迹邮局</text>
+</view>
+<view class="bottom row start-cen">
+  <view catchtap='saveImage' class="saveImage marg20-right">保存图片</view>
+  <view catchtap='makeImage' class="saveImage">做成明信片</view>
+</view>

@@ -1,4 +1,5 @@
 // pages/payComplete/payComplete.js
+const app = getApp();
 Page({
 
   /**
