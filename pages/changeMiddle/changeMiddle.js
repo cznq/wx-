@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+  canvasShow:false,
    text_x: 58, //x轴
    text_y:97, //y轴
    imageWidth:0,
@@ -27,6 +28,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 打开调试
+    wx.setEnableDebug({
+      enableDebug: true
+    })
     if (options.orderId) {
     console.log('options--options',options);
     console.log('传递订单号',options.orderId);
@@ -52,6 +57,10 @@ Page({
           imageUrl:'../../images/changeBag4.jpg'
         })
       }
+    }else if (options.scene != void 0) {
+      // scene 需要使用 decodeURIComponent 才能获取到生成二维码时传入的 scene
+    const scene = decodeURIComponent(options.scene)
+    console.log('朋友圈-参数:',scene);
     }
     else {
       wx.showToast({
@@ -61,8 +70,9 @@ Page({
       return false
     }
     var that = this;
+    wx.showLoading();
     app.getOpenid().then(function() {
-    var url = app.globalData.baseUrlTpost + 'share/share_info?';
+    var url = app.globalData.baseUrlTpost + 'order/order_info?';
     var snsid = app.globalData.userId * 1;
     var reqbody = {
       "common": {
@@ -81,10 +91,10 @@ Page({
       }
     }
     utils.Md5http(url, (dataStr) => {
-      console.log('share_info',dataStr);
+      console.log('success',dataStr);
       if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
-      var share_image = dataStr.share_image;
-      var send_nick = dataStr.send_nick;
+      var share_image = dataStr.order.postcard_list[0].postcard_front_url;//图片路径
+      var send_nick = dataStr.order.send_nick;//昵称
       // 网络图片转本地图片
       wx.getImageInfo({
         src: share_image,
@@ -128,6 +138,10 @@ Page({
             }
         })
      })
+     that.setData({
+       canvasShow:true
+     })
+     wx.hideLoading();
      //图片合成结束
   }
 })

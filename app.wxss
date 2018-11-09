@@ -29,7 +29,9 @@ page{
  .margintop8{
    margin: 8rpx
  }
-
+.over_hid{
+  overflow: hidden;
+}
  /* 2px线 */
 .line-2{
   width: 100%;

@@ -3,6 +3,7 @@ const app = getApp();
 const utils = require('../../utils/util.js');
 const base64 = require('../../utils/base64.js');
 var Base64 = base64.Base64;
+var setInter;
 Page({
 
   /**
@@ -125,7 +126,8 @@ Page({
           if (ship_company != void 0) {//存在物流信息
             var ship_context = order.ship.context
             var ship_status = order.ship.status
-            var ship_time = order.ship.time
+            var ship_time = order.ship.time;
+          
             that.setData({
               ship:true,
               ship_company:ship_company,
@@ -169,7 +171,7 @@ Page({
   },
 expireTime(){
   var that = this;
-  var setInter = setInterval(function(){
+  setInter = setInterval(function(){
     var expire_time = that.data.expire_time -1000;
     var hours = parseInt((expire_time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = parseInt((expire_time % (1000 * 60 * 60)) / (1000 * 60));
@@ -298,7 +300,7 @@ copyShipId(){
 },
 copyOrderId(){
   wx.setClipboardData({
-  data: this.data.order_id +""
+  data: this.data.ord_no +""
 })
 },
 contactCusSer(){
@@ -353,7 +355,7 @@ loyerbtn(){
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    clearInterval(setInter);
   },
 
   /**

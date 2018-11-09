@@ -25,11 +25,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 打开调试
+    wx.setEnableDebug({
+      enableDebug: true
+    })
     console.log('options:',options);
     if (options.picture_id) {
       this.setData({
         picture_id:options.picture_id
       })
+    }else if (options.scene != void 0) {
+      // scene 需要使用 decodeURIComponent 才能获取到生成二维码时传入的 scene
+    const scene = decodeURIComponent(options.scene)
+    console.log('朋友圈-参数:',scene);
     }else {
       wx.showToast({
         title:'请求参数错误',

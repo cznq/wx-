@@ -45,6 +45,7 @@
           <view class='row cen-start'>
             <text wx:if='{{item.order_status == 3}}' class='btn_ordetail' data-ord_no='{{item.order_no}}' catchtap='keepShip'>追踪物流</text>
             <view class='btn_ordetail' data-ord_no='{{item.order_no}}' catchtap='orderDetail2'>订单详情</view>
+            <view wx:if='{{item.order_status == 2}}' data-ord_no='{{item.order_no}}' catchtap='delete_Ord' class='btn_ordetail margin_l15'>删除</view>
             <view catchtap='paybtn' data-index='{{indx}}' wx:if='{{item.order_status == 0}}' class='btn_pay'>立即支付</view>
           </view>
       </view>

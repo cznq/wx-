@@ -4,7 +4,7 @@
 
   <view class="title_r column start-cen">
     <text wx:if='{{order_status ===0}}' class='white ft16'>待付款</text>
-    <text wx:if='{{order_status ===1}}' class='white ft16'>已付款，待发货</text>
+    <text wx:if='{{order_status ===1}}' class='white ft16'>待发货</text>
     <text wx:if='{{order_status ===2}}' class='white ft16'>已失效</text>
     <text wx:if='{{order_status ===3}}' class='white ft16'>已发货</text>
     <text wx:if='{{order_status ===0}}' class='white ft14'>剩余{{hours}}时{{minutes}}分{{seconds}}秒自动失效</text>
@@ -22,7 +22,7 @@
   <view class="startleft row cen-start">
     <image class='start_image' src='../../images/shipstart.png'></image>
     <view class="startText column start-cen">
-      <text class='ship_content ft14'>{{ship_status}}，{{ship_context}}</text>
+      <text class='ship_content ft14'>{{ship_status}} {{ship_context}}</text>
       <text class='ft12 gray-9'>{{ship_time}}</text>
     </view>
   </view>
@@ -74,12 +74,12 @@
 <view class="navthree white_bg">
 <view class="row cen-space">
   <view class="orderInfo column start-cen">
-    <view class='row cen-start ft14 lin-25'><text class='gray-9'>订单编号：</text><text class='gray-3'>{{order_id}}</text></view>
+    <view class='row cen-start ft14 lin-25'><text class='gray-9'>订单编号：</text><text class='gray-3'>{{ord_no}}</text></view>
     <view class='row cen-start ft14 lin-25'><text class='gray-9'>下单时间：</text><text class='gray-3'>{{create_time}}</text></view>
     <view wx:if='{{order_status !=0 && order_status !=2}}' class='row cen-start ft14 lin-25'><text class='gray-9'>支付时间：</text><text class='gray-3'>{{pay_time}}</text></view>
     <view class='row cen-start ft14 lin-25'><text class='gray-9'>支付方式：</text><text class='gray-3'>{{pay_type == 0? '微信':'支付宝'}}</text></view>
   </view>
-  <view class="orderInfoCopy row start-end">
+  <view class="orderInfoCopy {{order_status !=0 && order_status !=2? 'lineH':''}} row start-end">
     <view catchtap='copyOrderId' class="btn">复制</view>
   </view>
 </view>

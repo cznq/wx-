@@ -154,6 +154,9 @@ page{
   box-sizing: border-box;
   height: 138rpx;
 }
+.orderInfoCopy.lineH{
+  height: 200rpx!important;
+}
 .lin-25{
   line-height: 50rpx;
 }

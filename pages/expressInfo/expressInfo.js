@@ -19,7 +19,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('options2018',options.ord_no);
     var ord_no = options.ord_no;
     var that = this;
     var url = app.globalData.baseUrlTpost + 'ship/get_ship_info?';

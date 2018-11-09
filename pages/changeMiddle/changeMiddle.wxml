@@ -1,7 +1,9 @@
+<view wx:if='{{canvasShow}}'>
 <view class="canvasStyle">
   <canvas class='myCanvas' canvas-id="myCanvas" />
 </view>
 <view class="bottom row start-cen">
   <view catchtap='saveImage' class="saveImage marg20-right">保存图片</view>
   <view catchtap='makeImage' class="saveImage">我也做一张</view>
+</view>
 </view>
