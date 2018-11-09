@@ -29,8 +29,8 @@ Page({
   onLoad: function (options) {
     if (options.orderId) {
     console.log('options--options',options);
-    console.log('options.orderId',options.orderId);
-      console.log('options.seleBg',options.seleBg,typeof(options.seleBg));
+    console.log('传递订单号',options.orderId);
+      console.log('传递背景标识',options.seleBg);
       orderId = options.orderId;
       if (options.seleBg == '1') {
       this.setData({
@@ -52,9 +52,6 @@ Page({
           imageUrl:'../../images/changeBag4.jpg'
         })
       }
-      // this.setData({
-      //   orderId:options.orderId
-      // })
     }
     else {
       wx.showToast({
@@ -67,7 +64,6 @@ Page({
     app.getOpenid().then(function() {
     var url = app.globalData.baseUrlTpost + 'share/share_info?';
     var snsid = app.globalData.userId * 1;
-    console.log('111111',orderId);
     var reqbody = {
       "common": {
         'snsid': app.globalData.userId,
@@ -84,8 +80,6 @@ Page({
         order_no:orderId
       }
     }
-    // that.data.orderId
-    // "201811061806802941"
     utils.Md5http(url, (dataStr) => {
       console.log('share_info',dataStr);
       if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
@@ -102,18 +96,21 @@ Page({
     //图片合成
     var imageWidth = app.globalData.widWidth;
     var imageHeight = (app.globalData.widHeight / 1.51).toFixed(0);
-    ctx.drawImage(that.data.imageUrl, 0, 0, imageWidth, imageHeight*1) //重新画上
+    ctx.drawImage(that.data.imageUrl, 0, 0, imageWidth, imageHeight*1); //重新画上
+    ctx.draw();
     ctx.setFontSize(10)//重新画上字体大小
     ctx.setFillStyle('#666')
     var sytext = "【" + that.data.userName + "】"+ "送出了明信片和祝福"
     var text_x = app.globalData.widWidth / 6.4;
     var text_y = (app.globalData.widHeight / 6.5).toFixed(0);
      ctx.fillText(sytext, text_x * 1, text_y * 1)
+     ctx.draw(true)
      var userImage_x = app.globalData.widWidth / 6.4;
      var userImage_y = app.globalData.widHeight / 3;
      var userImage_width = app.globalData.widWidth / 1.5;
      var userImage_height = app.globalData.widHeight / 3.6;
      ctx.drawImage(that.data.userImageUrl, userImage_x, userImage_y, userImage_width, userImage_height) //重新画上
+     // ctx.draw(true)
      ctx.draw(true,function(){
        wx.canvasToTempFilePath({
             x: 0,

@@ -13,8 +13,8 @@ Page({
     ord_no:'',
     order_status:4,
     receive_name:'',
+    receive_city_name:'',
     receive_mobile:'',
-    receive_name:'',
     receive_address:'',
     send_name:'',
     send_mobile:'',
@@ -99,7 +99,7 @@ Page({
           var receive_name = order.receive_name;//收件人
           var receive_mobile = order.receive_mobile;//收件人电话
           var receive_address = order.receive_city_name + order.receive_address;//收件地址
-          var receive_name = order.receive_city_name;
+          var receive_city_name = order.receive_city_name;
           var send_name = order.send_name;//发件人
           var send_mobile = order.send_mobile;//发件人电话
           var postcard_back_url = order.postcard_list[0].postcard_back_url;//明信片背面
@@ -140,7 +140,7 @@ Page({
             order_status:order_status,
             receive_name:receive_name,
             receive_mobile:receive_mobile,
-            receive_name:receive_name,
+            receive_city_name:receive_city_name,
             receive_address:receive_address,
             send_name:send_name,
             send_mobile:send_mobile,
@@ -180,6 +180,16 @@ expireTime(){
       minutes:minutes,
       seconds:seconds
     })
+    if (hours ==0 && minutes ==0 && seconds ==0) {
+      clearInterval(setInter);
+      that.setData({
+        order_status:2
+      })
+      wx.showToast({
+        title:'订单已自动关闭，重新下单请点击“继续制作',
+        icon:'none'
+      })
+    }
   },1000)
 },
 previewfront(){

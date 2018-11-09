@@ -1,6 +1,7 @@
 /* pages/orderDetail2/orderDetail2.wxss */
 page{
   background: #F8F9FB;
+  padding-bottom:120rpx;
 }
 .orderTitle{
   position: relative;
@@ -21,6 +22,9 @@ page{
   width: 70%;
   height: 148rpx;
   z-index: 2;
+}
+.marg70-bottom{
+  margin-bottom:140rpx;
 }
 .title_l{
   position: relative;
@@ -138,7 +142,7 @@ page{
 .navthree{
   padding:30rpx;
   margin-top:20rpx;
-  margin-bottom:92rpx;
+  /* margin-bottom:140rpx; */
   box-sizing: border-box;
 }
 .orderInfo{
@@ -174,7 +178,7 @@ page{
 .cutLine{
   position: absolute;
   left:50%;
-  top: 25%;
+  top: 50%;
   transform: translate(-50%,-50%);
   width: 1rpx;
   height: 30rpx;

@@ -22,7 +22,7 @@
       <image wx:if='{{indx !=(ship_listLen-1)}}' src='../../images/grayline.png' class="graySx" />
     </view>
     <view class="shipContent column">
-      <text class='ft14 gray-32 {{ indx!=0? "gray-9" :""}} mar_top_-2'>{{item.status}}</text>
+      <text class='ft14 gray-32 {{ indx!=0? "gray-9" :""}}'>{{item.status}}</text>
       <text wx:if='{{indx == 0}}' class='ft112 gray-32'>[收货地址]：{{receive_address}}</text>
       <text class='ft112 gray-32 {{ indx!=0? "gray-9" :"blue"}}'>{{item.context}}</text>
       <text class='ft112 gray-9'>{{item.time}}</text>
