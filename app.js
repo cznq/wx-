@@ -96,12 +96,12 @@ App({
     isConnected:false,
     networkType:'none',
     userInfo: null,
-    // baseUrlT: 'https://uc.api.moji.com/mapi/',//登陆接口线上接口
-    // baseUrlTpost: 'https://pcd.api.moji.com/',//明信片线上接口
-    // baseUrlTuploadFile:'https://snsup.moji.com/snsupload/upload/json/upload',//上传线上接口
-    baseUrlT: 'http://192.168.1.232:8883/api/',//登陆接口
-    baseUrlTpost: 'http://192.168.1.232:8886/postcard/',//明信片接口
-    baseUrlTuploadFile:'http://snsforum.mojitest.com/snsupload/upload/json/upload',//上传接口
+    baseUrlT: 'https://uc.api.moji.com/mapi/',//登陆接口线上接口
+    baseUrlTpost: 'https://pcd.api.moji.com/',//明信片线上接口
+    baseUrlTuploadFile:'https://snsup.moji.com/snsupload/upload/json/upload',//上传线上接口
+    // baseUrlT: 'http://192.168.1.232:8883/api/',//登陆接口
+    // baseUrlTpost: 'http://192.168.1.232:8886/postcard/',//明信片接口
+    // baseUrlTuploadFile:'http://snsforum.mojitest.com/snsupload/upload/json/upload',//上传接口
     pixelRatio:1,//设备像素比
     language: '',
     platform: '',
@@ -134,6 +134,9 @@ App({
     order_no:'',
     postcard_picture_url:'',//上传到服务器端原图
     originalImage:'',//选择原图
-    original_image:''//本地切图
+    original_image:'',//本地切图
+    access_token:'',
+    user_action_set_id:'1107969762',
+    click_id:'',//广告主传递
   }
 })

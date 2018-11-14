@@ -124,18 +124,31 @@ Page({
           var qq_number = order.qq_number;//	QQ群号
 
           if (ship_company != void 0) {//存在物流信息
-            var ship_context = order.ship.context
-            var ship_status = order.ship.status
-            var ship_time = order.ship.time;
-          
-            that.setData({
-              ship:true,
-              ship_company:ship_company,
-              ship_no:ship_no,
-              ship_context:ship_context,
-              ship_status:ship_status,
-              ship_time:ship_time
-            })
+            if (order.ship == void 0) {
+              that.setData({
+                ship:false,
+                ship_company:ship_company,
+                ship_no:ship_no,
+                ship_context:'',
+                ship_status:'',
+                ship_time:''
+              })
+            }else {
+              var ship_context = order.ship.context
+              var ship_status = order.ship.status
+              var ship_time = order.ship.time;
+              that.setData({
+                ship:true,
+                ship_company:ship_company,
+                ship_no:ship_no,
+                ship_context:ship_context,
+                ship_status:ship_status,
+                ship_time:ship_time
+              })
+            }
+
+
+
           }
 
           that.setData({
@@ -265,6 +278,34 @@ paybtn() {
         success: function(res) {
           console.log(res);
           console.log('成功');
+          //广告主数据回传
+          if(app.globalData.click_id !=void 0){
+          var unixTime = Math.round(pay_sign.timeStamp/1000);
+          var url = "https://api.weixin.qq.com/marketing/user_actions/add?version=v1.0&access_token="+app.globalData.access_token;
+          var reqbody = {
+            "actions":[
+                {
+                   "user_action_set_id":"1107969762",
+                   "url":"http://www.pages/order/order",
+                   "action_time":unixTime,
+                   "action_type":"COMPLETE_ORDER",
+                   "trace":{
+                     "click_id":app.globalData.click_id
+                    },
+                }
+            ]
+          }
+          utils.mHttp(url, reqbody, (dataStr) => {
+            console.log('广告主数据回传', dataStr);
+          if (dataStr.errcode != 0) {
+            wx.showToast({
+              title:'unixTime'+unixTime,
+              icon:'none'
+            })
+          }
+          },'POST');
+          }
+          // 广告主数据回传
           wx.navigateTo({
             url: '../payComplete/payComplete?path=' + 'orderDetail'
           })

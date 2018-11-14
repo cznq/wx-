@@ -90,14 +90,6 @@ function Md5http(url, callBack, reqbody) {
   var reqbody = reqbody ? reqbody : {};
   console.log('reqbody',reqbody);
     reqbody = JSON.stringify(reqbody)
-  // if (platform == 'iphone') {
-  //   value = reqbody + 'MojiWeather_iOS';
-  //   console.log(value);
-  // }else{
-  //   value = reqbody + 'KAndroid';
-  // }
-  // value = md5.hex_md5(value).toUpperCase()
-  // console.log('url::',url + 'sign='+value);
   wx.request({
     url: url + 'fromType=1',
     data: reqbody,
@@ -117,6 +109,7 @@ function Md5http(url, callBack, reqbody) {
 }
 // 请求
 function mHttp(url, data = {}, callBack, method = 'get', header = { 'content-type': 'application/json'}) {
+  console.log('请求url',url);
   wx.request({
     url,
     data,

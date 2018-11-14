@@ -148,8 +148,10 @@ Page({
     console.log('valLen', valLen);
     if (valLen <= 26) { //第一行
       this.setData({
-        areaValRel: val
+        areaValRel: val,
+        areaVal: val
       })
+      console.log('input',val);
       console.log('第一行areaValRel',this.data.areaValRel);
     }
     if (valLen > 26 && valLen <= 52) { //第二行
@@ -157,7 +159,12 @@ Page({
       secendLine = val.split(fistLine)[1];
       areaValRel = fistLine + '\n' + secendLine;
       console.log('secendLine', secendLine);
-      console.log('areaValRel', areaValRel);
+      console.log('第二行areaValRel', areaValRel);
+      console.log('input',val);
+      this.setData({
+        areaValRel:areaValRel,
+        areaVal: val
+      })
     }
     if (valLen > 52) {
       var one = this.cut_str(val, 52);
@@ -170,13 +177,14 @@ Page({
       console.log('secendLine', secendLine);
       console.log('thirdLine',thirdLine);
       areaValRel = fistLine + '\n' + secendLine + '\n' + thirdLine;
-      console.log('areaValRel',areaValRel);
+      console.log('第三行areaValRel',areaValRel);
+      console.log('input',val);
+      this.setData({
+        areaValRel:areaValRel,
+        areaVal: val
+      })
     }
-    console.log('input',val);
-    this.setData({
-      areaValRel:areaValRel,
-      areaVal: val
-    })
+
   },
   cut_str(str, len, end = 0) {
     var char_length = 0;
@@ -248,7 +256,7 @@ Page({
     })
   },
   areaVal(e) {
-    console.log("失去焦点后",e.detail.value);
+    console.log("失去焦点后",this.data.areaValRel);
     // 新增css处理结果
     areaValRel = this.data.areaValRel;
     fistLine = areaValRel.split('\n')[0];
@@ -284,11 +292,11 @@ Page({
       })
     }
 
-    console.log('3333');
+    console.log('最终结果');
     console.log('fistLine',fistLine);
     console.log('secendLine', secendLine);
     console.log('thirdLine',thirdLine);
-    console.log('areaValRel',areaValRel);
+    console.log('最终areaValRel',areaValRel);
     // 新增css处理结果
     this.setData({
       areaVal: e.detail.value

@@ -17,17 +17,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if(options.gdt_vid != void 0){
+       app.globalData.click_id = options.gdt_vid;
+    }
+
+    // 广告主clickId监听结束
     app.aldstat.sendEvent('program_postcard_first_show');//宣传页展示一次+1v
     var _that = this
     app.getOpenid().then(function() {
       _that.setData({
         onloaded: true
       })
+      //首页配置信息
       var url = app.globalData.baseUrlTpost + 'config/get_config_information?';
       var snsid = app.globalData.userId * 1;
       var reqbody = {
         "common": {
           'snsid': snsid,
+          'sid': app.globalData.session_id,
           "uid": 0,
           "platform": app.globalData.platform,
           "language": 'CN',
@@ -56,8 +63,37 @@ Page({
         }
       }, reqbody);
     })
-
-
+  //首页配置信息结束
+if(app.globalData.click_id !=void 0){
+  //获取公众号accessToken接口
+  var url = app.globalData.baseUrlTpost + 'share/get_access_token?';
+  var snsid = app.globalData.userId * 1;
+  var reqbody = {
+    "common": {
+      'snsid': snsid,
+      'sid': app.globalData.session_id,
+      "uid": 0,
+      "platform": app.globalData.platform,
+      "language": 'CN',
+      "device": app.globalData.brand,
+      "os_version": app.globalData.system + "-" + app.globalData.version,
+      "width": app.globalData.width,
+      "height": app.globalData.height,
+    },
+    "params": {
+      appid_type:'2'
+    }
+  }
+  utils.Md5http(url, (dataStr) => {
+    console.log('获取accessToken接口', dataStr);
+    if (dataStr.rc.c == 0) {
+      app.globalData.access_token = dataStr.access_token;
+    } else {
+      console.log('获取配置信息接口失败', dataStr);
+    }
+  }, reqbody);
+}
+    //获取accessToken接口结束
     wx.getSetting({ // 查看是否授权
       success: function(res) {
         if (res.authSetting['scope.userInfo']) {

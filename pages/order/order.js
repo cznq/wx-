@@ -381,6 +381,34 @@ Page({
               app.aldstat.sendEvent('program_postcard_pay',{
                 '0':'支付成功'
               });//支付成功
+              //广告主数据回传
+              if(app.globalData.click_id !=void 0){
+              var unixTime = Math.round(pay_sign.timeStamp/1000);
+              var url = "https://api.weixin.qq.com/marketing/user_actions/add?version=v1.0&access_token="+app.globalData.access_token;
+              var reqbody = {
+                "actions":[
+                    {
+                       "user_action_set_id":"1107969762",
+                       "url":"http://www.pages/order/order",
+                       "action_time":unixTime,
+                       "action_type":"COMPLETE_ORDER",
+                       "trace":{
+                         "click_id":app.globalData.click_id
+                        },
+                    }
+                ]
+              }
+              utils.mHttp(url, reqbody, (dataStr) => {
+                console.log('广告主数据回传', dataStr);
+              if (dataStr.errcode != 0) {
+                wx.showToast({
+                  title:'unixTime'+unixTime,
+                  icon:'none'
+                })
+              }
+              },'POST');
+              }
+              // 广告主数据回传
             wx.navigateTo({
               url: '../payComplete/payComplete?path=' + 'order'
             })
