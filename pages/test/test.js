@@ -148,9 +148,41 @@ Page({
 
   },
 
-  fz(){
-
+  click(){
+    wx.navigateTo({
+      url:'../home/home?sku='+1077777+'&platform'+'='+1+'&gdt_vid'+'='+'wx0ewinbalytptma00'+'&weixinadinfo'+'='+20966864
+    })
   },
+  // if(app.globalData.click_id !=void 0){
+  //   //获取公众号accessToken接口
+  //   var url = app.globalData.baseUrlTpost + 'share/get_access_token?';
+  //   var snsid = app.globalData.userId * 1;
+  //   var reqbody = {
+  //     "common": {
+  //       'snsid': snsid,
+  //       'sid': app.globalData.session_id,
+  //       "uid": 0,
+  //       "platform": app.globalData.platform,
+  //       "language": 'CN',
+  //       "device": app.globalData.brand,
+  //       "os_version": app.globalData.system + "-" + app.globalData.version,
+  //       "width": app.globalData.width,
+  //       "height": app.globalData.height,
+  //     },
+  //     "params": {
+  //       appid_type:'2'
+  //     }
+  //   }
+  //   utils.Md5http(url, (dataStr) => {
+  //     console.log('获取accessToken接口', dataStr);
+  //     if (dataStr.rc.c == 0) {
+  //       app.globalData.access_token = dataStr.access_token;
+  //     } else {
+  //       console.log('获取配置信息接口失败', dataStr);
+  //     }
+  //   }, reqbody);
+  // }
+      //获取accessToken接口结束
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

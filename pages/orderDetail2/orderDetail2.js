@@ -280,32 +280,33 @@ paybtn() {
           console.log('成功');
           //广告主数据回传
           if(app.globalData.click_id !=void 0){
-          var unixTime = Math.round(pay_sign.timeStamp/1000);
-          var url = "https://api.weixin.qq.com/marketing/user_actions/add?version=v1.0&access_token="+app.globalData.access_token;
-          var reqbody = {
-            "actions":[
-                {
-                   "user_action_set_id":"1107969762",
-                   "url":"http://www.pages/order/order",
-                   "action_time":unixTime,
-                   "action_type":"COMPLETE_ORDER",
-                   "trace":{
-                     "click_id":app.globalData.click_id
-                    },
-                }
-            ]
+            //广告商数据回传
+            let unixTime = Math.round(pay_sign.timeStamp/1000);
+            var url = app.globalData.baseUrlTpost + 'applets/submit_data?';
+            var snsid = app.globalData.userId * 1;
+            var reqbody = {
+              "common": {
+                'snsid': snsid,
+                'sid': app.globalData.session_id,
+                "uid": 0,
+                "platform": app.globalData.platform,
+                "language": 'CN',
+                "device": app.globalData.brand,
+                "os_version": app.globalData.system + "-" + app.globalData.version,
+                "width": app.globalData.width,
+                "height": app.globalData.height,
+              },
+              "params": {
+                'click_id':app.globalData.click_id,
+                'action_time':unixTime,
+                'url':'http://www.pages/order/order'
+              }
+            }
+            utils.Md5http(url, (dataStr) => {
+              console.log(dataStr);
+            }, reqbody);
+            //广告商数据回传结束
           }
-          utils.mHttp(url, reqbody, (dataStr) => {
-            console.log('广告主数据回传', dataStr);
-          if (dataStr.errcode != 0) {
-            wx.showToast({
-              title:'unixTime'+unixTime,
-              icon:'none'
-            })
-          }
-          },'POST');
-          }
-          // 广告主数据回传
           wx.navigateTo({
             url: '../payComplete/payComplete?path=' + 'orderDetail'
           })

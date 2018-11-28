@@ -3,6 +3,10 @@ const utils = require('./utils/util.js');
 //app.js
 App({
   onLaunch: function() {
+    // 关闭调试
+    // wx.setEnableDebug({
+    //   enableDebug: false
+    // })
     var _that = this;
     try {
       var res = wx.getSystemInfoSync();

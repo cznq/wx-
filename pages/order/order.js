@@ -63,7 +63,7 @@ Page({
         })
       },
       fail(res) {
-        console.log('res', res);
+        // console.log('res', res);
         if (res.errMsg =='chooseAddress:cancel') {
           that.setData({
             chooseAddr: false
@@ -93,6 +93,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
     app.aldstat.sendEvent('program_postcard_order_show');//编辑订单页展示一次+1
     var that = this;
     // console.log('that.globalData.platform', app.globalData.platform);
@@ -114,7 +115,7 @@ Page({
       "params": {}
     }
     utils.Md5http(url, (dataStr) => {
-      console.log('获取上一次的邮寄地址接口',dataStr);
+      // console.log('获取上一次的邮寄地址接口',dataStr);
       if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
         if (dataStr.send_mobile !=undefined && dataStr.send_mobile !='') {
               var send_mobile = dataStr.send_mobile;
@@ -130,7 +131,7 @@ Page({
         }
 
       } else {
-        console.log('获取配置信息接口失败', dataStr);
+        // console.log('获取配置信息接口失败', dataStr);
         wx.showToast({
           title:dataStr.rc.p,
           icon:'none'
@@ -141,7 +142,7 @@ Page({
     that.setData({
       cut_image: app.globalData.original_image
     })
-    console.log('本地切图', app.globalData.original_image);
+    // console.log('本地切图', app.globalData.original_image);
     var picture_type = app.globalData.postcard_picture_type //	0:横图 1:竖图
     if (picture_type == '1') {
       that.setData({
@@ -215,7 +216,7 @@ Page({
     this.setData({
       send_name:val
     })
-    console.log('send_name',this.data.send_name);
+    // console.log('send_name',this.data.send_name);
   },
   senderPhone(e){
     var val = e.detail.value;
@@ -236,7 +237,7 @@ Page({
     this.setData({
       send_mobile:val
     })
-    console.log('send_mobile',this.data.send_mobile);
+    // console.log('send_mobile',this.data.send_mobile);
   },
   onGotUserInfo: function(e) {
     let userInfo = e[0].detail.userInfo;
@@ -259,7 +260,7 @@ Page({
       this.setData({
         getUserInfo: true
       })
-      console.log('e[0].detail.userInfo', e[0].detail.userInfo);
+      // console.log('e[0].detail.userInfo', e[0].detail.userInfo);
       app.globalData.nickName = userInfo.nickName
       app.globalData.avatarUrl = userInfo.avatarUrl
       app.globalData.gender = userInfo.gender //性别 0：未知、1：男、2：女
@@ -286,7 +287,7 @@ Page({
         }
       }
       utils.http(url, (dataStr) => {
-        console.log('微信用户信息', dataStr);
+        // console.log('微信用户信息', dataStr);
         if (dataStr.rc.c == 0) {}
 
       }, reqbody);
@@ -361,10 +362,10 @@ Page({
       }
     }
     utils.Md5http(url, (dataStr) => {
-      console.log('dataStr', dataStr);
+      // console.log('dataStr', dataStr);
       if (dataStr.rc.c == 0) {
-        console.log('dataStr.order_no', dataStr.postcard_order_info.order_no);
-        console.log('dataStr.pay_sign', dataStr.postcard_order_info.pay_sign);
+        // console.log('dataStr.order_no', dataStr.postcard_order_info.order_no);
+        // console.log('dataStr.pay_sign', dataStr.postcard_order_info.pay_sign);
         var pay_sign = dataStr.postcard_order_info.pay_sign;
         pay_sign = JSON.parse(Base64.decode(pay_sign));
         // console.log('pay_sign',pay_sign);
@@ -376,46 +377,47 @@ Page({
           signType: pay_sign.signType,
           paySign: pay_sign.paySign,
           success: function(res) {
-            console.log(res);
-            console.log('成功');
               app.aldstat.sendEvent('program_postcard_pay',{
                 '0':'支付成功'
               });//支付成功
+              console.log('app.globalData.click_id',app.globalData.click_id);
               //广告主数据回传
-              if(app.globalData.click_id !=void 0){
-              var unixTime = Math.round(pay_sign.timeStamp/1000);
-              var url = "https://api.weixin.qq.com/marketing/user_actions/add?version=v1.0&access_token="+app.globalData.access_token;
-              var reqbody = {
-                "actions":[
-                    {
-                       "user_action_set_id":"1107969762",
-                       "url":"http://www.pages/order/order",
-                       "action_time":unixTime,
-                       "action_type":"COMPLETE_ORDER",
-                       "trace":{
-                         "click_id":app.globalData.click_id
-                        },
-                    }
-                ]
+              if(app.globalData.click_id != void 0){
+                console.log(888888888);
+                //广告商数据回传
+                let unixTime = Math.round(pay_sign.timeStamp/1000);
+                var url = app.globalData.baseUrlTpost + 'applets/submit_data?';
+                var snsid = app.globalData.userId * 1;
+                var reqbody = {
+                  "common": {
+                    'snsid': snsid,
+                    'sid': app.globalData.session_id,
+                    "uid": 0,
+                    "platform": app.globalData.platform,
+                    "language": 'CN',
+                    "device": app.globalData.brand,
+                    "os_version": app.globalData.system + "-" + app.globalData.version,
+                    "width": app.globalData.width,
+                    "height": app.globalData.height,
+                  },
+                  "params": {
+                    'click_id':app.globalData.click_id,
+                    'action_time':unixTime,
+                    'url':'http://www.pages/order/order'
+                  }
+                }
+                utils.Md5http(url, (dataStr) => {
+                  console.log(dataStr);
+                }, reqbody);
+                //广告商数据回传结束
               }
-              utils.mHttp(url, reqbody, (dataStr) => {
-                console.log('广告主数据回传', dataStr);
-              if (dataStr.errcode != 0) {
-                wx.showToast({
-                  title:'unixTime'+unixTime,
-                  icon:'none'
-                })
-              }
-              },'POST');
-              }
-              // 广告主数据回传
-            wx.navigateTo({
-              url: '../payComplete/payComplete?path=' + 'order'
-            })
+              wx.navigateTo({
+                url: '../payComplete/payComplete?path=' + 'order'
+              })
           },
           fail: function(res) {
-            console.log(res);
-            console.log('失败');
+            // console.log(res);
+            // console.log('失败');
             app.aldstat.sendEvent('program_postcard_pay',{
               '1':'支付失败'
             });//支付成功

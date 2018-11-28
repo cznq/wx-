@@ -59,8 +59,11 @@ Page({
       }
     }else if (options.scene != void 0) {
       // scene 需要使用 decodeURIComponent 才能获取到生成二维码时传入的 scene
-    const scene = decodeURIComponent(options.scene)
+    var scene = decodeURIComponent(options.scene)
     console.log('朋友圈-参数:',scene);
+    var queryObj= scene.split('=')[1];
+    console.log('queryObj',queryObj);
+
     }
     else {
       wx.showToast({

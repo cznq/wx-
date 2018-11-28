@@ -167,9 +167,9 @@ uploadTap() { //选择图片
       sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
+        wx.showLoading();
         var imageSize = res.tempFiles[0].size;
         imageSize = utils.howSize(imageSize);
-        console.log('imageSize', imageSize);
         var numSize = imageSize.split('-')[0];
         var unitSize = imageSize.split('-')[1];
         switch (unitSize) {
@@ -198,7 +198,6 @@ uploadTap() { //选择图片
           src: res.tempFilePaths[0],
           success: function(res) {
             if (res.width >= res.height) {
-              console.log('横图');
               let cutx = 'cropperOpt.cut.x',
                 cuty = 'cropperOpt.cut.y',
                 cutW = 'cropperOpt.cut.width',
@@ -211,12 +210,10 @@ uploadTap() { //选择图片
                 imgdir: 0, //横图 0
                 original_image: src
               })
-              console.log(self.data.cropperOpt.cut.width);
               self.showCavs();
 
               self.wecropper.pushOrign(src);
             } else {
-              console.log('竖图');
               let cutx = 'cropperOpt.cut.x',
                 cuty = 'cropperOpt.cut.y',
                 cutW = 'cropperOpt.cut.width',
@@ -230,6 +227,7 @@ uploadTap() { //选择图片
                 original_image: src
               })
               self.showCavs();
+              wx.hideLoading();
               self.wecropper.pushOrign(src);
             }
 
@@ -252,9 +250,7 @@ uploadTap() { //选择图片
         src: options.src,
         success: function(res) {
           app.globalData.originalImage = res.path;
-          console.log('用户选择原图', app.globalData.originalImage);
           if (res.width >= res.height) {
-            console.log('横图');
             let cutx = 'cropperOpt.cut.x',
               cuty = 'cropperOpt.cut.y',
               cutW = 'cropperOpt.cut.width',
@@ -271,7 +267,6 @@ uploadTap() { //选择图片
             self.wecropper.pushOrign(options.src);
 
           } else {
-            console.log('竖图');
             let cutx = 'cropperOpt.cut.x',
               cuty = 'cropperOpt.cut.y',
               cutW = 'cropperOpt.cut.width',
@@ -303,21 +298,10 @@ uploadTap() { //选择图片
     } = this.data
 
     new WeCropper(cropperOpt)
-      .on('ready', (ctx) => {
-        // console.log(`wecropper is ready for work!`)
-      })
-      .on('beforeImageLoad', (ctx) => {
-        // console.log(`before picture loaded, i can do something`)
-        // console.log(`current canvas context:`, ctx)
-      })
-      .on('imageLoad', (ctx) => {
-        // console.log(`picture loaded`)
-        // console.log(`current canvas context:`, ctx)
-      })
-      .on('beforeDraw', (ctx, instance) => {
-        // console.log(`before canvas draw,i can do something`)
-        // console.log(`current canvas context:`, ctx)
-      })
+      .on('ready', (ctx) => {})
+      .on('beforeImageLoad', (ctx) => {})
+      .on('imageLoad', (ctx) => {})
+      .on('beforeDraw', (ctx, instance) => {})
       .updateCanvas();
   },
   /**

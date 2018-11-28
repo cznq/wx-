@@ -17,10 +17,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if(options.gdt_vid != void 0){
-       app.globalData.click_id = options.gdt_vid;
-    }
+console.log('options',options);
+console.log('options',options.gdt_vid);
 
+    if(options.gdt_vid != undefined){
+       app.globalData.click_id = options.gdt_vid;
+       console.log('click_id',app.globalData.click_id);
+    }
     // 广告主clickId监听结束
     app.aldstat.sendEvent('program_postcard_first_show');//宣传页展示一次+1v
     var _that = this
@@ -46,7 +49,6 @@ Page({
         "params": {}
       }
       utils.Md5http(url, (dataStr) => {
-        console.log('onload首页配置信息', dataStr);
         if (dataStr.rc.c == 0) {
           var picture_list = dataStr.promotion_picture_list;
           _that.setData({
@@ -64,36 +66,6 @@ Page({
       }, reqbody);
     })
   //首页配置信息结束
-if(app.globalData.click_id !=void 0){
-  //获取公众号accessToken接口
-  var url = app.globalData.baseUrlTpost + 'share/get_access_token?';
-  var snsid = app.globalData.userId * 1;
-  var reqbody = {
-    "common": {
-      'snsid': snsid,
-      'sid': app.globalData.session_id,
-      "uid": 0,
-      "platform": app.globalData.platform,
-      "language": 'CN',
-      "device": app.globalData.brand,
-      "os_version": app.globalData.system + "-" + app.globalData.version,
-      "width": app.globalData.width,
-      "height": app.globalData.height,
-    },
-    "params": {
-      appid_type:'2'
-    }
-  }
-  utils.Md5http(url, (dataStr) => {
-    console.log('获取accessToken接口', dataStr);
-    if (dataStr.rc.c == 0) {
-      app.globalData.access_token = dataStr.access_token;
-    } else {
-      console.log('获取配置信息接口失败', dataStr);
-    }
-  }, reqbody);
-}
-    //获取accessToken接口结束
     wx.getSetting({ // 查看是否授权
       success: function(res) {
         if (res.authSetting['scope.userInfo']) {
@@ -233,38 +205,12 @@ if(app.globalData.click_id !=void 0){
       sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
-        // 获取最新配置
-        // var url = app.globalData.baseUrlTpost + 'config/get_config_information?';
-        // var snsid = app.globalData.userId * 1;
-        // var reqbody = {
-        //   "common": {
-        //     'snsid': snsid,
-        //     "uid": 0,
-        //     "platform": app.globalData.platform,
-        //     "language": app.globalData.language
-        //   },
-        //   "params": {}
-        // }
-        // utils.Md5http(url, (dataStr) => {
-        //   console.log('show首页配置信息',dataStr);
-        //   if (dataStr.rc.c == 0) {
-        //     app.globalData.original_price = dataStr.total_fee / 100 //订单总价
-        //     app.globalData.postage_fee = dataStr.postage_fee / 100 //邮费0不展示
-        //     app.globalData.postage_copywriting = dataStr.postage_copywriting//邮费文案
-        //     app.globalData.express_delivery_copywriting = dataStr.express_delivery_copywriting//快递文案
-        //     app.globalData.original_copywriting = dataStr.original_copywriting//原价文案
-        //
-        //   }else{
-        //     console.log('获取配置信息接口失败',dataStr);
-        //   }
-        // }, reqbody);
+        wx.showLoading();
         // 获取最新配置
         var imageSize = res.tempFiles[0].size;
         imageSize = utils.howSize(imageSize);
-        console.log('imageSize', imageSize);
         var numSize = imageSize.split('-')[0];
         var unitSize = imageSize.split('-')[1];
-        console.log(numSize, unitSize);
         switch (unitSize) {
           case 'B':
             wx.showToast({
@@ -285,6 +231,7 @@ if(app.globalData.click_id !=void 0){
           default:
         }
         const src = res.tempFilePaths[0]
+        wx.hideLoading();
         //  获取裁剪图片资源后，给data添加src属性及其值
         wx.navigateTo({
           url: '../make/make?src=' + src,
