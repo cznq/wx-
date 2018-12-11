@@ -17,9 +17,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-console.log('options',options);
-console.log('options',options.gdt_vid);
-
     if(options.gdt_vid != undefined){
        app.globalData.click_id = options.gdt_vid;
        console.log('click_id',app.globalData.click_id);

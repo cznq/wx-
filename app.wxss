@@ -119,6 +119,12 @@ page{
   align-items: center;
   justify-content: flex-end;
 }
+.end-end {
+  -webkit-box-align: end;
+  -webkit-box-pack: end;
+  align-items: end;
+  justify-content: end;
+}
 .start-end {
   -webkit-box-align: end;
   -webkit-box-pack: start;

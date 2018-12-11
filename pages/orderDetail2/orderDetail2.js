@@ -42,7 +42,8 @@ Page({
     ship_time:'',
     kefu:false,
     order_fee_pay:0,
-    order_no:''
+    order_no:'',
+    refund_status:0
   },
 
   /**
@@ -122,7 +123,7 @@ Page({
           var ship_no = order.ship_no;//邮寄单号
           var help_mobile = order.help_mobile;//客服电话
           var qq_number = order.qq_number;//	QQ群号
-
+          let refund_status = order.refund_status;//退款状态 0:未退款 1:已退款
           if (ship_company != void 0) {//存在物流信息
             if (order.ship == void 0) {
               that.setData({
@@ -137,14 +138,24 @@ Page({
               var ship_context = order.ship.context
               var ship_status = order.ship.status
               var ship_time = order.ship.time;
-              that.setData({
-                ship:true,
-                ship_company:ship_company,
-                ship_no:ship_no,
-                ship_context:ship_context,
-                ship_status:ship_status,
-                ship_time:ship_time
-              })
+              if (order.ship.status != void 0) {
+                that.setData({
+                  ship:true,
+                  ship_company:ship_company,
+                  ship_no:ship_no,
+                  ship_context:ship_context,
+                  ship_status:ship_status,
+                  ship_time:ship_time
+                })
+              }else {
+                that.setData({
+                  ship:true,
+                  ship_company:ship_company,
+                  ship_no:ship_no,
+                  ship_context:ship_context
+                })
+              }
+
             }
 
 
@@ -171,7 +182,8 @@ Page({
             help_mobile:help_mobile,
             qq_number:qq_number,
             showView:true,
-            order_no:order_no
+            order_no:order_no,
+            refund_status:refund_status
           })
 
 

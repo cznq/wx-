@@ -119,6 +119,30 @@ page{
   width: 252rpx;
   height: 166rpx;
 }
+.previewState{
+  position: relative;
+  width: 120rpx;
+  height: 166rpx;
+}
+.previewPrice{
+  display: block;
+  position: absolute;
+  right: 0;
+  top:0;
+  width: 120rpx;
+  line-height: 30rpx;
+  text-align: right;
+}
+.preState{
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom:0;
+  width: 120rpx;
+  line-height: 30rpx;
+  text-align: right;
+  color:#CF3A53;
+}
 .front{
   position: absolute;
   left: 0;

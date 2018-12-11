@@ -1,4 +1,6 @@
 // pages/test/test.js
+const app = getApp();
+const utils = require('../../utils/util.js');
 Page({
 
   /**
@@ -12,6 +14,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    //
+  
+
+
+
+
+    return false;
     var that = this;
     const ctx = wx.createCanvasContext('firstCanvas')
     var DEFAULT = {

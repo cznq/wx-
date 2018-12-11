@@ -88,7 +88,7 @@ function Md5http(url, callBack, reqbody) {
   })
   var value;
   var reqbody = reqbody ? reqbody : {};
-  console.log('reqbody',reqbody);
+  // console.log('reqbody',reqbody);
     reqbody = JSON.stringify(reqbody)
   wx.request({
     url: url + 'fromType=1',

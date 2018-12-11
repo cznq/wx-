@@ -124,7 +124,6 @@ Page({
                  tmpPath = res.tempFilePath
                 // console.log('tmpPath',tmpPath)
                 app.globalData.original_image = tmpPath; //获取本地切图
-                  console.log('make全局本地切图',app.globalData.original_image);
                   self.wecropper.pushOrign(src);
                   wx.getImageInfo({ //获取图信息
                     src: src,

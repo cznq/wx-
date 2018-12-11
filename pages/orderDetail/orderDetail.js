@@ -68,9 +68,7 @@ Page({
         console.log('total_count', total_count);
         var currentPage_no = 1;
         page_no = Math.ceil(total_count / 20);
-        console.log('order_list', order_list);
         if (order_list.length === 0) {
-          console.log('length', order_list.length);
           this.setData({
             noDetails: true
           })
@@ -406,7 +404,6 @@ Page({
   paybtn(e) {
     app.aldstat.sendEvent('program_postcard_order_manage_pay');//在我的订单页，待付款的订单点击立即支付按钮一次+1
     var _that = this;
-    console.log('e.currentTarget.dataset.index', e.currentTarget.dataset.index);
     var index = e.currentTarget.dataset.index;
     // _that.data.order_list[index]
     // ---获取接口数据---
@@ -451,8 +448,6 @@ Page({
     utils.Md5http(url, (dataStr) => {
       console.log('dataStr', dataStr);
       if (dataStr.rc.c !=undefined && dataStr.rc.c == 0) {
-        console.log('dataStr.order_no', dataStr.postcard_order_info.order_no);
-        console.log('dataStr.pay_sign', dataStr.postcard_order_info.pay_sign);
         var pay_sign = dataStr.postcard_order_info.pay_sign;
         pay_sign = JSON.parse(Base64.decode(pay_sign));
         // console.log('pay_sign',pay_sign);
@@ -464,8 +459,6 @@ Page({
           signType: pay_sign.signType,
           paySign: pay_sign.paySign,
           success: function(res) {
-            console.log(res);
-            console.log('成功');
             //广告主数据回传
             if(app.globalData.click_id !=void 0){
               //广告商数据回传
@@ -617,10 +610,8 @@ Page({
       success(res) {
         var imageSize = res.tempFiles[0].size;
         imageSize = utils.howSize(imageSize);
-        console.log('imageSize', imageSize);
         var numSize = imageSize.split('-')[0];
         var unitSize = imageSize.split('-')[1];
-        console.log(numSize, unitSize);
         switch (unitSize) {
           case 'B':
             wx.showToast({

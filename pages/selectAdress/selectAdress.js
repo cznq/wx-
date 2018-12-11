@@ -72,7 +72,6 @@ Page({
     })
   },
   selectCity(e) { //选择地址
-    console.log(e.target.dataset.cityname);
     var cityName = e.target.dataset.cityname;
     this.setData({
       cityName: cityName
@@ -96,7 +95,7 @@ Page({
       return false;
     }
     // console.log('cut_imgage', _that.data.cut_image);
-    console.log('全局本地切图:',app.globalData.original_image);
+    // console.log('全局本地切图:',app.globalData.original_image);
     if (app.globalData.original_image == '') {
       wx.showToast({
         title:'切图生成失败重新尝试',
@@ -121,7 +120,6 @@ Page({
       },
       formData: {},
       success: function(res) {
-        console.log('上传cut_image完成', res);
         //上传原图
         const uploadTask = wx.uploadFile({ //上传cut_imgage
           url: app.globalData.baseUrlTuploadFile, //
@@ -135,14 +133,13 @@ Page({
           },
           formData: {},
           success: function(res) {
-            console.log('上传原图完成', res);
+            // console.log('上传原图完成', res);
 
             wx.hideLoading();
             var data = JSON.parse(res.data);
 
             if (data.code == 0) {
               app.globalData.postcard_picture_url = data.path;
-              console.log('原图返回', app.globalData.postcard_picture_url);
             }
           },
           fail: function(e) {
@@ -160,7 +157,7 @@ Page({
         if (data.code == 0) {
           wx.hideLoading();
           app.globalData.postcard_front_url = data.path;
-          console.log('切图返回URL',app.globalData.postcard_front_url);
+          // console.log('切图返回URL',app.globalData.postcard_front_url);
           wx.redirectTo({
             url: '../postCard/postCard?cityName=' + _that.data.cityName
           })

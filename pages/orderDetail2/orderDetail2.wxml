@@ -51,15 +51,21 @@
   </view>
 </view>
 <view class="navtwo white_bg">
-  <view class="row marg10-bottom">
-  <view catchtap='previewfront' class="previewA">
-    <image class='front' src='../../images/front.png' />
-    <image class='frontImage' src='{{postcard_front_url}}' />
-  </view>
-  <view catchtap='previewback' class="previewB">
-    <image class='front' src='../../images/back.png' />
-    <image class='frontImage' src='{{postcard_back_url}}' />
-  </view>
+  <view class="row cen-space marg10-bottom">
+    <view class='row'>
+      <view catchtap='previewfront' class="previewA">
+        <image class='front' src='../../images/front.png' />
+        <image class='frontImage' src='{{postcard_front_url}}' />
+      </view>
+      <view catchtap='previewback' class="previewB">
+        <image class='front' src='../../images/back.png' />
+        <image class='frontImage' src='{{postcard_back_url}}' />
+      </view>
+    </view>
+    <view class='previewState'>
+      <text class='previewPrice ft14'>￥{{total_fee}}</text>
+      <text class='preState ft12' wx:if='{{refund_status === 1}}'>已退款</text>
+    </view>
   </view>
   <view class="list gray-32 ft14 row cen-space">
     <text>商品总价</text><text>￥{{total_fee}}</text>

@@ -3,10 +3,6 @@ const utils = require('./utils/util.js');
 //app.js
 App({
   onLaunch: function() {
-    // 关闭调试
-    // wx.setEnableDebug({
-    //   enableDebug: false
-    // })
     var _that = this;
     try {
       var res = wx.getSystemInfoSync();
@@ -46,13 +42,11 @@ App({
   getOpenid: function() {
     var _that = this;
     var userInfo = {};
-    // userInfo = wx.getStorageSync('userInfo');
     return new Promise(function(resolve, reject) {
       // 登录
       wx.login({
         success: res => {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          console.log('当前coded为', res.code);
           _that.globalData.code = res.code;
           // 首次登陆调注册接口获取openid&&userid
           if (!userInfo.userId || userInfo.userId == undefined) {
@@ -68,19 +62,10 @@ App({
               }
             }
             utils.http(url, (dataStr) => {
-              console.log('据code获取登陆信息', dataStr);
               if (dataStr.code == 0) {
                 _that.globalData.userId = dataStr.sns_id;
                 _that.globalData.openId = dataStr.open_id;
                 _that.globalData.session_id = dataStr.session_id;
-                console.log('app.globalData.userId',_that.globalData.userId);
-                console.log('app.globalData.openId',_that.globalData.openId);
-                // userInfo = {
-                //   userId: _that.globalData.userId,
-                //   openId: _that.globalData.openId,
-                //   session_id: _that.globalData.session_id
-                // }
-                // wx.setStorageSync('userInfo', userInfo);
                 resolve(userInfo);
               } else {
                 wx:showToast({
