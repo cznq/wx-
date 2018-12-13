@@ -33,7 +33,6 @@ Page({
     bg_src: '../../images/bg.jpg',
     bgimg_w: '',
     bgimg_h: '',
-    fixtext: '../../images/dizhi.png',
     original_image: '',
     cut_image: '',
     cropperOpt: {
@@ -43,8 +42,8 @@ Page({
       scale: 2.5,
       zoom: 8,
       cut: {
-        x: (width - 301) / 2,// 裁剪框x轴起点
-        y: (height - 443) / 2,// 裁剪框y轴期起点
+        x: (width - 301) / 2,
+        y: (height - 443) / 2,
         width: 301,
         height: 443
       }
@@ -282,9 +281,6 @@ uploadTap() { //选择图片
             self.wecropper.pushOrign(options.src);
 
           }
-          // setTimeout(function(){
-          //   wx.hideLoading();
-          // },1500)
 
         }
       })

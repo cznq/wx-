@@ -98,7 +98,6 @@ Page({
   onGotUserInfo: function(e) {
     app.aldstat.sendEvent('program_postcard_first_make_click');//宣传页制作按钮点击一次+1
     let userInfo = e[0].detail.userInfo;
-    // console.log('onGotUserInfo', e[0].detail.userInfo);
     if (!userInfo) {
       this.setData({
         getUserInfo: true
@@ -109,32 +108,9 @@ Page({
         sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
         success(res) {
-          var imageSize = res.tempFiles[0].size;
-          imageSize = utils.howSize(imageSize);
-          // console.log('imageSize', imageSize);
-          var numSize = imageSize.split('-')[0];
-          var unitSize = imageSize.split('-')[1];
-          console.log(numSize, unitSize);
-          switch (unitSize) {
-            case 'B':
-              wx.showToast({
-                title: '图片质量太低请上传更高清晰度的图片',
-                icon: 'none'
-              })
-              return false
-              break;
-            case 'KB':
-              if (parseInt(numSize) < 50) {
-                wx.showToast({
-                  title: '图片质量太低请上传更高清晰度的图片',
-                  icon: 'none'
-                })
-                return false
-              }
-              break;
-            default:
-          }
+            wx.showLoading()
           const src = res.tempFilePaths[0];
+          wx.hideLoading()
           //  获取裁剪图片资源后，给data添加src属性及其值
           wx.navigateTo({
             url: '../make/make?src=' + src,
@@ -145,7 +121,6 @@ Page({
       this.setData({
         getUserInfo: true
       })
-      console.log('e[0].detail.userInfo', e[0].detail.userInfo);
       app.globalData.nickName = userInfo.nickName
       app.globalData.avatarUrl = userInfo.avatarUrl
       app.globalData.gender = userInfo.gender //性别 0：未知、1：男、2：女
@@ -168,7 +143,6 @@ Page({
         }
       }
       utils.http(url, (dataStr) => {
-        console.log('微信用户信息', dataStr);
         if (dataStr.rc.c == 0) {}
 
       }, reqbody);
@@ -178,7 +152,9 @@ Page({
         sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
         success(res) {
+            wx.showLoading();
           const src = res.tempFilePaths[0]
+          wx.hideLoading()
           //  获取裁剪图片资源后，给data添加src属性及其值
           wx.navigateTo({
             url: '../make/make?src=' + src,
@@ -203,30 +179,6 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
         wx.showLoading();
-        // 获取最新配置
-        var imageSize = res.tempFiles[0].size;
-        imageSize = utils.howSize(imageSize);
-        var numSize = imageSize.split('-')[0];
-        var unitSize = imageSize.split('-')[1];
-        switch (unitSize) {
-          case 'B':
-            wx.showToast({
-              title: '图片质量太低请上传更高清晰度的图片',
-              icon: 'none'
-            })
-            return false
-            break;
-          case 'KB':
-            if (parseInt(numSize) < 50) {
-              wx.showToast({
-                title: '图片质量太低请上传更高清晰度的图片',
-                icon: 'none'
-              })
-              return false
-            }
-            break;
-          default:
-        }
         const src = res.tempFilePaths[0]
         wx.hideLoading();
         //  获取裁剪图片资源后，给data添加src属性及其值
@@ -239,16 +191,12 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -258,9 +206,7 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
-
-  },
+  onUnload: function() {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作

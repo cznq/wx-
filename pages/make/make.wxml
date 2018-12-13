@@ -8,7 +8,6 @@
   <!-- 新增canvas -->
 <view class="cropper-wrapper">
   <template wx:if='{{is_chooseimg}}' is="we-cropper" data="{{...cropperOpt}}"/>
-  <image wx:if='{{!is_chooseimg}}' src='{{fixtext}}' class='fix' bindtap='chooseImage'></image>
   <view class="cropper-buttons">
     <view  class="upload" bindtap="uploadTap">
         重新选择图片
