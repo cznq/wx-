@@ -616,7 +616,6 @@ function methods () {
       self.ctx.drawImage(self.croperTarget, self.imgLeft, self.imgTop, self.scaleWidth, self.scaleHeight);
     }
     isFunction(self.onBeforeDraw) && self.onBeforeDraw(self.ctx, self);
-
     self.setBoundStyle(); //	设置边界样式
     self.ctx.draw();
     return self
@@ -767,11 +766,10 @@ function update () {
     }
     xMove = Math.round(touch.x - self.touchX0);
     yMove = Math.round(touch.y - self.touchY0);
+		var imgLeft = Math.round(self.rectX + xMove);
+		var imgTop = Math.round(self.rectY + yMove);
 
-    var imgLeft = Math.round(self.rectX + xMove);
-    var imgTop = Math.round(self.rectY + yMove);
-
-    self.outsideBound(imgLeft, imgTop);
+		self.outsideBound(imgLeft, imgTop);
 
     self.updateCanvas();
   };

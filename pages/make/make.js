@@ -43,8 +43,8 @@ Page({
       scale: 2.5,
       zoom: 8,
       cut: {
-        x: (width - 301) / 2,
-        y: (height - 443) / 2,
+        x: (width - 301) / 2,// 裁剪框x轴起点
+        y: (height - 443) / 2,// 裁剪框y轴期起点
         width: 301,
         height: 443
       }
