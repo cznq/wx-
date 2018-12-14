@@ -159,8 +159,8 @@ page{
         box-sizing: border-box;
     }
 }
-.cropper-buttons .upload, .cropper-buttons .getCropperImage{
-    width: 50%;
+.cropper-buttons .upload, .cropper-buttons .getCropperImage, .cropper-buttons .rotate{
+    width: 30%;
     text-align: center;
     color:#4294EA;
     font-size: 28rpx;
@@ -173,7 +173,7 @@ page{
 .targetCtx{
   position: absolute;
   bottom: 0;
-  left: 9999px;
+  left: 0px;
 
 }
 .cropper-buttons{

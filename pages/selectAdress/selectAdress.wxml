@@ -1,9 +1,9 @@
 <view class='column cen-start' >
   <view bindtap='selImage' class='selImage'>
   <view wx:if="{{imgdir ==='1'}}" class='pre'>
-    <image  class='preimgrotat' src='{{cut_image}}'></image>
+    <image  class='preimgrotat' src='{{original_image}}'></image>
   </view>
-  <image wx:if="{{imgdir ==='0'}}" class='preimg' src='{{cut_image}}'></image>
+  <image wx:if="{{imgdir ==='0'}}" class='preimg' src='{{original_image}}'></image>
   </view>
   <view bindtap='querySel' class="addressInfo row cen-center">
     <image src='../../images/selectAddress.png'></image>

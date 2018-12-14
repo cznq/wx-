@@ -575,15 +575,6 @@ function convertToImage (canvasId, x, y, width, height, type, done) {
 
 var CanvasToBase64 = {
   convertToImage: convertToImage,
-  // convertToPNG: function (width, height, done) {
-  //   return convertToImage(width, height, 'png', done)
-  // },
-  // convertToJPEG: function (width, height, done) {
-  //   return convertToImage(width, height, 'jpeg', done)
-  // },
-  // convertToGIF: function (width, height, done) {
-  //   return convertToImage(width, height, 'gif', done)
-  // },
   convertToBMP: function (ref, done) {
     if ( ref === void 0 ) ref = {};
     var canvasId = ref.canvasId;
@@ -610,18 +601,26 @@ function methods () {
   var width = ref.width; if ( width === void 0 ) width = boundWidth;
   var height = ref.height; if ( height === void 0 ) height = boundHeight;
 
-  self.updateCanvas = function () {
+  self.updateCanvas = function (rotateI) {
+		self.rotateI = rotateI ? rotateI : self.rotateI
+		console.log('rotateI',self.rotateI);
     if (self.croperTarget) {
-      //  画布绘制图片
-      self.ctx.drawImage(self.croperTarget, self.imgLeft, self.imgTop, self.scaleWidth, self.scaleHeight);
+			//  画布绘制图片
+			self.ctx.save()
+			self.ctx.translate(self.tranlateX, self.tranlateY)
+			self.ctx.rotate(self.rotateI * 90 * Math.PI / 180)
+			self.ctx.drawImage(self.croperTarget, self.imgLeft-210, (self.imgTop+y)/2-310, self.scaleWidth, self.scaleHeight);
+
     }
     isFunction(self.onBeforeDraw) && self.onBeforeDraw(self.ctx, self);
+		self.ctx.restore()
     self.setBoundStyle(); //	设置边界样式
     self.ctx.draw();
     return self
   };
 
   self.pushOrign = function (src) {
+		self.rotateI = 0
     self.src = src;
 
     isFunction(self.onBeforeImageLoad) && self.onBeforeImageLoad(self.ctx, self);
@@ -631,7 +630,7 @@ function methods () {
       success: function success (res) {
         var innerAspectRadio = res.width / res.height;
 
-        self.croperTarget = res.path;
+        self.croperTarget = res.path;//图片的本地路径
 
         if (innerAspectRadio < width / height) {
           self.rectX = x;
@@ -766,9 +765,22 @@ function update () {
     }
     xMove = Math.round(touch.x - self.touchX0);
     yMove = Math.round(touch.y - self.touchY0);
-		var imgLeft = Math.round(self.rectX + xMove);
-		var imgTop = Math.round(self.rectY + yMove);
-
+		console.log('self.rotateI % 4',self.rotateI % 4);
+		// var imgLeft = Math.round(self.rectX + xMove);
+		// var imgTop = Math.round(self.rectY + yMove);
+		if (self.rotateI % 4 == 0) {
+			var imgLeft = Math.round(self.rectX + xMove);
+			var imgTop = Math.round(self.rectY + yMove);
+		} else if (self.rotateI % 4 == 1) {
+			var imgLeft = Math.round(self.rectX + yMove);
+			var imgTop = Math.round(self.rectY - xMove);
+		} else if (self.rotateI % 4 == 2) {
+			var imgLeft = Math.round(self.rectX - xMove);
+			var imgTop = Math.round(self.rectY - yMove);
+		} else if (self.rotateI % 4 == 3) {
+			var imgLeft = Math.round(self.rectX - yMove);
+			var imgTop = Math.round(self.rectY + xMove);
+		}
 		self.outsideBound(imgLeft, imgTop);
 
     self.updateCanvas();
@@ -796,9 +808,14 @@ function update () {
 
     self.newScale = getNewScale(oldScale, oldDistance, zoom, touch0, touch1);
 
-    //  设定缩放范围
+		//  设定缩放范围
+    // self.newScale <= 0.2 && (self.newScale = oldScale - 0.001 * zoom * (newDistance - oldDistance));
+    // self.newScale >= scale && (self.newScale = scale);
+
+		//  设定缩放范围
     self.newScale <= 1 && (self.newScale = 1);
     self.newScale >= scale && (self.newScale = scale);
+
 
     self.scaleWidth = Math.round(self.newScale * self.baseWidth);
     self.scaleHeight = Math.round(self.newScale * self.baseHeight);
@@ -866,8 +883,8 @@ var handle = {
 function cut () {
   var self = this;
   var boundWidth = self.width; // 裁剪框默认宽度，即整个画布宽度
-  var boundHeight = self.height;
-  // 裁剪框默认高度，即整个画布高度
+  var boundHeight = self.height;// 裁剪框默认高度，即整个画布高度
+
   var ref = self.cut;
   var x = ref.x; if ( x === void 0 ) x = 0;
   var y = ref.y; if ( y === void 0 ) y = 0;
@@ -880,6 +897,8 @@ function cut () {
 	 * @param imgTop 图片左上角纵坐标值
 	 */
   self.outsideBound = function (imgLeft, imgTop) {
+		// self.imgLeft = imgLeft
+    //   self.imgTop = imgTop
     self.imgLeft = imgLeft >= x
       ? x
       : self.scaleWidth + imgLeft - x <= width
@@ -897,6 +916,7 @@ function cut () {
 	 * 设置边界样式
 	 * @param color	边界颜色
 	 */
+
   self.setBoundStyle = function (ref) {
     if ( ref === void 0 ) ref = {};
     var color = ref.color; if ( color === void 0 ) color = '#04b00f';

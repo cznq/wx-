@@ -7,10 +7,13 @@
 </canvas>
   <!-- 新增canvas -->
 <view class="cropper-wrapper">
-  <template wx:if='{{is_chooseimg}}' is="we-cropper" data="{{...cropperOpt}}"/>
+  <template is="we-cropper" data="{{...cropperOpt}}"/>
   <view class="cropper-buttons">
     <view  class="upload" bindtap="uploadTap">
         重新选择图片
+    </view>
+    <view  class="upload" bindtap="rotateImg">
+        旋转
     </view>
     <view  class="getCropperImage"  bindtap="getCropperImage">
         生成明信片

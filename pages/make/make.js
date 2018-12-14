@@ -33,17 +33,21 @@ Page({
     bg_src: '../../images/bg.jpg',
     bgimg_w: '',
     bgimg_h: '',
+    fixtext: '../../images/dizhi.png',
     original_image: '',
     cut_image: '',
+    rotateI:0,
     cropperOpt: {
       id: 'cropper',
-      width,
-      height,
-      scale: 2.5,
-      zoom: 8,
+      width,// 画布宽度
+      height,// 画布高度
+      tranlateX: width / 2,
+      tranlateY: height / 2,
+      scale: 2.5,// 最大缩放倍数
+      zoom: 8,// 缩放系数
       cut: {
-        x: (width - 301) / 2,
-        y: (height - 443) / 2,
+        x: (width - 301) / 2,// 裁剪框x轴起点
+        y: (height - 443) / 2,// 裁剪框y轴期起点
         width: 301,
         height: 443
       }
@@ -90,15 +94,20 @@ Page({
         y = y * pixelRatio
         width = width * pixelRatio
         height = height * pixelRatio
-        // console.log('imgLeft', imgLeft);
-        // console.log('imgTop', imgTop);
-        // console.log('scaleWidth', scaleWidth);
-        // console.log('scaleHeight', scaleHeight);
-        // console.log('x', x);
-        // console.log('y', y);
-        // console.log('width', width);
-        // console.log('height', height);
+        console.log('imgLeft', imgLeft);
+        console.log('imgTop', imgTop);
+        console.log('scaleWidth', scaleWidth);
+        console.log('scaleHeight', scaleHeight);
+        console.log('x', x);
+        console.log('y', y);
+        console.log('width', width);
+        console.log('height', height);
         // 新增canvas
+        // console.log('this.data.cropperOpt.tranlateX',this.data.cropperOpt.tranlateX);
+        // console.log('this.data.cropperOpt.tranlateY',this.data.cropperOpt.tranlateY);
+        // console.log('this.data.rotateI',this.data.rotateI);
+  			// targetCtx.translate(this.data.cropperOpt.tranlateX, this.data.cropperOpt.tranlateY)
+  			// targetCtx.rotate(this.data.rotateI * 90 * Math.PI / 180)
         targetCtx.drawImage(app.globalData.originalImage, imgLeft, imgTop, scaleWidth, scaleHeight) // tmp代表被裁剪图片的临时路径
     // 新增canvas
     wx.showModal({ //预览后提示
@@ -121,14 +130,11 @@ Page({
               fileType:'jpg',
               success(res) {
                  tmpPath = res.tempFilePath
-                // console.log('tmpPath',tmpPath)
                 app.globalData.original_image = tmpPath; //获取本地切图
                   self.wecropper.pushOrign(src);
                   wx.getImageInfo({ //获取图信息
                     src: src,
                     success(res) {
-                      // console.log('图片宽度', res.width);
-                      // console.log('图片高度', res.height);
                       app.globalData.postcard_picture_width = res.width
                       app.globalData.postcard_picture_height = res.height
                       wx.hideLoading();
@@ -235,6 +241,15 @@ uploadTap() { //选择图片
       }
     })
   },
+  rotateImg(){
+    let self = this;
+    let rotateI = this.data.rotateI + 1;
+    this.setData({
+      rotateI: rotateI
+    })
+    // 将旋转的角度传递给插件
+    self.wecropper.updateCanvas(rotateI)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -281,6 +296,9 @@ uploadTap() { //选择图片
             self.wecropper.pushOrign(options.src);
 
           }
+          // setTimeout(function(){
+          //   wx.hideLoading();
+          // },1500)
 
         }
       })
