@@ -4,6 +4,7 @@ const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const app = getApp();
 var pixelRatio = app.globalData.pixelRatio;
+
 const utils = require('../../utils/util.js');
 var height = 0;
 // 兼容iphoneX
@@ -12,7 +13,8 @@ if (device.pixelRatio === 3 && device.screenHeight === 812 && device.screenWidth
 } else {
   height = device.windowHeight - 50
 }
-
+const canvas2W = width * pixelRatio
+const canvas2H = height * pixelRatio
 
 Page({
 
@@ -54,6 +56,8 @@ Page({
     },
     canvas2W: width * pixelRatio,
     canvas2H: height * pixelRatio,
+    tranlateX: canvas2W / 2,
+    tranlateY: canvas2H / 2,
     targetid: 'canvas2',
     imgdir: 0,
     is_chooseimg: true //选择图片
@@ -72,6 +76,7 @@ Page({
     const self = this
     this.wecropper.getCropperImage((src) => { //获取裁剪图片
       if (src) {
+
         let {
           imgLeft,
           imgTop,
@@ -85,6 +90,7 @@ Page({
           height
         } = this.wecropper.cut // 获取裁剪框位置及大小
         const targetCtx = wx.createCanvasContext('canvas2') // 这里是目标canvas画布的id值
+
         // 所有参数乘设备像素比
         imgLeft = imgLeft * pixelRatio
         imgTop = imgTop * pixelRatio
@@ -94,21 +100,20 @@ Page({
         y = y * pixelRatio
         width = width * pixelRatio
         height = height * pixelRatio
-        console.log('imgLeft', imgLeft);
-        console.log('imgTop', imgTop);
-        console.log('scaleWidth', scaleWidth);
-        console.log('scaleHeight', scaleHeight);
-        console.log('x', x);
-        console.log('y', y);
-        console.log('width', width);
-        console.log('height', height);
+        // console.log('imgLeft', imgLeft);
+        // console.log('imgTop', imgTop);
+        // console.log('scaleWidth', scaleWidth);
+        // console.log('scaleHeight', scaleHeight);
+        // console.log('x', x);
+        // console.log('y', y);
+        // console.log('width', width);
+        // console.log('height', height);
         // 新增canvas
-        // console.log('this.data.cropperOpt.tranlateX',this.data.cropperOpt.tranlateX);
-        // console.log('this.data.cropperOpt.tranlateY',this.data.cropperOpt.tranlateY);
-        // console.log('this.data.rotateI',this.data.rotateI);
-  			// targetCtx.translate(this.data.cropperOpt.tranlateX, this.data.cropperOpt.tranlateY)
-  			// targetCtx.rotate(this.data.rotateI * 90 * Math.PI / 180)
-        targetCtx.drawImage(app.globalData.originalImage, imgLeft, imgTop, scaleWidth, scaleHeight) // tmp代表被裁剪图片的临时路径
+        console.log('this.data.rotateI',this.data.rotateI);
+        targetCtx.translate(this.data.tranlateX, this.data.tranlateY)
+        targetCtx.rotate(this.data.rotateI * 90 * Math.PI / 180)
+
+        targetCtx.drawImage(app.globalData.originalImage, imgLeft,imgTop, scaleWidth, scaleHeight) // tmp代表被裁剪图片的临时路径
     // 新增canvas
     wx.showModal({ //预览后提示
       title: '提示',
@@ -130,7 +135,7 @@ Page({
               fileType:'jpg',
               success(res) {
                  tmpPath = res.tempFilePath
-                app.globalData.original_image = tmpPath; //获取本地切图
+                app.globalData.original_image = tmpPath; //高清截图存全局
                   self.wecropper.pushOrign(src);
                   wx.getImageInfo({ //获取图信息
                     src: src,
@@ -141,7 +146,8 @@ Page({
                     }
                   })
                   self.setData({
-                    cut_image: src
+                    cut_image: src,
+                    original_image: tmpPath
                   })
                   wx.navigateTo({
                     url: '../selectAdress/selectAdress?src=' + src + '&imgdir=' + self.data.imgdir + '&original_image=' + self.data.original_image + '&cut_image=' + self.data.cut_image
@@ -212,7 +218,8 @@ uploadTap() { //选择图片
                 [cutW]: 343,
                 [cutH]: 233,
                 imgdir: 0, //横图 0
-                original_image: src
+                original_image: src,
+                rotateI:0
               })
               self.showCavs();
 
@@ -228,7 +235,8 @@ uploadTap() { //选择图片
                 [cutW]: 301,
                 [cutH]: 443,
                 imgdir: 1,
-                original_image: src
+                original_image: src,
+                rotateI:0
               })
               self.showCavs();
               wx.hideLoading();
@@ -289,7 +297,8 @@ uploadTap() { //选择图片
               [cuty]: (height - 443) / 2,
               [cutW]: 301,
               [cutH]: 443,
-              imgdir: 1
+              imgdir: 1,
+              original_image: options.src//本地切图原图
             })
             self.showCavs();
 

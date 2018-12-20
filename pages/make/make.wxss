@@ -173,7 +173,7 @@ page{
 .targetCtx{
   position: absolute;
   bottom: 0;
-  left: 0px;
+  left: 9999px;
 
 }
 .cropper-buttons{

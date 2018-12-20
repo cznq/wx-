@@ -600,16 +600,70 @@ function methods () {
   var y = ref.y; if ( y === void 0 ) y = 0;
   var width = ref.width; if ( width === void 0 ) width = boundWidth;
   var height = ref.height; if ( height === void 0 ) height = boundHeight;
+   self.handleVerticalImage = function(){
+		if(self.baseWidth < height){//rotate==1
+			let diffNum = height / self.baseWidth
+			self.baseWidth = height
+			self.baseHeight = self.baseHeight * diffNum
+			self.rectX = y - self.tranlateY
+			self.rectY =  x -self.tranlateX - Math.abs((width - self.baseHeight) / 2)
+			self.imgLeft = self.rectX
+			self.imgTop = self.rectY
+			self.scaleWidth = self.baseWidth;
+			self.scaleHeight = self.baseHeight;
+		}
+		if(self.baseHeight < width){//rotate==2
+			let diffNum = width / self.baseHeight
+			self.baseHeight = width
+			self.baseWidth = self.baseWidth * diffNum
+			self.rectX = y - self.tranlateY - Math.abs((height - self.baseWidth) / 2);
+			self.rectY = x - self.tranlateX
+			self.imgLeft = self.rectX
+			self.imgTop = self.rectY
+			self.scaleWidth = self.baseWidth;
+			self.scaleHeight = self.baseHeight;
 
+		}
+	}
+
+
+	self.handleRowImage = function(){
+		let innerAspectRadio = self.baseWidth / self.baseHeight;
+		if (innerAspectRadio < width / height) {
+			self.rectX = x ;
+			self.baseWidth = width;
+			self.baseHeight = width / innerAspectRadio;
+			self.rectY = y - Math.abs((height - self.baseHeight) / 2);
+		} else {
+			self.rectY = y;
+			self.baseWidth = height * innerAspectRadio;
+			self.baseHeight = height;
+			self.rectX = x - Math.abs((width - self.baseWidth) / 2);
+		}
+			self.rectX = self.rectX - self.tranlateX;
+			self.rectY = self.rectY - self.tranlateY
+			self.imgLeft = self.rectX ;
+			self.imgTop = self.rectY;
+			self.scaleWidth = self.baseWidth;
+			self.scaleHeight = self.baseHeight;
+ }
   self.updateCanvas = function (rotateI) {
 		self.rotateI = rotateI ? rotateI : self.rotateI
-		console.log('rotateI',self.rotateI);
     if (self.croperTarget) {
 			//  画布绘制图片
 			self.ctx.save()
-			self.ctx.translate(self.tranlateX, self.tranlateY)
+			self.ctx.translate(self.tranlateX , self.tranlateY)
 			self.ctx.rotate(self.rotateI * 90 * Math.PI / 180)
-			self.ctx.drawImage(self.croperTarget, self.imgLeft-210, (self.imgTop+y)/2-310, self.scaleWidth, self.scaleHeight);
+
+			if (self.rotateI % 4 == 1&&self.verticalQuery || self.rotateI % 4 == 3&&self.verticalQuery) {
+				self.verticalQuery = false
+				self.handleVerticalImage();
+			}
+			if (self.rotateI % 4 == 0&&!self.verticalQuery || self.rotateI % 4 == 2&&!self.verticalQuery) {
+				self.verticalQuery = true
+				self.handleRowImage();
+			}
+			self.ctx.drawImage(self.croperTarget, self.imgLeft, self.imgTop, self.scaleWidth, self.scaleHeight);
 
     }
     isFunction(self.onBeforeDraw) && self.onBeforeDraw(self.ctx, self);
@@ -621,6 +675,8 @@ function methods () {
 
   self.pushOrign = function (src) {
 		self.rotateI = 0
+		self.verticalQuery=true
+
     self.src = src;
 
     isFunction(self.onBeforeImageLoad) && self.onBeforeImageLoad(self.ctx, self);
@@ -633,7 +689,7 @@ function methods () {
         self.croperTarget = res.path;//图片的本地路径
 
         if (innerAspectRadio < width / height) {
-          self.rectX = x;
+          self.rectX = x ;
           self.baseWidth = width;
           self.baseHeight = width / innerAspectRadio;
           self.rectY = y - Math.abs((height - self.baseHeight) / 2);
@@ -643,12 +699,12 @@ function methods () {
           self.baseHeight = height;
           self.rectX = x - Math.abs((width - self.baseWidth) / 2);
         }
-
-        self.imgLeft = self.rectX;
+				self.rectX = self.rectX - self.tranlateX;
+				self.rectY = self.rectY - self.tranlateY
+        self.imgLeft = self.rectX ;
         self.imgTop = self.rectY;
         self.scaleWidth = self.baseWidth;
         self.scaleHeight = self.baseHeight;
-
         self.updateCanvas();
 
         isFunction(self.onImageLoad) && self.onImageLoad(self.ctx, self);
@@ -765,20 +821,17 @@ function update () {
     }
     xMove = Math.round(touch.x - self.touchX0);
     yMove = Math.round(touch.y - self.touchY0);
-		console.log('self.rotateI % 4',self.rotateI % 4);
-		// var imgLeft = Math.round(self.rectX + xMove);
-		// var imgTop = Math.round(self.rectY + yMove);
 		if (self.rotateI % 4 == 0) {
-			var imgLeft = Math.round(self.rectX + xMove);
+			var imgLeft = Math.round(self.rectX  + xMove);
 			var imgTop = Math.round(self.rectY + yMove);
 		} else if (self.rotateI % 4 == 1) {
-			var imgLeft = Math.round(self.rectX + yMove);
+			var imgLeft = Math.round(self.rectX  + yMove);
 			var imgTop = Math.round(self.rectY - xMove);
 		} else if (self.rotateI % 4 == 2) {
-			var imgLeft = Math.round(self.rectX - xMove);
+			var imgLeft = Math.round(self.rectX  - xMove);
 			var imgTop = Math.round(self.rectY - yMove);
 		} else if (self.rotateI % 4 == 3) {
-			var imgLeft = Math.round(self.rectX - yMove);
+			var imgLeft = Math.round(self.rectX  - yMove);
 			var imgTop = Math.round(self.rectY + xMove);
 		}
 		self.outsideBound(imgLeft, imgTop);
@@ -897,19 +950,40 @@ function cut () {
 	 * @param imgTop 图片左上角纵坐标值
 	 */
   self.outsideBound = function (imgLeft, imgTop) {
-		// self.imgLeft = imgLeft
-    //   self.imgTop = imgTop
-    self.imgLeft = imgLeft >= x
-      ? x
-      : self.scaleWidth + imgLeft - x <= width
-        ? x + width - self.scaleWidth
-        :	imgLeft;
 
-    self.imgTop = imgTop >= y
-      ? y
-      : self.scaleHeight + imgTop - y <= height
-        ? y + height - self.scaleHeight
-        : imgTop;
+if(self.rotateI % 4 == 0 || self.rotateI % 4 == 2 ){
+	let X = x - self.tranlateX
+	let Y = y - self.tranlateY
+
+	self.imgLeft = imgLeft >= X
+		? X
+		: self.scaleWidth + imgLeft - X <= width
+			? X+ width - self.scaleWidth
+			:	imgLeft ;
+
+	self.imgTop = imgTop >= Y
+		? Y
+		: self.scaleHeight + imgTop - Y <= height
+			? Y + height - self.scaleHeight
+			: imgTop;
+}else{
+	let X = y - self.tranlateY
+	let Y = x -self.tranlateX
+	self.imgLeft = imgLeft >= X
+		? X
+		: self.scaleWidth + imgLeft - X <= height
+			? X+ height - self.scaleWidth
+			:	imgLeft ;
+
+	self.imgTop = imgTop >= Y
+		? Y
+		: self.scaleHeight + imgTop - Y <= width
+			? Y + width - self.scaleHeight
+			: imgTop;
+}
+
+
+
   };
 
   /**

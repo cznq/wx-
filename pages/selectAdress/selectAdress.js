@@ -41,7 +41,8 @@ Page({
         original_image: options.original_image
       })
     }
-
+console.log('cut_image',options.cut_image);
+console.log('original_image',options.original_image);
   },
   // selImage(){
   //   console.log(222);
