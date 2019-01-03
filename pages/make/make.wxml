@@ -8,15 +8,21 @@
   <!-- 新增canvas -->
 <view class="cropper-wrapper">
   <template is="we-cropper" data="{{...cropperOpt}}"/>
-  <view class="cropper-buttons">
-    <view  class="upload" bindtap="uploadTap">
-        重新选择图片
+  <view class="cropper-buttons row">
+    <view class="buttonLeft row cen-start">
+      <view  class="upload" bindtap="rotateImg">
+          <view class="rotateBtn row cen-center">
+            <image class='rotate' src='../../images/rotate.png'></image>
+            <text>旋转</text>
+          </view>
+      </view>
+      <view class='cutLine'></view>
+      <view  class="upload row cen-center" bindtap="uploadTap">
+          <text>换一张</text>
+      </view>
     </view>
-    <view  class="upload" bindtap="rotateImg">
-        旋转
-    </view>
-    <view  class="getCropperImage"  bindtap="getCropperImage">
-        生成明信片
+    <view  class="getCropperImage row cen-end"  bindtap="getCropperImage">
+        <view class="completeBtn ft28 white">生成明信片</view>
     </view>
   </view>
 </view>

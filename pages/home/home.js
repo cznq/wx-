@@ -105,10 +105,33 @@ Page({
       const self = this
       wx.chooseImage({
         count: 1, // 默认9
-        sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
         success(res) {
             wx.showLoading()
+            var imageSize = res.tempFiles[0].size;
+            imageSize = utils.howSize(imageSize);
+            var numSize = imageSize.split('-')[0];
+            var unitSize = imageSize.split('-')[1];
+            switch (unitSize) {
+              case 'B':
+                wx.showToast({
+                  title: '图片质量太低请上传更高清晰度的图片',
+                  icon: 'none'
+                })
+                return false
+                break;
+              case 'KB':
+                if (parseInt(numSize) < 50) {
+                  wx.showToast({
+                    title: '图片质量太低请上传更高清晰度的图片',
+                    icon: 'none'
+                  })
+                  return false
+                }
+                break;
+              default:
+            }
           const src = res.tempFilePaths[0];
           wx.hideLoading()
           //  获取裁剪图片资源后，给data添加src属性及其值
@@ -149,10 +172,33 @@ Page({
 
       wx.chooseImage({
         count: 1, // 默认9
-        sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
         success(res) {
             wx.showLoading();
+            var imageSize = res.tempFiles[0].size;
+            imageSize = utils.howSize(imageSize);
+            var numSize = imageSize.split('-')[0];
+            var unitSize = imageSize.split('-')[1];
+            switch (unitSize) {
+              case 'B':
+                wx.showToast({
+                  title: '图片质量太低请上传更高清晰度的图片',
+                  icon: 'none'
+                })
+                return false
+                break;
+              case 'KB':
+                if (parseInt(numSize) < 50) {
+                  wx.showToast({
+                    title: '图片质量太低请上传更高清晰度的图片',
+                    icon: 'none'
+                  })
+                  return false
+                }
+                break;
+              default:
+            }
           const src = res.tempFilePaths[0]
           wx.hideLoading()
           //  获取裁剪图片资源后，给data添加src属性及其值
@@ -173,14 +219,38 @@ Page({
   },
   uploadTap() { //选择图片
     const self = this
+
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
-        wx.showLoading();
+        wx.showLoading()
+        var imageSize = res.tempFiles[0].size;
+        imageSize = utils.howSize(imageSize);
+        var numSize = imageSize.split('-')[0];
+        var unitSize = imageSize.split('-')[1];
+        switch (unitSize) {
+          case 'B':
+            wx.showToast({
+              title: '图片质量太低请上传更高清晰度的图片',
+              icon: 'none'
+            })
+            return false
+            break;
+          case 'KB':
+            if (parseInt(numSize) < 50) {
+              wx.showToast({
+                title: '图片质量太低请上传更高清晰度的图片',
+                icon: 'none'
+              })
+              return false
+            }
+            break;
+          default:
+        }
         const src = res.tempFilePaths[0]
-        wx.hideLoading();
+        wx.hideLoading()
         //  获取裁剪图片资源后，给data添加src属性及其值
         wx.navigateTo({
           url: '../make/make?src=' + src,

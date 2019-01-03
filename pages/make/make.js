@@ -62,6 +62,57 @@ Page({
     imgdir: 0,
     is_chooseimg: true //选择图片
   },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    wx.showLoading();
+    app.aldstat.sendEvent('program_postcard_front_show');//订单按钮点击一次+1
+    var self = this;
+    self.showCavs();
+    if (options.src) { //首次加载图片
+      wx.getImageInfo({
+        src: options.src,
+        success: function(res) {
+          app.globalData.originalImage = res.path;
+          if (res.width >= res.height) {
+            let cutx = 'cropperOpt.cut.x',
+              cuty = 'cropperOpt.cut.y',
+              cutW = 'cropperOpt.cut.width',
+              cutH = 'cropperOpt.cut.height';
+            self.setData({
+              [cutx]: (width - 343) / 2,
+              [cuty]: (height - 233) / 2,
+              [cutW]: 343,
+              [cutH]: 233,
+              imgdir: 0, //横图 0
+              original_image: options.src//本地切图原图
+            })
+            self.showCavs();
+            self.wecropper.pushOrign(options.src);
+
+          } else {
+            let cutx = 'cropperOpt.cut.x',
+              cuty = 'cropperOpt.cut.y',
+              cutW = 'cropperOpt.cut.width',
+              cutH = 'cropperOpt.cut.height';
+            self.setData({
+              [cutx]: (width - 301) / 2,
+              [cuty]: (height - 443) / 2,
+              [cutW]: 301,
+              [cutH]: 443,
+              imgdir: 1,
+              original_image: options.src//本地切图原图
+            })
+            self.showCavs();
+
+            self.wecropper.pushOrign(options.src);
+
+          }
+        }
+      })
+    }
+  },
   touchStart(e) {
     this.wecropper.touchStart(e)
   },
@@ -76,7 +127,6 @@ Page({
     const self = this
     this.wecropper.getCropperImage((src) => { //获取裁剪图片
       if (src) {
-
         let {
           imgLeft,
           imgTop,
@@ -90,7 +140,6 @@ Page({
           height
         } = this.wecropper.cut // 获取裁剪框位置及大小
         const targetCtx = wx.createCanvasContext('canvas2') // 这里是目标canvas画布的id值
-
         // 所有参数乘设备像素比
         imgLeft = imgLeft * pixelRatio
         imgTop = imgTop * pixelRatio
@@ -109,13 +158,16 @@ Page({
         // console.log('width', width);
         // console.log('height', height);
         // 新增canvas
-        console.log('this.data.rotateI',this.data.rotateI);
+        // console.log('this.data.rotateI',this.data.rotateI);
         targetCtx.translate(this.data.tranlateX, this.data.tranlateY)
         targetCtx.rotate(this.data.rotateI * 90 * Math.PI / 180)
+        if(app.globalData.original_image ===''){
+          targetCtx.drawImage(app.globalData.originalImage, imgLeft,imgTop, scaleWidth, scaleHeight)
+        }else {
+          targetCtx.drawImage(app.globalData.original_image, imgLeft,imgTop, scaleWidth, scaleHeight)
+        }
 
-        targetCtx.drawImage(app.globalData.originalImage, imgLeft,imgTop, scaleWidth, scaleHeight) // tmp代表被裁剪图片的临时路径
-    // 新增canvas
-    wx.showModal({ //预览后提示
+    wx.showModal({
       title: '提示',
       content: '为了防止图片被过度剪裁，请确认您已预览图片且人像完整',
       success: function(res) {
@@ -160,9 +212,7 @@ Page({
         }
       }
     })
-
   } else {
-    console.log('获取图片地址失败，请稍后重试')
     wx.showToast({
       title:'canvas渲染图片失败请重新尝试',
       icon:'none'
@@ -170,12 +220,12 @@ Page({
   }
 })
 },
-uploadTap() { //选择图片
+uploadTap() {
     const self = this
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
       success(res) {
         wx.showLoading();
         var imageSize = res.tempFiles[0].size;
@@ -245,7 +295,6 @@ uploadTap() { //选择图片
 
           }
         })
-
       }
     })
   },
@@ -258,66 +307,8 @@ uploadTap() { //选择图片
     // 将旋转的角度传递给插件
     self.wecropper.updateCanvas(rotateI)
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    wx.showLoading();
-    app.aldstat.sendEvent('program_postcard_front_show');//订单按钮点击一次+1
-    var self = this;
-    self.showCavs();
-    if (options.src) { //首次加载图片
-      wx.getImageInfo({
-        src: options.src,
-        success: function(res) {
-          app.globalData.originalImage = res.path;
-          if (res.width >= res.height) {
-            let cutx = 'cropperOpt.cut.x',
-              cuty = 'cropperOpt.cut.y',
-              cutW = 'cropperOpt.cut.width',
-              cutH = 'cropperOpt.cut.height';
-            self.setData({
-              [cutx]: (width - 343) / 2,
-              [cuty]: (height - 233) / 2,
-              [cutW]: 343,
-              [cutH]: 233,
-              imgdir: 0, //横图 0
-              original_image: options.src//本地切图原图
-            })
-            self.showCavs();
-            self.wecropper.pushOrign(options.src);
-
-          } else {
-            let cutx = 'cropperOpt.cut.x',
-              cuty = 'cropperOpt.cut.y',
-              cutW = 'cropperOpt.cut.width',
-              cutH = 'cropperOpt.cut.height';
-            self.setData({
-              [cutx]: (width - 301) / 2,
-              [cuty]: (height - 443) / 2,
-              [cutW]: 301,
-              [cutH]: 443,
-              imgdir: 1,
-              original_image: options.src//本地切图原图
-            })
-            self.showCavs();
-
-            self.wecropper.pushOrign(options.src);
-
-          }
-          // setTimeout(function(){
-          //   wx.hideLoading();
-          // },1500)
-
-        }
-      })
-    }
-
-  },
   showCavs() {
-    const {
-      cropperOpt
-    } = this.data
+    const { cropperOpt } = this.data
 
     new WeCropper(cropperOpt)
       .on('ready', (ctx) => {})
@@ -351,7 +342,7 @@ uploadTap() { //选择图片
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    app.globalData.original_image = '';
   },
 
   /**

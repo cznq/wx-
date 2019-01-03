@@ -159,11 +159,26 @@ page{
         box-sizing: border-box;
     }
 }
-.cropper-buttons .upload, .cropper-buttons .getCropperImage, .cropper-buttons .rotate{
-    width: 30%;
+.cropper-buttons .buttonLeft, .cropper-buttons .getCropperImage{
+     width: 50%;
+}
+.buttonLeft{
+  color:#4294EA;
+  font-size: 28rpx;
+}
+.rotateBtn{
+  width: 220rpx;
+}
+.upload{
+  width: 220rpx;
+}
+.getCropperImage .completeBtn{
+    margin-right: 50rpx;
+    width:180rpx;
     text-align: center;
-    color:#4294EA;
-    font-size: 28rpx;
+    background-color: #4294EA;
+    line-height: 64rpx;
+    border-radius:8rpx;
 }
 .cropper{
     position: absolute;
@@ -179,6 +194,18 @@ page{
 .cropper-buttons{
     background-color: rgba(0, 0, 0, 0.95);
     color: #04b00f;
+    border-top: 2rpx solid rgba(255,255,255,.3);
+
+}
+.rotate{
+  width:28rpx;
+  height: 28rpx;
+  margin-right:2px;
+}
+.cutLine{
+  width: 2rpx;
+  height:40rpx;
+  background: rgba(255,255,255, .3);
 }
 .fix{
   position: fixed;

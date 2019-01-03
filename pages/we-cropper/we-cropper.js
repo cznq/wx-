@@ -601,7 +601,7 @@ function methods () {
   var width = ref.width; if ( width === void 0 ) width = boundWidth;
   var height = ref.height; if ( height === void 0 ) height = boundHeight;
    self.handleVerticalImage = function(){
-		if(self.baseWidth < height){//rotate==1
+		if(self.baseWidth < height){
 			let diffNum = height / self.baseWidth
 			self.baseWidth = height
 			self.baseHeight = self.baseHeight * diffNum
@@ -612,7 +612,7 @@ function methods () {
 			self.scaleWidth = self.baseWidth;
 			self.scaleHeight = self.baseHeight;
 		}
-		if(self.baseHeight < width){//rotate==2
+		else if(self.baseHeight < width){
 			let diffNum = width / self.baseHeight
 			self.baseHeight = width
 			self.baseWidth = self.baseWidth * diffNum
@@ -623,11 +623,18 @@ function methods () {
 			self.scaleWidth = self.baseWidth;
 			self.scaleHeight = self.baseHeight;
 
+		}else{
+		self.rectX = y - self.tranlateY - Math.abs((height - self.baseWidth) / 2);
+		self.rectY = x - self.tranlateX;
+		self.imgLeft = self.rectX ;
+		self.imgTop = self.rectY;
+		self.scaleWidth = self.baseWidth;
+		self.scaleHeight = self.baseHeight;
 		}
 	}
 
 
-	self.handleRowImage = function(){
+		self.handleRowImage = function(){
 		let innerAspectRadio = self.baseWidth / self.baseHeight;
 		if (innerAspectRadio < width / height) {
 			self.rectX = x ;
