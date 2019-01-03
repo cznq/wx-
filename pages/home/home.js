@@ -63,6 +63,7 @@ Page({
       }, reqbody);
     })
   //首页配置信息结束
+  
     wx.getSetting({ // 查看是否授权
       success: function(res) {
         if (res.authSetting['scope.userInfo']) {
